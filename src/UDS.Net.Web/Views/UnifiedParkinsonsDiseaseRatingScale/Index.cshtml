@@ -1,0 +1,377 @@
+@model IEnumerable<UnifiedParkinsonsDiseaseRatingScale>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IsNormal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Speech)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpeechUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FacialExpression)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FacialExpressionUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestFaceLipsChin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestFaceLipsChinUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestRightHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestRightHandUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestLeftHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestLeftHandUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestRightFoot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestRightFootUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestLeftFoot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorRestLeftFootOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorActionRightHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorActionRightHandOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorActionLeftHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TremorActionLeftHandOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityNeck)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityNeckUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityRightUpper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityRightUpperUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityLeftUpper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityLeftUpperUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityRightLower)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityRightLowerUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityLeftLower)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RigidityLeftLowerUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FingerTapsRightHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FingerTapsRightHandUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FingerTapsLeftHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FingerTapsLeftHandUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HandMovementsRightHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HandMovementsRightHandUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HandMovemonetsLeftHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HandMovemonetsLeftHandUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RapidRightHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RapidRightHandUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RapidLeftHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RapidLeftHandUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RightLegAgility)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RightLegAgilityUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeftLegAgility)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeftLegAgilityUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArisingFromChair)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArisingFromChairUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostureUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gait)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GaitUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostureStability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostureStabilityUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BradykinesiaAndHypokinesia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BradykinesiaAndHypokinesiaUntestable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsNormal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Speech)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpeechUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacialExpression)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacialExpressionUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestFaceLipsChin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestFaceLipsChinUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestRightHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestRightHandUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestLeftHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestLeftHandUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestRightFoot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestRightFootUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestLeftFoot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorRestLeftFootOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorActionRightHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorActionRightHandOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorActionLeftHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TremorActionLeftHandOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityNeck)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityNeckUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityRightUpper)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityRightUpperUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityLeftUpper)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityLeftUpperUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityRightLower)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityRightLowerUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityLeftLower)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RigidityLeftLowerUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FingerTapsRightHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FingerTapsRightHandUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FingerTapsLeftHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FingerTapsLeftHandUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HandMovementsRightHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HandMovementsRightHandUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HandMovemonetsLeftHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HandMovemonetsLeftHandUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RapidRightHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RapidRightHandUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RapidLeftHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RapidLeftHandUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RightLegAgility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RightLegAgilityUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeftLegAgility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeftLegAgilityUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArisingFromChair)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArisingFromChairUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Posture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostureUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gait)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GaitUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostureStability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostureStabilityUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BradykinesiaAndHypokinesia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BradykinesiaAndHypokinesiaUntestable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

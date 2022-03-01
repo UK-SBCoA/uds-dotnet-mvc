@@ -1,0 +1,83 @@
+﻿[
+  {
+    "Name": "NeurologicalPsychiatric",
+    "Decription": "Codes for neurological problems and psychiatric conditions",
+    "Codes": {
+      "1": "CODES for neurological problems and psychiatric conditions",
+      "2": "Parkinsonism",
+      "3": "ALS",
+      "4": "Other neurologic condition such as multiple sclerosis or stroke",
+      "5": "Psychiatric condition such as schizophrenia, bipolar disorder, alcoholism, or depression",
+      "8": "N/A — no neurological problem or psychiatric condition",
+      "9": "Unknown"
+    }
+  },
+  {
+    "Name": "EvaluationMethod",
+    "Description": "Codes for Method of Evaluation",
+    "Codes": {
+      "1": "Autopsy",
+      "2": "Examination",
+      "3": "Medical record review from formal dementia evaluation",
+      "4": "Review of general medical records AND co-participant and/or subject telephone interview",
+      "5": "Review of general medical records only",
+      "6": "Subject and/or co-participant telephone interview",
+      "7": "Family report"
+    }
+  },
+  {
+    "Name": "PrimaryDiagnosis",
+    "Description": "",
+    "Codes": {
+      "40": "Mild cognitive impairment (MCI), not otherwise specified",
+      "41": "MCI — amnestic, single domain",
+      "42": "MCI — multiple domain with amnesia",
+      "43": "MCI — single domain nonamnestic",
+      "44": "MCI — multiple domain nonamnestic",
+      "45": "Impaired, but not MCI",
+      "50": "Alzheimer’s disease dementia",
+      "70": "Dementia with Lewy bodies,",
+      "80": "Vascular cognitive impairment or dementia",
+      "100": "Impairment due to alcohol abuse,",
+      "110": "Dementia of undetermined etiology",
+      "120": "Behavioral variant frontotemporal dementia",
+      "130": "Primary progressive aphasia, semantic variant",
+      "131": "Primary progressive aphasia, nonfluent/agrammatic variant",
+      "132": "Primary progressive aphasia, logopenic variant",
+      "133": "Primary progressive aphasia, not otherwise specified",
+      "140": "Clinical progressive supranuclear palsy",
+      "150": "Clinical corticobasal syndrome/corticobasal degeneration",
+      "160": "Huntington’s disease",
+      "170": "Clinical prion disease",
+      "180": "Cognitive dysfunction from medications",
+      "190": "Cognitive dysfunction from medical illness",
+      "200": "Depression",
+      "210": "Other major psychiatric illness",
+      "220": "Down syndrome",
+      "230": "Parkinson’s disease",
+      "240": "Stroke",
+      "250": "Hydrocephalus",
+      "260": "Traumatic brain injury",
+      "270": "CNS neoplasm",
+      "280": "Other",
+      "310": "Amyotrophic lateral sclerosis",
+      "320": "Multiple sclerosis",
+      "400": "Alzheimer’s disease neuropathology",
+      "410": "Lewy body disease neuropathology",
+      "420": "Gross infarct(s) neuropathology",
+      "421": "Hemorrhage(s) neuropathology",
+      "430": "Other cerebrovascular disease neuropathology",
+      "431": "ALS/MND",
+      "432": "FTLD with Tau pathology — Pick’s disease",
+      "433": "FTLD with Tau pathology — CBD",
+      "434": "FTLD with Tau pathology — PSP",
+      "435": "FTLD with Tau pathology — argyrophyllic grains",
+      "436": "FTLD with Tau pathology — other",
+      "439": "FTLD with TDP-43",
+      "440": "FTLD other (FTLD-FUS, FTLD-UPS, FTLD NOS)",
+      "450": "Hippocampal sclerosis",
+      "490": "Prion disease neuropathology",
+      "999": "Specific diagnosis unknown (acceptable if method of evaluation is not by autopsy, examination, or dementia evaluation)"
+    }
+  }
+]

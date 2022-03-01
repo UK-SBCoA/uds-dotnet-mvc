@@ -1,0 +1,125 @@
+@model IEnumerable<PhysicalEvaluation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HeightInches)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeightInchesDecimal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodPressureSystolic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodPressureDiastolic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestingHeartRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectsVision)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrectiveLenses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrectiveLensesNormal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectsHearing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HearingAids)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HearingAidsNormal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Version)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeightInches)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeightInchesDecimal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodPressureSystolic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodPressureDiastolic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestingHeartRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectsVision)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorrectiveLenses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorrectiveLensesNormal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectsHearing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HearingAids)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HearingAidsNormal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

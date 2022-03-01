@@ -1,0 +1,191 @@
+@model IEnumerable<NPIQ>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CoParticipant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoParticipantOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Delusions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DelusionsSeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hallucinations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HallucinationsSeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agitation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgitationSeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Anxiety)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnxietySeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Elation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElationSeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apathy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApathySeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disinhibition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisinhibitionSeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Irritability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IrritabilitySeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotorDisturbance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotorDisturbanceSeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nighttime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NighttimeSeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appetite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppetiteSeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoParticipant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoParticipantOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Delusions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DelusionsSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hallucinations)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HallucinationsSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agitation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgitationSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anxiety)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnxietySeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Elation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElationSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apathy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApathySeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disinhibition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisinhibitionSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Irritability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IrritabilitySeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotorDisturbance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotorDisturbanceSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nighttime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NighttimeSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appetite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppetiteSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

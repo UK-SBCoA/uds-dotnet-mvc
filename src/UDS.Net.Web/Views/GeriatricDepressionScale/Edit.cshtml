@@ -1,0 +1,534 @@
+@model GeriatricDepressionScale
+
+@{
+    var title = "Geriatric Depression Scale";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+}
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+
+<div class="row">
+    <div class="col-md-8 p-4">
+        <form asp-action="Edit">
+            <!-- Geriatric Depression Scale -->
+            <div class="form-group">
+                <div class="form-check">
+                    @Html.CheckBox("NoGDS", Model.NoGDS != null && (bool)Model.NoGDS)
+                    @Html.DisplayNameFor(model => model.NoGDS)
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <th></th>
+                <th>Yes</th>
+                <th>No</th>
+                <th>Did not answer</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label asp-for="Satisfaction" class="control-label"></label><br>
+                            <span asp-validation-for="Satisfaction" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Satisfaction"
+                                       id="Satisfaction[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Satisfaction[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Satisfaction"
+                                       id="Satisfaction[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Satisfaction[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Satisfaction"
+                                       id="Satisfaction[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Satisfaction[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="ActivityInterests" class="control-label"></label><br>
+                            <span asp-validation-for="ActivityInterests" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="ActivityInterests"
+                                       id="ActivityInterests[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="ActivityInterests[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="ActivityInterests"
+                                       id="ActivityInterests[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="ActivityInterests[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="ActivityInterests"
+                                       id="ActivityInterests[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="ActivityInterests[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Empty" class="control-label"></label><br>
+                            <span asp-validation-for="Empty" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Empty"
+                                       id="Empty[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Empty[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Empty"
+                                       id="Empty[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Empty[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Empty"
+                                       id="Empty[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Empty[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Bored" class="control-label"></label><br>
+                            <span asp-validation-for="Bored" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Bored"
+                                       id="Bored[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Bored[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Bored"
+                                       id="Bored[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Bored[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Bored"
+                                       id="Bored[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Bored[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Spirits" class="control-label"></label><br>
+                            <span asp-validation-for="Spirits" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Spirits"
+                                       id="Spirits[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Spirits[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Spirits"
+                                       id="Spirits[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Spirits[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Spirits"
+                                       id="Spirits[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Spirits[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Afraid" class="control-label"></label><br>
+                            <span asp-validation-for="Afraid" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Afraid"
+                                       id="Afraid[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Afraid[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Afraid"
+                                       id="Afraid[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Afraid[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Afraid"
+                                       id="Afraid[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Afraid[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Happy" class="control-label"></label><br>
+                            <span asp-validation-for="Happy" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Happy"
+                                       id="Happy[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Happy[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Happy"
+                                       id="Happy[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Happy[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Happy"
+                                       id="Happy[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Happy[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Helpless" class="control-label"></label><br>
+                            <span asp-validation-for="Helpless" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Helpless"
+                                       id="Helpless[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Helpless[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Helpless"
+                                       id="Helpless[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Helpless[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Helpless"
+                                       id="Helpless[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Helpless[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="StayHome" class="control-label"></label><br>
+                            <span asp-validation-for="StayHome" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="StayHome"
+                                       id="StayHome[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="StayHome[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="StayHome"
+                                       id="StayHome[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="StayHome[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="StayHome"
+                                       id="StayHome[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="StayHome[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="MemProb" class="control-label"></label><br>
+                            <span asp-validation-for="MemProb" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="MemProb"
+                                       id="MemProb[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="MemProb[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="MemProb"
+                                       id="MemProb[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="MemProb[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="MemProb"
+                                       id="MemProb[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="MemProb[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Wonderful" class="control-label"></label><br>
+                            <span asp-validation-for="Wonderful" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Wonderful"
+                                       id="Wonderful[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Wonderful[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Wonderful"
+                                       id="Wonderful[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Wonderful[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Wonderful"
+                                       id="Wonderful[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Wonderful[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Worthless" class="control-label"></label><br>
+                            <span asp-validation-for="Worthless" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Worthless"
+                                       id="Worthless[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Worthless[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Worthless"
+                                       id="Worthless[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Worthless[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Worthless"
+                                       id="Worthless[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Worthless[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Energy" class="control-label"></label><br>
+                            <span asp-validation-for="Energy" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Energy"
+                                       id="Energy[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Energy[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Energy"
+                                       id="Energy[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Energy[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Energy"
+                                       id="Energy[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Energy[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Hopeless" class="control-label"></label><br>
+                            <span asp-validation-for="Hopeless" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Hopeless"
+                                       id="Hopeless[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Hopeless[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Hopeless"
+                                       id="Hopeless[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Hopeless[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Hopeless"
+                                       id="Hopeless[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Hopeless[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Better" class="control-label"></label><br>
+                            <span asp-validation-for="Better" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Better"
+                                       id="Better[1]"
+                                       value="1" />
+                                <label class="form-check-label" for="Better[1]"> <span class="badge badge-pillbadge-light">1 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Better"
+                                       id="Better[0]"
+                                       value="0" />
+                                <label class="form-check-label" for="Better[0]"> <span class="badge badge-pillbadge-light">0 </span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Better"
+                                       id="Better[9]"
+                                       value="9" />
+                                <label class="form-check-label" for="Better[9]"> <span class="badge badge-pillbadge-light">9 </span></label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label asp-for="GDS" class="control-label"></label>
+                        <span asp-validation-for="GDS" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-2">
+                        <input asp-for="GDS" class="form-control" />
+                    </div>
+                </div>
+
+            </div>
+
+
+            <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>var total = 0
+        $('input[name=NoGDS]').on('change gds-load', (event) => {
+            var isChecked = $(event.target).is(':checked');
+            if (isChecked) {
+                $('input[type=radio]').each((index, elem) => {
+                    if (elem.getAttribute('name') != event.target.getAttribute('name')) {
+                        $(elem).prop('disabled', true);
+                        $('input[name=GDS]').val(88);
+                    }
+                });
+            } else {
+                $('input').each((index, elem) => {
+                    $(elem).prop('disabled', false);
+                    $('input[name=GDS]').val(null);
+                    depressionScore();
+                });
+            }
+        }).triggerHandler('gds-load');
+        $('input[type=radio]').on('change', (event) => {
+            depressionScore();
+        });
+        function depressionScore() {
+            $('input[name=GDS]').val($('input[type=radio][value=1]:checked').length);
+        }</script>
+}

@@ -1,0 +1,236 @@
+@model FunctionalActivitiesQuestionnaire
+
+@{
+    var title = "B7 FUNCTIONAL ASSESSMENT Functional Activities Questionnaire";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+}
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+
+<div class="row">
+    <div class="col-md-12 p-4">
+        <p class="lead">
+            <h5 class="lead font-weight-bold">Instructions</h5>
+        <p>This form is to be completed by the clinician or other trained health professional, based on information provided by the co-participant. For further information, see UDS Coding Guidebook for Telephone Visit Packet, Form B7. Indicate the level of performance for each activity by checking the one appropriate response.</p>
+        </p>
+
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            In the past four weeks, did the subject have difficulty or need help with:
+                        </th>
+                        <th>
+                            Not applicable (e.g., never did)
+                        </th>
+                        <th>
+                            Normal
+                        </th>
+                        <th>
+                            Has difficulty, but does by self
+                        </th>
+                        <th>
+                            Requires assistance
+                        </th>
+                        <th>
+                            Dependent
+                        </th>
+                        <th>
+                            Unknown
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Bills -->
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="Bills" class="control-label"></label><br>
+                            <span asp-validation-for="Bills" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Bills"
+                           id="Bills[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="Bills[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="Taxes" class="control-label"></label><br>
+                            <span asp-validation-for="Taxes" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Taxes"
+                           id="Taxes[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="Taxes[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="Shopping" class="control-label"></label><br>
+                            <span asp-validation-for="Shopping" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Shopping"
+                           id="Shopping[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="Shopping[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="Games" class="control-label"></label><br>
+                            <span asp-validation-for="Games" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Games"
+                           id="Games[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="Games[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="Stove" class="control-label"></label><br>
+                            <span asp-validation-for="Stove" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Stove"
+                           id="Stove[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="Stove[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="MealPrep" class="control-label"></label><br>
+                            <span asp-validation-for="MealPrep" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="MealPrep"
+                           id="MealPrep[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="MealPrep[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="Events" class="control-label"></label><br>
+                            <span asp-validation-for="Events" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Events"
+                           id="Events[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="Events[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="PayAttention" class="control-label"></label><br>
+                            <span asp-validation-for="PayAttention" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="PayAttention"
+                           id="PayAttention[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="PayAttention[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="RememberDates" class="control-label"></label><br>
+                            <span asp-validation-for="RememberDates" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="RememberDates"
+                           id="RememberDates[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="RememberDates[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label asp-for="Travel" class="control-label"></label><br>
+                            <span asp-validation-for="Travel" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Travel"
+                           id="Travel[@code.Key]"
+                           value="@code.Key" />
+                    <label class="form-check-label" for="Travel[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key </span></label>
+                </div>
+            </td>}
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

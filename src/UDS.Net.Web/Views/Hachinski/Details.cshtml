@@ -1,0 +1,97 @@
+@model Hachinski
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Hachinski</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AbruptOnset)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AbruptOnset)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StepwiseDeterioration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StepwiseDeterioration)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SomaticComplaints)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SomaticComplaints)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EmotionalIncontinence)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmotionalIncontinence)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hypertension)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hypertension)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Stroke)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Stroke)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Symptoms)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Symptoms)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Signs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Signs)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HachinskiTotal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HachinskiTotal)
+        </dd>
+        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Visit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Visit.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ExaminerInitials)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ExaminerInitials)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FormStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FormStatus)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Version)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Version)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

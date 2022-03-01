@@ -1,0 +1,19 @@
+﻿@model FormBase
+@{
+}
+
+@if (Model != null && Model.Id > 0)
+{
+    @if (Model.FormStatus == FormStatus.Incomplete)
+    {
+        <span class="text-danger">@Model.FormStatus</span>
+    }
+    else
+    {
+        <span class="text-success">@Model.FormStatus</span>
+    }
+}
+else
+{
+    <span>Not started</span>
+}

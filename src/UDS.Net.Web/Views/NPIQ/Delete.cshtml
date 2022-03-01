@@ -1,0 +1,183 @@
+@model NPIQ
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>NPIQ</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CoParticipant)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CoParticipant)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CoParticipantOther)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CoParticipantOther)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Delusions)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Delusions)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DelusionsSeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DelusionsSeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hallucinations)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hallucinations)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HallucinationsSeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HallucinationsSeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Agitation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Agitation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AgitationSeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AgitationSeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Anxiety)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Anxiety)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AnxietySeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AnxietySeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Elation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Elation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ElationSeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ElationSeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Apathy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Apathy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ApathySeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ApathySeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Disinhibition)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Disinhibition)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DisinhibitionSeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DisinhibitionSeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Irritability)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Irritability)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IrritabilitySeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IrritabilitySeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MotorDisturbance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MotorDisturbance)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MotorDisturbanceSeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MotorDisturbanceSeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nighttime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nighttime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NighttimeSeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NighttimeSeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Appetite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Appetite)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AppetiteSeverity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AppetiteSeverity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Visit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Visit.Id)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ExaminerInitials)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ExaminerInitials)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FormStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FormStatus)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

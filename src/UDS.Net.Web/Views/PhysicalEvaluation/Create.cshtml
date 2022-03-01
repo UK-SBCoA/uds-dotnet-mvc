@@ -1,0 +1,107 @@
+@model PhysicalEvaluation
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>PhysicalEvaluation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HeightInches" class="control-label"></label>
+                <input asp-for="HeightInches" class="form-control" />
+                <span asp-validation-for="HeightInches" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeightInchesDecimal" class="control-label"></label>
+                <input asp-for="HeightInchesDecimal" class="form-control" />
+                <span asp-validation-for="HeightInchesDecimal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodPressureSystolic" class="control-label"></label>
+                <input asp-for="BloodPressureSystolic" class="form-control" />
+                <span asp-validation-for="BloodPressureSystolic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodPressureDiastolic" class="control-label"></label>
+                <input asp-for="BloodPressureDiastolic" class="form-control" />
+                <span asp-validation-for="BloodPressureDiastolic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RestingHeartRate" class="control-label"></label>
+                <input asp-for="RestingHeartRate" class="form-control" />
+                <span asp-validation-for="RestingHeartRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubjectsVision" class="control-label"></label>
+                <input asp-for="SubjectsVision" class="form-control" />
+                <span asp-validation-for="SubjectsVision" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorrectiveLenses" class="control-label"></label>
+                <input asp-for="CorrectiveLenses" class="form-control" />
+                <span asp-validation-for="CorrectiveLenses" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorrectiveLensesNormal" class="control-label"></label>
+                <input asp-for="CorrectiveLensesNormal" class="form-control" />
+                <span asp-validation-for="CorrectiveLensesNormal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubjectsHearing" class="control-label"></label>
+                <input asp-for="SubjectsHearing" class="form-control" />
+                <span asp-validation-for="SubjectsHearing" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HearingAids" class="control-label"></label>
+                <input asp-for="HearingAids" class="form-control" />
+                <span asp-validation-for="HearingAids" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HearingAidsNormal" class="control-label"></label>
+                <input asp-for="HearingAidsNormal" class="form-control" />
+                <span asp-validation-for="HearingAidsNormal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class ="form-control" asp-items="ViewBag.Id"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExaminerInitials" class="control-label"></label>
+                <input asp-for="ExaminerInitials" class="form-control" />
+                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormStatus" class="control-label"></label>
+                <select asp-for="FormStatus" class="form-control"></select>
+                <span asp-validation-for="FormStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Version" class="control-label"></label>
+                <input asp-for="Version" class="form-control" />
+                <span asp-validation-for="Version" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

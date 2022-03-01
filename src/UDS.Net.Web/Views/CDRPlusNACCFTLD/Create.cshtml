@@ -1,0 +1,102 @@
+@model CDRPlusNACCFTLD
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>CDRPlusNACCFTLD</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Memory" class="control-label"></label>
+                <input asp-for="Memory" class="form-control" />
+                <span asp-validation-for="Memory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Orientation" class="control-label"></label>
+                <input asp-for="Orientation" class="form-control" />
+                <span asp-validation-for="Orientation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JudgmentAndProblemSolving" class="control-label"></label>
+                <input asp-for="JudgmentAndProblemSolving" class="form-control" />
+                <span asp-validation-for="JudgmentAndProblemSolving" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CommunityAffairs" class="control-label"></label>
+                <input asp-for="CommunityAffairs" class="form-control" />
+                <span asp-validation-for="CommunityAffairs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomesAndHobbies" class="control-label"></label>
+                <input asp-for="HomesAndHobbies" class="form-control" />
+                <span asp-validation-for="HomesAndHobbies" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalCare" class="control-label"></label>
+                <input asp-for="PersonalCare" class="form-control" />
+                <span asp-validation-for="PersonalCare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StandardCDRSumOfBoxes" class="control-label"></label>
+                <input asp-for="StandardCDRSumOfBoxes" class="form-control" />
+                <span asp-validation-for="StandardCDRSumOfBoxes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StandardGlobalCDR" class="control-label"></label>
+                <input asp-for="StandardGlobalCDR" class="form-control" />
+                <span asp-validation-for="StandardGlobalCDR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BehaviorComportmentAndPersonality" class="control-label"></label>
+                <input asp-for="BehaviorComportmentAndPersonality" class="form-control" />
+                <span asp-validation-for="BehaviorComportmentAndPersonality" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Language" class="control-label"></label>
+                <input asp-for="Language" class="form-control" />
+                <span asp-validation-for="Language" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplementalCDRSumOfBoxes" class="control-label"></label>
+                <input asp-for="SupplementalCDRSumOfBoxes" class="form-control" />
+                <span asp-validation-for="SupplementalCDRSumOfBoxes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplementalGlobalCDR" class="control-label"></label>
+                <input asp-for="SupplementalGlobalCDR" class="form-control" />
+                <span asp-validation-for="SupplementalGlobalCDR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class ="form-control" asp-items="ViewBag.Id"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExaminerInitials" class="control-label"></label>
+                <input asp-for="ExaminerInitials" class="form-control" />
+                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormStatus" class="control-label"></label>
+                <select asp-for="FormStatus" class="form-control"></select>
+                <span asp-validation-for="FormStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

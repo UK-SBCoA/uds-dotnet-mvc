@@ -1,0 +1,107 @@
+@model IEnumerable<FunctionalActivitiesQuestionnaire>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bills)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Taxes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shopping)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Games)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stove)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MealPrep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayAttention)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RememberDates)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Travel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Taxes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shopping)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Games)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stove)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MealPrep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Events)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayAttention)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RememberDates)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+﻿@model Visit
+@{
+}
+
+<div class="row">
+    <div class="col p-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2">Visit @Model.VisitNumber @Html.DisplayFor(model => model.VisitType) visit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><h5 class="font-weight-light">@ViewBag.Title</h5></td>
+                    <td class="text-right"><a>Previous</a> <a>Next</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

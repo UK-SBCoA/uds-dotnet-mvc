@@ -1,0 +1,70 @@
+﻿@model RelativeRowViewModel
+@{ char[] aplha = "ABCDEFGHIJKLMNOPQRSTUVQXYZ".ToLower().ToCharArray(); }
+@{
+    string TableName = "";
+    int questionNumber = 0;
+    switch(Model.Relative.Relation) {
+        case FamilyRelationship.Father:
+            TableName = "Parent";
+            questionNumber = 5;
+            break;
+        case FamilyRelationship.Mother:
+            TableName = "Parent";
+            questionNumber = 5;
+            break;
+        case FamilyRelationship.Sibling:
+            TableName = "Sibling";
+            questionNumber = 6;
+            break;
+        case FamilyRelationship.Child:
+            TableName = "Children";
+            questionNumber = 7;
+            break;
+    }
+}
+<tr id="@String.Format("{0}Row{1}", TableName, Model.Relative.RelationshipNumber )" data-state="disabled">
+    <td>
+
+        <p>@String.Format("{0}{1}. {2} {3}", questionNumber ,aplha.GetValue(Model.Relative.RelationshipNumber - 1), Model.Relative.Relation.ToString(), Model.Relative.RelationshipNumber)</p>
+        <input type="hidden" name="Relatives[@Model.Index].Id" value="@Model.Relative.Id" />
+        <input type="hidden" name="Relatives[@Model.Index].SubjectFamilyHistoryId" value="@Model.Relative.SubjectFamilyHistoryId" />
+        <input type="hidden" name="Relatives[@Model.Index].RelationshipNumber" value="@Model.Relative.RelationshipNumber" />
+        <input type="hidden" name="Relatives[@Model.Index].Relation" value="@Model.Relative.Relation" />
+    </td>
+    <td>
+        <div class="row">
+            <div class="col-4">
+                <input class="form-control" name="Relatives[@Model.Index].BirthMonth" value="@Model.Relative.BirthMonth" />
+                <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].BirthMonth", Model.Index))</span>
+            </div>
+            <div class="col-.2">
+                /
+            </div>
+            <div class="col">
+                <input class="form-control" name="Relatives[@Model.Index].BirthYear" value="@Model.Relative.BirthYear" />
+                <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].BirthYear", Model.Index))</span>
+            </div>
+        </div>
+    </td>
+    <td>
+        <input class="form-control" name="Relatives[@Model.Index].AgeAtDeath" value="@Model.Relative.AgeAtDeath" />
+        <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].AgeAtDeath", Model.Index))</span>
+    </td>
+    <td>
+        <input class="form-control" name="Relatives[@Model.Index].PrimaryNeurologicalProblemPsychiatricCondition" value="@Model.Relative.PrimaryNeurologicalProblemPsychiatricCondition" />
+        <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].PrimaryNeurologicalProblemPsychiatricCondition", Model.Index))</span>
+    </td>
+    <td>
+        <input class="form-control" name="Relatives[@Model.Index].PrimaryDx" value="@Model.Relative.PrimaryDx" data-neurocon />
+        <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].PrimaryDx", Model.Index))</span>
+
+    </td>
+    <td>
+        <input class="form-control" name="Relatives[@Model.Index].MethodOfEvaluation" value="@Model.Relative.MethodOfEvaluation" data-neurocon />
+        <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].MethodOfEvaluation", Model.Index))</span>
+    </td>
+    <td>
+        <input class="form-control" name="Relatives[@Model.Index].AgeOfOnSet" value="@Model.Relative.AgeOfOnSet" data-neurocon />
+        <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].AgeOfOnSet", Model.Index))</span>
+    </td>
+</tr>

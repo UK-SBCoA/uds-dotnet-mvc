@@ -1,0 +1,692 @@
+@model ClinicianDiagnosis
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ClinicianDiagnosis</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DiagnosisMethod" class="control-label"></label>
+                <input asp-for="DiagnosisMethod" class="form-control" />
+                <span asp-validation-for="DiagnosisMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HasNormalCognition" class="control-label"></label>
+                <input asp-for="HasNormalCognition" class="form-control" />
+                <span asp-validation-for="HasNormalCognition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MeetsCriteriaForDementia" class="control-label"></label>
+                <input asp-for="MeetsCriteriaForDementia" class="form-control" />
+                <span asp-validation-for="MeetsCriteriaForDementia" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AmnesticMultiDomainPresent" /> @Html.DisplayNameFor(model => model.AmnesticMultiDomainPresent)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PosteriorCorticalAtrophyPresent" /> @Html.DisplayNameFor(model => model.PosteriorCorticalAtrophyPresent)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PrimaryProgressiveAphasiaPresent" /> @Html.DisplayNameFor(model => model.PrimaryProgressiveAphasiaPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrimaryProgressiveAphasiaType" class="control-label"></label>
+                <input asp-for="PrimaryProgressiveAphasiaType" class="form-control" />
+                <span asp-validation-for="PrimaryProgressiveAphasiaType" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="BehavioralVariantFTDPresent" /> @Html.DisplayNameFor(model => model.BehavioralVariantFTDPresent)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="LewyBodyPresent" /> @Html.DisplayNameFor(model => model.LewyBodyPresent)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NonAmnesticMultiDomainPresent" /> @Html.DisplayNameFor(model => model.NonAmnesticMultiDomainPresent)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AmnesticMCISingleDomainPresent" /> @Html.DisplayNameFor(model => model.AmnesticMCISingleDomainPresent)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AmnesticMCIMultipleDomains" /> @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomains)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmnesticMCIMultipleDomainsLanguage" class="control-label"></label>
+                <input asp-for="AmnesticMCIMultipleDomainsLanguage" class="form-control" />
+                <span asp-validation-for="AmnesticMCIMultipleDomainsLanguage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmnesticMCIMultipleDomainsAttention" class="control-label"></label>
+                <input asp-for="AmnesticMCIMultipleDomainsAttention" class="form-control" />
+                <span asp-validation-for="AmnesticMCIMultipleDomainsAttention" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmnesticMCIMultipleDomainsExecutive" class="control-label"></label>
+                <input asp-for="AmnesticMCIMultipleDomainsExecutive" class="form-control" />
+                <span asp-validation-for="AmnesticMCIMultipleDomainsExecutive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmnesticMCIMultipleDomainsVisuospatial" class="control-label"></label>
+                <input asp-for="AmnesticMCIMultipleDomainsVisuospatial" class="form-control" />
+                <span asp-validation-for="AmnesticMCIMultipleDomainsVisuospatial" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NonAmnesticMCISingleDomain" /> @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomain)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="NonAmnesticMCISingleDomainLanguage" class="control-label"></label>
+                <input asp-for="NonAmnesticMCISingleDomainLanguage" class="form-control" />
+                <span asp-validation-for="NonAmnesticMCISingleDomainLanguage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NonAmnesticMCISingleDomainAttention" class="control-label"></label>
+                <input asp-for="NonAmnesticMCISingleDomainAttention" class="form-control" />
+                <span asp-validation-for="NonAmnesticMCISingleDomainAttention" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NonAmnesticMCISingleDomainExecutive" class="control-label"></label>
+                <input asp-for="NonAmnesticMCISingleDomainExecutive" class="form-control" />
+                <span asp-validation-for="NonAmnesticMCISingleDomainExecutive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NonAmnesticMCISingleDomainVisuospatial" class="control-label"></label>
+                <input asp-for="NonAmnesticMCISingleDomainVisuospatial" class="form-control" />
+                <span asp-validation-for="NonAmnesticMCISingleDomainVisuospatial" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NonAmnesticMCIMultipleDomains" /> @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomains)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="NonAmnesticMCIMultipleDomainsLanguage" class="control-label"></label>
+                <input asp-for="NonAmnesticMCIMultipleDomainsLanguage" class="form-control" />
+                <span asp-validation-for="NonAmnesticMCIMultipleDomainsLanguage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NonAmnesticMCIMultipleDomainsAttention" class="control-label"></label>
+                <input asp-for="NonAmnesticMCIMultipleDomainsAttention" class="form-control" />
+                <span asp-validation-for="NonAmnesticMCIMultipleDomainsAttention" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NonAmnesticMCIMultipleDomainsExecutive" class="control-label"></label>
+                <input asp-for="NonAmnesticMCIMultipleDomainsExecutive" class="form-control" />
+                <span asp-validation-for="NonAmnesticMCIMultipleDomainsExecutive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NonAmnesticMCIMultipleDomainsVisuospatial" class="control-label"></label>
+                <input asp-for="NonAmnesticMCIMultipleDomainsVisuospatial" class="form-control" />
+                <span asp-validation-for="NonAmnesticMCIMultipleDomainsVisuospatial" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CognitivelyImpairedNotMCIPresent" /> @Html.DisplayNameFor(model => model.CognitivelyImpairedNotMCIPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbnormallyElevatedAmyloidInPET" class="control-label"></label>
+                <input asp-for="AbnormallyElevatedAmyloidInPET" class="form-control" />
+                <span asp-validation-for="AbnormallyElevatedAmyloidInPET" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbnormallyLowAmyloidInCSF" class="control-label"></label>
+                <input asp-for="AbnormallyLowAmyloidInCSF" class="form-control" />
+                <span asp-validation-for="AbnormallyLowAmyloidInCSF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FDGPETPattern" class="control-label"></label>
+                <input asp-for="FDGPETPattern" class="form-control" />
+                <span asp-validation-for="FDGPETPattern" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HippocampalAtrophy" class="control-label"></label>
+                <input asp-for="HippocampalAtrophy" class="form-control" />
+                <span asp-validation-for="HippocampalAtrophy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TauPETEvidenceForAD" class="control-label"></label>
+                <input asp-for="TauPETEvidenceForAD" class="form-control" />
+                <span asp-validation-for="TauPETEvidenceForAD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbnormallyElevatedCSFTauOrPtau" class="control-label"></label>
+                <input asp-for="AbnormallyElevatedCSFTauOrPtau" class="form-control" />
+                <span asp-validation-for="AbnormallyElevatedCSFTauOrPtau" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism" class="control-label"></label>
+                <input asp-for="FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism" class="form-control" />
+                <span asp-validation-for="FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TauPETEvidence" class="control-label"></label>
+                <input asp-for="TauPETEvidence" class="form-control" />
+                <span asp-validation-for="TauPETEvidence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StructuralMREvidence" class="control-label"></label>
+                <input asp-for="StructuralMREvidence" class="form-control" />
+                <span asp-validation-for="StructuralMREvidence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DopamineTransporterScanEvidence" class="control-label"></label>
+                <input asp-for="DopamineTransporterScanEvidence" class="form-control" />
+                <span asp-validation-for="DopamineTransporterScanEvidence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherEvidenceExists" class="control-label"></label>
+                <input asp-for="OtherEvidenceExists" class="form-control" />
+                <span asp-validation-for="OtherEvidenceExists" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherEvidenceSpecified" class="control-label"></label>
+                <input asp-for="OtherEvidenceSpecified" class="form-control" />
+                <span asp-validation-for="OtherEvidenceSpecified" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LargeVesselInfarcts" class="control-label"></label>
+                <input asp-for="LargeVesselInfarcts" class="form-control" />
+                <span asp-validation-for="LargeVesselInfarcts" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LacunarInfarcts" class="control-label"></label>
+                <input asp-for="LacunarInfarcts" class="form-control" />
+                <span asp-validation-for="LacunarInfarcts" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Macrohemorrhages" class="control-label"></label>
+                <input asp-for="Macrohemorrhages" class="form-control" />
+                <span asp-validation-for="Macrohemorrhages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Microhemorrhages" class="control-label"></label>
+                <input asp-for="Microhemorrhages" class="form-control" />
+                <span asp-validation-for="Microhemorrhages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModerateWhiteMatterHyperintensity" class="control-label"></label>
+                <input asp-for="ModerateWhiteMatterHyperintensity" class="form-control" />
+                <span asp-validation-for="ModerateWhiteMatterHyperintensity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExtensiveWhiteMatterHyperintensity" class="control-label"></label>
+                <input asp-for="ExtensiveWhiteMatterHyperintensity" class="form-control" />
+                <span asp-validation-for="ExtensiveWhiteMatterHyperintensity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DominantlyInheritedADMutation" class="control-label"></label>
+                <input asp-for="DominantlyInheritedADMutation" class="form-control" />
+                <span asp-validation-for="DominantlyInheritedADMutation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HereditaryFTLDMutation" class="control-label"></label>
+                <input asp-for="HereditaryFTLDMutation" class="form-control" />
+                <span asp-validation-for="HereditaryFTLDMutation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HereditaryMutationOther" class="control-label"></label>
+                <input asp-for="HereditaryMutationOther" class="form-control" />
+                <span asp-validation-for="HereditaryMutationOther" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HereditaryMutationOtherSpecified" class="control-label"></label>
+                <input asp-for="HereditaryMutationOtherSpecified" class="form-control" />
+                <span asp-validation-for="HereditaryMutationOtherSpecified" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AlzheimersDiseasePresent" /> @Html.DisplayNameFor(model => model.AlzheimersDiseasePresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlzheimersDiseaseDiagnosis" class="control-label"></label>
+                <input asp-for="AlzheimersDiseaseDiagnosis" class="form-control" />
+                <span asp-validation-for="AlzheimersDiseaseDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="LewyBodyDiseasePresent" /> @Html.DisplayNameFor(model => model.LewyBodyDiseasePresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="LewyBodyDiseaseDiagnosis" class="control-label"></label>
+                <input asp-for="LewyBodyDiseaseDiagnosis" class="form-control" />
+                <span asp-validation-for="LewyBodyDiseaseDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ParkinsonsDiseasePresent" /> @Html.DisplayNameFor(model => model.ParkinsonsDiseasePresent)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="MultipleSystemAtrophyPresent" /> @Html.DisplayNameFor(model => model.MultipleSystemAtrophyPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="MultipleSystemAtrophyDiagnosis" class="control-label"></label>
+                <input asp-for="MultipleSystemAtrophyDiagnosis" class="form-control" />
+                <span asp-validation-for="MultipleSystemAtrophyDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ProgressiveSupranuclearPaslyPresent" /> @Html.DisplayNameFor(model => model.ProgressiveSupranuclearPaslyPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProgressiveSupranuclearPaslyDiagnosis" class="control-label"></label>
+                <input asp-for="ProgressiveSupranuclearPaslyDiagnosis" class="form-control" />
+                <span asp-validation-for="ProgressiveSupranuclearPaslyDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CorticobasalDegenerationPresent" /> @Html.DisplayNameFor(model => model.CorticobasalDegenerationPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorticobasalDegenerationDiagnosis" class="control-label"></label>
+                <input asp-for="CorticobasalDegenerationDiagnosis" class="form-control" />
+                <span asp-validation-for="CorticobasalDegenerationDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="FTLDWithMotorNeuronDiseasePresent" /> @Html.DisplayNameFor(model => model.FTLDWithMotorNeuronDiseasePresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="FTLDWithMotorNeuronDiseaseDiagnosis" class="control-label"></label>
+                <input asp-for="FTLDWithMotorNeuronDiseaseDiagnosis" class="form-control" />
+                <span asp-validation-for="FTLDWithMotorNeuronDiseaseDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="FTLDNOSPresent" /> @Html.DisplayNameFor(model => model.FTLDNOSPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="FTLDNOSDiagnosis" class="control-label"></label>
+                <input asp-for="FTLDNOSDiagnosis" class="form-control" />
+                <span asp-validation-for="FTLDNOSDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FTLDSubtype" class="control-label"></label>
+                <input asp-for="FTLDSubtype" class="form-control" />
+                <span asp-validation-for="FTLDSubtype" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FTLDSubtypeOtherSpecified" class="control-label"></label>
+                <input asp-for="FTLDSubtypeOtherSpecified" class="form-control" />
+                <span asp-validation-for="FTLDSubtypeOtherSpecified" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="VascularBrainInjuryPresent" /> @Html.DisplayNameFor(model => model.VascularBrainInjuryPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="VascularBrainInjuryDiagnosis" class="control-label"></label>
+                <input asp-for="VascularBrainInjuryDiagnosis" class="form-control" />
+                <span asp-validation-for="VascularBrainInjuryDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousSymptomaticStroke" class="control-label"></label>
+                <input asp-for="PreviousSymptomaticStroke" class="form-control" />
+                <span asp-validation-for="PreviousSymptomaticStroke" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TemporalRelationshipBetweenStrokeAndCognitive" class="control-label"></label>
+                <input asp-for="TemporalRelationshipBetweenStrokeAndCognitive" class="form-control" />
+                <span asp-validation-for="TemporalRelationshipBetweenStrokeAndCognitive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmationOfStrokeByNeuroImaging" class="control-label"></label>
+                <input asp-for="ConfirmationOfStrokeByNeuroImaging" class="form-control" />
+                <span asp-validation-for="ConfirmationOfStrokeByNeuroImaging" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagingEvidenceOfCysticInfarctionInCognitiveNetwork" class="control-label"></label>
+                <input asp-for="ImagingEvidenceOfCysticInfarctionInCognitiveNetwork" class="form-control" />
+                <span asp-validation-for="ImagingEvidenceOfCysticInfarctionInCognitiveNetwork" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment" class="control-label"></label>
+                <input asp-for="ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment" class="form-control" />
+                <span asp-validation-for="ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EssentialTremorPresent" /> @Html.DisplayNameFor(model => model.EssentialTremorPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="EssentialTremorDiagnosis" class="control-label"></label>
+                <input asp-for="EssentialTremorDiagnosis" class="form-control" />
+                <span asp-validation-for="EssentialTremorDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DownSyndromePresent" class="control-label"></label>
+                <input asp-for="DownSyndromePresent" class="form-control" />
+                <span asp-validation-for="DownSyndromePresent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DownSyndromeDiagnosis" class="control-label"></label>
+                <input asp-for="DownSyndromeDiagnosis" class="form-control" />
+                <span asp-validation-for="DownSyndromeDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="HuntingtonsDiseasePresent" /> @Html.DisplayNameFor(model => model.HuntingtonsDiseasePresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="HuntingtonsDiseaseDiagnosis" class="control-label"></label>
+                <input asp-for="HuntingtonsDiseaseDiagnosis" class="form-control" />
+                <span asp-validation-for="HuntingtonsDiseaseDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PrionDiseasePresent" /> @Html.DisplayNameFor(model => model.PrionDiseasePresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrionDiseaseDiagnosis" class="control-label"></label>
+                <input asp-for="PrionDiseaseDiagnosis" class="form-control" />
+                <span asp-validation-for="PrionDiseaseDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TraumaticBrainInjuryPresent" /> @Html.DisplayNameFor(model => model.TraumaticBrainInjuryPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="TraumaticBrainInjuryDiagnosis" class="control-label"></label>
+                <input asp-for="TraumaticBrainInjuryDiagnosis" class="form-control" />
+                <span asp-validation-for="TraumaticBrainInjuryDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChronicTraumaticEncephalopathySymptom" class="control-label"></label>
+                <input asp-for="ChronicTraumaticEncephalopathySymptom" class="form-control" />
+                <span asp-validation-for="ChronicTraumaticEncephalopathySymptom" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NormalPressureHydrocephalusPresent" /> @Html.DisplayNameFor(model => model.NormalPressureHydrocephalusPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="NormalPressureHydropcephalusDiagnosis" class="control-label"></label>
+                <input asp-for="NormalPressureHydropcephalusDiagnosis" class="form-control" />
+                <span asp-validation-for="NormalPressureHydropcephalusDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EpilepsyPresent" /> @Html.DisplayNameFor(model => model.EpilepsyPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="EpilepsyDiagnosis" class="control-label"></label>
+                <input asp-for="EpilepsyDiagnosis" class="form-control" />
+                <span asp-validation-for="EpilepsyDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CNSNeoplasmPresent" /> @Html.DisplayNameFor(model => model.CNSNeoplasmPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CNSNeoplasmDiagnosis" class="control-label"></label>
+                <input asp-for="CNSNeoplasmDiagnosis" class="form-control" />
+                <span asp-validation-for="CNSNeoplasmDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CNSNeoplasmType" class="control-label"></label>
+                <input asp-for="CNSNeoplasmType" class="form-control" />
+                <span asp-validation-for="CNSNeoplasmType" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="HumanImmunodeficiencyVirusPresent" /> @Html.DisplayNameFor(model => model.HumanImmunodeficiencyVirusPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="HumanImmunodeficiencyVirusDiagnosis" class="control-label"></label>
+                <input asp-for="HumanImmunodeficiencyVirusDiagnosis" class="form-control" />
+                <span asp-validation-for="HumanImmunodeficiencyVirusDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OtherCognitiveImpairmentPresent" /> @Html.DisplayNameFor(model => model.OtherCognitiveImpairmentPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherCognitiveImpairmentDiagnosis" class="control-label"></label>
+                <input asp-for="OtherCognitiveImpairmentDiagnosis" class="form-control" />
+                <span asp-validation-for="OtherCognitiveImpairmentDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherCognitiveImpairmentSpecified" class="control-label"></label>
+                <input asp-for="OtherCognitiveImpairmentSpecified" class="form-control" />
+                <span asp-validation-for="OtherCognitiveImpairmentSpecified" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ActiveDepressionPresent" /> @Html.DisplayNameFor(model => model.ActiveDepressionPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActiveDepressionDiagnosis" class="control-label"></label>
+                <input asp-for="ActiveDepressionDiagnosis" class="form-control" />
+                <span asp-validation-for="ActiveDepressionDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActiveDepressionTreatment" class="control-label"></label>
+                <input asp-for="ActiveDepressionTreatment" class="form-control" />
+                <span asp-validation-for="ActiveDepressionTreatment" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="BipolarDisorderPresent" /> @Html.DisplayNameFor(model => model.BipolarDisorderPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="BipolarDisorderDiagnosis" class="control-label"></label>
+                <input asp-for="BipolarDisorderDiagnosis" class="form-control" />
+                <span asp-validation-for="BipolarDisorderDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SchizophreniaPresent" /> @Html.DisplayNameFor(model => model.SchizophreniaPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SchizophreniaDiagnosis" class="control-label"></label>
+                <input asp-for="SchizophreniaDiagnosis" class="form-control" />
+                <span asp-validation-for="SchizophreniaDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AnxietyDisorderPresent" /> @Html.DisplayNameFor(model => model.AnxietyDisorderPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnxietyDiagnosis" class="control-label"></label>
+                <input asp-for="AnxietyDiagnosis" class="form-control" />
+                <span asp-validation-for="AnxietyDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DeliriumPresent" /> @Html.DisplayNameFor(model => model.DeliriumPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliriumDiagnosis" class="control-label"></label>
+                <input asp-for="DeliriumDiagnosis" class="form-control" />
+                <span asp-validation-for="DeliriumDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PostTraumaticStressDisorderPresent" /> @Html.DisplayNameFor(model => model.PostTraumaticStressDisorderPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostTraumaticStressDisorderDiagnosis" class="control-label"></label>
+                <input asp-for="PostTraumaticStressDisorderDiagnosis" class="form-control" />
+                <span asp-validation-for="PostTraumaticStressDisorderDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OtherPsychiatricDiseasePresent" /> @Html.DisplayNameFor(model => model.OtherPsychiatricDiseasePresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherPsychiatricDiseaseDiagnosis" class="control-label"></label>
+                <input asp-for="OtherPsychiatricDiseaseDiagnosis" class="form-control" />
+                <span asp-validation-for="OtherPsychiatricDiseaseDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherPsychiatricDiseaseSpecified" class="control-label"></label>
+                <input asp-for="OtherPsychiatricDiseaseSpecified" class="form-control" />
+                <span asp-validation-for="OtherPsychiatricDiseaseSpecified" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AlcoholAbuse" /> @Html.DisplayNameFor(model => model.AlcoholAbuse)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlcoholAbuseDiagnosis" class="control-label"></label>
+                <input asp-for="AlcoholAbuseDiagnosis" class="form-control" />
+                <span asp-validation-for="AlcoholAbuseDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrentAlcoholAbuse" class="control-label"></label>
+                <input asp-for="CurrentAlcoholAbuse" class="form-control" />
+                <span asp-validation-for="CurrentAlcoholAbuse" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SubstanceAbuse" /> @Html.DisplayNameFor(model => model.SubstanceAbuse)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubstanceAbuseDiagnosis" class="control-label"></label>
+                <input asp-for="SubstanceAbuseDiagnosis" class="form-control" />
+                <span asp-validation-for="SubstanceAbuseDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SystemicDisease" /> @Html.DisplayNameFor(model => model.SystemicDisease)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SystemicDiseaseDiagnosis" class="control-label"></label>
+                <input asp-for="SystemicDiseaseDiagnosis" class="form-control" />
+                <span asp-validation-for="SystemicDiseaseDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Medications" /> @Html.DisplayNameFor(model => model.Medications)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicationsDiagnosis" class="control-label"></label>
+                <input asp-for="MedicationsDiagnosis" class="form-control" />
+                <span asp-validation-for="MedicationsDiagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NOS1" /> @Html.DisplayNameFor(model => model.NOS1)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="NOS1Diagnosis" class="control-label"></label>
+                <input asp-for="NOS1Diagnosis" class="form-control" />
+                <span asp-validation-for="NOS1Diagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NOS1Specified" class="control-label"></label>
+                <input asp-for="NOS1Specified" class="form-control" />
+                <span asp-validation-for="NOS1Specified" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NOS2" /> @Html.DisplayNameFor(model => model.NOS2)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="NOS2Diagnosis" class="control-label"></label>
+                <input asp-for="NOS2Diagnosis" class="form-control" />
+                <span asp-validation-for="NOS2Diagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NOS2Specified" class="control-label"></label>
+                <input asp-for="NOS2Specified" class="form-control" />
+                <span asp-validation-for="NOS2Specified" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NOS3" /> @Html.DisplayNameFor(model => model.NOS3)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="NOS3Diagnosis" class="control-label"></label>
+                <input asp-for="NOS3Diagnosis" class="form-control" />
+                <span asp-validation-for="NOS3Diagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NOS3Specified" class="control-label"></label>
+                <input asp-for="NOS3Specified" class="form-control" />
+                <span asp-validation-for="NOS3Specified" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class ="form-control" asp-items="ViewBag.Id"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExaminerInitials" class="control-label"></label>
+                <input asp-for="ExaminerInitials" class="form-control" />
+                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormStatus" class="control-label"></label>
+                <select asp-for="FormStatus" class="form-control"></select>
+                <span asp-validation-for="FormStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

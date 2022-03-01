@@ -1,0 +1,317 @@
+@model UnifiedParkinsonsDiseaseRatingScale
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>UnifiedParkinsonsDiseaseRatingScale</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IsNormal" class="control-label"></label>
+                <input asp-for="IsNormal" class="form-control" />
+                <span asp-validation-for="IsNormal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Speech" class="control-label"></label>
+                <input asp-for="Speech" class="form-control" />
+                <span asp-validation-for="Speech" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpeechUntestable" class="control-label"></label>
+                <input asp-for="SpeechUntestable" class="form-control" />
+                <span asp-validation-for="SpeechUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FacialExpression" class="control-label"></label>
+                <input asp-for="FacialExpression" class="form-control" />
+                <span asp-validation-for="FacialExpression" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FacialExpressionUntestable" class="control-label"></label>
+                <input asp-for="FacialExpressionUntestable" class="form-control" />
+                <span asp-validation-for="FacialExpressionUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestFaceLipsChin" class="control-label"></label>
+                <input asp-for="TremorRestFaceLipsChin" class="form-control" />
+                <span asp-validation-for="TremorRestFaceLipsChin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestFaceLipsChinUntestable" class="control-label"></label>
+                <input asp-for="TremorRestFaceLipsChinUntestable" class="form-control" />
+                <span asp-validation-for="TremorRestFaceLipsChinUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestRightHand" class="control-label"></label>
+                <input asp-for="TremorRestRightHand" class="form-control" />
+                <span asp-validation-for="TremorRestRightHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestRightHandUntestable" class="control-label"></label>
+                <input asp-for="TremorRestRightHandUntestable" class="form-control" />
+                <span asp-validation-for="TremorRestRightHandUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestLeftHand" class="control-label"></label>
+                <input asp-for="TremorRestLeftHand" class="form-control" />
+                <span asp-validation-for="TremorRestLeftHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestLeftHandUntestable" class="control-label"></label>
+                <input asp-for="TremorRestLeftHandUntestable" class="form-control" />
+                <span asp-validation-for="TremorRestLeftHandUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestRightFoot" class="control-label"></label>
+                <input asp-for="TremorRestRightFoot" class="form-control" />
+                <span asp-validation-for="TremorRestRightFoot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestRightFootUntestable" class="control-label"></label>
+                <input asp-for="TremorRestRightFootUntestable" class="form-control" />
+                <span asp-validation-for="TremorRestRightFootUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestLeftFoot" class="control-label"></label>
+                <input asp-for="TremorRestLeftFoot" class="form-control" />
+                <span asp-validation-for="TremorRestLeftFoot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorRestLeftFootOther" class="control-label"></label>
+                <input asp-for="TremorRestLeftFootOther" class="form-control" />
+                <span asp-validation-for="TremorRestLeftFootOther" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorActionRightHand" class="control-label"></label>
+                <input asp-for="TremorActionRightHand" class="form-control" />
+                <span asp-validation-for="TremorActionRightHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorActionRightHandOther" class="control-label"></label>
+                <input asp-for="TremorActionRightHandOther" class="form-control" />
+                <span asp-validation-for="TremorActionRightHandOther" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorActionLeftHand" class="control-label"></label>
+                <input asp-for="TremorActionLeftHand" class="form-control" />
+                <span asp-validation-for="TremorActionLeftHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TremorActionLeftHandOther" class="control-label"></label>
+                <input asp-for="TremorActionLeftHandOther" class="form-control" />
+                <span asp-validation-for="TremorActionLeftHandOther" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityNeck" class="control-label"></label>
+                <input asp-for="RigidityNeck" class="form-control" />
+                <span asp-validation-for="RigidityNeck" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityNeckUntestable" class="control-label"></label>
+                <input asp-for="RigidityNeckUntestable" class="form-control" />
+                <span asp-validation-for="RigidityNeckUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityRightUpper" class="control-label"></label>
+                <input asp-for="RigidityRightUpper" class="form-control" />
+                <span asp-validation-for="RigidityRightUpper" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityRightUpperUntestable" class="control-label"></label>
+                <input asp-for="RigidityRightUpperUntestable" class="form-control" />
+                <span asp-validation-for="RigidityRightUpperUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityLeftUpper" class="control-label"></label>
+                <input asp-for="RigidityLeftUpper" class="form-control" />
+                <span asp-validation-for="RigidityLeftUpper" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityLeftUpperUntestable" class="control-label"></label>
+                <input asp-for="RigidityLeftUpperUntestable" class="form-control" />
+                <span asp-validation-for="RigidityLeftUpperUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityRightLower" class="control-label"></label>
+                <input asp-for="RigidityRightLower" class="form-control" />
+                <span asp-validation-for="RigidityRightLower" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityRightLowerUntestable" class="control-label"></label>
+                <input asp-for="RigidityRightLowerUntestable" class="form-control" />
+                <span asp-validation-for="RigidityRightLowerUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityLeftLower" class="control-label"></label>
+                <input asp-for="RigidityLeftLower" class="form-control" />
+                <span asp-validation-for="RigidityLeftLower" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RigidityLeftLowerUntestable" class="control-label"></label>
+                <input asp-for="RigidityLeftLowerUntestable" class="form-control" />
+                <span asp-validation-for="RigidityLeftLowerUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FingerTapsRightHand" class="control-label"></label>
+                <input asp-for="FingerTapsRightHand" class="form-control" />
+                <span asp-validation-for="FingerTapsRightHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FingerTapsRightHandUntestable" class="control-label"></label>
+                <input asp-for="FingerTapsRightHandUntestable" class="form-control" />
+                <span asp-validation-for="FingerTapsRightHandUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FingerTapsLeftHand" class="control-label"></label>
+                <input asp-for="FingerTapsLeftHand" class="form-control" />
+                <span asp-validation-for="FingerTapsLeftHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FingerTapsLeftHandUntestable" class="control-label"></label>
+                <input asp-for="FingerTapsLeftHandUntestable" class="form-control" />
+                <span asp-validation-for="FingerTapsLeftHandUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HandMovementsRightHand" class="control-label"></label>
+                <input asp-for="HandMovementsRightHand" class="form-control" />
+                <span asp-validation-for="HandMovementsRightHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HandMovementsRightHandUntestable" class="control-label"></label>
+                <input asp-for="HandMovementsRightHandUntestable" class="form-control" />
+                <span asp-validation-for="HandMovementsRightHandUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HandMovemonetsLeftHand" class="control-label"></label>
+                <input asp-for="HandMovemonetsLeftHand" class="form-control" />
+                <span asp-validation-for="HandMovemonetsLeftHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HandMovemonetsLeftHandUntestable" class="control-label"></label>
+                <input asp-for="HandMovemonetsLeftHandUntestable" class="form-control" />
+                <span asp-validation-for="HandMovemonetsLeftHandUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RapidRightHand" class="control-label"></label>
+                <input asp-for="RapidRightHand" class="form-control" />
+                <span asp-validation-for="RapidRightHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RapidRightHandUntestable" class="control-label"></label>
+                <input asp-for="RapidRightHandUntestable" class="form-control" />
+                <span asp-validation-for="RapidRightHandUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RapidLeftHand" class="control-label"></label>
+                <input asp-for="RapidLeftHand" class="form-control" />
+                <span asp-validation-for="RapidLeftHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RapidLeftHandUntestable" class="control-label"></label>
+                <input asp-for="RapidLeftHandUntestable" class="form-control" />
+                <span asp-validation-for="RapidLeftHandUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RightLegAgility" class="control-label"></label>
+                <input asp-for="RightLegAgility" class="form-control" />
+                <span asp-validation-for="RightLegAgility" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RightLegAgilityUntestable" class="control-label"></label>
+                <input asp-for="RightLegAgilityUntestable" class="form-control" />
+                <span asp-validation-for="RightLegAgilityUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LeftLegAgility" class="control-label"></label>
+                <input asp-for="LeftLegAgility" class="form-control" />
+                <span asp-validation-for="LeftLegAgility" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LeftLegAgilityUntestable" class="control-label"></label>
+                <input asp-for="LeftLegAgilityUntestable" class="form-control" />
+                <span asp-validation-for="LeftLegAgilityUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArisingFromChair" class="control-label"></label>
+                <input asp-for="ArisingFromChair" class="form-control" />
+                <span asp-validation-for="ArisingFromChair" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArisingFromChairUntestable" class="control-label"></label>
+                <input asp-for="ArisingFromChairUntestable" class="form-control" />
+                <span asp-validation-for="ArisingFromChairUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Posture" class="control-label"></label>
+                <input asp-for="Posture" class="form-control" />
+                <span asp-validation-for="Posture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostureUntestable" class="control-label"></label>
+                <input asp-for="PostureUntestable" class="form-control" />
+                <span asp-validation-for="PostureUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gait" class="control-label"></label>
+                <input asp-for="Gait" class="form-control" />
+                <span asp-validation-for="Gait" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GaitUntestable" class="control-label"></label>
+                <input asp-for="GaitUntestable" class="form-control" />
+                <span asp-validation-for="GaitUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostureStability" class="control-label"></label>
+                <input asp-for="PostureStability" class="form-control" />
+                <span asp-validation-for="PostureStability" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostureStabilityUntestable" class="control-label"></label>
+                <input asp-for="PostureStabilityUntestable" class="form-control" />
+                <span asp-validation-for="PostureStabilityUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BradykinesiaAndHypokinesia" class="control-label"></label>
+                <input asp-for="BradykinesiaAndHypokinesia" class="form-control" />
+                <span asp-validation-for="BradykinesiaAndHypokinesia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BradykinesiaAndHypokinesiaUntestable" class="control-label"></label>
+                <input asp-for="BradykinesiaAndHypokinesiaUntestable" class="form-control" />
+                <span asp-validation-for="BradykinesiaAndHypokinesiaUntestable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class ="form-control" asp-items="ViewBag.Id"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExaminerInitials" class="control-label"></label>
+                <input asp-for="ExaminerInitials" class="form-control" />
+                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormStatus" class="control-label"></label>
+                <select asp-for="FormStatus" class="form-control"></select>
+                <span asp-validation-for="FormStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

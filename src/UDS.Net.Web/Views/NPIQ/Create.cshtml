@@ -1,0 +1,302 @@
+@model NPIQ
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Form B5: Behavioral Assessment</h4>
+<h1>Neuropsychiatric Inventory Questionnaire (NPI-Q<sup>1</sup>)</h1>
+
+<div class="py-5 px-3">
+    <h5 class="lead font-weight-bold">Instructions</h5>
+    <h6 class="lead">Please answer the following questions based upon <strong>changes</strong> that have occurred since the patient first began to experience memory (i.e., cognitive) problems.</h6>
+    <p class="lead">
+        <strong>
+            Select 1=Yes <u>only</u> if the symptom(s) has been present <u>in the last month.</u>  Otherwise, select 0=No.
+        </strong>
+    </p>
+    <p class="lead">For each item marked 1=Yes, rate the SEVERITY of the symptom (how it affects the patient):</p>
+    <p class="lead font-weight-light">
+        1=<span class="bold">Mild</span>
+        <span style="font-size: 10px">(noticeable, but not a significant change)</span>
+        &emsp;2=<span class="bold">Moderate</span>
+        <span style="font-size: 10px">(significant, but not a dramatic change)</span>
+        &emsp;3=<span class="bold">Severe</span>
+        <span style="font-size: 10px">(very marked or prominent; a dramatic change)</span>
+    </p>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <table class="table table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th rowspan="2">1.</th>
+                        <th>
+                            <strong>NPI CO-PARTICIPANT</strong><br />
+                            <span asp-validation-for="CoParticipant" class="text-danger"></span>
+                        </th>
+                        <th rowspan="2"></th>
+                        <th colspan="3">
+                            Symptom present?
+                        </th>
+                        <th rowspan="2"></th>
+                        <th colspan="4">
+                            Severity
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+
+                            <div class="form-group">
+                                @foreach (KeyValuePair<string, string> inf in ViewBag.CoParticipant.Codes)
+                                {
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-inline" asp-for="CoParticipant" id="coParticipant[@inf.Key]" value="@inf.Key" />
+                                        <label class="form-check-label" for="primaryReason[@inf.Key]">@inf.Value <span class="badge badge-pill badge-light">@inf.Key</span> </label>
+                                    </div>
+                                }
+                            </div>
+                        </th>
+                        <th>Yes</th>
+                        <th>No</th>
+                        <th>Unknown</th>
+                        <th>Mild</th>
+                        <th>Mod</th>
+                        <th>Severe</th>
+                        <th>Unknown</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Delusions) &mdash;</strong> <span asp-description-for="Delusions"></span>
+
+                            <span asp-validation-for="Delusions" class="text-danger"></span>
+                            <span asp-validation-for="DelusionsSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+                            <td>
+
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" asp-for="Delusions" id="delusion[@code.Key]" value="@code.Key" />
+                                    <label class="form-check-label" for="delusion[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                                </div>
+                            </td>
+                         }
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+                            <td>
+
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" asp-for="DelusionsSeverity" id="delusionSev[@code.Key]" value="@code.Key" />
+                                    <label class="form-check-label" for="delusionSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Hallucinations) &mdash;</strong> <span asp-description-for="Hallucinations"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                                <input asp-for="Hallucinations" class="form-control" />
+                                <span asp-validation-for="Hallucinations" class="text-danger"></span>
+                            
+                        </td>
+                        <td>
+                                <input asp-for="HallucinationsSeverity" class="form-control" />
+                                <span asp-validation-for="HallucinationsSeverity" class="text-danger"></span>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Agitation) &mdash;</strong> <span asp-description-for="Agitation"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input asp-for="Agitation" class="form-control" />
+                            <span asp-validation-for="Agitation" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="AgitationSeverity" class="form-control" />
+                            <span asp-validation-for="AgitationSeverity" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Depression) &mdash;</strong> <span asp-description-for="Depression"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Anxiety) &mdash;</strong> <span asp-description-for="Anxiety"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input asp-for="Anxiety" class="form-control" />
+                            <span asp-validation-for="Anxiety" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="AnxietySeverity" class="form-control" />
+                            <span asp-validation-for="AnxietySeverity" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Elation) &mdash;</strong> <span asp-description-for="Elation"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input asp-for="Elation" class="form-control" />
+                            <span asp-validation-for="Elation" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="ElationSeverity" class="form-control" />
+                            <span asp-validation-for="ElationSeverity" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Apathy) &mdash;</strong> <span asp-description-for="Apathy"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input asp-for="Apathy" class="form-control" />
+                            <span asp-validation-for="Apathy" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="ApathySeverity" class="form-control" />
+                            <span asp-validation-for="ApathySeverity" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Disinhibition) &mdash;</strong> <span asp-description-for="Disinhibition"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input asp-for="Disinhibition" class="form-control" />
+                            <span asp-validation-for="Disinhibition" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="DisinhibitionSeverity" class="form-control" />
+                            <span asp-validation-for="DisinhibitionSeverity" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Irritability) &mdash;</strong> <span asp-description-for="Irritability"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input asp-for="Irritability" class="form-control" />
+                            <span asp-validation-for="Irritability" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="IrritabilitySeverity" class="form-control" />
+                            <span asp-validation-for="IrritabilitySeverity" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.MotorDisturbance) &mdash;</strong> <span asp-description-for="MotorDisturbance"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input asp-for="MotorDisturbance" class="form-control" />
+                            <span asp-validation-for="MotorDisturbance" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="MotorDisturbanceSeverity" class="form-control" />
+                            <span asp-validation-for="MotorDisturbanceSeverity" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>12.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Nighttime) &mdash;</strong> <span asp-description-for="Nighttime"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input asp-for="Nighttime" class="form-control" />
+                            <span asp-validation-for="Nighttime" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="NighttimeSeverity" class="form-control" />
+                            <span asp-validation-for="NighttimeSeverity" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Appetite) &mdash;</strong> <span asp-description-for="Appetite"></span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input asp-for="Appetite" class="form-control" />
+                            <span asp-validation-for="Appetite" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="AppetiteSeverity" class="form-control" />
+                            <span asp-validation-for="AppetiteSeverity" class="text-danger"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="reference"><sup>1</sup>Copyright© Jeffrey L. Cummings, MD. Reproduced by permission.</p>
+
+
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ExaminerInitials" class="control-label"></label>
+                <input asp-for="ExaminerInitials" class="form-control" />
+                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormStatus" class="control-label"></label>
+                <select asp-for="FormStatus" class="form-control" asp-items="Html.GetEnumSelectList(typeof(FormStatus))"></select>
+                <span asp-validation-for="FormStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

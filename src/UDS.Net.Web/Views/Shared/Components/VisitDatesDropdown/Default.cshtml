@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Visit>
+@{
+    var participationId = 0;
+    if (Model !=  null && Model.Count() > 0)
+    {
+        participationId = Model.First().FriendlyId;
+    }
+    var currentVisitId = 0;
+    var currentVisitShortDate = "View visit";
+    if (ViewBag.currentVisitId != null)
+    {
+        currentVisitId = ViewBag.currentVisitId;
+        var currentVisit = Model.Where(v => v.Id == currentVisitId).FirstOrDefault();
+        currentVisitShortDate = currentVisit.VisitDate.ToShortDateString();
+    }
+}
+
+<div class="dropdown">
+    <a id="visitsDropdownMenu" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+        <i class="bi-calendar"></i>
+        @currentVisitShortDate
+    </a>
+    <div class="dropdown-menu" aria-labelledby="visitsDropdownMenu">
+
+        @foreach (var visit in Model)
+        {
+            <a asp-controller="Visit" asp-action="Details" asp-route-id="@visit.Id" class="dropdown-item @(visit.Id == currentVisitId ? "active" : "")"><small>@visit.VisitDate.ToShortDateString()</small></a>
+        }
+
+        <div role="separator" class="dropdown-divider"></div>
+        <a asp-controller="Participation" asp-action="Details" asp-route-id="@participationId" class="dropdown-item"><small>View all visits</small></a>
+    </div>
+</div>

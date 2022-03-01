@@ -1,0 +1,151 @@
+@model SearchParticipation
+
+@{ ViewData["Title"] = "Search participants"; }
+
+<h2 class="display-4">Search</h2>
+
+<form id="searchForm" method="get" asp-action="Search" asp-controller="Participation" novalidate>
+    <div class="input-group mb-3">
+        <input type="number" asp-for="SearchTerm" class="form-control form-control-lg" autocomplete="off" />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+@if (Model != null)
+{
+    @if (Model.Result == null)
+    {
+        <p class="lead text-center p-5 font-italic">
+            Participant not found with PTID = @Model.SearchTerm
+        </p>
+    }
+    else
+    {
+        <div class="row p-5">
+            <div class="col-md-10 m-auto">
+                <div class="card ">
+                    <div class="card-header">
+                        PTID @Html.DisplayFor(model => model.Result.Id) found
+                    </div>
+                    <div class="card-body">
+                        
+                        <h5 class="card-title d-flex justify-content-between">
+                            @if (Model.Result.Profile != null)
+                            {
+                                if (Model.Result.Visits != null && Model.Result.Visits.Count() > 0)
+                                {
+                        <a asp-action="Details" asp-controller="Participation" asp-route-id="@Model.Result.Profile.Id">
+                            @Model.Result.Profile.DisplayName
+                        </a> }
+                                                else
+                                                {
+                                                    @Model.Result.Profile.DisplayName
+                                                }
+
+                                            }
+                            @if (Model.Result.Visits != null && Model.Result.Visits.Count() > 0)
+                            {
+                        @if (Model.Result.Visits.Last().Status == VisitStatus.Complete)
+                        {
+                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#createNextModal">Create next visit</a> }
+                    else
+                    {
+                        <a class="btn btn-outline-secondary" asp-controller="Visit" asp-action="Details" asp-route-id="@Model.Result.Visits.Last().Id">View current visit</a>} }
+                    else
+                    {
+                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#createInitialModal">Create initial visit</a>}
+
+                        </h5>
+                        <dl class="row">
+                            <dt class="col-sm-4">Participant profile</dt>
+                            <dd class="col-md-8">
+                            </dd>
+
+
+                            @if (Model.Result.Visits != null && Model.Result.Visits.Count() > 0)
+                            {
+                                <dt class="col-sm-4">
+                                    @(Model.Result.Visits.Last().Status == VisitStatus.Complete ? "Last" : "Current") visit number
+                                </dt>
+                                <dd class="col-md-8">@Model.Result.Visits.Last().VisitNumber</dd>
+
+                                <dt class="col-sm-4">
+                                    @(Model.Result.Visits.Last().Status == VisitStatus.Complete ? "Last" : "Current") visit date
+                                </dt>
+                                <dd class="col-md-8">@Model.Result.Visits.Last().VisitDate.ToShortDateString()</dd>
+
+                             }
+
+                        </dl>
+
+                        <div class="list-group list-group-flush">
+                            @{
+                                int lastCompleteVisitId = 0;
+                                if (Model.Result.Visits != null && Model.Result.Visits.Count() > 0)
+                                {
+                                    if (Model.Result.Visits.Last().Status == VisitStatus.Complete)
+                                    {
+                                        lastCompleteVisitId = Model.Result.Visits.Last().Id;
+                                    }
+                                    else
+                                    {
+                                        if (Model.Result.Visits.Count() > 1)
+                                        {
+                                            lastCompleteVisitId = Model.Result.Visits.Reverse().Skip(1).Take(1).First().Id;
+                                        }
+                                    }
+                                }
+                            }
+                            @if (lastCompleteVisitId > 0)
+                            {
+                                <a asp-action="Details" asp-controller="Participation" asp-route-id="@Model.Result.Profile.Id" class="list-group-item">
+                                    View all visits
+                                </a>
+                                <a asp-controller="SubjectHealthHistory" asp-action="Details" asp-route-id="@lastCompleteVisitId" class="list-group-item">
+                                    Previous visit health history
+                                </a>
+                                <a asp-controller="MedicationsReview" asp-action="Details" asp-route-id="@lastCompleteVisitId" class="list-group-item">
+                                    Previous visit medications
+                                </a>
+                                <a asp-controller="Consent" asp-action="Details" asp-route-id="@lastCompleteVisitId" class="list-group-item">
+                                    Previous visit scores
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    Participant Summary report
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="createInitialModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <partial name="_CreateVisit" model='new Visit { FriendlyId = Model.Result.Id, VisitType = VisitType.IVP, VisitNumber = 1, VisitDate = DateTime.Now }' />
+
+            </div>
+        </div>
+
+
+        <div id="createNextModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                @if (Model.Result.Visits?.Count() > 0)
+                {
+
+                    <partial name="_CreateVisit" model='new Visit { FriendlyId = Model.Result.Id, VisitType = VisitType.FVP, VisitNumber = Model.Result.Visits.OrderByDescending(x => x.VisitNumber).Select(x => x.VisitNumber).FirstOrDefault() + 1, VisitDate = DateTime.Now }' />
+                }
+
+            </div>
+        </div>
+    }
+}
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

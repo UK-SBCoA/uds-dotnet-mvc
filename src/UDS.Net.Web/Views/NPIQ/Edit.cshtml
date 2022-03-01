@@ -1,0 +1,498 @@
+@model NPIQ
+
+@{
+    var title = "B5 BEHAVIORAL ASSESSMENT Neuropsychiatric Inventory Questionnaire";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+}
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+
+<div class="py-5 px-3">
+    <h5 class="lead font-weight-bold">Instructions</h5>
+    <h6 class="lead">Please answer the following questions based upon <strong>changes</strong> that have occurred since the patient first began to experience memory (i.e., cognitive) problems.</h6>
+    <p class="lead">
+        <strong>
+            Select 1=Yes <u>only</u> if the symptom(s) has been present <u>in the last month.</u>  Otherwise, select 0=No.
+        </strong>
+    </p>
+    <p class="lead">For each item marked 1=Yes, rate the SEVERITY of the symptom (how it affects the patient):</p>
+    <p class="lead font-weight-light">
+        1=<span class="bold">Mild</span>
+        <span style="font-size: 10px">(noticeable, but not a significant change)</span>
+        &emsp;2=<span class="bold">Moderate</span>
+        <span style="font-size: 10px">(significant, but not a dramatic change)</span>
+        &emsp;3=<span class="bold">Severe</span>
+        <span style="font-size: 10px">(very marked or prominent; a dramatic change)</span>
+    </p>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 p-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <table class="table table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th rowspan="2">1.</th>
+                        <th>
+                            <strong>NPI CO-PARTICIPANT</strong><br />
+                            <span asp-validation-for="CoParticipant" class="text-danger"></span>
+                        </th>
+                        <th rowspan="2"></th>
+                        <th colspan="3">
+                            Symptom present?
+                        </th>
+                        <th rowspan="2"></th>
+                        <th colspan="4">
+                            Severity
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="form-group">
+                                @foreach (KeyValuePair<string, string> inf in ViewBag.CoParticipant.Codes)
+                                {
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-inline" asp-for="CoParticipant" id="coParticipant[@inf.Key]" value="@inf.Key" />
+                        <label class="form-check-label" for="coParticipant[@inf.Key]">@inf.Value <span class="badge badge-pill badge-light">@inf.Key</span> </label>
+                    </div>}
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="CoParticipantOther" class="form-control" />
+                                <span asp-validation-for="CoParticipantOther" class="text-danger"></span>
+                            </div>
+                        </th>
+                        <th>Yes</th>
+                        <th>No</th>
+                        <th>Unknown</th>
+                        <th>Mild</th>
+                        <th>Mod</th>
+                        <th>Severe</th>
+                        <th>Unknown</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Delusions) &mdash;</strong> <span asp-description-for="Delusions"></span>
+
+                            <span asp-validation-for="Delusions" class="text-danger"></span>
+                            <span asp-validation-for="DelusionsSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Delusions" id="delusion[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="delusion[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="DelusionsSeverity" id="delusionSev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="delusionSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Hallucinations) &mdash;</strong> <span asp-description-for="Hallucinations"></span>
+
+                            <span asp-validation-for="Hallucinations" class="text-danger"></span>
+                            <span asp-validation-for="HallucinationsSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Hallucinations" id="hallucinations[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="hallucinations[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="HallucinationsSeverity" id="hallucinationsSev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="hallucinationsSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Agitation) &mdash;</strong> <span asp-description-for="Agitation"></span>
+                            <span asp-validation-for="Agitation" class="text-danger"></span>
+                            <span asp-validation-for="AgitationSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Agitation" id="agitation[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="agitation[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="AgitationSeverity" id="agitationSev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="agitationSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>5.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Depression) &mdash;</strong> <span asp-description-for="Depression"></span>
+                            <span asp-validation-for="Depression" class="text-danger"></span>
+                            <span asp-validation-for="DepressionSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Depression" id="depression[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="depression[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="DepressionSeverity" id="depressionSev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="depressionSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>6.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Anxiety) &mdash;</strong> <span asp-description-for="Anxiety"></span>
+                            <span asp-validation-for="Anxiety" class="text-danger"></span>
+                            <span asp-validation-for="AnxietySeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Anxiety" id="anxiety[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="anxiety[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="AnxietySeverity" id="anxietySev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="anxietySev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>7.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Elation) &mdash;</strong> <span asp-description-for="Elation"></span>
+                            <span asp-validation-for="Elation" class="text-danger"></span>
+                            <span asp-validation-for="ElationSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Elation" id="elation[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="elation[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>
+}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="ElationSeverity" id="elationSev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="elationSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>
+}
+                    </tr>
+                    <tr>
+                        <td>8.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Apathy) &mdash;</strong> <span asp-description-for="Apathy"></span>
+                            <span asp-validation-for="Apathy" class="text-danger"></span>
+                            <span asp-validation-for="ApathySeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Apathy" id="apathy[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="apathy[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>
+}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="ApathySeverity" id="apathySev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="apathySev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>
+}
+                    </tr>
+                    <tr>
+                        <td>9.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Disinhibition) &mdash;</strong> <span asp-description-for="Disinhibition"></span>
+                            <span asp-validation-for="Disinhibition" class="text-danger"></span>
+                            <span asp-validation-for="DisinhibitionSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Disinhibition" id="disinhibition[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="disinhibition[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="DisinhibitionSeverity" id="disinhibitionSev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="disinhibitionSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>10.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Irritability) &mdash;</strong> <span asp-description-for="Irritability"></span>
+                            <span asp-validation-for="Irritability" class="text-danger"></span>
+                            <span asp-validation-for="IrritabilitySeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Irritability" id="irritability[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="irritability[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>
+}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="IrritabilitySeverity" id="irritabilitySev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="irritabilitySev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>
+}
+                    </tr>
+                    <tr>
+                        <td>11.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.MotorDisturbance) &mdash;</strong> <span asp-description-for="MotorDisturbance"></span>
+                            <span asp-validation-for="MotorDisturbance" class="text-danger"></span>
+                            <span asp-validation-for="MotorDisturbanceSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="MotorDisturbance" id="motordisturbance[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="motordisturbance[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="MotorDisturbanceSeverity" id="motordisturbanceSev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="motordisturbanceSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>12.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Nighttime) &mdash;</strong> <span asp-description-for="Nighttime"></span>
+                            <span asp-validation-for="Nighttime" class="text-danger"></span>
+                            <span asp-validation-for="NighttimeSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Nighttime" id="nighttime[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="nighttime[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="NighttimeSeverity" id="nighttimeSev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="nighttimeSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>13.</td>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Appetite) &mdash;</strong> <span asp-description-for="Appetite"></span>
+                            <span asp-validation-for="Appetite" class="text-danger"></span>
+                            <span asp-validation-for="AppetiteSeverity" class="text-danger"></span>
+                        </td>
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomPresent.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Appetite" id="appetite[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="appetite[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                        <td></td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
+                        {
+            <td>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="AppetiteSeverity" id="appetiteSev[@code.Key]" value="@code.Key" />
+                    <label class="form-check-label" for="appetiteSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                </div>
+            </td>}
+                    </tr>
+                </tbody>
+            </table>
+            <p class="reference"><sup>1</sup>Copyright© Jeffrey L. Cummings, MD. Reproduced by permission.</p>
+
+            <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            function coParticipantCondition(val) {
+                if (val) {
+                    var readonly = true;
+                    if (val === "3") {
+                        readonly = false;
+                    }
+                    $("input[name='CoParticipantOther']").attr('readonly', readonly);
+                }
+            }
+
+            function symptomSeverityCondition(name, val) {
+                if (name && val) {
+                    var disabled = true;
+                    if (val === "1") { // severity is only required when symptom present is 1 or yes
+                        disabled = false;
+                    }
+                    $("input[name='" + name + "Severity'").attr('disabled', disabled);
+                }
+            }
+
+            // initialize and bind events
+
+            var coParticipantVal = $("input[name='CoParticipant']:checked").val();
+            coParticipantCondition(coParticipantVal);
+
+            var radioButtons = jQuery.unique($("input[type='radio']"));
+            radioButtons.each(function () {
+                var name = $(this).attr('name');
+                if (name.search("CoParticipant") < 0 && name.search("Severity") < 0) {
+                    var symptomVal = $("input[name='" + name + "']:checked").val();
+                    symptomSeverityCondition(name, symptomVal);
+                }
+            });
+
+            $("input[type='radio']").on("change", function () {
+                var name = $(this).attr('name');
+                var val = $(this).val();
+                if (name === 'CoParticipant') {
+                    coParticipantCondition(val);
+                }
+                else {
+                    symptomSeverityCondition(name, val);
+                }
+            });            
+        });
+    </script>
+}

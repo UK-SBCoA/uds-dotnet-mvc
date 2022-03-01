@@ -1,0 +1,100 @@
+﻿@model Milestone
+@{
+    // Milestone type A (continued contact)
+}
+
+<tr>
+    <td>
+        @if (Model.StatusChangeYear.HasValue)
+        {
+        <span>@string.Format("{1}/{2}/{0}", Model.StatusChangeYear, Model.StatusChangeMonth, Model.StatusChangeDay)</span>
+        }
+    </td>
+    <td>
+        <p>Change followed by continued contact</p>
+    </td>
+    <td>
+        @if (Model.StatusChangeYear.HasValue)
+        {
+            @if (Model.NewStatus.HasValue)
+            {
+                @if (Model.NewStatus.HasValue)
+                {
+                    <p>Status changed to
+                        @if (Model.NewStatus == 1)
+                        {
+                            <span>annual UDS follow-up by telephone.</span>
+                        }
+                        else if (Model.NewStatus == 2)
+                        {
+                            <span>minimal contact.</span>
+                        }
+                        else if (Model.NewStatus == 3)
+                        {
+                            <span>annual in-person UDS follow-up.</span>
+                        }
+                    </p>
+                }
+                <p>Reason(s) </p>
+                <ul>
+                    @if (Model.ReasonCognitivelyImpaired.HasValue && Model.ReasonCognitivelyImpaired.Value == true)
+                    {
+                        <li>Participant is too cognitively impaired.</li>
+                    }
+                    @if (Model.ReasonPhysicallyImpaired.HasValue && Model.ReasonPhysicallyImpaired.Value == true)
+                    {
+                        <li>Participant is too ill or physically impaired.</li>
+                    }
+                    @if (Model.ReasonRefused.HasValue && Model.ReasonRefused.Value == true)
+                    {
+                        <li>Participant refuses neuropsychological testing or clinical exam.</li>
+                    }
+                    @if (Model.ReasonUnavailable.HasValue && Model.ReasonUnavailable.Value == true)
+                    {
+                        <li>Participant or co-participant unreachable, not available, or moved away.</li>
+                    }
+                    @if (Model.ReasonPermanentAssistedLiving.HasValue && Model.ReasonPermanentAssistedLiving.Value == true)
+                    {
+                        <li>Participant has permanently entered nursing home.</li>
+                    }
+                </ul>
+            }
+            else if (Model.FTLDStatus.HasValue)
+            {
+                <span>UDS status change to @Model.FTLDStatus.Value </span><br />
+                <span>@Model.FTLDReason</span>
+            }
+        }
+    </td>
+    <td>
+        @if (Model.IsSubmittedToNACC)
+        {
+            <small>Submitted to NACC</small>
+        }
+        else
+        {
+            @Model.FormStatus
+        }
+    </td>
+    <td>
+        <a asp-controller="Milestone" asp-action="Details" asp-route-id="@Model.Id">View</a>
+        @if (Model.IsSubmittedToNACC)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Milestone" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            }
+        }
+        else
+        {
+            <a asp-controller="Milestone" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+
+            if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Milestone" asp-action="Remove" asp-route-id="@Model.Id">Remove</a>
+            }
+        }
+
+
+    </td>
+</tr>

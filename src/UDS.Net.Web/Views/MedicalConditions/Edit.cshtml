@@ -1,0 +1,740 @@
+@model MedicalConditions
+
+@{
+    var title = "D2 Clinician-assessed Medical Conditions";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+}
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+<p class="lead p-4">
+    INSTRUCTIONS: This form is to be completed by a physician, physician's assistant, nurse practitioner, or other qualified practitioner. For additional clarifications and examples, see UDS Coding Guidebook for Initial Visit Packet, Form D2.
+</p>
+
+<div class="row">
+    <div class="col p-4">
+        <form asp-action="Edit" class="counterreset">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <table class="table table-striped">
+                <tbody>
+                    <tr class="table-light">
+                        <td colspan="6" class="p-4">
+                            <p class="font-weight-light font-italic text-primary">
+                                The following questions should be answered based on review of all available information, including:
+                            </p>
+                            <ul class="font-weight-light text-primary font-italic">
+                                <li>new diagnoses made during the current visit</li>
+                                <li>previous medical records</li>
+                                <li>procedures</li>
+                                <li>laboratory tests</li>
+                                <li>and the clinical exam</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="5">
+                            <div class="form-group">
+                                <label asp-for="Cancer" class="control-label"></label>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input hasChildren" type="radio" asp-for="Cancer" id="Cancer[0]" value="0" data-children="[&#34;CancerSite&#34;]" data-childstate="false">
+                                    <label class="form-check-label" for="Cancer[0]"><span class="badge badge-pill badge-light">0</span> No <span class="text-uppercase font-weight-light font-italic text-primary">(SKIP TO QUESTION 2)</span></label>
+                                </div>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input hasChildren" type="radio" asp-for="Cancer" id="Cancer[1]" value="1" data-children="[&#34;CancerSite&#34;]" data-childstate="true">
+                                    <label class="form-check-label" for="Cancer[1]"><span class="badge badge-pill badge-light">1</span> Yes, primary/non-metastatic</label>
+                                </div>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input hasChildren" type="radio" asp-for="Cancer" id="Cancer[2]" value="2" data-children="[&#34;CancerSite&#34;]" data-childstate="true">
+                                    <label class="form-check-label" for="Cancer[2]"><span class="badge badge-pill badge-light">2</span> Yes, metastatic</label>
+                                </div>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input hasChildren" type="radio" asp-for="Cancer" id="Cancer[8]" value="8" data-children="[&#34;CancerSite&#34;]" data-childstate="false">
+                                    <label class="form-check-label" for="Cancer[8]"><span class="badge badge-pill badge-light">8</span> Not assessed <span class="text-uppercase font-weight-light font-italic text-primary">(SKIP TO QUESTION 2)</span></label>
+                                </div>
+                                <span asp-validation-for="Cancer" class="text-danger"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="5">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span class="subcounter"></span>
+                                </div>
+                                <div class="col-6 col-sm-9">
+                                    <div class="form-group">
+                                        <label asp-for="CancerSite" class="control-label"></label>
+                                        <input asp-for="CancerSite" class="form-control" disabled="disabled"/>
+                                        <span asp-validation-for="CancerSite" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr class="table-light">
+                        <td colspan="6" class="text-center p-4">
+                            <p class="font-weight-light font-italic text-primary">If any of the conditions below are present (even if successfully treated), please check <span class="font-weight-bolder"><span class="text-uppercase">Yes</span></span>.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="5">
+                            <div class="form-group">
+                                <label asp-for="Diabetes" class="control-label"></label>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" type="radio" asp-for="Diabetes" id="Diabetes[0]" value="0">
+                                    <label class="form-check-label" for="Diabetes[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                </div>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" type="radio" asp-for="Diabetes" id="Diabetes[1]" value="1">
+                                    <label class="form-check-label" for="Diabetes[1]"><span class="badge badge-pill badge-light">1</span> Yes, Type I</label>
+                                </div>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" type="radio" asp-for="Diabetes" id="Diabetes[2]" value="2">
+                                    <label class="form-check-label" for="Diabetes[2]"><span class="badge badge-pill badge-light">2</span> Yes, Type II</label>
+                                </div>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" type="radio" asp-for="Diabetes" id="Diabetes[3]" value="3">
+                                    <label class="form-check-label" for="Diabetes[3]"><span class="badge badge-pill badge-light">3</span> Yes, other type (diabetes insipidus, latent autoimmune diabetes/type 1.5, gestational diabetes)</label>
+                                </div>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" type="radio" asp-for="Diabetes" id="Diabetes[9]" value="9">
+                                    <label class="form-check-label" for="Diabetes[9]"><span class="badge badge-pill badge-light">9</span> Not assessed or unknown</label>
+                                </div>
+                                <span asp-validation-for="Diabetes" class="text-danger"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="table-dark text-dark">
+                        <td colspan="3"></td>
+                        <td>No</td>
+                        <td>Yes</td>
+                        <td>Not assessed</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="MyocardialInfarct" class="control-label"></label>
+                                <span asp-validation-for="MyocardialInfarct" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="MyocardialInfarct" class="form-check-inline" id="MyocardialInfarct[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="MyocardialInfarct[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="CongestiveHeartFailure" class="control-label"></label>
+                                <span asp-validation-for="CongestiveHeartFailure" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="CongestiveHeartFailure" class="form-check-inline" id="CongestiveHeartFailure[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="CongestiveHeartFailure[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="AtrialFibrillation" class="control-label"></label>
+                                <span asp-validation-for="AtrialFibrillation" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="AtrialFibrillation" class="form-check-inline" id="AtrialFibrillation[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="AtrialFibrillation[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="Hypertension" class="control-label"></label>
+                                <span asp-validation-for="Hypertension" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Hypertension" class="form-check-inline" id="Hypertension[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="Hypertension[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="Angina" class="control-label"></label>
+                                <span asp-validation-for="Angina" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Angina" class="form-check-inline" id="Angina[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="Angina[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="Hypercholesterolemia" class="control-label"></label>
+                                <span asp-validation-for="Hypercholesterolemia" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Hypercholesterolemia" class="form-check-inline" id="Hypercholesterolemia[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="Hypercholesterolemia[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="B12Deficiency" class="control-label"></label>
+                                <span asp-validation-for="B12Deficiency" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="B12Deficiency" class="form-check-inline" id="B12Deficiency[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="B12Deficiency[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="ThyroidDisease" class="control-label"></label>
+                                <span asp-validation-for="ThyroidDisease" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="ThyroidDisease" class="form-check-inline" id="ThyroidDisease[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="ThyroidDisease[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="Arthritis" class="control-label"></label> <span class="font-weight-light font-italic">If No or Not assessed, <span class="text-uppercase text-primary">SKIP TO QUESTION 12</span></span>
+                                <span asp-validation-for="Arthritis" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Arthritis" class="form-check-inline hasChildren" id="Arthritis[@inf.Key]" value="@inf.Key" data-children="[&#34;ArthritisType&#34;,&#34;ArthritisRegionUpperExtremity&#34;,&#34;ArthritisRegionLowerExtremity&#34;,&#34;ArthritisRegionSpine&#34;,&#34;ArthritisRegionUnknown&#34;]" data-childstate='@(inf.Key == "1" ? "true" : "false")' />
+                                <label class="form-check-label" for="Arthritis[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr class="subcounterreset">
+                        <td></td>
+                        <td colspan="5">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span class="subcounter"></span>
+                                </div>
+                                <div class="col-11">
+                                    <label>If yes, what type?</label>
+                                    <div class="form-check form-group">
+                                        <input class="form-check-input hasChildren" type="radio" asp-for="ArthritisType" id="ArthritisType[1]" value="1" disabled="disabled" data-children="[&#34;ArthritisTypeSpecified&#34;]" data-childstate="false">
+                                        <label class="form-check-label" for="ArthritisType[1]"><span class="badge badge-pill badge-light">1</span> Rheumatoid</label>
+                                    </div>
+                                    <div class="form-check form-group">
+                                        <input class="form-check-input hasChildren" type="radio" asp-for="ArthritisType" id="ArthritisType[2]" value="2" disabled="disabled" data-children="[&#34;ArthritisTypeSpecified&#34;]" data-childstate="false">
+                                        <label class="form-check-label" for="ArthritisType[2]"><span class="badge badge-pill badge-light">2</span> Osteoarthritis</label>
+                                    </div>
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <input class="form-check-input hasChildren" type="radio" asp-for="ArthritisType" id="ArthritisType[3]" value="3" disabled="disabled" data-children="[&#34;ArthritisTypeSpecified&#34;]" data-childstate="true">
+                                            <label class="form-check-label" for="ArthritisType[3]"><span class="badge badge-pill badge-light">3</span> Other (SPECIFY)</label>
+                                            
+                                        </div>
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <input asp-for="ArthritisTypeSpecified" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                    <div class="form-check form-group">
+                                        <input class="form-check-input hasChildren" type="radio" asp-for="ArthritisType" id="ArthritisType[9]" value="9" disabled="disabled" data-children="[&#34;ArthritisTypeSpecified&#34;]" data-childstate="false">
+                                        <label class="form-check-label" for="ArthritisType[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span asp-validation-for="ArthritisTypeSpecified" class="text-danger"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="5">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span class="subcounter"></span>
+                                </div>
+                                <div class="col-11 subsubcounterreset">
+                                    <label>If yes, regions affected (check at least one)</label>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <span class="subsubcounter"></span>
+                                        </div>
+                                        <div class="col-11">
+
+                                            <div class="form-check">
+                                                @Html.CheckBox("ArthritisRegionUpperExtremity", Model.ArthritisRegionUpperExtremity != null && (bool)Model.ArthritisRegionUpperExtremity, new { @disabled = "disabled" })
+                                                @Html.DisplayNameFor(model => model.ArthritisRegionUpperExtremity)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <span class="subsubcounter"></span>
+                                        </div>
+                                        <div class="col-11">
+                                            <div class="form-check">
+                                                @Html.CheckBox("ArthritisRegionLowerExtremity", Model.ArthritisRegionLowerExtremity != null && (bool)Model.ArthritisRegionLowerExtremity, new { @disabled = "disabled" })
+                                                @Html.DisplayNameFor(model => model.ArthritisRegionLowerExtremity)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <span class="subsubcounter"></span>
+                                        </div>
+                                        <div class="col-11">
+                                            <div class="form-check">
+                                                @Html.CheckBox("ArthritisRegionSpine", Model.ArthritisRegionSpine != null && (bool)Model.ArthritisRegionSpine, new { @disabled = "disabled" })
+                                                @Html.DisplayNameFor(model => model.ArthritisRegionSpine)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <span class="subsubcounter"></span>
+                                        </div>
+                                        <div class="col-11">
+                                            <div class="form-check">
+                                                @Html.CheckBox("ArthritisRegionUnknown", Model.ArthritisRegionUnknown != null && (bool)Model.ArthritisRegionUnknown, new { @disabled = "disabled" })
+                                                @Html.DisplayNameFor(model => model.ArthritisRegionUnknown)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>
+                                <span asp-validation-for="ArthritisRegionIndicated" class="text-danger"></span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="IncontinenceUrinary" class="control-label"></label>
+                                <span asp-validation-for="IncontinenceUrinary" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="IncontinenceUrinary" class="form-check-inline" id="IncontinenceUrinary[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="IncontinenceUrinary[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="IncontinenceBowel" class="control-label"></label>
+                                <span asp-validation-for="IncontinenceBowel" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="IncontinenceBowel" class="form-check-inline" id="IncontinenceBowel[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="IncontinenceBowel[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="SleepApnea" class="control-label"></label>
+                                <span asp-validation-for="SleepApnea" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="SleepApnea" class="form-check-inline" id="SleepApnea[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="SleepApnea[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="REMSleepBehaviorDisorder" class="control-label"></label>
+                                <span asp-validation-for="REMSleepBehaviorDisorder" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="REMSleepBehaviorDisorder" class="form-check-inline" id="REMSleepBehaviorDisorder[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="REMSleepBehaviorDisorder[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="HyposomniaInsomnia" class="control-label"></label>
+                                <span asp-validation-for="HyposomniaInsomnia" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="HyposomniaInsomnia" class="form-check-inline" id="HyposomniaInsomnia[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="HyposomniaInsomnia[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="OtherSleepDisorder" class="control-label"></label>
+                                <span asp-validation-for="OtherSleepDisorder" class="text-danger"></span>
+                            </div>
+                            <div class="form-inline">
+                                <div class="form-group mb-2">
+                                    <label asp-for="OtherSleepDisorderSpecified" class="control-label">(Specify)</label>
+                                </div>
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <input asp-for="OtherSleepDisorderSpecified" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span asp-validation-for="OtherSleepDisorderSpecified" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="OtherSleepDisorder" class="form-check-inline hasChildren" id="OtherSleepDisorder[@inf.Key]" value="@inf.Key" data-children="[&#34;OtherSleepDisorderSpecified&#34;]" data-childstate='@(inf.Key == "1" ? "true" : "false")' />
+                                <label class="form-check-label" for="OtherSleepDisorder[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="CarotidProcedure" class="control-label"></label>
+                                <span asp-validation-for="CarotidProcedure" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="CarotidProcedure" class="form-check-inline" id="CarotidProcedure[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="CarotidProcedure[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="PercutaneousCoronaryIntervention" class="control-label"></label>
+                                <span asp-validation-for="PercutaneousCoronaryIntervention" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="PercutaneousCoronaryIntervention" class="form-check-inline" id="PercutaneousCoronaryIntervention[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="PercutaneousCoronaryIntervention[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="PacemakerDefibrillator" class="control-label"></label>
+                                <span asp-validation-for="PacemakerDefibrillator" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="PacemakerDefibrillator" class="form-check-inline" id="PacemakerDefibrillator[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="PacemakerDefibrillator[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="HeartValveReplacementRepair" class="control-label"></label>
+                                <span asp-validation-for="HeartValveReplacementRepair" class="text-danger"></span>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="HeartValveReplacementRepair" class="form-check-inline" id="HeartValveReplacementRepair[@inf.Key]" value="@inf.Key" />
+                                <label class="form-check-label" for="HeartValveReplacementRepair[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="AntibodyMediatedEncephalopathy" class="control-label"></label>
+                                <span asp-validation-for="AntibodyMediatedEncephalopathy" class="text-danger"></span>
+                            </div>
+                            <div class="row subcounterreset">
+                                <div class="col">
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <label asp-for="AntibodyMediatedEncephalopathySpecified" class="control-label"><span class="subcounter"></span>&nbsp;Specify antibody</label>
+                                        </div>
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <input asp-for="AntibodyMediatedEncephalopathySpecified" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <span asp-validation-for="AntibodyMediatedEncephalopathySpecified" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        @foreach (KeyValuePair<string, string> inf in ViewBag.Findings.Codes)
+                        {
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="AntibodyMediatedEncephalopathy" class="form-check-inline hasChildren" id="AntibodyMediatedEncephalopathy[@inf.Key]" value="@inf.Key" data-children="[&#34;AntibodyMediatedEncephalopathySpecified&#34;]" data-childstate='@(inf.Key == "1" ? "true" : "false")' />
+                                <label class="form-check-label" for="AntibodyMediatedEncephalopathy[@inf.Key]"><span class="badge badge-pill badge-light">@inf.Key</span></label>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="counter"></span>
+                        </td>
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="OtherMedicalCondition" class="control-label"></label>
+                                <span asp-validation-for="OtherMedicalCondition" class="text-danger"></span>
+                            </div>
+                            <div class="form-inline">
+                                <div class="form-group mb-2">
+                                    <label asp-for="OtherMedicalConditionSpecified" class="control-label"></label>
+                                </div>
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <input asp-for="OtherMedicalConditionSpecified" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span asp-validation-for="OtherMedicalConditionSpecified" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="OtherMedicalCondition" class="form-check-inline hasChildren" id="OtherMedicalCondition[0]" value="false" data-children="[&#34;OtherMedicalConditionSpecified&#34;]" data-childstate="false"  />
+                                <label class="form-check-label" for="OtherMedicalCondition[0]"><span class="badge badge-pill badge-light">0</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="OtherMedicalCondition" class="form-check-inline hasChildren" id="OtherMedicalCondition[1]" value="true" data-children="[&#34;OtherMedicalConditionSpecified&#34;]" data-childstate="true"  />
+                                <label class="form-check-label" for="OtherMedicalCondition[1]"><span class="badge badge-pill badge-light">1</span></label>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        
+        $(document).ready(function () {
+
+            function elementWithChildren(isChecked, childElements) {
+                var disabled = !isChecked;
+
+                $.each(childElements, function (index, value) {
+                    $('input[name="' + value + '"]').prop("disabled", disabled);
+                    console.log(value + " disabled to " + disabled);
+                    if (!isChecked) {
+                        $('input[name="' + value + '"]').prop('checked', false);
+                    }
+                });
+            }
+
+            $(".hasChildren").each(function () {
+                var syndrome = $(this).prop("name");
+                var present = $(this).is(":checked");
+                if (present) {
+                    var childElements = $(this).data("children");
+                    var childState = $(this).data("childstate");
+                    console.log("syndrome group " + syndrome + " " + present);
+                    elementWithChildren(childState, childElements);
+                }
+            });
+
+            $(".hasChildren").on("change", function () {
+                var syndrome = $(this).prop("name");
+                var present = $(this).is(":checked");
+                var childElements = $(this).data("children");
+                var childState = $(this).data("childstate");
+
+                elementWithChildren(childState, childElements);
+            });
+
+        });
+
+    </script>
+}

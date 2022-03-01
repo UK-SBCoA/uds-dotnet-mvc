@@ -1,0 +1,397 @@
+@model NeuropsychologicalBatteryScores
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>NeuropsychologicalBatteryScores</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MoCAPartAdministered" class="control-label"></label>
+                <input asp-for="MoCAPartAdministered" class="form-control" />
+                <span asp-validation-for="MoCAPartAdministered" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAPartAdministeredCode" class="control-label"></label>
+                <input asp-for="MoCAPartAdministeredCode" class="form-control" />
+                <span asp-validation-for="MoCAPartAdministeredCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAAdministered" class="control-label"></label>
+                <input asp-for="MoCAAdministered" class="form-control" />
+                <span asp-validation-for="MoCAAdministered" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCALanguage" class="control-label"></label>
+                <input asp-for="MoCALanguage" class="form-control" />
+                <span asp-validation-for="MoCALanguage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCALanguageOther" class="control-label"></label>
+                <input asp-for="MoCALanguageOther" class="form-control" />
+                <span asp-validation-for="MoCALanguageOther" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAVisualImpairment" class="control-label"></label>
+                <input asp-for="MoCAVisualImpairment" class="form-control" />
+                <span asp-validation-for="MoCAVisualImpairment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAHearingImpairment" class="control-label"></label>
+                <input asp-for="MoCAHearingImpairment" class="form-control" />
+                <span asp-validation-for="MoCAHearingImpairment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalRawScore" class="control-label"></label>
+                <input asp-for="TotalRawScore" class="form-control" />
+                <span asp-validation-for="TotalRawScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCATrials" class="control-label"></label>
+                <input asp-for="MoCATrials" class="form-control" />
+                <span asp-validation-for="MoCATrials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCACube" class="control-label"></label>
+                <input asp-for="MoCACube" class="form-control" />
+                <span asp-validation-for="MoCACube" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAClockContour" class="control-label"></label>
+                <input asp-for="MoCAClockContour" class="form-control" />
+                <span asp-validation-for="MoCAClockContour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAClockNumbers" class="control-label"></label>
+                <input asp-for="MoCAClockNumbers" class="form-control" />
+                <span asp-validation-for="MoCAClockNumbers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAHands" class="control-label"></label>
+                <input asp-for="MoCAHands" class="form-control" />
+                <span asp-validation-for="MoCAHands" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCANaming" class="control-label"></label>
+                <input asp-for="MoCANaming" class="form-control" />
+                <span asp-validation-for="MoCANaming" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCARegistration" class="control-label"></label>
+                <input asp-for="MoCARegistration" class="form-control" />
+                <span asp-validation-for="MoCARegistration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCADigits" class="control-label"></label>
+                <input asp-for="MoCADigits" class="form-control" />
+                <span asp-validation-for="MoCADigits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCALetter" class="control-label"></label>
+                <input asp-for="MoCALetter" class="form-control" />
+                <span asp-validation-for="MoCALetter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCASerial" class="control-label"></label>
+                <input asp-for="MoCASerial" class="form-control" />
+                <span asp-validation-for="MoCASerial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCARepetition" class="control-label"></label>
+                <input asp-for="MoCARepetition" class="form-control" />
+                <span asp-validation-for="MoCARepetition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAFluency" class="control-label"></label>
+                <input asp-for="MoCAFluency" class="form-control" />
+                <span asp-validation-for="MoCAFluency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAAbstraction" class="control-label"></label>
+                <input asp-for="MoCAAbstraction" class="form-control" />
+                <span asp-validation-for="MoCAAbstraction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCANoCue" class="control-label"></label>
+                <input asp-for="MoCANoCue" class="form-control" />
+                <span asp-validation-for="MoCANoCue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCACategoryCue" class="control-label"></label>
+                <input asp-for="MoCACategoryCue" class="form-control" />
+                <span asp-validation-for="MoCACategoryCue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCARecognition" class="control-label"></label>
+                <input asp-for="MoCARecognition" class="form-control" />
+                <span asp-validation-for="MoCARecognition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCADate" class="control-label"></label>
+                <input asp-for="MoCADate" class="form-control" />
+                <span asp-validation-for="MoCADate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAMonth" class="control-label"></label>
+                <input asp-for="MoCAMonth" class="form-control" />
+                <span asp-validation-for="MoCAMonth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAYear" class="control-label"></label>
+                <input asp-for="MoCAYear" class="form-control" />
+                <span asp-validation-for="MoCAYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCADay" class="control-label"></label>
+                <input asp-for="MoCADay" class="form-control" />
+                <span asp-validation-for="MoCADay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCAPlace" class="control-label"></label>
+                <input asp-for="MoCAPlace" class="form-control" />
+                <span asp-validation-for="MoCAPlace" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCACity" class="control-label"></label>
+                <input asp-for="MoCACity" class="form-control" />
+                <span asp-validation-for="MoCACity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCATestsAdministered" class="control-label"></label>
+                <input asp-for="MoCATestsAdministered" class="form-control" />
+                <span asp-validation-for="MoCATestsAdministered" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCATestLanguage" class="control-label"></label>
+                <input asp-for="MoCATestLanguage" class="form-control" />
+                <span asp-validation-for="MoCATestLanguage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoCATestLanguageOther" class="control-label"></label>
+                <input asp-for="MoCATestLanguageOther" class="form-control" />
+                <span asp-validation-for="MoCATestLanguageOther" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CraftStoryVerbatim" class="control-label"></label>
+                <input asp-for="CraftStoryVerbatim" class="form-control" />
+                <span asp-validation-for="CraftStoryVerbatim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CraftStoryParaphrase" class="control-label"></label>
+                <input asp-for="CraftStoryParaphrase" class="form-control" />
+                <span asp-validation-for="CraftStoryParaphrase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BensonFigureScore" class="control-label"></label>
+                <input asp-for="BensonFigureScore" class="form-control" />
+                <span asp-validation-for="BensonFigureScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberSpanTestForwardCorrectTrials" class="control-label"></label>
+                <input asp-for="NumberSpanTestForwardCorrectTrials" class="form-control" />
+                <span asp-validation-for="NumberSpanTestForwardCorrectTrials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberSpanTestForwardLongestSpanForward" class="control-label"></label>
+                <input asp-for="NumberSpanTestForwardLongestSpanForward" class="form-control" />
+                <span asp-validation-for="NumberSpanTestForwardLongestSpanForward" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberSpanTestBackwardCorrectTrials" class="control-label"></label>
+                <input asp-for="NumberSpanTestBackwardCorrectTrials" class="form-control" />
+                <span asp-validation-for="NumberSpanTestBackwardCorrectTrials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberSpanTestBackwardLongestSpanBackward" class="control-label"></label>
+                <input asp-for="NumberSpanTestBackwardLongestSpanBackward" class="form-control" />
+                <span asp-validation-for="NumberSpanTestBackwardLongestSpanBackward" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryFluencyAnimals" class="control-label"></label>
+                <input asp-for="CategoryFluencyAnimals" class="form-control" />
+                <span asp-validation-for="CategoryFluencyAnimals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryFluencyVegetables" class="control-label"></label>
+                <input asp-for="CategoryFluencyVegetables" class="form-control" />
+                <span asp-validation-for="CategoryFluencyVegetables" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrailMakingTestASecondsToComplete" class="control-label"></label>
+                <input asp-for="TrailMakingTestASecondsToComplete" class="form-control" />
+                <span asp-validation-for="TrailMakingTestASecondsToComplete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrailMakingTestANumberOfErrors" class="control-label"></label>
+                <input asp-for="TrailMakingTestANumberOfErrors" class="form-control" />
+                <span asp-validation-for="TrailMakingTestANumberOfErrors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrailMakingTestANumberOfCorrect" class="control-label"></label>
+                <input asp-for="TrailMakingTestANumberOfCorrect" class="form-control" />
+                <span asp-validation-for="TrailMakingTestANumberOfCorrect" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrailMakingTestBSecondsToComplete" class="control-label"></label>
+                <input asp-for="TrailMakingTestBSecondsToComplete" class="form-control" />
+                <span asp-validation-for="TrailMakingTestBSecondsToComplete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrailMakingTestBNumberOfErrors" class="control-label"></label>
+                <input asp-for="TrailMakingTestBNumberOfErrors" class="form-control" />
+                <span asp-validation-for="TrailMakingTestBNumberOfErrors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrailMakingTestBNumberOfCorrect" class="control-label"></label>
+                <input asp-for="TrailMakingTestBNumberOfCorrect" class="form-control" />
+                <span asp-validation-for="TrailMakingTestBNumberOfCorrect" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CraftStoryRecallUnitsRecallVerbatim" class="control-label"></label>
+                <input asp-for="CraftStoryRecallUnitsRecallVerbatim" class="form-control" />
+                <span asp-validation-for="CraftStoryRecallUnitsRecallVerbatim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CraftStoryRecallUnitsRecallParaphrase" class="control-label"></label>
+                <input asp-for="CraftStoryRecallUnitsRecallParaphrase" class="form-control" />
+                <span asp-validation-for="CraftStoryRecallUnitsRecallParaphrase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CraftStoryRecallUnitsRecallDelay" class="control-label"></label>
+                <input asp-for="CraftStoryRecallUnitsRecallDelay" class="form-control" />
+                <span asp-validation-for="CraftStoryRecallUnitsRecallDelay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CraftStoryRecallCueNeeded" class="control-label"></label>
+                <input asp-for="CraftStoryRecallCueNeeded" class="form-control" />
+                <span asp-validation-for="CraftStoryRecallCueNeeded" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BensonComplexFigureRecallTotalDrawingScore" class="control-label"></label>
+                <input asp-for="BensonComplexFigureRecallTotalDrawingScore" class="form-control" />
+                <span asp-validation-for="BensonComplexFigureRecallTotalDrawingScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BensonComplexFigureRecallRecognizedOriginalStiumulus" class="control-label"></label>
+                <input asp-for="BensonComplexFigureRecallRecognizedOriginalStiumulus" class="form-control" />
+                <span asp-validation-for="BensonComplexFigureRecallRecognizedOriginalStiumulus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MINTTotalScore" class="control-label"></label>
+                <input asp-for="MINTTotalScore" class="form-control" />
+                <span asp-validation-for="MINTTotalScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MINTTotalCorrectWithoutSemanticCue" class="control-label"></label>
+                <input asp-for="MINTTotalCorrectWithoutSemanticCue" class="form-control" />
+                <span asp-validation-for="MINTTotalCorrectWithoutSemanticCue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MINTSemanticCuesNumberGiven" class="control-label"></label>
+                <input asp-for="MINTSemanticCuesNumberGiven" class="form-control" />
+                <span asp-validation-for="MINTSemanticCuesNumberGiven" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MINTSemanticCuesNumberCorrectWithoutCue" class="control-label"></label>
+                <input asp-for="MINTSemanticCuesNumberCorrectWithoutCue" class="form-control" />
+                <span asp-validation-for="MINTSemanticCuesNumberCorrectWithoutCue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MINTPhonemicCuesNumberGiven" class="control-label"></label>
+                <input asp-for="MINTPhonemicCuesNumberGiven" class="form-control" />
+                <span asp-validation-for="MINTPhonemicCuesNumberGiven" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MINTPhonemicCuesNumberCorrectWithCue" class="control-label"></label>
+                <input asp-for="MINTPhonemicCuesNumberCorrectWithCue" class="form-control" />
+                <span asp-validation-for="MINTPhonemicCuesNumberCorrectWithCue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerbalFluencyPhonemicTestGeneratedFWords" class="control-label"></label>
+                <input asp-for="VerbalFluencyPhonemicTestGeneratedFWords" class="form-control" />
+                <span asp-validation-for="VerbalFluencyPhonemicTestGeneratedFWords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerbalFluencyPhonemicTestRepeatedFWords" class="control-label"></label>
+                <input asp-for="VerbalFluencyPhonemicTestRepeatedFWords" class="form-control" />
+                <span asp-validation-for="VerbalFluencyPhonemicTestRepeatedFWords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerbalFluencyPhonemicTestFWordErrors" class="control-label"></label>
+                <input asp-for="VerbalFluencyPhonemicTestFWordErrors" class="form-control" />
+                <span asp-validation-for="VerbalFluencyPhonemicTestFWordErrors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerbalFluencyPhonemicTestGeneratedLWords" class="control-label"></label>
+                <input asp-for="VerbalFluencyPhonemicTestGeneratedLWords" class="form-control" />
+                <span asp-validation-for="VerbalFluencyPhonemicTestGeneratedLWords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerbalFluencyPhonemicTestRepeatedLWords" class="control-label"></label>
+                <input asp-for="VerbalFluencyPhonemicTestRepeatedLWords" class="form-control" />
+                <span asp-validation-for="VerbalFluencyPhonemicTestRepeatedLWords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerbalFluencyPhonemicTestLWordErrors" class="control-label"></label>
+                <input asp-for="VerbalFluencyPhonemicTestLWordErrors" class="form-control" />
+                <span asp-validation-for="VerbalFluencyPhonemicTestLWordErrors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerbalFluencyPhonemicTestTotalCorrectFAndLWords" class="control-label"></label>
+                <input asp-for="VerbalFluencyPhonemicTestTotalCorrectFAndLWords" class="form-control" />
+                <span asp-validation-for="VerbalFluencyPhonemicTestTotalCorrectFAndLWords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors" class="control-label"></label>
+                <input asp-for="VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors" class="form-control" />
+                <span asp-validation-for="VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerbalFluencyPhonemicTestTotalFAndLViolationErrors" class="control-label"></label>
+                <input asp-for="VerbalFluencyPhonemicTestTotalFAndLViolationErrors" class="form-control" />
+                <span asp-validation-for="VerbalFluencyPhonemicTestTotalFAndLViolationErrors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OverallAppraisal" class="control-label"></label>
+                <input asp-for="OverallAppraisal" class="form-control" />
+                <span asp-validation-for="OverallAppraisal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class ="form-control" asp-items="ViewBag.Id"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExaminerInitials" class="control-label"></label>
+                <input asp-for="ExaminerInitials" class="form-control" />
+                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormStatus" class="control-label"></label>
+                <select asp-for="FormStatus" class="form-control"></select>
+                <span asp-validation-for="FormStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Version" class="control-label"></label>
+                <input asp-for="Version" class="form-control" />
+                <span asp-validation-for="Version" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

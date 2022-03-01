@@ -1,0 +1,1606 @@
+@model NeuropsychologicalBatteryScores
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<div>
+<h1>Edit</h1>
+<h4>NeuropsychologicalBatteryScores</h4>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" class="counterreset"> 
+            <div class="table-responsive ">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Montreal Cognitive Assessment (MoCA)</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAPartAdministered" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAPartAdministered" class="text-danger"></span></div>
+                                <div><span asp-validation-for="MoCAPartAdministeredCode" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2" style="width: 50%">
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="MoCAPartAdministered" type="radio" data-toggle-bool="[false]" 
+                                        data-toggle-targets="MoCAAdministered,MoCALanguage,MoCAVisualImpairment,MoCAHearingImpairment,TotalRawScore,MoCATrials,MoCACube,MoCAClockContour,MoCAClockNumbers,MoCAHands,MoCANaming,MoCARegistration,MoCADigits,MoCALetter,MoCASerial,MoCARepetition,MoCAFluency,MoCAAbstraction,MoCANoCue,MoCACategoryCue,MoCARecognition,MoCADate,MoCAMonth,MoCAYear,MoCADay,MoCAPlace,MoCACity" id="MoCAPartAdministered[1]" value="false" name="MoCAPartAdministered">
+                                        <label class="form-check-label" for="MoCAPartAdministered[1]"><span class="badge badge-pillbadge-light">0</span>No<span class="text-uppercase font-weight-light font-italic text-primary"> (If No, enter reason code, 95–98 and skip to question 2a):</span></label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCAPartAdministeredCode" type="number" name="MoCAPartAdministeredCode" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="MoCAPartAdministered" type="radio" data-toggle-bool="[false]" 
+                                    data-toggle-targets="MoCAAdministered,MoCALanguage,MoCAVisualImpairment,MoCAHearingImpairment,TotalRawScore,MoCATrials,MoCACube,MoCAClockContour,MoCAClockNumbers,MoCAHands,MoCANaming,MoCARegistration,MoCADigits,MoCALetter,MoCASerial,MoCARepetition,MoCAFluency,MoCAAbstraction,MoCANoCue,MoCACategoryCue,MoCARecognition,MoCADate,MoCAMonth,MoCAYear,MoCADay,MoCAPlace,MoCACity" id="MoCAPartAdministered[2]" value="true" name="MoCAPartAdministered">
+                                    <label class="form-check-label" for="MoCAPartAdministered[2]"><span class="badge badge-pillbadge-light">1</span>Yes<span class="text-uppercase font-weight-light font-italic text-primary"> (CONTINUE WITH QUESTION 1b)</span></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAAdministered" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAAdministered" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2">
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input asp-for="MoCAAdministered" type="radio" id="MoCAAdministered[1]" value="1" name="MoCAAdministered" class="form-check-input">
+                                        <label class="form-check-label" for="MoCAAdministered[1]"><span class="badge badge-pillbadge-light">1</span>In ADC or clinic</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCAAdministered" type="radio" id="MoCAAdministered[2]" value="2" name="MoCAAdministered" class="form-check-input">
+                                        <label class="form-check-label" for="MoCAAdministered[2]"><span class="badge badge-pillbadge-light">2</span>In Home</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCAAdministered" type="radio" id="MoCAAdministered[3]" value="3" name="MoCAAdministered" class="form-check-input">
+                                        <label class="form-check-label" for="MoCAAdministered[3]"><span class="badge badge-pillbadge-light">3</span>In person - other</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCALanguage" class="control-label"></label>
+                                <div><span asp-validation-for="MoCALanguage" class="text-danger"></span></div>
+                                <div><span asp-validation-for="MoCALanguageOther" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2">
+                                <div class="form-group form-check">
+                                    <div>
+                                        <input asp-for="MoCALanguage" type="radio" id="MoCALanguage[1]" value="1" name="MoCALanguage" data-toggle-values="[1,2]" data-toggle-targets="MoCALanguageOther" class="form-check-input">
+                                        <label class="form-check-label" for="MoCALanguage[1]"><span class="badge badge-pillbadge-light">1</span>English</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCALanguage" type="radio" id="MoCALanguage[2]" value="2" name="MoCALanguage" data-toggle-values="[1,2]" data-toggle-targets="MoCALanguageOther" class="form-check-input">
+                                        <label class="form-check-label" for="MoCALanguage[2]"><span class="badge badge-pillbadge-light">2</span>Spanish</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCALanguage" type="radio" id="MoCALanguage[3]" value="3" name="MoCALanguage" data-toggle-values="[1,2]" data-toggle-targets="MoCALanguageOther" class="form-check-input">
+                                        <label class="form-check-label" for="MoCALanguage[3]"><span class="badge badge-pillbadge-light">3</span>Other (Specify)</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCALanguageOther" type="text" name="MoCALanguageOther" class="form-control" disabled>
+                                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAVisualImpairment" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAVisualImpairment" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <div class="form-check form-check-inline form-group">
+                                            <input asp-for="MoCAVisualImpairment" type="radio" id="MoCAVisualImpairment[1]" value="false" name="MoCAVisualImpairment" class="form-check">
+                                            <label class="form-check-label" for="MoCAVisualImpairment[1]"><span class="badge badge-pillbadge-light">0</span>No</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline form-group">
+                                            <input asp-for="MoCAVisualImpairment" type="radio" id="MoCAVisualImpairment[2]" value="true" name="MoCAVisualImpairment" class="form-check">
+                                            <label class="form-check-label" for="MoCAVisualImpairment[2]"><span class="badge badge-pillbadge-light">1</span>Yes</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAHearingImpairment" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAHearingImpairment" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <div class="form-check form-check-inline form-group">
+                                            <input asp-for="MoCAHearingImpairment" type="radio" id="MoCAHearingImpairment[1]" value="false" name="MoCAHearingImpairment" class="form-check">
+                                            <label class="form-check-label" for="MoCAHearingImpairment[1]"><span class="badge badge-pillbadge-light">0</span>No</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline form-group">
+                                            <input asp-for="MoCAHearingImpairment" type="radio" id="MoCAHearingImpairment[2]" value="true" name="MoCAHearingImpairment" class="form-check">
+                                            <label class="form-check-label" for="MoCAHearingImpairment[2]"><span class="badge badge-pillbadge-light">1</span>Yes</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="TotalRawScore" class="control-label"></label>
+                                <span class="text-uppercase font-weight-light font-italic text-primary">Enter 88 if any of the following MoCA items were not administered: 1g–1l, 1n–1t, 1w–1bb</span>
+                                <div><span asp-validation-for="TotalRawScore" class="text-danger"></span></div>
+                                <div><span class="errorHidden TotalRawScoreError text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="TotalRawScore" type="number" id="TotalRawScore[1]" name="TotalRawScore" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–30, 88)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCATrials" class="control-label"></label>
+                                <div><span asp-validation-for="MoCATrials" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCATrials" type="number" id="MoCATrials[1]" name="MoCATrials" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCACube" class="control-label"></label>
+                                <div><span asp-validation-for="MoCACube" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCACube" type="number" id="MoCACube[1]" name="MoCACube" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAClockContour" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAClockContour" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCAClockContour" type="number" id="MoCAClockContour[1]" name="MoCAClockContour" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAClockNumbers" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAClockNumbers" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCAClockNumbers" type="number" id="MoCAClockNumbers[1]" name="MoCAClockNumbers" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAHands" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAHands" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCAHands" type="number" id="MoCAHands[1]" name="MoCAHands" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCANaming" class="control-label"></label>
+                                <div><span asp-validation-for="MoCANaming" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCANaming" type="number" id="MoCANaming[1]" name="MoCANaming" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–3, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCARegistration" class="control-label"></label>
+                                <div><span asp-validation-for="MoCARegistration" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="form-control" asp-for="MoCARegistration" type="number" id="MoCARegistration[1]" name="MoCARegistration" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–10, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCADigits" class="control-label"></label>
+                                <div><span asp-validation-for="MoCADigits" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCADigits" type="number" id="MoCADigits[1]" name="MoCADigits" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–2, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCALetter" class="control-label"></label>
+                                <div><span asp-validation-for="MoCALetter" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCALetter" type="number" id="MoCALetter[1]" name="MoCALetter" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCASerial" class="control-label"></label>
+                                <div><span asp-validation-for="MoCASerial" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCASerial" type="number" id="MoCASerial[1]" name="MoCASerial" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–3, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCARepetition" class="control-label"></label>
+                                <div><span asp-validation-for="MoCARepetition" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCARepetition" type="number" id="MoCARepetition[1]" name="MoCARepetition" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–2, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAFluency" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAFluency" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCAFluency" type="number" id="MoCAFluency[1]" name="MoCAFluency" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAAbstraction" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAAbstraction" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCAAbstraction" type="number" id="MoCAAbstraction[1]" name="MoCAAbstraction" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–2, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCANoCue" class="control-label"></label>
+                                <div><span asp-validation-for="MoCANoCue" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCANoCue" type="number" id="MoCANoCue[1]" name="MoCANoCue" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–5, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCACategoryCue" class="control-label"></label>
+                                <div><span asp-validation-for="MoCACategoryCue" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="form-control" asp-for="MoCACategoryCue" type="number" id="MoCACategoryCue[1]" name="MoCACategoryCue" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–5; 88=Not applicable)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCARecognition" class="control-label"></label>
+                                <div><span asp-validation-for="MoCARecognition" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="form-control" asp-for="MoCARecognition" type="number" id="MoCARecognition[1]" name="MoCARecognition" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–5; 88=Not applicable)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCADate" class="control-label"></label>
+                                <div><span asp-validation-for="MoCADate" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCADate" type="number" id="MoCADate[1]" name="MoCADate" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAMonth" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAMonth" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCAMonth" type="number" id="MoCAMonth[1]" name="MoCAMonth" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAYear" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAYear" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCAYear" type="number" id="MoCAYear[1]" name="MoCAYear" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCADay" class="control-label"></label>
+                                <div><span asp-validation-for="MoCADay" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCADay" type="number" id="MoCADay[1]" name="MoCADay" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCAPlace" class="control-label"></label>
+                                <div><span asp-validation-for="MoCAPlace" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCAPlace" type="number" id="MoCAPlace[1]" name="MoCAPlace" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1bb.</span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCACity" class="control-label"></label>
+                                <div><span asp-validation-for="MoCACity" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input class="totalScoreSum form-control" asp-for="MoCACity" type="number" id="MoCACity[1]" name="MoCACity" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–1, 95-98)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Administration of the remainder of the battery</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCATestsAdministered" class="control-label"></label>
+                                <div><span asp-validation-for="MoCATestsAdministered" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2">
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input asp-for="MoCATestsAdministered" type="radio" id="MoCATestsAdministered[1]" value="1" name="MoCATestsAdministered" class="form-check-input">
+                                        <label class="form-check-label" for="MoCATestsAdministered[1]"><span class="badge badge-pillbadge-light">1</span>In ADC or clinic</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCATestsAdministered" type="radio" id="MoCATestsAdministered[2]" value="2" name="MoCATestsAdministered" class="form-check-input">
+                                        <label class="form-check-label" for="MoCATestsAdministered[2]"><span class="badge badge-pillbadge-light">2</span>In Home</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCATestsAdministered" type="radio" id="MoCATestsAdministered[3]" value="3" name="MoCATestsAdministered" class="form-check-input">
+                                        <label class="form-check-label" for="MoCATestsAdministered[3]"><span class="badge badge-pillbadge-light">3</span>In person - other</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MoCATestLanguage" class="control-label"></label>
+                                <div><span asp-validation-for="MoCATestLanguage" class="text-danger"></span></div>
+                                <div><span asp-validation-for="MoCATestLanguageOther" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2">
+                                <div class="form-group form-check">
+                                    <div>
+                                        <input asp-for="MoCATestLanguage" type="radio" id="MoCATestLanguage[1]" value="1" name="MoCATestLanguage" data-toggle-values="[1,2]" data-toggle-targets="MoCATestLanguageOther" class="form-check-input">
+                                        <label class="form-check-label" for="MoCATestLanguage[1]"><span class="badge badge-pillbadge-light">1</span>English</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCATestLanguage" type="radio" id="MoCATestLanguage[2]" value="2" name="MoCATestLanguage" data-toggle-values="[1,2]" data-toggle-targets="MoCATestLanguageOther" class="form-check-input">
+                                        <label class="form-check-label" for="MoCATestLanguage[2]"><span class="badge badge-pillbadge-light">2</span>Spanish</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCATestLanguage" type="radio" id="MoCATestLanguage[3]" value="3" name="MoCATestLanguage" data-toggle-values="[1,2]" data-toggle-targets="MoCATestLanguageOther" class="form-check-input">
+                                        <label class="form-check-label" for="MoCATestLanguage[3]"><span class="badge badge-pillbadge-light">3</span>Other (Specify)</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="MoCATestLanguageOther" type="text" name="MoCATestLanguageOther" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Craft Story 21 Recall (Immediate)</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="CraftStoryVerbatim" class="control-label"></label>
+                                <span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 95–98, and SKIP TO QUESTION 4a.)</span>
+                                <div><span asp-validation-for="CraftStoryVerbatim" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="CraftStoryVerbatim" type="number" id="CraftStoryVerbatim[1]" name="CraftStoryVerbatim" class="form-control" data-toggle-range="[95,98]" data-toggle-targets="CraftStoryParaphrase">
+                                </div>
+                            </td>
+                            <td>
+                                (0–44, 95-98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="CraftStoryParaphrase" class="control-label"></label>
+                                <div><span asp-validation-for="CraftStoryParaphrase" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="CraftStoryParaphrase" type="number" id="CraftStoryParaphrase[1]" name="CraftStoryParaphrase" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0–25)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Benson Complex Figure Copy</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="BensonFigureScore" class="control-label"></label>
+                                <div><span asp-validation-for="BensonFigureScore" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="BensonFigureScore" type="number" id="BensonFigureScore[1]" name="BensonFigureScore" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 17, 95 - 98)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Number Span Test: Forward</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="NumberSpanTestForwardCorrectTrials" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 95–98, and SKIP TO QUESTION 6a.)</span></div>
+                                <div><span asp-validation-for="NumberSpanTestForwardCorrectTrials" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="NumberSpanTestForwardCorrectTrials" type="number" id="NumberSpanTestForwardCorrectTrials[1]" name="NumberSpanTestForwardCorrectTrials" class="form-control" data-toggle-range="[95,98]" data-toggle-targets="NumberSpanTestForwardLongestSpanForward">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 14, 95 - 98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="NumberSpanTestForwardLongestSpanForward" class="control-label"></label>
+                                <div><span asp-validation-for="NumberSpanTestForwardLongestSpanForward" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="NumberSpanTestForwardLongestSpanForward" type="number" id="NumberSpanTestForwardLongestSpanForward[1]" name="NumberSpanTestForwardLongestSpanForward" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0, 3 - 9)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Number Span Test: Backward</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="NumberSpanTestBackwardCorrectTrials" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 95–98, and SKIP TO QUESTION 7a.)</span></div>
+                                <div><span asp-validation-for="NumberSpanTestBackwardCorrectTrials" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="NumberSpanTestBackwardCorrectTrials" type="number" id="NumberSpanTestBackwardCorrectTrials[1]" name="NumberSpanTestBackwardCorrectTrials" class="form-control"
+                                    data-toggle-range="[95,98]" data-toggle-targets="NumberSpanTestBackwardLongestSpanBackward">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 14, 95 - 98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="NumberSpanTestBackwardLongestSpanBackward" class="control-label"></label>
+                                <div><span asp-validation-for="NumberSpanTestBackwardLongestSpanBackward" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="NumberSpanTestBackwardLongestSpanBackward" type="number" id="NumberSpanTestBackwardLongestSpanBackward[1]" name="NumberSpanTestBackwardLongestSpanBackward" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0, 2 - 8)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Category Fluency</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="CategoryFluencyAnimals" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 95–98)</span></div>
+                                <div><span asp-validation-for="CategoryFluencyAnimals" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="CategoryFluencyAnimals" type="number" id="CategoryFluencyAnimals[1]" name="CategoryFluencyAnimals" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 77, 95 - 98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="CategoryFluencyVegetables" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 95–98)</span></div>
+                                <div><span asp-validation-for="CategoryFluencyVegetables" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="CategoryFluencyVegetables" type="number" id="CategoryFluencyVegetables[1]" name="CategoryFluencyVegetables" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 77, 95 - 98)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Trail Making Test</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                               8a.
+                            </td>
+                            <td>
+                                <label asp-for="TrailMakingTestASecondsToComplete" class="control-label"></label>
+                                <span class="badge badge-pillbadge-light">(If not finished by 150 seconds, enter 150)</span>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 995–998, and SKIP TO QUESTION 8b.)</span></div>
+                                <div><span asp-validation-for="TrailMakingTestASecondsToComplete" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="TrailMakingTestASecondsToComplete" type="number" id="TrailMakingTestASecondsToComplete[1]" name="TrailMakingTestASecondsToComplete" class="form-control" data-toggle-range="[995,998]" data-toggle-targets="TrailMakingTestANumberOfErrors,TrailMakingTestANumberOfCorrect">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 150, 995 - 998)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               8a1.
+                            </td>
+                            <td>
+                                <label asp-for="TrailMakingTestANumberOfErrors" class="control-label"></label>
+                                <div><span asp-validation-for="TrailMakingTestANumberOfErrors" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="TrailMakingTestANumberOfErrors" type="number" id="TrailMakingTestANumberOfErrors[1]" name="TrailMakingTestANumberOfErrors" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 40)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               8a2.
+                            </td>
+                            <td>
+                                <label asp-for="TrailMakingTestANumberOfCorrect" class="control-label"></label>
+                                <div><span asp-validation-for="TrailMakingTestANumberOfCorrect" class="text-danger"></span></div>
+                                <div><span class="errorHidden TrailMakingTestANumberOfCorrect text-danger">If 8a is 149 or less, 8a2 must be entered as 24</span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="TrailMakingTestANumberOfCorrect" type="number" id="TrailMakingTestANumberOfCorrect[1]" name="TrailMakingTestANumberOfCorrect" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 24)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               8b.
+                            </td>
+                            <td>
+                                <label asp-for="TrailMakingTestBSecondsToComplete" class="control-label"></label>
+                                <span class="badge badge-pillbadge-light">(If not finished by 300 seconds, enter 300)</span>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 995–998, and SKIP TO QUESTION 9a.)</span></div>
+                                <div><span asp-validation-for="TrailMakingTestBSecondsToComplete" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="TrailMakingTestBSecondsToComplete" type="number" id="TrailMakingTestBSecondsToComplete[1]" name="TrailMakingTestBSecondsToComplete" class="form-control" data-toggle-range="[995,998]" data-toggle-targets="TrailMakingTestBNumberOfErrors,TrailMakingTestBNumberOfCorrect">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 300, 995 - 998)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               8b1.
+                            </td>
+                            <td>
+                                <label asp-for="TrailMakingTestBNumberOfErrors" class="control-label"></label>
+                                <div><span asp-validation-for="TrailMakingTestBNumberOfErrors" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="TrailMakingTestBNumberOfErrors" type="number" id="TrailMakingTestBNumberOfErrors[1]" name="TrailMakingTestBNumberOfErrors" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 40)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               8b2.
+                            </td>
+                            <td>
+                                <label asp-for="TrailMakingTestBNumberOfCorrect" class="control-label"></label>
+                                <div><span asp-validation-for="TrailMakingTestBNumberOfCorrect" class="text-danger"></span></div>
+                                <div><span class="errorHidden TrailMakingTestBNumberOfCorrect text-danger">If 8b is 299 or less, 8b2 must be entered as 24</span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="TrailMakingTestBNumberOfCorrect" type="number" id="TrailMakingTestBNumberOfCorrect[1]" name="TrailMakingTestBNumberOfCorrect" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 24)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Craft Story 21 Recall (Delayed)</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="CraftStoryRecallUnitsRecallVerbatim" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 95–98, and SKIP TO QUESTION 10a.)</span></div>
+                                <div><span asp-validation-for="CraftStoryRecallUnitsRecallVerbatim" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="CraftStoryRecallUnitsRecallVerbatim" type="number" id="CraftStoryRecallUnitsRecallVerbatim[1]" name="CraftStoryRecallUnitsRecallVerbatim" class="form-control"
+                                    data-toggle-range="[95,98]" data-toggle-targets="CraftStoryRecallUnitsRecallParaphrase,CraftStoryRecallUnitsRecallDelay,CraftStoryRecallCueNeeded">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 44, 95 - 98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="CraftStoryRecallUnitsRecallParaphrase" class="control-label"></label>
+                                <div><span asp-validation-for="CraftStoryRecallUnitsRecallParaphrase" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="CraftStoryRecallUnitsRecallParaphrase" type="number" id="CraftStoryRecallUnitsRecallParaphrase[1]" name="CraftStoryRecallUnitsRecallParaphrase" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 25)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="CraftStoryRecallUnitsRecallDelay" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(99=Unknown)</span></div>
+                                <div><span asp-validation-for="CraftStoryRecallUnitsRecallDelay" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="CraftStoryRecallUnitsRecallDelay" type="number" id="CraftStoryRecallUnitsRecallDelay[1]" name="CraftStoryRecallUnitsRecallDelay" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 – 85 minutes)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="CraftStoryRecallCueNeeded" class="control-label"></label>
+                                <div><span asp-validation-for="CraftStoryRecallCueNeeded" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <div class="form-check form-check-inline form-group">
+                                            <div>
+                                                <input asp-for="CraftStoryRecallCueNeeded" type="radio" id="CraftStoryRecallCueNeeded[1]" value="false" name="CraftStoryRecallCueNeeded">
+                                                <label class="form-check-label" for="CraftStoryRecallCueNeeded[1]"><span class="badge badge-pillbadge-light">0</span>No</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input asp-for="CraftStoryRecallCueNeeded" type="radio" id="CraftStoryRecallCueNeeded[2]" value="true" name="CraftStoryRecallCueNeeded">
+                                            <label class="form-check-label" for="CraftStoryRecallCueNeeded[2]"><span class="badge badge-pillbadge-light">1</span>Yes</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Benson Complex Figure Recall</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="BensonComplexFigureRecallTotalDrawingScore" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, 95–98, and SKIP TO QUESTION 11a)</span></div>
+                                <div><span asp-validation-for="BensonComplexFigureRecallTotalDrawingScore" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="BensonComplexFigureRecallTotalDrawingScore" type="number" id="BensonComplexFigureRecallTotalDrawingScore[1]" name="BensonComplexFigureRecallTotalDrawingScore" class="form-control"
+                                    data-toggle-range="[95,98]" data-toggle-targets="BensonComplexFigureRecallRecognizedOriginalStiumulus">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 17, 95 - 98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="BensonComplexFigureRecallRecognizedOriginalStiumulus" class="control-label"></label>
+                                <div><span asp-validation-for="BensonComplexFigureRecallRecognizedOriginalStiumulus" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <div class="form-check form-check-inline form-group">
+                                            <div>
+                                                <input asp-for="BensonComplexFigureRecallRecognizedOriginalStiumulus" type="radio" id="BensonComplexFigureRecallRecognizedOriginalStiumulus[1]" value="false" name="BensonComplexFigureRecallRecognizedOriginalStiumulus">
+                                                <label class="form-check-label" for="BensonComplexFigureRecallRecognizedOriginalStiumulus[1]"><span class="badge badge-pillbadge-light">0</span>No</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check form-check-inline">
+                                            <input asp-for="BensonComplexFigureRecallRecognizedOriginalStiumulus" type="radio" id="BensonComplexFigureRecallRecognizedOriginalStiumulus[2]" value="true" name="BensonComplexFigureRecallRecognizedOriginalStiumulus">
+                                            <label class="form-check-label" for="BensonComplexFigureRecallRecognizedOriginalStiumulus[2]"><span class="badge badge-pillbadge-light">1</span>Yes</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Multilingual Naming Test (MINT)</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MINTTotalScore" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, 95–98, and SKIP TO QUESTION 12a)</span></div>
+                                <div><span asp-validation-for="MINTTotalScore" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="MINTTotalScore" type="number" id="MINTTotalScore[1]" name="MINTTotalScore" class="form-control"
+                                    data-toggle-range="[95,98]" data-toggle-targets="MINTTotalCorrectWithoutSemanticCue,MINTSemanticCuesNumberGiven,MINTSemanticCuesNumberCorrectWithoutCue,MINTPhonemicCuesNumberGiven,MINTPhonemicCuesNumberCorrectWithCue">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 32, 95 - 98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MINTTotalCorrectWithoutSemanticCue" class="control-label"></label>
+                                <div><span asp-validation-for="MINTTotalCorrectWithoutSemanticCue" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="MINTTotalCorrectWithoutSemanticCue" type="number" id="MINTTotalCorrectWithoutSemanticCue[1]" name="MINTTotalCorrectWithoutSemanticCue" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 32)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MINTSemanticCuesNumberGiven" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary"></span></div>
+                                <div><span asp-validation-for="MINTSemanticCuesNumberGiven" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="MINTSemanticCuesNumberGiven" type="number" id="MINTSemanticCuesNumberGiven[1]" name="MINTSemanticCuesNumberGiven" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 32)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MINTSemanticCuesNumberCorrectWithoutCue" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(88 = Not applicable)</span></div>
+                                <div><span asp-validation-for="MINTSemanticCuesNumberCorrectWithoutCue" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="MINTSemanticCuesNumberCorrectWithoutCue" type="number" id="MINTSemanticCuesNumberCorrectWithoutCue[1]" name="MINTSemanticCuesNumberCorrectWithoutCue" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 32, 88)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MINTPhonemicCuesNumberGiven" class="control-label"></label>
+                                <div><span asp-validation-for="MINTPhonemicCuesNumberGiven" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="MINTPhonemicCuesNumberGiven" type="number" id="MINTPhonemicCuesNumberGiven[1]" name="MINTPhonemicCuesNumberGiven" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 32)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="MINTPhonemicCuesNumberCorrectWithCue" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(88 = Not applicable)</span></div>
+                                <div><span asp-validation-for="MINTPhonemicCuesNumberCorrectWithCue" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="MINTPhonemicCuesNumberCorrectWithCue" type="number" id="MINTPhonemicCuesNumberCorrectWithCue[1]" name="MINTPhonemicCuesNumberCorrectWithCue" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 32, 88)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Verbal Fluency: Phonemic Test</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="VerbalFluencyPhonemicTestGeneratedFWords" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 95–98, and SKIP TO QUESTION 12d)</span></div>
+                                <div><span asp-validation-for="VerbalFluencyPhonemicTestGeneratedFWords" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="VerbalFluencyPhonemicTestGeneratedFWords" type="number" id="VerbalFluencyPhonemicTestGeneratedFWords[1]" name="VerbalFluencyPhonemicTestGeneratedFWords" class="form-control"
+                                    data-toggle-range="[95,98]"
+                                    data-toggle-targets="VerbalFluencyPhonemicTestRepeatedFWords,VerbalFluencyPhonemicTestFWordErrors">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 40, 95 - 98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="VerbalFluencyPhonemicTestRepeatedFWords" class="control-label"></label>
+                                <div><span asp-validation-for="VerbalFluencyPhonemicTestRepeatedFWords" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="VerbalFluencyPhonemicTestRepeatedFWords" type="number" id="VerbalFluencyPhonemicTestRepeatedFWords[1]" name="VerbalFluencyPhonemicTestRepeatedFWords" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 15)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="VerbalFluencyPhonemicTestFWordErrors" class="control-label"></label>
+                                <div><span asp-validation-for="VerbalFluencyPhonemicTestFWordErrors" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="VerbalFluencyPhonemicTestFWordErrors" type="number" id="VerbalFluencyPhonemicTestFWordErrors[1]" name="VerbalFluencyPhonemicTestFWordErrors" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 15)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="VerbalFluencyPhonemicTestGeneratedLWords" class="control-label"></label>
+                                <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 95–98, and SKIP TO QUESTION 13a.)</span></div>
+                                <div><span asp-validation-for="VerbalFluencyPhonemicTestGeneratedLWords" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="VerbalFluencyPhonemicTestGeneratedLWords" type="number" id="VerbalFluencyPhonemicTestGeneratedLWords[1]" name="VerbalFluencyPhonemicTestGeneratedLWords" class="form-control"
+                                    data-toggle-range="[95,98]"
+                                    data-toggle-targets="VerbalFluencyPhonemicTestRepeatedLWords,VerbalFluencyPhonemicTestLWordErrors,VerbalFluencyPhonemicTestTotalCorrectFAndLWords,VerbalFluencyPhonemicTestTotalCorrectFAndLWords,VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors,VerbalFluencyPhonemicTestTotalFAndLViolationErrors">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 40, 95 - 98)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="VerbalFluencyPhonemicTestRepeatedLWords" class="control-label"></label>
+                                <div><span asp-validation-for="VerbalFluencyPhonemicTestRepeatedLWords" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="VerbalFluencyPhonemicTestRepeatedLWords" type="number" id="VerbalFluencyPhonemicTestRepeatedLWords[1]" name="VerbalFluencyPhonemicTestRepeatedLWords" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 15)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="VerbalFluencyPhonemicTestLWordErrors" class="control-label"></label>
+                                <div><span asp-validation-for="VerbalFluencyPhonemicTestLWordErrors" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="VerbalFluencyPhonemicTestLWordErrors" type="number" id="VerbalFluencyPhonemicTestLWordErrors[1]" name="VerbalFluencyPhonemicTestLWordErrors" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 15)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="VerbalFluencyPhonemicTestTotalCorrectFAndLWords" class="control-label"></label>
+                                <div><span asp-validation-for="VerbalFluencyPhonemicTestTotalCorrectFAndLWords" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="VerbalFluencyPhonemicTestTotalCorrectFAndLWords" type="number" id="VerbalFluencyPhonemicTestTotalCorrectFAndLWords[1]" name="VerbalFluencyPhonemicTestTotalCorrectFAndLWords" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 80)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors" class="control-label"></label>
+                                <div><span asp-validation-for="VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors" type="number" id="VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors[1]" name="VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 30)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="VerbalFluencyPhonemicTestTotalFAndLViolationErrors" class="control-label"></label>
+                                <div><span asp-validation-for="VerbalFluencyPhonemicTestTotalFAndLViolationErrors" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline form-group">
+                                    <input asp-for="VerbalFluencyPhonemicTestTotalFAndLViolationErrors" type="number" id="VerbalFluencyPhonemicTestTotalFAndLViolationErrors[1]" name="VerbalFluencyPhonemicTestTotalFAndLViolationErrors" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                (0 - 30)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="table table-responsive">
+                <table class="table table-striped table-bordered countereset">
+                    <thead>
+                        <tr>
+                            <td colspan="6"><span class="counter"></span> Overall appraisal</td>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span class="subcounter"></span>
+                            </td>
+                            <td>
+                                <label asp-for="OverallAppraisal" class="control-label"></label>
+                                <div><span asp-validation-for="OverallAppraisal" class="text-danger"></span></div>
+                            </td>
+                            <td style="width: 50%">
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input asp-for="OverallAppraisal" type="radio" id="OverallAppraisal[1]" value="1" name="OverallAppraisal" class="form-check-input">
+                                        <label class="form-check-label" for="OverallAppraisal[1]"><span class="badge badge-pillbadge-light">1</span>Better than normal for age</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="OverallAppraisal" type="radio" id="OverallAppraisal[2]" value="2" name="OverallAppraisal" class="form-check-input">
+                                        <label class="form-check-label" for="OverallAppraisal[2]"><span class="badge badge-pillbadge-light">2</span>Normal for age</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="OverallAppraisal" type="radio" id="OverallAppraisal[3]" value="3" name="OverallAppraisal" class="form-check-input">
+                                        <label class="form-check-label" for="OverallAppraisal[3]"><span class="badge badge-pillbadge-light">3</span>One or two test scores are abnormal</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="OverallAppraisal" type="radio" id="OverallAppraisal[4]" value="4" name="OverallAppraisal" class="form-check-input">
+                                        <label class="form-check-label" for="OverallAppraisal[4]"><span class="badge badge-pillbadge-light">4</span>Three or more test scores are abnormal or lower than expected</label>
+                                    </div>
+                                    <div>
+                                        <input asp-for="OverallAppraisal" type="radio" id="OverallAppraisal[5]" value="0" name="OverallAppraisal" class="form-check-input">
+                                        <label class="form-check-label" for="OverallAppraisal[5]"><span class="badge badge-pillbadge-light">0</span>Clinician unable to render opinion</label>
+                                    </div>
+                                </div> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="row">
+                <div class="col">
+                    <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+                </div>
+            </div>
+        </form>
+    </div> 
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript" src="~/js/RadioFieldToggle.js"></script>
+    <script type="text/javascript" src="~/js/NumberRangeToggle.js"></script>
+    <script>
+        var eightA = $('input[name="TrailMakingTestASecondsToComplete"]');
+        var eightATwo = $('input[name="TrailMakingTestANumberOfCorrect"]');
+        var eightB = $('input[name="TrailMakingTestBSecondsToComplete"]');
+        var eightBTwo = $('input[name="TrailMakingTestBNumberOfCorrect"]');
+        var trailMakingErrorA = $('input.trailMakingErrorA');
+        var trailMakingErrorB = $('input.trailMakingErrorB');
+        
+
+        var TrailMakingTestCheck =(elem, maxValue, elemToToggle)=> {
+            var elemValue = parseInt($(elem).val())
+            //check 8a values
+            if(elemValue) {
+                if(elemValue <= maxValue) {
+                    elemToToggle.prop('disabled', false);
+                } else {
+                    elemToToggle.prop('disabled', true);
+                }
+            }
+        }
+
+         //show/hide error text for value conflict
+        var TrailMakingErrorCheck =(errorElement, expectedValue, parentElement, parentElementMax)=> {
+            var errorField =  $(`.${errorElement}`)
+            var inputField = $(`input[name="${errorElement}"`)
+            var inputFieldValue = inputField.val()
+            var parentElementValue = $(`input[name="${parentElement}"`).val()
+
+            if(inputFieldValue != expectedValue && parentElementValue <= parentElementMax) {
+                if(errorField.hasClass("errorHidden")) {
+                    errorField.removeClass("errorHidden")
+                }
+                if(!inputField.hasClass("errorField")) {
+                    inputField.addClass("errorField")
+                }
+                inputField.val(null)
+            } else {
+                if(!errorField.hasClass("errorHidden")) {
+                    errorField.addClass("errorHidden")
+                }
+                if(inputField.hasClass("errorField")) {
+                    inputField.removeClass("errorField")
+                }
+            }
+        }
+
+        //onload readOnly correct lines
+        TrailMakingTestCheck(eightA, 149, eightATwo)
+        TrailMakingTestCheck(eightB, 299, eightBTwo)
+
+        //on change, if 8a is null or < 150, 8a2 NEEDS to be 24. If 8a is null, 8a2 is disabled. Same with 8b and 8b2
+        eightA.change((elem) => {
+            TrailMakingTestCheck(elem.target, 149, eightATwo)
+            TrailMakingErrorCheck('TrailMakingTestANumberOfCorrect', 24, 'TrailMakingTestASecondsToComplete', 149)
+        });
+
+        eightB.change((elem) => {
+            TrailMakingTestCheck(elem.target, 299, eightBTwo)
+            TrailMakingErrorCheck('TrailMakingTestBNumberOfCorrect', 24, 'TrailMakingTestBSecondsToComplete', 299)
+        });
+
+        eightATwo.change((elem) => {
+           TrailMakingErrorCheck('TrailMakingTestANumberOfCorrect', 24, 'TrailMakingTestASecondsToComplete', 149)
+        })
+       
+        eightBTwo.change((elem) => {
+           TrailMakingErrorCheck('TrailMakingTestBNumberOfCorrect', 24, 'TrailMakingTestBSecondsToComplete', 299)
+        })
+    </script>
+    <script>
+        //add all of the values for 1g - 1bb and compare to total raw score
+        var TotalRawScoreSum =()=> {
+            var totalRawScore = parseInt($('input[name="TotalRawScore"').val());
+            var scoreSum = 0;
+            var scoreList = 
+            [
+                "MoCATrials",
+                "MoCACube",
+                "MoCAClockContour",
+                "MoCAClockNumbers",
+                "MoCAHands",
+                "MoCANaming",
+                "MoCADigits",
+                "MoCALetter",
+                "MoCASerial",
+                "MoCARepetition",
+                "MoCAFluency",
+                "MoCAAbstraction",
+                "MoCANoCue",
+                "MoCADate",
+                "MoCAMonth",
+                "MoCAYear",
+                "MoCADay",
+                "MoCAPlace",
+                "MoCACity"
+            ]
+
+            scoreList.forEach((elem) => {
+                var elemValue = parseInt($(`input[name="${elem}"]`).val())
+                if(isNaN(elemValue)) {
+                    elemValue = 0;
+                }
+
+                //if elem value is 88 or an error code, don't caclulate to total
+                if(elemValue >= 88) {
+                    elemValue = 0;
+                } else {
+                    scoreSum += elemValue; 
+                }               
+            }) 
+
+            if(totalRawScore != 88) {
+                if(isNaN(totalRawScore)) {
+                    totalRawScore = 0;
+                }
+                if(scoreSum != totalRawScore) {
+                    $('.TotalRawScoreError').text(`The MoCA Item Scores you have entered equal ${scoreSum} and do not add up to the Total Raw Score of ${totalRawScore}.  Please check both the Item Scores and/or the Total Raw Score and make corrections.`)
+                    if($('.TotalRawScoreError').hasClass("errorHidden")) {
+                        $('.TotalRawScoreError').removeClass("errorHidden")
+                    }
+                    if(!$('input[name="TotalRawScore"]').hasClass("errorField")) {
+                        $('input[name="TotalRawScore"]').addClass("errorField")
+                    }
+
+                    $('input[name="TotalRawScore"]').val(null)
+                    totalRawScore = 0;
+                } else {
+                    if(!$('.TotalRawScoreError').hasClass("errorHidden")) {
+                        $('.TotalRawScoreError').addClass("errorHidden")
+                        $('input[name="TotalRawScore"]').removeClass("errorField")
+                    }
+                    if($('input[name="TotalRawScore"]').hasClass("errorField")) {
+                        $('input[name="TotalRawScore"]').removeClass("errorField")
+                    }
+                }
+            } else {
+                //if 88 then ignore and treat as valid, remove all previous invalid classes
+                if(!$('.TotalRawScoreError').hasClass("errorHidden")) {
+                    $('.TotalRawScoreError').addClass("errorHidden")
+                    $('input[name="TotalRawScore"]').removeClass("errorField")
+                }
+                if($('input[name="TotalRawScore"]').hasClass("errorField")) {
+                    $('input[name="TotalRawScore"]').removeClass("errorField")
+                }
+            }
+        }
+
+      
+
+        $('.totalScoreSum').change(() => {
+            TotalRawScoreSum();
+        });
+
+        $('input[name="TotalRawScore"]').change(() => {
+            TotalRawScoreSum();
+        });
+
+    </script>
+}

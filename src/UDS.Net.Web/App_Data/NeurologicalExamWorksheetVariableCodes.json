@@ -1,0 +1,106 @@
+﻿[
+  {
+    "Name": "DXA",
+    "Description": "",
+    "Codes": {
+      "1": "Abnormal",
+      "0": "Normal",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "DXB",
+    "Description": "",
+    "Codes": {
+      "1": "Present",
+      "0": "Absent",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "CRANIALNERVESA",
+    "Description": "",
+    "Codes": {
+      "1": "Yes",
+      "0": "No",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "CRANIALNERVESB",
+    "Description": "",
+    "Codes": {
+      "1": "Normal",
+      "0": "Abnormal",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "DX13",
+    "Description": "",
+    "Codes": {
+      "0": "Absent",
+      "1": "Hypoactive",
+      "2": "Normal",
+      "3": "Hyperactive",
+      "4": "Clonus",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "DX14",
+    "Description": "",
+    "Codes": {
+      "0": "Flaccid",
+      "1": "Flicker Movement",
+      "2": "Moves, gravity eliminated",
+      "3": "Moves against gravity",
+      "4": "Moves against resistance",
+      "5": "Normal",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "REFLEXESA",
+    "Description": "",
+    "Codes": {
+      "1": "Flexor",
+      "2": "Extensor",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "GAIT",
+    "Description": "",
+    "Codes": {
+      "1": "Normal",
+      "2": "Bradykinetic",
+      "3": "Ataxic",
+      "8": "Other",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "LANGUAGE",
+    "Description": "",
+    "Codes": {
+      "1": "Normal",
+      "2": "Dysarthia",
+      "3": "Anomia",
+      "4": "Aphasia",
+      "8": "Other",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "PRAXIS",
+    "Description": "",
+    "Codes": {
+      "1": "Normal",
+      "2": "Ideomotor",
+      "3": "Conceptual",
+      "8": "Other",
+      "9": "Not Done"
+    }
+  }
+]

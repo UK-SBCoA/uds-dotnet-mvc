@@ -1,0 +1,65 @@
+﻿[
+  {
+    "Name": "NACCREAS",
+    "Description": "Primary reason for coming to ADC",
+    "Codes": {
+      "1": "To participate in a research study",
+      "2": "To have clinical evaluation",
+      "4": "Both (to participate in a reasearch study and to have a clinical evaluation",
+      "9": "Unknown"
+    }
+  },
+  {
+    "Name": "REFERSC",
+    "Description": "Principal referral source",
+    "Codes": {
+      "1": "Self-referral",
+      "2": "Non-professional contact (spouse/partner, relative, friend, coworker, etc.)",
+      "3": "ADC participant referral",
+      "4": "ADC clinician, staff, or investigator referral",
+      "5": "Nurse, doctor, or other health care provider",
+      "6": "Other research study clinician/staff/investigator (non-ADC; e.g., ADNI, Women's Health Initiative)",
+      "8": "Other",
+      "9": "Unknown"
+    }
+  },
+  {
+    "Name": "NPIQINF",
+    "Description": "NPI CO-PARTICIPANT",
+    "Codes": {
+      "1": "Spouse",
+      "2": "Child",
+      "3": "Other"
+    }
+  },
+  {
+    "Name": "NPIQ_SYMPTOMS",
+    "Description": "Answers for any ",
+    "Codes": {
+      "1": "Yes",
+      "0": "No",
+      "9": "Unknown"
+    }
+  },
+  {
+    "Name": "NPIQ_SEVERITY",
+    "Description": "Severity levels",
+    "Codes": {
+      "1": "Mild (noticeable, but not a significant change)",
+      "2": "Moderate (significant, but not a dramatic change)",
+      "3": "Severe (very marked or prominent a dramatic change)",
+      "9": "Unknown"
+    }
+  },
+  {
+    "Name": "REASON",
+    "Description": "Reason CVLT was not administered",
+    "Codes": {
+      "1": "Refused",
+      "2": "Out of Time",
+      "3": "Impaired",
+      "4": "Fatigue/Sick"
+    }
+  }
+  
+]

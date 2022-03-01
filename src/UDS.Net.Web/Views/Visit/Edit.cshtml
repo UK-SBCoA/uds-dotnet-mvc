@@ -1,0 +1,96 @@
+@model Visit
+
+@{
+    ViewData["Title"] = "Edit visit";
+
+    var checklistExists = false;
+    var checklistId = 0;
+    var checklistStatus = FormStatus.Incomplete;
+
+    if (Model.Checklist != null)
+    {
+        checklistExists = true;
+        checklistId = Model.Checklist.Id;
+        checklistStatus = Model.Checklist.FormStatus;
+    } }
+
+<h2>Edit Visit @Model.VisitNumber for PTID @Model.FriendlyId</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" data-checklist-exists="@checklistExists" data-checklist-id="@checklistId" data-checklist-status="@checklistStatus">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="VisitDate" class="control-label"></label>
+                <input asp-for="VisitDate" class="form-control" />
+                <span asp-validation-for="VisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitType" class="control-label"></label>
+                @if (Model.VisitNumber == 1)
+                {
+    <select asp-for="VisitType" class="form-control" asp-items="Html.GetEnumSelectList(typeof(VisitType))" disabled></select> }
+                else
+                {
+    <select asp-for="VisitType" class="form-control">
+        <option value="FVP">In-person follow-up</option>
+        <option value="TFP">Telephone follow-up</option>
+    </select>}
+                <span asp-validation-for="VisitType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Coordinator" class="control-label"></label>
+                <select asp-for="CoordinatorInitials" class="form-control" asp-items="@(new SelectList(ViewBag.Examiners,"Initials","Name"))">
+                    <option value="">-- Select --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clinician" class="control-label"></label>
+                <select asp-for="ClinicianInitials" class="form-control" asp-items="@(new SelectList(ViewBag.Examiners,"Initials","Name"))">
+                    <option value="">-- Select --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SocialWorker" class="control-label"></label>
+                <select asp-for="SocialWorkerInitials" class="form-control" asp-items="@(new SelectList(ViewBag.Examiners,"Initials","Name"))">
+                    <option value="">-- Select --</option>
+                </select>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">Form progress - @await Component.InvokeAsync("VisitProgress", new { id = Model.Id, visittype = Model.VisitType, formStatus = FormStatus.Complete })</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList(typeof(VisitStatus))"></select>
+                        <small>Visit can only be completed when all NACC forms are completed.</small>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="PriorityWeight" class="control-label"></label>
+                        <input asp-for="PriorityWeight" class="form-control" disabled />
+                    </div>
+                    <div class="form-group form-check">
+                        <input asp-for="IsSubmittedToNACC" class="form-check-input" disabled />
+                        <label class="form-check-label" asp-for="IsSubmittedToNACC"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="FriendlyId" />
+                <input type="hidden" asp-for="VisitNumber" />
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/Visit/Edit.js"></script>
+}

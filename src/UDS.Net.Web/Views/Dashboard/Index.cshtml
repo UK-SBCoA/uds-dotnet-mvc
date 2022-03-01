@@ -1,0 +1,104 @@
+﻿@model CurrentVisits
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<div class="row">
+    <div class="col-lg-8 col-md-12">
+        <div class="row">
+            <div class="col text-right p-2">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="visitDisplaySwitch">
+                    <label class="custom-control-label text-muted font-weight-light" for="visitDisplaySwitch">Display only yours</label>
+                </div>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col">
+                <div class="card">
+                    <h5 class="card-header"><a class="font-weight-light" asp-controller="Visit" asp-action="InProgress">In-progress</a> <small><span class="badge badge-pill badge-light">@Model.InProgress.Count() total</span></small></h5>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><small class="text-muted">Urgency</small></th>
+                                        <th>
+                                            PTID
+                                        </th>
+                                        <th>
+                                            Visit date
+                                        </th>
+                                        <th>
+                                            Visit number
+                                        </th>
+                                        <th>
+                                            Progress
+                                        </th>
+                                        <th>Coordinator</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.InProgress)
+                                    {
+                                        <tr>
+                                            <td>
+
+                                                @if (item.Urgency <= 28)
+                                                {
+                                                    <span class="text-info">&lt;28 days</span>
+                                                }
+                                                else if (item.Urgency <= 40)
+                                                {
+                                                    <span class="text-warning">&lt;40 days</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">&gt;41 days</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a asp-action="Details" asp-controller="Participation" asp-route-Id="@item.FriendlyId">@item.FriendlyId</a>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.VisitDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.VisitNumber)
+                                            </td>
+                                            <td>
+                                                @await Component.InvokeAsync("VisitProgress", new { id = item.Id, visittype = item.VisitType, formStatus = FormStatus.Complete })
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.CoordinatorInitials)</td>
+                                            <td>
+                                                <a asp-controller="Visit" asp-action="Details" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="right" title="@item.VisitType">View</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4 d-none d-sm-none d-md-block">
+        <div class="card bg-light m-3" style="height:600px;">
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+    </script>
+}

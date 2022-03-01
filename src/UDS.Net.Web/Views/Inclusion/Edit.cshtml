@@ -1,0 +1,239 @@
+﻿@model Inclusion
+
+@{
+    var title = "T1 Inclusion";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+}
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+<div class="row">
+    <div class="col-md-12 p-4">
+        <p class="lead">
+            INSTRUCTIONS: This form is to be completed by the clinician or clinical interviewer who will participate in the telephone follow-up. For additional clarification and examples, see UDS Coding Guidebook for Telephone Follow-up Packet, Form T1.
+        </p>
+        <form asp-action="Edit">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped counterreset">
+
+                    <tbody class="table-primary">
+                        <tr>
+                            <td><span class="counter"></span></td>
+                            <td colspan="3">Why is the UDS telephone follow-up protocol being used to obtain data about the subject?</td>
+                            <td>
+                                No
+                            </td>
+                            <td>
+                                Yes
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td></td>
+                            <td><span class="subcounter"></span></td>
+                            <td>
+                                <label asp-for="CognitivelyImpaired" class="control-label"></label>
+                                <div><span asp-validation-for="CognitivelyImpaired" class="text-danger"></span></div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="CognitivelyImpaired" type="radio" id="CognitivelyImpaired[0]" value="false" name="CognitivelyImpaired">
+                                        <label class="form-check-label" for="CognitivelyImpaired[0]"><span class="badge badge-pill badge-light">0</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="CognitivelyImpaired" type="radio" id="CognitivelyImpaired[1]" value="true" name="CognitivelyImpaired">
+                                        <label class="form-check-label" for="CognitivelyImpaired[1]"><span class="badge badge-pill badge-light">1</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span class="subcounter"></span></td>
+                            <td>
+                                <label asp-for="PhysicallyImpaired" class="control-label"></label>
+                                <div><span asp-validation-for="PhysicallyImpaired" class="text-danger"></span></div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="PhysicallyImpaired" type="radio" id="PhysicallyImpaired[0]" value="false" name="PhysicallyImpaired">
+                                        <label class="form-check-label" for="PhysicallyImpaired[0]"><span class="badge badge-pill badge-light">0</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="PhysicallyImpaired" type="radio" id="PhysicallyImpaired[1]" value="true" name="PhysicallyImpaired">
+                                        <label class="form-check-label" for="PhysicallyImpaired[1]"><span class="badge badge-pill badge-light">1</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span class="subcounter"></span></td>
+                            <td>
+                                <label asp-for="Homebound" class="control-label"></label>
+                                <div><span asp-validation-for="Homebound" class="text-danger"></span></div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="Homebound" type="radio" id="Homebound[0]" value="false" name="Homebound">
+                                        <label class="form-check-label" for="Homebound[0]"><span class="badge badge-pill badge-light">0</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="Homebound" type="radio" id="Homebound[1]" value="true" name="Homebound">
+                                        <label class="form-check-label" for="Homebound[1]"><span class="badge badge-pill badge-light">1</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span class="subcounter"></span></td>
+                            <td>
+                                <label asp-for="Refused" class="control-label"></label>
+                                <div><span asp-validation-for="Refused" class="text-danger"></span></div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="Refused" type="radio" id="Refused[0]" value="false" name="Refused">
+                                        <label class="form-check-label" for="Refused[0]"><span class="badge badge-pill badge-light">0</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="Refused" type="radio" id="Refused[1]" value="true" name="Refused">
+                                        <label class="form-check-label" for="Refused[1]"><span class="badge badge-pill badge-light">1</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span class="subcounter"></span></td>
+                            <td>
+                                <div class="form-group">
+                                    <label asp-for="OtherSpecified" class="control-label"></label>
+                                    <input class="form-control" asp-for="OtherSpecified" />
+                                    <small class="form-text text-muted">ADC staff convenience is not an acceptable reason.</small>
+                                </div>
+                                <div><span asp-validation-for="Other" class="text-danger"></span></div>
+                                <div><span asp-validation-for="OtherSpecified" class="text-danger"></span></div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="Other" type="radio" id="Other[0]" value="false" name="Other" data-toggle-targets="OtherSpecified" data-toggle-bool="[false]">
+                                        <label class="form-check-label" for="Other[0]"><span class="badge badge-pill badge-light">0</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input" asp-for="Other" type="radio" id="Other[1]" value="true" name="Other" data-toggle-targets="OtherSpecified" data-toggle-bool="[false]">
+                                        <label class="form-check-label" for="Other[1]"><span class="badge badge-pill badge-light">1</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="table-primary">
+                            <td colspan="3"></td>
+                            <td>No</td>
+                            <td>Yes</td>
+                            <td>Unknown</td>
+                        </tr>
+                        <tr>
+                            <td><span class="counter"></span></td>
+                            <td colspan="2">
+                                <p>Is the subject likely to resume in-person UDS follow-up evaluation?</p>
+                                <p>If Yes or Unknown, and this is the first telephone packet submitted for the subject, then END FORM HERE.</p>
+                                <p>If No or Unknown but two or more consecutive telephone packets have been submitted for this subject, then CONTINUE TO QUESTION 3.</p>
+                                <div><span asp-validation-for="LikelyToResumeInPerson" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" asp-for="LikelyToResumeInPerson" type="radio" id="LikelyToResumeInPerson[0]" value="0" name="LikelyToResumeInPerson" data-toggle-targets="MilestoneFormCompleted" data-toggle-values="[1]">
+                                    <label class="form-check-label" for="LikelyToResumeInPerson[0]"><span class="badge badge-pill badge-light">0</span></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" asp-for="LikelyToResumeInPerson" type="radio" id="LikelyToResumeInPerson[1]" value="1" name="LikelyToResumeInPerson" data-toggle-targets="MilestoneFormCompleted" data-toggle-values="[1]">
+                                    <label class="form-check-label" for="LikelyToResumeInPerson[1]"><span class="badge badge-pill badge-light">1</span></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" asp-for="LikelyToResumeInPerson" type="radio" id="LikelyToResumeInPerson[2]" value="9" name="LikelyToResumeInPerson" data-toggle-targets="MilestoneFormCompleted" data-toggle-values="[1]">
+                                    <label class="form-check-label" for="LikelyToResumeInPerson[2]"><span class="badge badge-pill badge-light">9</span></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="counter"></span></td>
+                            <td colspan="2">
+                                <p>Has a Milestones Form documenting the change to telephone follow-up been completed? (If no, complete a Milestones Form now.)</p>
+                                <div><span asp-validation-for="MilestoneFormCompleted" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" asp-for="MilestoneFormCompleted" type="radio" id="MilestoneFormCompleted[0]" value="0" name="MilestoneFormCompleted">
+                                    <label class="form-check-label" for="MilestoneFormCompleted[0]"><span class="badge badge-pill badge-light">0</span></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" asp-for="MilestoneFormCompleted" type="radio" id="MilestoneFormCompleted[1]" value="1" name="MilestoneFormCompleted">
+                                    <label class="form-check-label" for="MilestoneFormCompleted[1]"><span class="badge badge-pill badge-light">1</span></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <input class="form-check-input" asp-for="MilestoneFormCompleted" type="radio" id="MilestoneFormCompleted[2]" value="9" name="MilestoneFormCompleted">
+                                    <label class="form-check-label" for="MilestoneFormCompleted[2]"><span class="badge badge-pill badge-light">9</span></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/RadioFieldToggle.js"></script>
+}

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UDS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <nav class="navbar sticky-top flex-md-nowrap p-0">
+
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 bg-dark" asp-area="" asp-controller="Home" asp-action="Index">
+            UDS
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" id="dropdown_user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown_user">
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut">Sign out</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item text-nowrap">
+                                <span class="navbar-text"><a asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Sign in</a></span>
+                            </li>
+                        }
+                    </ul>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Dashboard" ? "active" : "text-light")" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="bi-layout-wtf"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "InProgress" ? "active" : "text-light")" asp-controller="Visit" asp-action="Index" asp-route-visitStatus="InProgress">
+                                <i class="bi-receipt"></i> In-progress <span class="badge badge-pill badge-secondary">@await Component.InvokeAsync("VisitCount", new { visitStatus = "InProgress" })</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Participation" ? "active" : "text-light")" asp-area="" asp-controller="Participation" asp-action="Search">
+                                <i class="bi-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Recent searches</span>
+                        <a class="d-flex align-items-center text-muted" style="font-size:1.25rem;" asp-area="" asp-controller="Participation" asp-action="Search">
+                            <i class="bi-plus-circle"></i>
+                        </a>
+                    </h6>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @await Component.InvokeAsync("RecentParticipationSearch")
+                    }
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-columnizer/jquery.columnizer.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

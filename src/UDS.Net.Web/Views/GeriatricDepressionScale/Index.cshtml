@@ -1,0 +1,155 @@
+@model IEnumerable<GeriatricDepressionScale>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NoGDS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Satisfaction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityInterests)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Empty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bored)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Spirits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Afraid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Happy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Helpless)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StayHome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemProb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wonderful)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Worthless)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Energy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hopeless)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Better)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GDS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Version)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoGDS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Satisfaction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActivityInterests)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bored)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Spirits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Afraid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Happy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Helpless)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StayHome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemProb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wonderful)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Worthless)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Energy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hopeless)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Better)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GDS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

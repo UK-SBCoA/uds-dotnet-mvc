@@ -1,0 +1,78 @@
+[
+    {
+        "Name": "CurrentHealth",
+        "Description": "Current feeling of health",
+        "Codes": {
+            "1": "Excellent",
+            "2": "Very Good",
+            "3": "Good",
+            "4": "Fair",
+            "5": "Poor"
+        }
+    },
+    {
+        "Name": "PreviousHealth",
+        "Description": "Previous feeling of health",
+        "Codes": {
+            "1": "Much better now than one year ago",
+            "2": "Somewhat better now than one year ago",
+            "3": "About the same as one year ago",
+            "4": "Somewhat worse now than one year ago",
+            "5": "Much worse now than one year ago"
+        }
+    },
+    {
+        "Name": "Limitations",
+        "Description": "Current feeling of health limitations",
+        "Codes": {
+            "1": "Yes, limited a lot",
+            "2": "Yes, limited a little",
+            "3": "No, not limited at all"
+        }
+    },
+    {
+        "Name": "Severity",
+        "Description": "Severity of issue",
+        "Codes": {
+            "1": "Not at all",
+            "2": "Slightly",
+            "3": "Moderately",
+            "4": "Quite a bit",
+            "5": "Extremely"
+        }
+    },
+    {
+        "Name": "PainSeverity",
+        "Description": "Severity of pain",
+        "Codes": {
+            "1": "None",
+            "2": "Very mild",
+            "3": "Mild",
+            "4": "Moderate",
+            "5": "Severe",
+            "6": "Very Severe"
+        }
+    },
+    {
+        "Name": "Feeling",
+        "Description": "Feeling of issue",
+        "Codes": {
+            "1": "All of the time",
+            "2": "Most of the time",
+            "3": "Some of the time",
+            "4": "A little of the time",
+            "5": "None of the time"
+        }
+    },
+    {
+        "Name": "TrueFalse",
+        "Description": "How true/false of the issue",
+        "Codes": {
+            "1": "Definitely true",
+            "2": "Mostly true",
+            "3": "Don't know",
+            "4": "Mostly false",
+            "5": "Definitely false"
+        }
+    }
+]

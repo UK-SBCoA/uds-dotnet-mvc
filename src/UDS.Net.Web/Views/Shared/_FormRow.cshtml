@@ -1,0 +1,93 @@
+﻿@model VisitForm
+
+@{
+}
+<tr>
+    <td>
+        @if (Model.Disabled)
+        {
+            @Model.FormDisplayName
+        }
+        else
+        {
+            @if (Model.VisitStatus == VisitStatus.Complete)
+            {
+                @if (Model.FormBase != null && Model.FormBase.Id > 0)
+                {
+                    <a asp-controller="@Model.ControllerName" asp-action="Details" asp-route-id="@Model.FormBase.Id">@Model.FormDisplayName</a>
+                }
+                else
+                {
+                    @Model.FormDisplayName
+                }
+            }
+            else
+            {
+                @if (Model.FormBase != null && Model.FormBase.Id > 0)
+                {
+                    <a asp-controller="@Model.ControllerName" asp-action="Edit" asp-route-id="@Model.FormBase.Id">@Model.FormDisplayName</a>
+                }
+                else
+                {
+                    <a asp-controller="@Model.ControllerName" asp-action="Create" asp-route-id="@Model.VisitId">@Model.FormDisplayName</a>
+                }
+            }
+        }
+    </td>
+    <td class="status-column">
+        @if (Model.FormBase != null && Model.FormBase.Id > 0)
+        {
+            @if (Model.Disabled)
+            {
+                <span class="font-italic text-muted">Not available</span>
+            }
+            else
+            {
+                <partial name="_FormStatusDisplay" model="@Model.FormBase" />
+            }
+        }
+        else
+        {
+            <span class="text-secondary">Not started</span>
+        }
+    </td>
+    <td class="full-button-column">
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            @if (!Model.Disabled)
+            {
+                <div class="dropdown-menu">
+                    @if (Model.VisitStatus == VisitStatus.Complete)
+                    {
+                        @if (Model.FormBase != null && Model.FormBase.Id > 0)
+                        {
+                            <a class="dropdown-item" asp-controller="@Model.ControllerName" asp-action="Details" asp-route-id="@Model.FormBase.Id"><small class="text-muted">Completed by @Model.FormBase.ExaminerInitials</small></a>
+                            <a class="dropdown-item" asp-controller="@Model.ControllerName" asp-action="Details" asp-route-id="@Model.FormBase.Id">View</a>
+                        }
+                        else
+                        {
+                            <a href class="dropdown-item">No data</a>
+                        }
+                    }
+                    else
+                    {
+                        @if (Model.FormBase != null && Model.FormBase.Id > 0)
+                        {
+                            @if (Model.FormBase.FormStatus == FormStatus.Complete)
+                            {
+                                <a class="dropdown-item" asp-controller="@Model.ControllerName" asp-action="Details" asp-route-id="@Model.FormBase.Id"><small class="text-muted">Completed by @Model.FormBase.ExaminerInitials</small></a>
+                            }
+                            <a class="dropdown-item" asp-controller="@Model.ControllerName" asp-action="Edit" asp-route-id="@Model.FormBase.Id">Edit</a>
+                        }
+                        else
+                        {
+                            <a class="dropdown-item" asp-controller="@Model.ControllerName" asp-action="Create" asp-route-id="@Model.VisitId">Create</a>
+                        }
+                    }
+                </div>
+            }
+        </div>
+    </td>
+</tr>

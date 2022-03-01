@@ -1,0 +1,27 @@
+﻿@model VisitParticipant
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+    <div class="btn-toolbar">
+        <div class="btn-group">
+
+            <a onclick="window.history.back();" class="btn btn-sm btn-outline-secondary"><i class="bi-arrow-left"></i> Back</a>
+
+        </div>
+    </div>
+    <div class="font-weight-light">
+        <a class="text-dark" asp-controller="Participation" asp-action="Details" asp-route-id="@Model.ParticipationId">
+            @if (Model.ParticipantProfile != null)
+            {
+                @Model.ParticipantProfile.DisplayName
+            }
+            @Html.DisplayFor(model => model.ParticipationId)
+        </a>
+    </div>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        @await Component.InvokeAsync("VisitDatesDropdown", new { currentVisitId = Model.CurrentVisitId, participationId = Model.ParticipationId })
+    </div>
+</div>

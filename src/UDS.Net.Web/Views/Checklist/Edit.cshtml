@@ -1,0 +1,433 @@
+﻿@model VisitCompletionViewModel
+@{
+    var title = "Checklist";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+
+    var requiredForms = "A1, B4, B8, B9, C2, D1, D2, Z1";
+    if (Model.Visit.VisitType == VisitType.IVP)
+    {
+        requiredForms = "A1, A5, B4, B8, B9, C2, D1, D2, Z1";
+    }
+    else if (Model.Visit.VisitType == VisitType.TFP)
+    {
+        requiredForms = "A1, A2, B4, B9, D1, D2, T1, Z1";
+    }
+}
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Checklist.Visit.Id, participationId = Model.Checklist.Visit.Participant.Id, participantProfile = Model.Checklist.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Checklist.Visit, currentForm = Model.Checklist, formTitle = title })
+
+<div class="row">
+    <div class="col-md-10 m-auto p-3 pb-5">
+        <div class="card">
+            <div class="card-body">
+                <p class="lead">
+                    @Model.Visit.VisitType visits require @requiredForms
+                </p>
+                <p>
+                    NACC expects and intends that all UDS forms will be attempted on all participants, but we realize this may be impossible when the patient is terminally ill, or when there is no co-participant, or for other reasons. However, for a participant to be included in national NACC UDS database, Forms <strong>@requiredForms</strong> must be submitted, even though these forms may include some items with missing data. An explanation is required below for forms that are not submitted.
+                </p>
+                <p>
+                    <strong>KEY</strong> If the specified form was not completed, please enter one of the following codes:
+                </p>
+                <dl class="row justify-content-center">
+                    <dt class="col-2">95</dt>
+                    <dd class="col-9">Physical problem</dd>
+                    <dt class="col-2">96</dt>
+                    <dd class="col-9">Cognitive or behavioral problem</dd>
+                    <dt class="col-2">97</dt>
+                    <dd class="col-9">Other problem</dd>
+                    <dt class="col-2">98</dt>
+                    <dd class="col-9">Verbal refusal</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-action="Edit">
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th rowspan="2" style="width:400px;">Form</th>
+                    <th rowspan="2">Status</th>
+                    <th colspan="2">Include in packet?</th>
+                    <th rowspan="2" style="width:200px;">If not submitted, specify reason (see KEY)</th>
+                    <th rowspan="2">Comments (provide if form not included)</th>
+                </tr>
+                <tr>
+                    <th>Yes</th>
+                    <th>No</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        A1 Participant Demographics
+                        <div><span asp-validation-for="A1_IsIncluded" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.ParticipantDemographics" />
+                    </td>
+                    <td colspan="4" class="table-primary">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        A2 Co-participant Demographics
+                        <div><span asp-validation-for="Checklist.A2_IsIncluded" class="text-danger"></span></div>
+                        <div><span asp-validation-for="A2_RequiredForTFP" class="text-danger"></span></div>
+                        <div><span asp-validation-for="A2_OptionalForIVPFVP" class="text-danger"></span></div>
+                        <div><span asp-validation-for="A2_IfIncludedThenCompleted" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.CoParticipantDemographics" />
+                    </td>
+                    @if (Model.Visit.VisitType == VisitType.TFP)
+                    {
+                        <td colspan="4" class="table-primary">
+                            <input type="hidden" asp-for="Checklist.A2_IsIncluded" value="true" />
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Checklist.A2_IsIncluded" id="Checklist.A2_IsIncluded[0]" value="true" data-toggle-bool="[true]" data-toggle-targets="Checklist.A2_ReasonNotIncluded,Checklist.A2_Comments" />
+                                <label class="form-check-label" for="Checklist.A2_IsIncluded[0]"><span class="badge badge-pill badge-light">1</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Checklist.A2_IsIncluded" id="Checklist.A2_IsIncluded[1]" value="false" data-toggle-bool="[true]" data-toggle-targets="Checklist.A2_ReasonNotIncluded,Checklist.A2_Comments" />
+                                <label class="form-check-label" for="Checklist.A2_IsIncluded[1]"><span class="badge badge-pill badge-light">0</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Checklist.A2_ReasonNotIncluded" style="width:100px;" />
+                            <div><span asp-validation-for="Checklist.A2_ReasonNotIncluded" class="text-danger"></span></div>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Checklist.A2_Comments" />
+                            <div><span asp-validation-for="Checklist.A2_Comments" class="text-danger"></span></div>
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    <td>
+                        A3 Family History
+                        <div><span asp-validation-for="Checklist.A3_IsIncluded" class="text-danger"></span></div>
+                        <div><span asp-validation-for="A3_IfIncludedThenCompleted" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.SubjectFamilyHistory" />
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Checklist.A3_IsIncluded" id="Checklist.A3_IsIncluded[0]" value="true" data-toggle-bool="[true]" data-toggle-targets="Checklist.A3_ReasonNotIncluded,Checklist.A3_Comments" />
+                            <label class="form-check-label" for="Checklist.A3_IsIncluded[0]"><span class="badge badge-pill badge-light">1</span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Checklist.A3_IsIncluded" id="Checklist.A3_IsIncluded[1]" value="false" data-toggle-bool="[true]" data-toggle-targets="Checklist.A3_ReasonNotIncluded,Checklist.A3_Comments" />
+                            <label class="form-check-label" for="Checklist.A3_IsIncluded[1]"><span class="badge badge-pill badge-light">0</span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="Checklist.A3_ReasonNotIncluded" style="width:100px;" />
+                        <div><span asp-validation-for="Checklist.A3_ReasonNotIncluded" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="Checklist.A3_Comments" />
+                        <div><span asp-validation-for="Checklist.A3_Comments" class="text-danger"></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        A4 Medications
+                        <div><span asp-validation-for="Checklist.A4_IsIncluded" class="text-danger"></span></div>
+                        <div><span asp-validation-for="A4_IfIncludedThenCompleted" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.MedicationsReview" />
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Checklist.A4_IsIncluded" id="Checklist.A4_IsIncluded[0]" value="true" data-toggle-bool="[true]" data-toggle-targets="Checklist.A4_ReasonNotIncluded,Checklist.A4_Comments" />
+                            <label class="form-check-label" for="Checklist.A4_IsIncluded[0]"><span class="badge badge-pill badge-light">1</span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Checklist.A4_IsIncluded" id="Checklist.A4_IsIncluded[1]" value="false" data-toggle-bool="[true]" data-toggle-targets="Checklist.A4_ReasonNotIncluded,Checklist.A4_Comments" />
+                            <label class="form-check-label" for="Checklist.A4_IsIncluded[1]"><span class="badge badge-pill badge-light">0</span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="Checklist.A4_ReasonNotIncluded" style="width:100px;" />
+                        <div><span asp-validation-for="Checklist.A4_ReasonNotIncluded" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="Checklist.A4_Comments" />
+                        <div><span asp-validation-for="Checklist.A4_Comments" class="text-danger"></span></div>
+                    </td>
+                </tr>
+                @if (Model.Visit.VisitType == VisitType.IVP)
+                {
+                    <tr>
+                        <td>
+                            A5 Health History
+                            <div><span asp-validation-for="A5_IsIncluded" class="text-danger"></span></div>
+                        </td>
+                        <td>
+                            <partial name="_FormStatusDisplay" model="@Model.Visit.SubjectHealthHistory" />
+                        </td>
+                        <td colspan="4" class="table-primary">
+                        </td>
+                    </tr>
+                }
+                @if (Model.Visit.VisitType != VisitType.TFP)
+                {
+                    <tr>
+                        <td>
+                            B1 Physical Evaluation
+                            <div><span asp-validation-for="Checklist.B1_IsIncluded" class="text-danger"></span></div>
+                            <div><span asp-validation-for="B1_IfIncludedThenCompleted" class="text-danger"></span></div>
+                        </td>
+                        <td>
+                            <partial name="_FormStatusDisplay" model="@Model.Visit.PhysicalEvaluation" />
+                        </td>
+
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Checklist.B1_IsIncluded" id="Checklist.B1_IsIncluded[0]" value="true" data-toggle-bool="[true]" data-toggle-targets="Checklist.B1_ReasonNotIncluded,Checklist.B1_Comments" />
+                                <label class="form-check-label" for="Checklist.B1_IsIncluded[0]"><span class="badge badge-pill badge-light">1</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Checklist.B1_IsIncluded" id="Checklist.B1_IsIncluded[1]" value="false" data-toggle-bool="[true]" data-toggle-targets="Checklist.B1_ReasonNotIncluded,Checklist.B1_Comments" />
+                                <label class="form-check-label" for="Checklist.B1_IsIncluded[1]"><span class="badge badge-pill badge-light">0</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Checklist.B1_ReasonNotIncluded" style="width:100px;" />
+                            <div><span asp-validation-for="Checklist.B1_ReasonNotIncluded" class="text-danger"></span></div>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Checklist.B1_Comments" />
+                            <div><span asp-validation-for="Checklist.B1_Comments" class="text-danger"></span></div>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        B4 CDR Plus NACC FTLD
+                        <div><span asp-validation-for="B4_IsIncluded" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.CDRPlusNACCFTLD" />
+                    </td>
+                    <td colspan="4" class="table-primary">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        B5 NPIQ
+                        <div><span asp-validation-for="Checklist.B5_IsIncluded" class="text-danger"></span></div>
+                        <div><span asp-validation-for="B5_IfIncludedThenCompleted" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.NPIQ" />
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Checklist.B5_IsIncluded" id="Checklist.B5_IsIncluded[0]" value="true" data-toggle-bool="[true]" data-toggle-targets="Checklist.B5_ReasonNotIncluded,Checklist.B5_Comments" />
+                            <label class="form-check-label" for="Checklist.B5_IsIncluded[0]"><span class="badge badge-pill badge-light">1</span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Checklist.B5_IsIncluded" id="Checklist.B5_IsIncluded[1]" value="false" data-toggle-bool="[true]" data-toggle-targets="Checklist.B5_ReasonNotIncluded,Checklist.B5_Comments" />
+                            <label class="form-check-label" for="Checklist.B5_IsIncluded[1]"><span class="badge badge-pill badge-light">0</span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="Checklist.B5_ReasonNotIncluded" style="width:100px;" />
+                        <div><span asp-validation-for="Checklist.B5_ReasonNotIncluded" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="Checklist.B5_Comments" />
+                        <div><span asp-validation-for="Checklist.B5_Comments" class="text-danger"></span></div>
+                    </td>
+                </tr>
+                @if (Model.Visit.VisitType != VisitType.TFP)
+                {
+                    <tr>
+                        <td>
+                            B6 GDS
+                            <div><span asp-validation-for="Checklist.B6_IsIncluded" class="text-danger"></span></div>
+                            <div><span asp-validation-for="B6_IfIncludedThenCompleted" class="text-danger"></span></div>
+                        </td>
+                        <td>
+                            <partial name="_FormStatusDisplay" model="@Model.Visit.GeriatricDepressionScale" />
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Checklist.B6_IsIncluded" id="Checklist.B6_IsIncluded[0]" value="true" data-toggle-bool="[true]" data-toggle-targets="Checklist.B6_ReasonNotIncluded,Checklist.B6_Comments" />
+                                <label class="form-check-label" for="Checklist.B6_IsIncluded[0]"><span class="badge badge-pill badge-light">1</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Checklist.B6_IsIncluded" id="Checklist.B6_IsIncluded[1]" value="false" data-toggle-bool="[true]" data-toggle-targets="Checklist.B6_ReasonNotIncluded,Checklist.B6_Comments" />
+                                <label class="form-check-label" for="Checklist.B6_IsIncluded[1]"><span class="badge badge-pill badge-light">0</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Checklist.B6_ReasonNotIncluded" style="width:100px;" />
+                            <div><span asp-validation-for="Checklist.B6_ReasonNotIncluded" class="text-danger"></span></div>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Checklist.B6_Comments" />
+                            <div><span asp-validation-for="Checklist.B6_Comments" class="text-danger"></span></div>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        B7 Functional Activities Questionnaire (FAQ)
+                        <div><span asp-validation-for="Checklist.B7_IsIncluded" class="text-danger"></span></div>
+                        <div><span asp-validation-for="B7_IfIncludedThenCompleted" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.FunctionalActivitiesQuestionnaire" />
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Checklist.B7_IsIncluded" id="Checklist.B7_IsIncluded[0]" value="true" data-toggle-bool="[true]" data-toggle-targets="Checklist.B7_ReasonNotIncluded,Checklist.B7_Comments" />
+                            <label class="form-check-label" for="Checklist.B7_IsIncluded[0]"><span class="badge badge-pill badge-light">1</span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Checklist.B7_IsIncluded" id="Checklist.B7_IsIncluded[1]" value="false" data-toggle-bool="[true]" data-toggle-targets="Checklist.B7_ReasonNotIncluded,Checklist.B7_Comments" />
+                            <label class="form-check-label" for="Checklist.B7_IsIncluded[1]"><span class="badge badge-pill badge-light">0</span></label>
+                        </div>
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="Checklist.B7_ReasonNotIncluded" style="width:100px;" />
+                        <div><span asp-validation-for="Checklist.B7_ReasonNotIncluded" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="Checklist.B7_Comments" />
+                        <div><span asp-validation-for="Checklist.B7_Comments" class="text-danger"></span></div>
+                    </td>
+                </tr>
+                @if (Model.Visit.VisitType != VisitType.TFP)
+                {
+                    <tr>
+                        <td>
+                            B8 Neurological Examination Findings
+                            <div><span asp-validation-for="B8_IsIncluded" class="text-danger"></span></div>
+                        </td>
+                        <td>
+                            <partial name="_FormStatusDisplay" model="@Model.Visit.NeurologicalExaminationFindings" />
+                        </td>
+                        <td colspan="4" class="table-primary">
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        B9 Symptoms
+                        <div><span asp-validation-for="B9_IsIncluded" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.Symptoms" />
+                    </td>
+                    <td colspan="4" class="table-primary">
+                    </td>
+                </tr>
+                @if (Model.Visit.VisitType != VisitType.TFP)
+                {
+                    <tr>
+                        <td>
+                            C2 Neuropsych Battery Scores
+                            <div><span asp-validation-for="C2_IsIncluded" class="text-danger"></span></div>
+                        </td>
+                        <td>
+                            <partial name="_FormStatusDisplay" model="@Model.Visit.NeuropsychologicalBatteryScores" />
+                        </td>
+                        <td colspan="4" class="table-primary">
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        D1 Clinician Diagnosis
+                        <div><span asp-validation-for="D1_IsIncluded" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.ClinicianDiagnosis" />
+                    </td>
+                    <td colspan="4" class="table-primary">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        D2 Medication Conditions
+                        <div><span asp-validation-for="@Model.D2_IsIncluded" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.MedicalConditions" />
+                    </td>
+                    <td colspan="4" class="table-primary">
+                    </td>
+                </tr>
+                @if (Model.Visit.VisitType == VisitType.TFP)
+                {
+                    <tr>
+                        <td>
+                            T1 Inclusion
+                            <div><span asp-validation-for="@Model.T1_IsIncluded" class="text-danger"></span></div>
+                        </td>
+                        <td>
+                            <partial name="_FormStatusDisplay" model="@Model.Visit.Inclusion" />
+                        </td>
+                        <td colspan="4" class="table-primary">
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        Z1 Checklist
+                        <div><span asp-validation-for="ChecklistCanBeCompleted" class="text-danger"></span></div>
+                    </td>
+                    <td>
+                        <partial name="_FormStatusDisplay" model="@Model.Visit.Checklist" />
+                    </td>
+                    <td colspan="4" class="table-primary">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <input type="hidden" asp-for="Checklist.Id" />
+    <input type="hidden" asp-for="Checklist.FormStatus" />
+    <input type="hidden" asp-for="Checklist.ExaminerInitials" />
+    <partial name="_SaveComplete" model='Model.Checklist' view-data="ViewData" />
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/RadioFieldToggle.js"></script>
+}

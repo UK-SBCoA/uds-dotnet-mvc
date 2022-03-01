@@ -1,0 +1,177 @@
+@model Participation
+
+@{ ViewData["Title"] = "Details"; }
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <a asp-action="Index" class="btn btn-sm btn-outline-secondary"><i class="bi-arrow-left"></i> Back</a>
+        </div>
+    </div>
+    <div class="text-muted font-weight-light">
+        @if (Model.Profile != null)
+        {
+@Model.Profile.DisplayName}
+        @Html.DisplayFor(model => model.Id)
+
+    </div>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <i class="bi-calendar"></i>
+            Go to visit
+        </button>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mt-5 border-bottom">
+    <h2 class="display-5">Visits</h2>
+    <div class="btn-toolbar mb-2 mb-md-0">
+
+        @if (Model.Visits != null && Model.Visits.Count() > 0)
+        {
+<a href="#" data-toggle="modal" data-target="#createNextModal">Create next visit</a>
+}
+else
+{
+<a href="#" data-toggle="modal" data-target="#createInitialModal">Create initial visit</a>}
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Visit date
+            </th>
+            <th>
+                Visit number
+            </th>
+            <th>
+                Visit type
+            </th>
+            <th>
+                Coordinator
+            </th>
+            <th>
+                Clinician
+            </th>
+            <th>
+                Social worker
+            </th>
+            <th>Progress</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Visits)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoordinatorInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClinicianInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SocialWorkerInitials)
+            </td>
+            <td>
+                @if (item.IsSubmittedToNACC)
+                {
+                    <small>Submitted to NACC</small>
+                }
+            </td>
+            <td></td>
+            <td>
+                @if (item.IsSubmittedToNACC == true)
+                {
+                    <a asp-controller="Visit" asp-action="Details" asp-route-id="@item.Id">View</a>
+                }
+                else
+                {
+                    <a asp-controller="Visit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<div id="createInitialModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <partial name="_CreateVisit" model='new Visit { FriendlyId = Model.Id, VisitType = VisitType.IVP, VisitNumber = 1, VisitDate = DateTime.Now }' />
+
+    </div>
+</div>
+
+<div id="createNextModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <partial name="_CreateVisit" model='new Visit { FriendlyId = Model.Id, VisitType = VisitType.FVP, VisitNumber = Model.Visits.OrderByDescending(x => x.VisitNumber).Select(x => x.VisitNumber).FirstOrDefault() + 1, VisitDate = DateTime.Now }' />
+
+    </div>
+</div>
+
+
+
+<!--//-------------------------- MILESTONES --------------------------//-->
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom mt-5">
+    <h2 class="display-5">Milestones</h2>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        @{
+            bool isDeceased = Model.Milestones.Where(m => m.ParticipantIsDeceased == true).Any();
+            bool isDropped = Model.Milestones.Where(m => m.ParticipantHasWithdrawn == true).Any();
+        }
+        @if (!isDeceased)
+        {
+            <a asp-action="Create" asp-controller="Milestone" asp-route-friendlyId="@Model.Id">Create milestone</a>
+        }
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Milestone date
+            </th>
+            <th>
+                Milestone type
+            </th>
+            <th>Details</th>
+            <th>Progress</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var milestone in Model.Milestones)
+        {
+            @if (milestone.MilestoneType == "A")
+            {
+                <partial name="_MilestoneBoxADisplayRow" model="@milestone" />
+                
+            }
+            else
+            {
+                <partial name="_MilestoneBoxBDisplayRow" model="@milestone" />
+            }
+        }
+    </tbody>
+</table>

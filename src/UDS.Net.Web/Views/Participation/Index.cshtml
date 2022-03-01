@@ -1,0 +1,51 @@
+@model IEnumerable<Participation>
+
+@{
+    ViewData["Title"] = "Participants";
+}
+
+<h2 class="display-4">Participants</h2>
+
+<p>
+    <a asp-action="Create">Enroll New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                PTID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Date of Birth
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Visits</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

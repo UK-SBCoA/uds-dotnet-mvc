@@ -1,0 +1,167 @@
+@model IEnumerable<CoParticipantDemographics>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HispanicLatinoEthnicity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EthnicOrigins)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EthnicOriginsOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Race)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RaceOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondaryRace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondaryRaceOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalRace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalRaceOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearsOfEducation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearsKnown)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LivesWith)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FrequencyOfVisit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FrequencyOfTele)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reliability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthMonth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HispanicLatinoEthnicity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EthnicOrigins)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EthnicOriginsOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Race)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RaceOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondaryRace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondaryRaceOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalRace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalRaceOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearsOfEducation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Relationship)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearsKnown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LivesWith)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrequencyOfVisit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrequencyOfTele)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reliability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

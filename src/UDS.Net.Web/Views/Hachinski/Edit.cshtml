@@ -1,0 +1,297 @@
+@model Hachinski
+
+@{
+    var title = "Hachinski";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+}
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+<div class="row">
+    <div class="col-md-12 p-4">
+        <p>
+            Please complete the following scale using information obtained from history/physical/neurological exam and/or medical records. Check the appropriate box to indicate if a specific item is present (chacteristic of the patient) or absent.
+        </p>
+        <form asp-action="Edit">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Hachinski Ischemic Score</th>
+                            <th>
+                                Present
+                            </th>
+                            <th>
+                                Absent
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="subcounterreset">
+                        <tr>
+                            <td>
+                                <span>UDS1.</span>
+                            </td>
+                            <td>
+                                <label asp-for="AbruptOnset" class="control-label"></label>
+                                <div><span asp-validation-for="AbruptOnset" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="AbruptOnset" type="radio" id="AbruptOnset[1]" value="2" name="AbruptOnset">
+                                        <label class="form-check-label" for="AbruptOnset[1]"><span class="badge badge-pillbadge-light">2</span>Present<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                     <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="AbruptOnset" type="radio" id="AbruptOnset[2]" value="0" name="AbruptOnset">
+                                        <label class="form-check-label" for="AbruptOnset[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>UDS2.</span>
+                            </td>
+                            <td>
+                                <label asp-for="StepwiseDeterioration" class="control-label"></label>
+                                <div><span asp-validation-for="StepwiseDeterioration" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="StepwiseDeterioration" type="radio" id="StepwiseDeterioration[1]" value="1" name="StepwiseDeterioration">
+                                        <label class="form-check-label" for="StepwiseDeterioration[1]"><span class="badge badge-pillbadge-light">1</span>Present<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                     <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="StepwiseDeterioration" type="radio" id="StepwiseDeterioration[2]" value="0" name="StepwiseDeterioration">
+                                        <label class="form-check-label" for="StepwiseDeterioration[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>UDS3.</span>
+                            </td>
+                            <td>
+                                <label asp-for="SomaticComplaints" class="control-label"></label>
+                                <div><span asp-validation-for="SomaticComplaints" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="SomaticComplaints" type="radio" id="SomaticComplaints[1]" value="1" name="SomaticComplaints">
+                                        <label class="form-check-label" for="SomaticComplaints[1]"><span class="badge badge-pillbadge-light">1</span>Present<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                     <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="SomaticComplaints" type="radio" id="SomaticComplaints[2]" value="0" name="SomaticComplaints">
+                                        <label class="form-check-label" for="SomaticComplaints[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>UDS4.</span>
+                            </td>
+                            <td>
+                                <label asp-for="EmotionalIncontinence" class="control-label"></label>
+                                <div><span asp-validation-for="EmotionalIncontinence" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="EmotionalIncontinence" type="radio" id="EmotionalIncontinence[1]" value="1" name="EmotionalIncontinence">
+                                        <label class="form-check-label" for="EmotionalIncontinence[1]"><span class="badge badge-pillbadge-light">1</span>Present<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                     <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="EmotionalIncontinence" type="radio" id="EmotionalIncontinence[2]" value="0" name="EmotionalIncontinence">
+                                        <label class="form-check-label" for="EmotionalIncontinence[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>UDS5.</span>
+                            </td>
+                            <td>
+                                <label asp-for="Hypertension" class="control-label"></label>
+                                <div><span asp-validation-for="Hypertension" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="Hypertension" type="radio" id="Hypertension[1]" value="1" name="Hypertension">
+                                        <label class="form-check-label" for="Hypertension[1]"><span class="badge badge-pillbadge-light">1</span>Present<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                     <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="Hypertension" type="radio" id="Hypertension[2]" value="0" name="Hypertension">
+                                        <label class="form-check-label" for="Hypertension[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>UDS6.</span>
+                            </td>
+                            <td>
+                                <label asp-for="Stroke" class="control-label"></label>
+                                <div><span asp-validation-for="Stroke" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="Stroke" type="radio" id="Stroke[1]" value="2" name="Stroke">
+                                        <label class="form-check-label" for="Stroke[1]"><span class="badge badge-pillbadge-light">2</span>Present<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                     <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="Stroke" type="radio" id="Stroke[2]" value="0" name="Stroke">
+                                        <label class="form-check-label" for="Stroke[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>UDS7.</span>
+                            </td>
+                            <td>
+                                <label asp-for="Symptoms" class="control-label"></label>
+                                <div><span asp-validation-for="Symptoms" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="Symptoms" type="radio" id="Symptoms[1]" value="2" name="Symptoms">
+                                        <label class="form-check-label" for="Symptoms[1]"><span class="badge badge-pillbadge-light">2</span>Present<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                     <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="Symptoms" type="radio" id="Symptoms[2]" value="0" name="Symptoms">
+                                        <label class="form-check-label" for="Symptoms[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>UDS8.</span>
+                            </td>
+                            <td>
+                                <label asp-for="Signs" class="control-label"></label>
+                                <div><span asp-validation-for="Signs" class="text-danger"></span></div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                    <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="Signs" type="radio" id="Signs[1]" value="2" name="Signs">
+                                        <label class="form-check-label" for="Signs[1]"><span class="badge badge-pillbadge-light">2</span>Present<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-group">
+                                     <div>
+                                        <input class="form-check-input hachinskiValue" asp-for="Signs" type="radio" id="Signs[2]" value="0" name="Signs">
+                                        <label class="form-check-label" for="Signs[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="table-dark">
+                        <tr>
+                            <td>
+                                <span>UDS9.</span>
+                            </td>
+                            <td>
+                                <label asp-for="HachinskiTotal" class="control-label"></label>
+                                <div><span asp-validation-for="HachinskiTotal" class="text-danger"></span></div>
+                            </td>
+                            <td colspan="2">
+                                <div>
+                                    <input class="form-control hachinskiTotal" asp-for="HachinskiTotal" readonly>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 p-2">
+                    <div class="form-group">
+                        <label asp-for="Comment" class="control-label"></label>
+                        <textarea asp-for="Comment" class="form-control" rows="3" name="Comment"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <p class="text-muted">Adapted with permission.</br>Copyright&#169; 2006, 2008, 2015 University of Washington. Created and published by the ADC Clinical Task 
+                Force (John C. Morris, MD, Chair) and the National Alzheimer's Coordinating Center (U01 AG016976 - Walter A. Kukull, PhD, Director).</p>
+            </div>
+
+            <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+        let calculateTotals = () => {
+            let hachinskiTotal = 0;
+
+            $(".hachinskiValue:checked").each(function (index, radioElement) {
+               let radioValue = parseInt($(radioElement).val())
+               hachinskiTotal += radioValue;
+            })
+
+            $(".hachinskiTotal").val(hachinskiTotal);
+        }
+
+        calculateTotals();
+
+        $('input[type="radio"]').on("change", function() {
+            calculateTotals();
+        })
+    </script>
+}

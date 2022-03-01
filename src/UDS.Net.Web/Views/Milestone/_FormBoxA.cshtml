@@ -1,0 +1,180 @@
+﻿@model Milestone
+@{
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr class="table-secondary">
+            <th colspan="3">
+                BOX A - CHANGE WITH CONTINUED CONTACT
+
+            </th>
+        </tr>
+    </thead>
+    <tbody class="subcounterreset">
+        <tr>
+            <td><span class="counter"></span></td>
+            <td>
+                <label asp-for="StatusChangeYear" class="control-label">Date of status change <small class="font-weight-light font-italic text-primary">(Unknown = 99/99/YEAR REQUIRED)</small></label>
+            </td>
+            <td>
+                <div class="form-group">
+                    <div class="form-inline">
+                        <input asp-for="StatusChangeMonth" class="form-control boxAToggle" style="width:70px;" placeholder="mm" />
+                        <input asp-for="StatusChangeDay" class="form-control boxAToggle" style="width:70px;" placeholder="dd" />
+                        <input asp-for="StatusChangeYear" class="form-control boxAToggle" style="width:140px;" placeholder="yyyy" />
+                    </div>
+                </div>
+                <div><span asp-validation-for="StatusChangeMonth" class="text-danger"></span></div>
+                <div><span asp-validation-for="StatusChangeDay" class="text-danger"></span></div>
+                <div><span asp-validation-for="StatusChangeYear" class="text-danger"></span></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <small class="font-weight-light font-italic text-primary">Complete the UDS and FTLD sections below, as appropriate.</small>
+            </td>
+        </tr>
+        <tr class="table-primary">
+            <td colspan="3"><span class="counter"></span> UDS STATUS</td>
+        </tr>
+        <tr>
+            <td><span class="subcounter"></span></td>
+            <td>
+                <label class="control-label">UDS data collection status changed; participant's new status is <span class="text-uppercase font-weight-light font-italic text-primary">(CHECK ONE)</span></label>
+
+                <div><span asp-validation-for="NewStatus" class="text-danger"></span></div>
+            </td>
+            <td>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input boxAToggle" asp-for="NewStatus" id="NewStatus[1]" value="1" data-toggle-values="[3]" data-toggle-targets="AutopsyConsentOnFile" />
+                    <label class="form-check-label" for="NewStatus[1]"> <span class="badge badge-pill badge-light">1</span> Annual UDS follow-up by telephone <span class="text-uppercase font-weight-light font-italic text-primary">(Continue to question 2a1)</span></label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input boxAToggle" asp-for="NewStatus" id="NewStatus[2]" value="2" data-toggle-values="[3]" data-toggle-targets="AutopsyConsentOnFile" />
+                    <label class="form-check-label" for="NewStatus[2]"> <span class="badge badge-pill badge-light">2</span> Minimal contact <span class="text-uppercase font-weight-light font-italic text-primary">(Continue to question 2a1)</span></label>
+                    <small class="form-text text-muted">NOTE: Minimal contact status is reserved for participants who can no longer participate for one of the reasons listed in Question 2b, below.</small>
+                </div>
+                <div class="row">
+                    <div class="col-1 offset-2"><span class="subsubcounter"></span></div>
+                    <div class="col-3">Autopsy consent on file?</div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input boxAToggle" asp-for="AutopsyConsentOnFile" id="AutopsyConsentOnFile[1]" value="false" />
+                            <label class="form-check-label" for="AutopsyConsentOnFile[1]"> <span class="badge badge-pill badge-light">0</span> No <span class="text-uppercase font-weight-light font-italic text-primary">(Continue to Question 2b)</span></label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input boxAToggle" asp-for="AutopsyConsentOnFile" id="AutopsyConsentOnFile[2]" value="true" />
+                            <label class="form-check-label" for="AutopsyConsentOnFile[2]"> <span class="badge badge-pill badge-light">1</span> Yes <span class="text-uppercase font-weight-light font-italic text-primary">(Continue to Question 2b)</span></label>
+                        </div>
+
+                        <div><span asp-validation-for="AutopsyConsentOnFile" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input boxAToggle" asp-for="NewStatus" id="NewStatus[3]" value="3" data-toggle-values="[1,3]" data-toggle-targets="AutopsyConsentOnFile" />
+                    <label class="form-check-label" for="NewStatus[3]"> <span class="badge badge-pill badge-light">3</span> Annual in-person UDS follow-up</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="subcounter"></span></td>
+            <td>
+                <label class="control-label">Reason(s) for change indicated in Question 2a <span class="text-uppercase font-weight-light font-italic text-primary">(CHECK AT LEAST ONE)</span></label>
+                <div><span asp-validation-for="ReasonProvided" class="text-danger"></span></div>
+            </td>
+            <td>
+                <div class="form-check">
+                    @Html.CheckBox("ReasonCognitivelyImpaired", Model.ReasonCognitivelyImpaired != null && (bool)Model.ReasonCognitivelyImpaired, new { @class = "form-check-input boxAToggle" })
+                    <label class="form-check-label" for="ReasonCognitivelyImpaired"> <span class="badge badge-pill badge-light">1</span> @Html.DisplayNameFor(x => x.ReasonCognitivelyImpaired)</label>
+                </div>
+                <div class="form-check">
+                    @Html.CheckBox("ReasonPhysicallyImpaired", Model.ReasonPhysicallyImpaired != null && (bool)Model.ReasonPhysicallyImpaired, new { @class = "form-check-input boxAToggle" })
+                    <label class="form-check-label" for="ReasonPhysicallyImpaired"> <span class="badge badge-pill badge-light">2</span> @Html.DisplayNameFor(x => x.ReasonPhysicallyImpaired)</label>
+                </div>
+                <div class="form-check">
+                    @Html.CheckBox("ReasonRefused", Model.ReasonRefused != null && (bool)Model.ReasonRefused, new { @class = "form-check-input boxAToggle" })
+                    <label class="form-check-label" for="ReasonRefused"> <span class="badge badge-pill badge-light">3</span> @Html.DisplayNameFor(x => x.ReasonRefused)</label>
+                </div>
+                <div class="form-check">
+                    @Html.CheckBox("ReasonUnavailable", Model.ReasonUnavailable != null && (bool)Model.ReasonUnavailable, new { @class = "form-check-input boxAToggle" })
+                    <label class="form-check-label" for="ReasonUnavailable"> <span class="badge badge-pill badge-light">4</span> @Html.DisplayNameFor(x => x.ReasonUnavailable)</label>
+                </div>
+                <div class="form-check">
+                    @Html.CheckBox("ReasonPermanentAssistedLiving", Model.ReasonPermanentAssistedLiving != null && (bool)Model.ReasonPermanentAssistedLiving, new { @class = "form-check-input boxAToggle" })
+                    <label class="form-check-label" for="ReasonPermanentAssistedLiving"> <span class="badge badge-pill badge-light">5</span> @Html.DisplayNameFor(x => x.ReasonPermanentAssistedLiving)</label>
+                </div>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col">
+                        2b5a. Date permanently moved to nursing home <small class="font-weight-light font-italic text-primary">(Unknown = 99/99/YEAR REQUIRED)</small>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <input asp-for="PermanentAssistedLivingMonth" class="form-control boxAToggle" style="width:70px;" placeholder="mm" />
+                                <input asp-for="PermanentAssistedLivingDay" class="form-control boxAToggle" style="width:70px;" placeholder="dd" />
+                                <input asp-for="PermanentAssistedLivingYear" class="form-control boxAToggle" style="width:150px;" placeholder="yyyy" />
+                            </div>
+                        </div>
+                        <div><span asp-validation-for="PermanentAssistedLivingMonth" class="text-danger"></span></div>
+                        <div><span asp-validation-for="PermanentAssistedLivingDay" class="text-danger"></span></div>
+                        <div><span asp-validation-for="PermanentAssistedLivingYear" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <div class="form-check">
+                    @Html.CheckBox("ReasonRejoiningADC", Model.ReasonRejoiningADC != null && (bool)Model.ReasonRejoiningADC, new { @class = "form-check-input boxAToggle" })
+                    <label class="form-check-label" for="ReasonRejoiningADC"> <span class="badge badge-pill badge-light">6</span> @Html.DisplayNameFor(x => x.ReasonRejoiningADC)</label>
+                </div>
+            </td>
+        </tr>
+        <tr class="table-primary">
+            <td colspan="3">FTLD MODULE STATUS</td>
+        </tr>
+        <tr>
+            <td><span class="counter subcounterreset"></span></td>
+            <td colspan="2">
+                <div class="form-check">
+                    @Html.CheckBox("FTLDStatus", Model.FTLDStatus != null && (bool)Model.FTLDStatus, new { @class = "form-check-input boxAToggle" })
+                    <label class="form-check-label" for="FTLDStatus"> <span class="badge badge-pill badge-light">1</span> @Html.DisplayNameFor(x => x.FTLDStatus)</label>
+                </div>
+            </td>
+        </tr>
+        <tr class="subcounterreset">
+            <td></td>
+            <td colspan="2">
+                <div class="row">
+                    <div class="col-1"><span class="subcounter"></span></div>
+                    <div class="col">
+                        <div><span asp-validation-for="FTLDReason" class="text-danger"></span></div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input boxAToggle" asp-for="FTLDReason" id="FTLDReason[1]" value="1" data-toggle-values="[1,2,3]" data-toggle-targets="FTLDReasonOther" />
+                            <label class="form-check-label" for="FTLDReason[1]"><span class="badge badge-pill badge-light">1</span> ADC decision</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input boxAToggle" asp-for="FTLDReason" id="FTLDReason[2]" value="2" data-toggle-values="[1,2,3]" data-toggle-targets="FTLDReasonOther" />
+                            <label class="form-check-label" for="FTLDReason[2]"><span class="badge badge-pill badge-light">2</span> Participant/co-participant refused</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input boxAToggle" asp-for="FTLDReason" id="FTLDReason[3]" value="3" data-toggle-values="[1,2,3]" data-toggle-targets="FTLDReasonOther" />
+                            <label class="form-check-label" for="FTLDReason[3]"><span class="badge badge-pill badge-light">3</span> Co-participant not available</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input boxAToggle" asp-for="FTLDReason" id="FTLDReason[4]" value="4" data-toggle-values="[1,2,3]" data-toggle-targets="FTLDReasonOther" />
+                            <label class="form-check-label" for="FTLDReason[4]"><span class="badge badge-pill badge-light">4</span> Other, specify below</label>
+                        </div>
+                        <div class="form-group">
+                            <span class="subsubcounter"></span><input asp-for="FTLDReasonOther" class="form-control boxAToggle" />
+                            <div><span asp-validation-for="FTLDReasonOther" class="text-danger"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+

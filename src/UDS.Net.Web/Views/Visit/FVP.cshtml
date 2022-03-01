@@ -1,0 +1,111 @@
+﻿@model VisitOverviewViewModel
+
+@{
+    ViewData["Title"] = Model.Participant.Id + " - Visit " + Model.VisitNumber;
+}
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Id, participationId = Model.Participant.Id, participantProfile = Model.Participant.Profile })
+
+<div class="row">
+    <div class="col p-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Visit @Html.DisplayFor(model => model.VisitNumber) @Html.DisplayFor(model => model.VisitType) visit </th>
+                    <th class="status-column"></th>
+                    <th class="full-button-column"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.ParticipantDemographics, FormDisplayName = "A1 Demographics", ControllerName = "ParticipantDemographics" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.SubjectFamilyHistory, FormDisplayName = "A3 Subject Family History", ControllerName = "SubjectFamilyHistory" }' />
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Clinical exam data</th>
+                    <th class="status-column"></th>
+                    <th class="full-button-column"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.PhysicalEvaluation, FormDisplayName = "B1 Physical Evaluation", ControllerName = "PhysicalEvaluation"}' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.SubjectHealthHistory, FormDisplayName = "A5 Health History", ControllerName = "SubjectHealthHistory" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.MedicalConditions, FormDisplayName = "D2 Medical Conditions", ControllerName = "MedicalConditions"}' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.MedicationsReview, FormDisplayName = "A4 Medications", ControllerName = "MedicationsReview" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.UnifiedParkinsonsDiseaseRatingScale, FormDisplayName = "B3 UPDRS", ControllerName = "UnifiedParkinsonsDiseaseRatingScale" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.NeurologicalExaminationFindings, FormDisplayName = "B8 Neurological Findings", ControllerName = "NeurologicalExaminationFindings" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.Symptoms, FormDisplayName = "B9 Symptoms", ControllerName = "Symptoms"}' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.Hachinski, FormDisplayName = "B2 Hachinski", ControllerName = "Hachinski"}' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.CDRPlusNACCFTLD, FormDisplayName = "B4 CDR® Plus FTLD", ControllerName = "CDRPlusNACCFTLD" }' />
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Psychometric data</th>
+                    <th class="status-column"></th>
+                    <th class="full-button-column"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.NeuropsychologicalBatteryScores, FormDisplayName = "C2 Neuropsych Battery Scores", ControllerName = "NeuropsychologicalBatteryScores" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.GeriatricDepressionScale, FormDisplayName = "B6 GDS", ControllerName = "GeriatricDepressionScale" }' />
+            </tbody>
+        </table>
+    </div>
+    <div class="col p-3">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Co-participant data</th>
+                    <th class="status-column"></th>
+                    <th class="full-button-column"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.CoParticipantDemographics, FormDisplayName = "A2 Co-participant Demographics", ControllerName = "CoParticipantDemographics" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.NPIQ, FormDisplayName = "B5 NPI-Q", ControllerName = "NPIQ" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.FunctionalActivitiesQuestionnaire, FormDisplayName = "B7 Functional Assessment (FAQ)", ControllerName = "FunctionalActivitiesQuestionnaire" }' />
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                <tr>
+                    <th>Finalize</th>
+                    <th class="status-column"></th>
+                    <th class="full-button-column"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.Checklist, FormDisplayName = "Z1 Checklist", ControllerName = "Checklist" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.ClinicianDiagnosis, FormDisplayName = "D1 Diagnosis", ControllerName = "ClinicianDiagnosis" }' />
+            </tbody>
+        </table>
+
+        @{
+            Checklist checklist = null;
+            if (Model.Checklist != null && Model.Checklist.Id > 0)
+            {
+                checklist = new Checklist
+                {
+                    Id = Model.Checklist.Id,
+                    FormStatus = Model.Checklist.FormStatus
+                };
+            }
+        }
+        <partial name="_VisitQuickDetails" model='new Visit { Id = Model.Id, FriendlyId = Model.FriendlyId, VisitNumber = Model.VisitNumber, VisitDate = Model.VisitDate, VisitType = Model.VisitType, Status = Model.Status, IsSubmittedToNACC = Model.IsSubmittedtoNACC, CoordinatorInitials = Model.CoordinatorInitials, ClinicianInitials = Model.ClinicianInitials, SocialWorkerInitials = Model.SocialWorkerInitials, Checklist = checklist }' />
+
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/Visit/QuickDetailsEdit.js"></script>
+}

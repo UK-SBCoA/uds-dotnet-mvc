@@ -1,0 +1,195 @@
+@model MedicationsReview
+
+@{ var title = "A4 Subject Medications";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+
+    List<MedicationSelected> defaultMeds = (List<MedicationSelected>)ViewBag.DefaultRef;
+    List<MedicationSelected> otcMeds = (List<MedicationSelected>)ViewBag.OverTheCounterRef;
+    List<MedicationSelected> otherMeds = (List<MedicationSelected>)ViewBag.NonDefaultRef;
+    int defaultMedsMedian = (int)Math.Ceiling((double)defaultMeds.Count / 2);
+    int otcMedsMedian = (int)Math.Ceiling((double)otcMeds.Count / 2);
+    int otherMedsMedian = (int)Math.Ceiling((double)otherMeds.Count / 2);
+    }
+
+    @await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+    @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+    <p class="lead">
+        INSTRUCTIONS: This form is to be completed by the clinician or ADC staff. The purpose of this form is to record all prescription medications taken by the subject within the two weeks before the current visit. For prescription medications not listed here, please follow the instructions at the end of this form. OTC (non-prescription) medications need not be reported; however, a short list of medications that could be either prescription or OTC follows the prescription list.
+    </p>
+    <!-- Default Medications -->
+    <div id="default-medications">
+        <div class="row">
+            <div class="col">
+                @foreach (var medicationSelected in defaultMeds.Take(defaultMedsMedian))
+                {
+                    <partial name="_MedicationCheckbox" for="@medicationSelected" />
+                }
+            </div>
+            <div class="col">
+                @foreach (var medicationSelected in defaultMeds.Skip(defaultMedsMedian))
+                {
+                    <partial name="_MedicationCheckbox" for="@medicationSelected" />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="col">
+            <p class="lead">
+                Commonly reported medications that may be purchased over the counter (but that may also be prescription)
+            </p>
+        </div>
+    </div>
+    <!-- Over the counter Medications -->
+    <div id="otc-medications">
+        <div class="row">
+            <div class="col">
+                @foreach (var medicationSelected in otcMeds.Take(otcMedsMedian))
+                {
+        <partial name="_MedicationCheckbox" for="@medicationSelected" />}
+            </div>
+            <div class="col">
+                @foreach (var medicationSelected in otcMeds.Skip(otcMedsMedian))
+                {
+        <partial name="_MedicationCheckbox" for="@medicationSelected" />}
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <div class="accordion" id="NonDefaultMeds">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne">
+                                Show more medications
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse" data-parent="#NonDefaultMeds">
+                        <div id="other-medications">
+                            <div class="row">
+                                <div class="col">
+                                    @foreach (var medicationSelected in otherMeds.Take(otherMedsMedian))
+                                    {
+                        <partial name="_MedicationCheckbox" for="@medicationSelected" />}
+                                </div>
+                                <div class="col">
+                                    @foreach (var medicationSelected in otherMeds.Skip(otherMedsMedian))
+                                    {
+                        <partial name="_MedicationCheckbox" for="@medicationSelected" />}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-3">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="lead">
+                                            If a medication is not listed above, create a new reference using the button below.
+                                        </p>
+
+                                        <p>
+                                            <a class="btn btn-outline-info" asp-controller="MedicationReference" asp-action="Create" asp-route-visitId="@Model.Id">Add medication</a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+
+
+            <form asp-action="Edit">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+                <div class="form-group">
+                    <label asp-for="Comments" class="control-label"></label>
+                    <textarea asp-for="Comments" class="form-control"></textarea>
+                    <span asp-validation-for="Comments" class="text-danger"></span>
+                </div>
+
+                <!--//     This has an additional confirmation step, so the partial for save/complete can't be used     //-->
+                <input type="hidden" asp-for="CurrentlyTakingMedications" />
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="FormStatus" />
+
+                <div class="btn-group">
+                    <input formnovalidate type="submit" name="save" value="Save" class="btn btn-primary" />
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="px-3 py-4">
+                            <div class="form-group">
+                                <label asp-for="ExaminerInitials" class="control-label"></label>
+                                <input asp-for="ExaminerInitials" class="form-control" />
+                                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+                            </div>
+                            <button type="button" name="complete" value="Complete" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">Complete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--//     Confirmation Modal     //-->
+                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmationModalLabel">Please confirm</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>@Html.DisplayNameFor(model => model.CurrentlyTakingMedications)</label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="CurrentlyTakingMedicationsControl[0]" name="CurrentlyTakingMedicationsControl" value="false">
+                                        <label class="form-check-label" for="CurrentlyTakingMedicationsControl[0]">No</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="CurrentlyTakingMedicationsControl[1]" name="CurrentlyTakingMedicationsControl" value="true">
+                                        <label class="form-check-label" for="CurrentlyTakingMedicationsControl[1]">Yes</label>
+                                    </div>
+                                    <span asp-validation-for="CurrentlyTakingMedications" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" name="complete" value="Complete" class="btn btn-primary">Complete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script src="~/js/MedicationReview/Edit.js"></script>
+    }

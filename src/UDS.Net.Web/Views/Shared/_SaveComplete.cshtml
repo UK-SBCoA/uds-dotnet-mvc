@@ -1,0 +1,20 @@
+
+@model FormBase
+<input type="hidden" asp-for="Id" data-always-enabled />
+<input type="hidden" asp-for="FormStatus" data-always-enabled />
+<div class="btn-group">
+    <input formnovalidate type="submit" name="save" value="Save" class="btn btn-primary" data-always-enabled />
+    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu">
+        <div class="px-3 py-4">
+            <div class="form-group">
+                <label asp-for="ExaminerInitials" class="control-label"></label>
+                <input asp-for="ExaminerInitials" class="form-control" data-always-enabled />
+                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+            </div>
+            <input type="submit" name="complete" value="Complete" class="btn btn-primary" data-always-enabled />
+        </div>
+    </div>
+</div>

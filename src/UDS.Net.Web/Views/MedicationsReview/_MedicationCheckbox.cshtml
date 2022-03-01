@@ -1,0 +1,37 @@
+﻿@model MedicationSelected
+@{
+}
+
+<div class="row medication-checkbox mx-2">
+    <div class="col">
+        <form id="form_@Model.MedicationReference.DrugId"
+              asp-action="UpdateCurrent"
+              asp-controller="MedicationsReview"
+              novalidate>
+            <input type="hidden" asp-for="VisitId" id="@(Model.MedicationReference.DrugId + "_VisitId")" />
+            <input type="hidden" asp-for="MedicationReference.DrugId" id="@(Model.MedicationReference.DrugId + "_DrugId")" />
+            <input type="hidden" asp-for="MedicationReference.DisplayName" id="@(Model.MedicationReference.DrugId + "_DisplayName")" />
+            <input type="hidden" asp-for="MedicationCurrent.Id" id="@(Model.MedicationReference.DrugId + "_MedicationCurrent_Id")" />
+            <input type="hidden" asp-for="MedicationCurrent.DrugId" id="@(Model.MedicationReference.DrugId + "_MedicationCurrent_DrugId")" />
+            <input type="hidden" asp-for="MedicationCurrent.Notes" id="@(Model.MedicationReference.DrugId + "_Notes")" />
+            <input type="hidden" asp-for="MedicationCurrent.MedicationsReviewId" id="@(Model.MedicationReference.DrugId + "_MedicationsReviewId")" />
+            <div class="row">
+                <div class="col-md-1">
+                    <div id="loading_@Model.MedicationReference.DrugId" style="display:none;" class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <input onchange="submitCurrent(this)" type="checkbox" asp-for="Selected" id="@Model.MedicationReference.DrugId" />
+                </div>
+                <div class="col-md-8">
+                    <label for="@Model.MedicationReference.DrugId"><small>@Model.MedicationReference.DisplayName</small></label>
+                </div>
+                <div class="col-md-3">
+                    <span class="badge badge-pill badge-secondary">@Model.MedicationReference.DrugId</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

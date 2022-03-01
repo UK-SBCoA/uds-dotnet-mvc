@@ -1,0 +1,200 @@
+﻿@model ParticipantDemographics
+@{
+}
+
+<tr>
+    <td><span class="counter"></span><span class="counter invisible"></span></td>
+    <td>
+        <label asp-for="Reason" class="control-label"></label>
+        <div><span asp-validation-for="Reason" class="text-danger"></span></div>
+    </td>
+    <td>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Reason" type="radio" id="Reason[1]" value="1" name="Reason">
+            <label class="form-check-label" for="Reason[1]"> <span class="badge badge-pill badge-light">1</span> To participate in a research study</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Reason" type="radio" id="Reason[2]" value="2" name="Reason">
+            <label class="form-check-label" for="Reason[2]"> <span class="badge badge-pill badge-light">2</span> To have a clinical evaluation</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Reason" type="radio" id="Reason[3]" value="4" name="Reason">
+            <label class="form-check-label" for="Reason[3]"> <span class="badge badge-pill badge-light">4</span> Both (to participate in a research study and to have a clinical evaluation)</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Reason" type="radio" id="Reason[4]" value="9" name="Reason">
+            <label class="form-check-label" for="Reason[4]"> <span class="badge badge-pill badge-light">9</span> Unknown</label>
+        </div>
+
+    </td>
+</tr>
+<tr class="subcounterreset">
+    <td><span class="subcounter"></span></td>
+    <td>
+        <label asp-for="ReferralSource" class="control-label"></label>
+        <div>
+            <small>(If answer is 1 or 2, <strong>CONTINUE TO QUESTION 2b</strong>; otherwise, <strong>SKIP TO QUESTION 3.</strong>)</p></small>
+        </div>
+        <div><span asp-validation-for="ReferralSource" class="text-danger"></span></div>
+    </td>
+    <td>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="ReferralSource" type="radio" data-toggle-values="[3,4,5,6,8,9]" data-toggle-targets="Learned" id="ReferralSource[1]" value="1" name="ReferralSource">
+            <label class="form-check-label" for="ReferralSource[1]"> <span class="badge badge-pill badge-light">1</span> Self-referral</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="ReferralSource" type="radio" data-toggle-values="[3,4,5,6,8,9]" data-toggle-targets="Learned" id="ReferralSource[2]" value="2" name="ReferralSource">
+            <label class="form-check-label" for="ReferralSource[2]"> <span class="badge badge-pill badge-light">2</span> Non-professional contact (spouse/partner, relative, friend, coworker, etc.)</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="ReferralSource" type="radio" data-toggle-values="[3,4,5,6,8,9]" data-toggle-targets="Learned" id="ReferralSource[3]" value="3" name="ReferralSource">
+            <label class="form-check-label" for="ReferralSource[3]"> <span class="badge badge-pill badge-light">3</span> ADC participant referral</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="ReferralSource" type="radio" data-toggle-values="[3,4,5,6,8,9]" data-toggle-targets="Learned" id="ReferralSource[4]" value="4" name="ReferralSource">
+            <label class="form-check-label" for="ReferralSource[4]"> <span class="badge badge-pill badge-light">4</span> ADC clinician, staff, or investigator referral</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="ReferralSource" type="radio" data-toggle-values="[3,4,5,6,8,9]" data-toggle-targets="Learned" id="ReferralSource[5]" value="5" name="ReferralSource">
+            <label class="form-check-label" for="ReferralSource[5]"> <span class="badge badge-pill badge-light">5</span> Nurse, doctor, or other health care provider</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="ReferralSource" type="radio" data-toggle-values="[3,4,5,6,8,9]" data-toggle-targets="Learned" id="ReferralSource[6]" value="6" name="ReferralSource">
+            <label class="form-check-label" for="ReferralSource[6]"> <span class="badge badge-pill badge-light">6</span> Other research study clinician/staff/investigator (non-ADC; e.g., ADNI, Women's Health Initiative)</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="ReferralSource" type="radio" data-toggle-values="[3,4,5,6,8,9]" data-toggle-targets="Learned" id="ReferralSource[8]" value="8" name="ReferralSource">
+            <label class="form-check-label" for="ReferralSource[8]"> <span class="badge badge-pill badge-light">8</span> Other</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="ReferralSource" type="radio" data-toggle-values="[3,4,5,6,8,9]" data-toggle-targets="Learned" data-toggle-value="['3','4','5','6','8',]" id="ReferralSource[9]" value="9" name="ReferralSource">
+            <label class="form-check-label" for="ReferralSource[9]"> <span class="badge badge-pill badge-light">9</span> Unknown</label>
+        </div>
+
+    </td>
+</tr>
+<tr>
+    <td><span class="subcounter"></span></td>
+    <td>
+        <div class="form-group">
+            <label asp-for="Learned" class="control-label"></label>
+            <div><span asp-validation-for="Learned" class="text-danger"></span></div>
+        </div>
+    </td>
+    <td>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Learned" type="radio" id="Learned[1]" value="1" name="Learned">
+            <label class="form-check-label" for="Learned[1]"> <span class="badge badge-pill badge-light">1</span> ADC advertisement (e.g., website, mailing, newspaper ad, community presentation)</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Learned" type="radio" id="Learned[2]" value="2" name="Learned">
+            <label class="form-check-label" for="Learned[2]"> <span class="badge badge-pill badge-light">2</span> News article or TV program mentioning the ADC study</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Learned" type="radio" id="Learned[3]" value="3" name="Learned">
+            <label class="form-check-label" for="Learned[3]"> <span class="badge badge-pill badge-light">3</span> Conference or community event (e.g., community memory walk)</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Learned" type="radio" id="Learned[4]" value="4" name="Learned">
+            <label class="form-check-label" for="Learned[4]"> <span class="badge badge-pill badge-light">4</span> Another organization's media appeal or website</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Learned" type="radio" id="Learned[5]" value="8" name="Learned">
+            <label class="form-check-label" for="Learned[5]"> <span class="badge badge-pill badge-light">8</span> Other</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="Learned" type="radio" id="Learned[6]" value="9" name="Learned">
+            <label class="form-check-label" for="Learned[6]"> <span class="badge badge-pill badge-light">9</span> Unknown</label>
+        </div>
+
+    </td>
+</tr>
+<tr>
+    <td><span class="counter"></span></td>
+    <td>
+        <div class="form-group">
+            <label asp-for="EnrollmentDiseaseStatus" class="control-label"></label>
+            <div><span asp-validation-for="EnrollmentDiseaseStatus" class="text-danger"></span></div>
+        </div>
+    </td>
+    <td>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="EnrollmentDiseaseStatus" type="radio" id="EnrollmentDiseaseStatus[1]" value="1" name="EnrollmentDiseaseStatus">
+            <label class="form-check-label" for="EnrollmentDiseaseStatus[1]"> <span class="badge badge-pill badge-light">1</span> Case, patient, or proband</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="EnrollmentDiseaseStatus" type="radio" id="EnrollmentDiseaseStatus[2]" value="2" name="EnrollmentDiseaseStatus">
+            <label class="form-check-label" for="EnrollmentDiseaseStatus[2]"> <span class="badge badge-pill badge-light">2</span> Control or normal</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="EnrollmentDiseaseStatus" type="radio" id="EnrollmentDiseaseStatus[3]" value="3" name="EnrollmentDiseaseStatus">
+            <label class="form-check-label" for="EnrollmentDiseaseStatus[3]"> <span class="badge badge-pill badge-light">3</span> No presumed disease status</label>
+        </div>
+
+    </td>
+</tr>
+<tr>
+    <td><span class="counter"></span></td>
+    <td>
+        <div class="form-group">
+            <label asp-for="PresumedParticipation" class="control-label"></label>
+            <div><span asp-validation-for="PresumedParticipation" class="text-danger"></span></div>
+        </div>
+    </td>
+    <td>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="PresumedParticipation" type="radio" id="PresumedParticipation[1]" value="1" name="PresumedParticipation">
+            <label class="form-check-label" for="PresumedParticipation[1]"><span class="badge badge-pill badge-light">1</span> Initial evaluation only</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="PresumedParticipation" type="radio" id="PresumedParticipation[2]" value="2" name="PresumedParticipation">
+            <label class="form-check-label" for="PresumedParticipation[2]"><span class="badge badge-pill badge-light">2</span> Longitudinal follow-up planned</label>
+        </div>
+
+    </td>
+</tr>
+<tr>
+    <td><span class="counter"></span></td>
+    <td>
+        <div class="form-group">
+            <label asp-for="EnrollmentType" class="control-label"></label>
+            <div><span class="text-danger" asp-validation-for="EnrollmentType"></span></div>
+        </div>
+    </td>
+    <td>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="EnrollmentType" type="radio" id="EnrollmentType[1]" value="1" name="EnrollmentType">
+            <label class="form-check-label" for="EnrollmentType[1]"> <span class="badge badge-pill badge-light">1</span> Primarily ADC-funded (Clinical Core, Satellite Core, or other ADC Core or project)</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" asp-for="EnrollmentType" type="radio" id="EnrollmentType[2]" value="2" name="EnrollmentType">
+            <label class="form-check-label" for="EnrollmentType[2]"> <span class="badge badge-pill badge-light">2</span> Participant is supported primarily by a non-ADC study (e.g., R01, including non-ADC grants supporting FTLD Module participation)</label>
+        </div>
+
+    </td>
+</tr>

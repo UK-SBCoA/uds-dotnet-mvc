@@ -1,0 +1,119 @@
+@model IEnumerable<CDRPlusNACCFTLD>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Memory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orientation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JudgmentAndProblemSolving)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommunityAffairs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomesAndHobbies)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonalCare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StandardCDRSumOfBoxes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StandardGlobalCDR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BehaviorComportmentAndPersonality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplementalCDRSumOfBoxes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplementalGlobalCDR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Memory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Orientation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JudgmentAndProblemSolving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommunityAffairs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomesAndHobbies)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonalCare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StandardCDRSumOfBoxes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StandardGlobalCDR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BehaviorComportmentAndPersonality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplementalCDRSumOfBoxes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplementalGlobalCDR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

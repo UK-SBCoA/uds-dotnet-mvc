@@ -1,0 +1,369 @@
+@model UnifiedParkinsonsDiseaseRatingScale
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UnifiedParkinsonsDiseaseRatingScale</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsNormal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsNormal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Speech)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Speech)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SpeechUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SpeechUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FacialExpression)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FacialExpression)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FacialExpressionUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FacialExpressionUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestFaceLipsChin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestFaceLipsChin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestFaceLipsChinUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestFaceLipsChinUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestRightHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestRightHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestRightHandUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestRightHandUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestLeftHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestLeftHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestLeftHandUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestLeftHandUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestRightFoot)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestRightFoot)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestRightFootUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestRightFootUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestLeftFoot)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestLeftFoot)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorRestLeftFootOther)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorRestLeftFootOther)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorActionRightHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorActionRightHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorActionRightHandOther)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorActionRightHandOther)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorActionLeftHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorActionLeftHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TremorActionLeftHandOther)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TremorActionLeftHandOther)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityNeck)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityNeck)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityNeckUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityNeckUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityRightUpper)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityRightUpper)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityRightUpperUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityRightUpperUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityLeftUpper)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityLeftUpper)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityLeftUpperUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityLeftUpperUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityRightLower)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityRightLower)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityRightLowerUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityRightLowerUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityLeftLower)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityLeftLower)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RigidityLeftLowerUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RigidityLeftLowerUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FingerTapsRightHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FingerTapsRightHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FingerTapsRightHandUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FingerTapsRightHandUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FingerTapsLeftHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FingerTapsLeftHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FingerTapsLeftHandUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FingerTapsLeftHandUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HandMovementsRightHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HandMovementsRightHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HandMovementsRightHandUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HandMovementsRightHandUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HandMovemonetsLeftHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HandMovemonetsLeftHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HandMovemonetsLeftHandUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HandMovemonetsLeftHandUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RapidRightHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RapidRightHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RapidRightHandUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RapidRightHandUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RapidLeftHand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RapidLeftHand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RapidLeftHandUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RapidLeftHandUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RightLegAgility)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RightLegAgility)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RightLegAgilityUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RightLegAgilityUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LeftLegAgility)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LeftLegAgility)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LeftLegAgilityUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LeftLegAgilityUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ArisingFromChair)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ArisingFromChair)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ArisingFromChairUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ArisingFromChairUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Posture)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Posture)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostureUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostureUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gait)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gait)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GaitUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GaitUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostureStability)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostureStability)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostureStabilityUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostureStabilityUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BradykinesiaAndHypokinesia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BradykinesiaAndHypokinesia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BradykinesiaAndHypokinesiaUntestable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BradykinesiaAndHypokinesiaUntestable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Visit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Visit.Id)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ExaminerInitials)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ExaminerInitials)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FormStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FormStatus)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

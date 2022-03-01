@@ -1,0 +1,42 @@
+@model Visit
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create visit</h1>
+
+<h4>PTID @Model.FriendlyId</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="VisitDate" class="control-label"></label>
+                <input asp-for="VisitDate" class="form-control" />
+                <span asp-validation-for="VisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitType" class="control-label"></label>
+                <select asp-for="VisitType" class="form-control" asp-items="Html.GetEnumSelectList(typeof(VisitType))">
+                </select>
+                <span asp-validation-for="VisitType" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="FriendlyId" />
+            <input type="hidden" asp-for="VisitNumber" value="@ViewBag.NextVisitNumber" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Participation" asp-action="Details" asp-route-friendlyid="@ViewBag.FriendlyId">Back to Participant</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

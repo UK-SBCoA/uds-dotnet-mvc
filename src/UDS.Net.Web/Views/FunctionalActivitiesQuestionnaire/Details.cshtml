@@ -1,0 +1,96 @@
+@model FunctionalActivitiesQuestionnaire
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>FunctionalActivitiesQuestionnaire</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bills)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bills)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Taxes)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Taxes)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Shopping)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Shopping)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Games)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Games)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Stove)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Stove)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MealPrep)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MealPrep)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Events)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Events)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PayAttention)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PayAttention)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RememberDates)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RememberDates)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Travel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Travel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Visit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Visit.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ExaminerInitials)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ExaminerInitials)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FormStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FormStatus)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

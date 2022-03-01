@@ -1,0 +1,262 @@
+@model NeurologicalExaminationFindings
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>NeurologicalExaminationFindings</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AbnormalNeurologicalExamFindings" class="control-label"></label>
+                <input asp-for="AbnormalNeurologicalExamFindings" class="form-control" />
+                <span asp-validation-for="AbnormalNeurologicalExamFindings" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianSigns" class="control-label"></label>
+                <input asp-for="ParkinsonianSigns" class="form-control" />
+                <span asp-validation-for="ParkinsonianSigns" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianLeftRestingTremorArm" class="control-label"></label>
+                <input asp-for="ParkinsonianLeftRestingTremorArm" class="form-control" />
+                <span asp-validation-for="ParkinsonianLeftRestingTremorArm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianRightRestingTremorArm" class="control-label"></label>
+                <input asp-for="ParkinsonianRightRestingTremorArm" class="form-control" />
+                <span asp-validation-for="ParkinsonianRightRestingTremorArm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianRightSlowingOfFineMotorMovements" class="control-label"></label>
+                <input asp-for="ParkinsonianRightSlowingOfFineMotorMovements" class="form-control" />
+                <span asp-validation-for="ParkinsonianRightSlowingOfFineMotorMovements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianLeftSlowingOfFineMotorMovements" class="control-label"></label>
+                <input asp-for="ParkinsonianLeftSlowingOfFineMotorMovements" class="form-control" />
+                <span asp-validation-for="ParkinsonianLeftSlowingOfFineMotorMovements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianRightRigidityArm" class="control-label"></label>
+                <input asp-for="ParkinsonianRightRigidityArm" class="form-control" />
+                <span asp-validation-for="ParkinsonianRightRigidityArm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianLeftRigidityArm" class="control-label"></label>
+                <input asp-for="ParkinsonianLeftRigidityArm" class="form-control" />
+                <span asp-validation-for="ParkinsonianLeftRigidityArm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianBradykinesia" class="control-label"></label>
+                <input asp-for="ParkinsonianBradykinesia" class="form-control" />
+                <span asp-validation-for="ParkinsonianBradykinesia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianGaitDisorder" class="control-label"></label>
+                <input asp-for="ParkinsonianGaitDisorder" class="form-control" />
+                <span asp-validation-for="ParkinsonianGaitDisorder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkinsonianPosturalInstability" class="control-label"></label>
+                <input asp-for="ParkinsonianPosturalInstability" class="form-control" />
+                <span asp-validation-for="ParkinsonianPosturalInstability" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CerebrovascularDiseaseSigns" class="control-label"></label>
+                <input asp-for="CerebrovascularDiseaseSigns" class="form-control" />
+                <span asp-validation-for="CerebrovascularDiseaseSigns" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorticalCognitiveDeficit" class="control-label"></label>
+                <input asp-for="CorticalCognitiveDeficit" class="form-control" />
+                <span asp-validation-for="CorticalCognitiveDeficit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorticalSIVD" class="control-label"></label>
+                <input asp-for="CorticalSIVD" class="form-control" />
+                <span asp-validation-for="CorticalSIVD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorticalMotorLeft" class="control-label"></label>
+                <input asp-for="CorticalMotorLeft" class="form-control" />
+                <span asp-validation-for="CorticalMotorLeft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorticalMotorRight" class="control-label"></label>
+                <input asp-for="CorticalMotorRight" class="form-control" />
+                <span asp-validation-for="CorticalMotorRight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorticalVisualFieldLossLeft" class="control-label"></label>
+                <input asp-for="CorticalVisualFieldLossLeft" class="form-control" />
+                <span asp-validation-for="CorticalVisualFieldLossLeft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorticalVisualFieldLossRight" class="control-label"></label>
+                <input asp-for="CorticalVisualFieldLossRight" class="form-control" />
+                <span asp-validation-for="CorticalVisualFieldLossRight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorticalSomatosensoryLossLeft" class="control-label"></label>
+                <input asp-for="CorticalSomatosensoryLossLeft" class="form-control" />
+                <span asp-validation-for="CorticalSomatosensoryLossLeft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorticalSomatosensoryLossRight" class="control-label"></label>
+                <input asp-for="CorticalSomatosensoryLossRight" class="form-control" />
+                <span asp-validation-for="CorticalSomatosensoryLossRight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HigherCorticalVisual" class="control-label"></label>
+                <input asp-for="HigherCorticalVisual" class="form-control" />
+                <span asp-validation-for="HigherCorticalVisual" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PSP" class="control-label"></label>
+                <input asp-for="PSP" class="form-control" />
+                <span asp-validation-for="PSP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PSP_EyeMovement" class="control-label"></label>
+                <input asp-for="PSP_EyeMovement" class="form-control" />
+                <span asp-validation-for="PSP_EyeMovement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PSP_Dysarthria" class="control-label"></label>
+                <input asp-for="PSP_Dysarthria" class="form-control" />
+                <span asp-validation-for="PSP_Dysarthria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PSP_Axial" class="control-label"></label>
+                <input asp-for="PSP_Axial" class="form-control" />
+                <span asp-validation-for="PSP_Axial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PSP_Gait" class="control-label"></label>
+                <input asp-for="PSP_Gait" class="form-control" />
+                <span asp-validation-for="PSP_Gait" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PSP_Apraxia" class="control-label"></label>
+                <input asp-for="PSP_Apraxia" class="form-control" />
+                <span asp-validation-for="PSP_Apraxia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_ApraxiaLeft" class="control-label"></label>
+                <input asp-for="CBS_ApraxiaLeft" class="form-control" />
+                <span asp-validation-for="CBS_ApraxiaLeft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_ApraxiaRight" class="control-label"></label>
+                <input asp-for="CBS_ApraxiaRight" class="form-control" />
+                <span asp-validation-for="CBS_ApraxiaRight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_CorticalSensoryDeficitsLeft" class="control-label"></label>
+                <input asp-for="CBS_CorticalSensoryDeficitsLeft" class="form-control" />
+                <span asp-validation-for="CBS_CorticalSensoryDeficitsLeft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_CorticalSensoryDeficitsRight" class="control-label"></label>
+                <input asp-for="CBS_CorticalSensoryDeficitsRight" class="form-control" />
+                <span asp-validation-for="CBS_CorticalSensoryDeficitsRight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_AtaxiaLeft" class="control-label"></label>
+                <input asp-for="CBS_AtaxiaLeft" class="form-control" />
+                <span asp-validation-for="CBS_AtaxiaLeft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_AtaxiaRight" class="control-label"></label>
+                <input asp-for="CBS_AtaxiaRight" class="form-control" />
+                <span asp-validation-for="CBS_AtaxiaRight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_AlienLimbLeft" class="control-label"></label>
+                <input asp-for="CBS_AlienLimbLeft" class="form-control" />
+                <span asp-validation-for="CBS_AlienLimbLeft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_AlienLimbRight" class="control-label"></label>
+                <input asp-for="CBS_AlienLimbRight" class="form-control" />
+                <span asp-validation-for="CBS_AlienLimbRight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_DystoniaLeft" class="control-label"></label>
+                <input asp-for="CBS_DystoniaLeft" class="form-control" />
+                <span asp-validation-for="CBS_DystoniaLeft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_DystoniaRight" class="control-label"></label>
+                <input asp-for="CBS_DystoniaRight" class="form-control" />
+                <span asp-validation-for="CBS_DystoniaRight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_MyoclonusLeft" class="control-label"></label>
+                <input asp-for="CBS_MyoclonusLeft" class="form-control" />
+                <span asp-validation-for="CBS_MyoclonusLeft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CBS_MyoclonusRight" class="control-label"></label>
+                <input asp-for="CBS_MyoclonusRight" class="form-control" />
+                <span asp-validation-for="CBS_MyoclonusRight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ALS_Findings" class="control-label"></label>
+                <input asp-for="ALS_Findings" class="form-control" />
+                <span asp-validation-for="ALS_Findings" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GaitApraxia" class="control-label"></label>
+                <input asp-for="GaitApraxia" class="form-control" />
+                <span asp-validation-for="GaitApraxia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherFindings" class="control-label"></label>
+                <input asp-for="OtherFindings" class="form-control" />
+                <span asp-validation-for="OtherFindings" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherFindingsSpeicify" class="control-label"></label>
+                <input asp-for="OtherFindingsSpeicify" class="form-control" />
+                <span asp-validation-for="OtherFindingsSpeicify" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class ="form-control" asp-items="ViewBag.Id"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExaminerInitials" class="control-label"></label>
+                <input asp-for="ExaminerInitials" class="form-control" />
+                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormStatus" class="control-label"></label>
+                <select asp-for="FormStatus" class="form-control"></select>
+                <span asp-validation-for="FormStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Version" class="control-label"></label>
+                <input asp-for="Version" class="form-control" />
+                <span asp-validation-for="Version" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,11 @@
+﻿@model RecentSearches
+@{
+}
+<ul id="recentSearches" class="nav flex-column mb-2 bg-dark">
+    @foreach (var search in Model.Searches.Reverse())
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-controller="Participation" asp-action="Search" asp-route-SearchTerm="@search">PTID @search</a>
+        </li>
+    }
+</ul>

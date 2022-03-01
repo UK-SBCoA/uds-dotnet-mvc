@@ -1,0 +1,245 @@
+@model IEnumerable<MedicalConditions>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cancer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CancerSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diabetes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyocardialInfarct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CongestiveHeartFailure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AtrialFibrillation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hypertension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Angina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hypercholesterolemia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.B12Deficiency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThyroidDisease)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arthritis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthritisType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthritisTypeSpecified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthritisRegionUpperExtremity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthritisRegionLowerExtremity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthritisRegionUnknown)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncontinenceUrinary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncontinenceBowel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SleepApnea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.REMSleepBehaviorDisorder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HyposomniaInsomnia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherSleepDisorder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherSleepDisorderSpecified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarotidProcedure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PercutaneousCoronaryIntervention)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PacemakerDefibrillator)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeartValveReplacementRepair)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AntibodyMediatedEncephalopathy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AntibodyMediatedEncephalopathySpecified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherMedicalCondition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherMedicalConditionSpecified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Version)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cancer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CancerSite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diabetes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MyocardialInfarct)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CongestiveHeartFailure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AtrialFibrillation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hypertension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Angina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hypercholesterolemia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.B12Deficiency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThyroidDisease)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arthritis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthritisType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthritisTypeSpecified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthritisRegionUpperExtremity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthritisRegionLowerExtremity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthritisRegionUnknown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncontinenceUrinary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncontinenceBowel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SleepApnea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.REMSleepBehaviorDisorder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HyposomniaInsomnia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherSleepDisorder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherSleepDisorderSpecified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarotidProcedure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PercutaneousCoronaryIntervention)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PacemakerDefibrillator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeartValveReplacementRepair)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AntibodyMediatedEncephalopathy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AntibodyMediatedEncephalopathySpecified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherMedicalCondition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherMedicalConditionSpecified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

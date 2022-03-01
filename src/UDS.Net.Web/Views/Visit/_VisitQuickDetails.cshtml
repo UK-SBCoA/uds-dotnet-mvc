@@ -1,0 +1,103 @@
+﻿@model Visit
+@{
+    var checklistExists = false;
+    var checklistId = 0;
+    var checklistStatus = FormStatus.Incomplete;
+
+    if (Model.Checklist != null)
+    {
+        checklistExists = true;
+        checklistId = Model.Checklist.Id;
+        checklistStatus = Model.Checklist.FormStatus;
+    }
+}
+
+<div class="card bg-light m-2">
+    <div class="card-body text-muted">
+        <form asp-action="Edit" data-checklist-exists="@checklistExists" data-checklist-id="@checklistId" data-checklist-status="@checklistStatus">
+            <div class="row">
+                <div class="col">
+                    @if (Model.IsSubmittedToNACC == false || User.IsInRole("Admin"))
+                    {
+                        <button type="button" id="edit-form" class="btn btn-sm float-right"><i class="bi bi-pencil"></i></button>
+                        <button type="reset" id="cancel" class="btn btn-sm float-right d-none"><i class="bi bi-x"></i></button>
+                        <button type="submit" id="submit" name="submit" class="btn btn-sm float-right d-none"><i class="bi bi-check"></i></button>
+                    }
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="FriendlyId" />
+                    <input type="hidden" asp-for="VisitNumber" />
+                    <input type="hidden" asp-for="VisitDate" />
+                    <input type="hidden" asp-for="VisitType" />
+                    <input type="hidden" name="redirectToAction" id="redirectToAction" value="Details" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Coordinator" class="control-label"></label>
+                    </div>
+                    <div class="col-6">
+                        <select asp-for="CoordinatorInitials" class="form-control-plaintext form-control-sm" asp-items="@(new SelectList(ViewBag.Examiners,"Initials","Name"))" disabled>
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Clinician" class="control-label"></label>
+                    </div>
+                    <div class="col-6">
+                        <select asp-for="ClinicianInitials" class="form-control-plaintext form-control-sm" asp-items="@(new SelectList(ViewBag.Examiners,"Initials","Name"))" disabled>
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="SocialWorker" class="control-label"></label>
+                    </div>
+                    <div class="col-6">
+                        <select asp-for="SocialWorkerInitials" class="form-control-plaintext form-control-sm" asp-items="@(new SelectList(ViewBag.Examiners,"Initials","Name"))" disabled>
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Status" class="control-label"></label>
+                    </div>
+                    <div class="col-6">
+                        <select asp-for="Status" class="form-control-plaintext form-control-sm" asp-items="Html.GetEnumSelectList(typeof(VisitStatus))" disabled></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                </div>
+                <div class="col-6">
+                    <div class="form-group d-none">
+                        <div class="row">
+                            <div class="col-6">
+                                <label asp-for="PriorityWeight" class="control-label">Priority ranking</label>
+                            </div>
+                            <div class="col-6">
+                                <input asp-for="PriorityWeight" class="form-control form-control-sm" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <input asp-for="IsSubmittedToNACC" class="form-check-input" disabled />
+                        <label class="form-check-label" asp-for="IsSubmittedToNACC"></label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

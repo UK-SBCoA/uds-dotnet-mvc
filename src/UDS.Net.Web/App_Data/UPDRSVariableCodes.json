@@ -1,0 +1,197 @@
+[
+  {
+    "Name": "Speech",
+    "Description": "Parkinsons symptoms in speech",
+    "Codes": {
+      "0": "Normal",
+      "1": "Slight loss of expression, diction and/or volume.",
+      "2": "Monotone, slurred but understandable; moderately impaired.",
+      "3": "Marked impairment, difficult to understand.",
+      "4": "Unintelligible.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "FacialExpression",
+    "Description": "Parkinsons symptoms in facial expressions",
+    "Codes": {
+      "0": "Normal",
+      "1": "Minimal hypomimia, could be normal “poker face",
+      "2": "Slight but definitely abnormal diminution of facial expression.",
+      "3": "Moderate hypomimia; lips parted some of the time.",
+      "4": "Masked or fixed facies with severe or complete lossof facial expression; lips parted 1/4 inches or more.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "TremorAtRest",
+    "Description": "Parkinsons symptoms in Temor at rest",
+    "Codes": {
+      "0": "Absent.",
+      "1": "Slight and infrequently present.",
+      "2": "Mild in amplitude and persistent; or moderate in amplitude, but only intermittently present.",
+      "3": "Moderate in amplitude and present most of the time.",
+      "4": "Marked in amplitude and present most of the time.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "ActionOrPosturalTremorOfHands",
+    "Description": "Parkinsons symptoms in tremor of hands",
+    "Codes": {
+      "0": "Absent.",
+      "1": "Slight; present with action.",
+      "2": "Moderate in amplitude, present with action.",
+      "3": "Moderate in amplitude with posture holding as well as action.",
+      "4": "Marked in amplitude; interferes with feeding.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "Rigidity",
+    "Description": "Parkinsons symptoms with rigidity in all body parts",
+    "Codes": {
+      "0": "Absent.",
+      "1": "Slight or detectable only when activated by mirror or other movements.",
+      "2": "Mild to moderate.",
+      "3": "Marked, but full range of motion easily achieved.",
+      "4": "Severe; range of motion achieved with difficulty.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "FingerTaps",
+    "Description": "Parkinsons symptoms in finger taps",
+    "Codes": {
+      "0": "Normal.",
+      "1": "Mild slowing and/or reduction in amplitude.",
+      "2": "Moderately impaired; definite and early fatiguing; may have occasional arrests in movement.",
+      "3": "Severely impaired; frequent hesitation in initiating movements or arrests in ongoing movement.",
+      "4": "Can barely perform the task.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "HandRapidLeg",
+    "Description": "Parkinsons symptoms in hand movement, rapid hand movement and leg movement",
+    "Codes": {
+      "0": "Normal.",
+      "1": "Mild slowing and/or reduction in amplitude.",
+      "2": "Moderately impaired; definite and early fatiguing; may have occasional arrests in movement.",
+      "3": "Severely impaired; frequent hesitation in initiating movements or arrests in ongoing movement.",
+      "4": "Can barely perform the task.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "ArisingFromChair",
+    "Description": "Arising from chair",
+    "Codes": {
+      "0": "Normal.",
+      "1": "Slow; or may need more than one attempt.",
+      "2": "Pushes self up from arms of seat.",
+      "3": "Tends to fall back and may have to try more than one time, but can get up without help.",
+      "4": "Unable to arise without help.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "Posture",
+    "Description": "Parkinsons symptoms in Posture",
+    "Codes": {
+      "0": "Normal.",
+      "1": "Not quite erect, slightly stooped posture; could be normal for older person.",
+      "2": "Moderately stooped posture, definitely abnormal; can be slightly leaning to one side.",
+      "3": "Severely stooped posture with kyphosis; can be moderately leaning to one side.",
+      "4": "Marked flexion with extreme abnormality of posture.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "Gait",
+    "Description": "Parkinsons symptoms in Gait",
+    "Codes": {
+      "0": "Normal.",
+      "1": "Walks slowly; may shuffle with short steps, but no festination (hastening steps) or propulsion.",
+      "2": "Walks with difficulty, but requires little or no assistance; may have some festination, short steps, or propulsion.",
+      "3": "Severe disturbance of gait requiring assistance.",
+      "4": "Cannot walk at all, even with assistance.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "PostureStability",
+    "Description": "Parkinsons symptoms in posture stability",
+    "Codes": {
+      "0": "Normal erect.",
+      "1": "Retropulsion, but recovers unaided.",
+      "2": "Absence of postural response; would fall if not caught by examiner.",
+      "3": "Very unstable, tends to lose balance spontaneously.",
+      "4": "Unable to stand without assistance.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "BodyBradykinesiaAndHypokinesia",
+    "Description": "Parkinsons symptoms in body bradykinesia and hypokinesia",
+    "Codes": {
+      "0": "None.",
+      "1": "Minimal slowness, giving movement a deliberate character; could be normal for some persons; possibly reduced amplitude.",
+      "2": "Mild degree of slowness and poverty of movement which is definitely abnormal. Alternatively, some reduced amplitude.",
+      "3": "Moderate slowness, poverty or small amplitude of movement.",
+      "4": "Marked slowness, poverty or small amplitude of movement.",
+      "8": "Untestable (specify reason):"
+    }
+  },
+  {
+    "Name": "Chorea",
+    "Description": "Chorea",
+    "Codes": {
+      "0": "Absent",
+      "1": "Present",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "MyoclonusRating",
+    "Description": "Myoclonus Rating",
+    "Codes": {
+      "0": "Absent",
+      "1": "Questionable; seen only with extension of arms",
+      "2": "Mild; seen once or twice in 30 minutes-single limb",
+      "3": "Moderate; seen more than twice in 30 minutes-several limbs",
+      "4": "Severe; apparent during most of examination-limbs & trunk",
+      "5": "Nearly continuous myoclonic jerks",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "OtherDyskinesias",
+    "Description": " Other dyskinesias (e.g. Tardive)",
+    "Codes": {
+      "0": "Absent",
+      "1": "Present",
+      "9": "Not Done"
+    }
+  },
+  {
+    "Name": "ReceivedDrug",
+    "Description": "Received drugs in the past 30 days",
+    "Codes": {
+      "0": "No",
+      "1": "Yes",
+      "8": "Unknown",
+      "9": "Not Rated"
+    }
+  },
+  {
+    "Name": "AntiparkinsonianDrugs",
+    "Description": "Antiparkinsonian Drugs",
+    "Codes": {
+      "0": "No",
+      "1": "Yes",
+      "8": "Unknown",
+      "9": "Not Rated"
+    }
+  }
+]

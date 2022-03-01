@@ -1,0 +1,473 @@
+@model IEnumerable<NeuropsychologicalBatteryScores>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAPartAdministered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAPartAdministeredCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAAdministered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCALanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCALanguageOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAVisualImpairment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAHearingImpairment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalRawScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCATrials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCACube)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAClockContour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAClockNumbers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAHands)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCANaming)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCARegistration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCADigits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCALetter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCASerial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCARepetition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAFluency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAAbstraction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCANoCue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCACategoryCue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCARecognition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCADate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCADay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCAPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCACity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCATestsAdministered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCATestLanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoCATestLanguageOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CraftStoryVerbatim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CraftStoryParaphrase)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BensonFigureScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberSpanTestForwardCorrectTrials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberSpanTestForwardLongestSpanForward)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberSpanTestBackwardCorrectTrials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberSpanTestBackwardLongestSpanBackward)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryFluencyAnimals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryFluencyVegetables)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrailMakingTestASecondsToComplete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrailMakingTestANumberOfErrors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrailMakingTestANumberOfCorrect)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrailMakingTestBSecondsToComplete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrailMakingTestBNumberOfErrors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrailMakingTestBNumberOfCorrect)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CraftStoryRecallUnitsRecallVerbatim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CraftStoryRecallUnitsRecallParaphrase)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CraftStoryRecallUnitsRecallDelay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CraftStoryRecallCueNeeded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BensonComplexFigureRecallTotalDrawingScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BensonComplexFigureRecallRecognizedOriginalStiumulus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MINTTotalScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MINTTotalCorrectWithoutSemanticCue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MINTSemanticCuesNumberGiven)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MINTSemanticCuesNumberCorrectWithoutCue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MINTPhonemicCuesNumberGiven)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MINTPhonemicCuesNumberCorrectWithCue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestGeneratedFWords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestRepeatedFWords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestFWordErrors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestGeneratedLWords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestRepeatedLWords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestLWordErrors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestTotalCorrectFAndLWords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestTotalFAndLViolationErrors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OverallAppraisal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Version)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAPartAdministered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAPartAdministeredCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAAdministered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCALanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCALanguageOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAVisualImpairment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAHearingImpairment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalRawScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCATrials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCACube)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAClockContour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAClockNumbers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAHands)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCANaming)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCARegistration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCADigits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCALetter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCASerial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCARepetition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAFluency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAAbstraction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCANoCue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCACategoryCue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCARecognition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCADate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAMonth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCADay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCAPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCACity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCATestsAdministered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCATestLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoCATestLanguageOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CraftStoryVerbatim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CraftStoryParaphrase)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BensonFigureScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberSpanTestForwardCorrectTrials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberSpanTestForwardLongestSpanForward)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberSpanTestBackwardCorrectTrials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberSpanTestBackwardLongestSpanBackward)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryFluencyAnimals)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryFluencyVegetables)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrailMakingTestASecondsToComplete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrailMakingTestANumberOfErrors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrailMakingTestANumberOfCorrect)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrailMakingTestBSecondsToComplete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrailMakingTestBNumberOfErrors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrailMakingTestBNumberOfCorrect)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CraftStoryRecallUnitsRecallVerbatim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CraftStoryRecallUnitsRecallParaphrase)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CraftStoryRecallUnitsRecallDelay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CraftStoryRecallCueNeeded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BensonComplexFigureRecallTotalDrawingScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BensonComplexFigureRecallRecognizedOriginalStiumulus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MINTTotalScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MINTTotalCorrectWithoutSemanticCue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MINTSemanticCuesNumberGiven)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MINTSemanticCuesNumberCorrectWithoutCue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MINTPhonemicCuesNumberGiven)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MINTPhonemicCuesNumberCorrectWithCue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerbalFluencyPhonemicTestGeneratedFWords)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerbalFluencyPhonemicTestRepeatedFWords)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerbalFluencyPhonemicTestFWordErrors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerbalFluencyPhonemicTestGeneratedLWords)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerbalFluencyPhonemicTestRepeatedLWords)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerbalFluencyPhonemicTestLWordErrors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerbalFluencyPhonemicTestTotalCorrectFAndLWords)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerbalFluencyPhonemicTestTotalFAndLViolationErrors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverallAppraisal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,455 @@
+@model IEnumerable<SubjectHealthHistory>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tobac30)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tobac100)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SmokingYears)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PackerPerDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuitSmoking)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlcoholConsumption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlcoholFrequency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeartAttack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeartAttackFreq)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeartAttackYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AtrialFibrillation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AngioplastyEndarterectomyStent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CardiacBypassProcedure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PacemakerAndOrDefibrillator)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CongestiveHeartFailure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Angina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeartValveReplacementOrRepair)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherCardiovascularDisease)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherCardiovascularDiseaseSpecify)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StrokeByHistory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoreThanOneStroke)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MostRecentStroke)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransientIschemicAttack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoreThanOneTIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearOfMostRecentTIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonsDisease)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearOfPDDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherParkinsonianDisorder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearOfParkinsonianDisorder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seizures)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TraumaticBrainInjury)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TBIBreif)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TBIExtend)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TBIWoLos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TBIYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diabetes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiabetesType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hypertension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hypercholesterolemia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.B12deficiency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThyroidDisease)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arthritis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthritisType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthritisTypeOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthUpperExtremity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthLowerExtremity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthSpine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArthUnknown)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncontinenceUrinary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncontinenceBowel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apnea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RBD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HyposomniaInsomnia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherSleepDisorder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherSleepDisorderSpecify)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlcoholAbuse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbuseOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbuseOtherSpecify)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PTSD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BipolarDisorder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schizophrenia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepressionLastTwoYears)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepressionPriorTwoYears)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Anxiety)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OCD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NpsyDev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PsychOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PsychOtherSpecify)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tobac30)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tobac100)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SmokingYears)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PackerPerDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuitSmoking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlcoholConsumption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlcoholFrequency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeartAttack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeartAttackFreq)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeartAttackYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AtrialFibrillation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AngioplastyEndarterectomyStent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardiacBypassProcedure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PacemakerAndOrDefibrillator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CongestiveHeartFailure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Angina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeartValveReplacementOrRepair)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherCardiovascularDisease)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherCardiovascularDiseaseSpecify)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StrokeByHistory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoreThanOneStroke)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MostRecentStroke)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransientIschemicAttack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoreThanOneTIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearOfMostRecentTIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonsDisease)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearOfPDDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherParkinsonianDisorder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearOfParkinsonianDisorder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seizures)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TraumaticBrainInjury)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TBIBreif)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TBIExtend)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TBIWoLos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TBIYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diabetes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiabetesType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hypertension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hypercholesterolemia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.B12deficiency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThyroidDisease)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arthritis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthritisType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthritisTypeOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthUpperExtremity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthLowerExtremity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthSpine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArthUnknown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncontinenceUrinary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncontinenceBowel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apnea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RBD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HyposomniaInsomnia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherSleepDisorder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherSleepDisorderSpecify)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlcoholAbuse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbuseOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbuseOtherSpecify)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PTSD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BipolarDisorder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Schizophrenia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepressionLastTwoYears)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepressionPriorTwoYears)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anxiety)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OCD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NpsyDev)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PsychOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PsychOtherSpecify)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

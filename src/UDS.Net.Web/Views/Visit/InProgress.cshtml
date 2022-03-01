@@ -1,0 +1,68 @@
+@model IEnumerable<Visit>
+
+@{
+    ViewData["Title"] = "In-progress";
+}
+
+<h2 class="display-4">Visits</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Urgency</th>
+            <th>
+                @Html.DisplayNameFor(model => model.FriendlyId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VisitDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VisitNumber)
+            </th>
+            <th>
+                Progress
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoordinatorInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClinicianInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SocialWorkerInitials)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td></td>
+            <td>
+                <a asp-controller="Participation" asp-action="Details" asp-route-id="@item.FriendlyId">@Html.DisplayFor(modelItem => item.FriendlyId)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitNumber)
+            </td>
+            <td>
+                1 of 19 complete
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoordinatorInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClinicianInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SocialWorkerInitials)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">View</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

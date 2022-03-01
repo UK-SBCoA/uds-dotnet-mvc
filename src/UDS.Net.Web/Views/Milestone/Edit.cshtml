@@ -1,0 +1,94 @@
+﻿@model Milestone
+@{
+    ViewData["Title"] = "Edit milestone";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <a asp-action="Details" asp-controller="Participation" asp-route-id="@Model.FriendlyId" class="btn btn-sm btn-outline-secondary"><i class="bi-arrow-left"></i> Back</a>
+        </div>
+    </div>
+    <div class="text-muted font-weight-light">
+        @if (Model.Participant.Profile != null)
+        {
+            @Model.Participant.Profile.DisplayName
+        }
+        @Html.DisplayFor(model => model.FriendlyId)
+
+    </div>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a asp-action="Details" asp-controller="Participation" asp-route-id="@Model.FriendlyId" class="btn btn-sm btn-outline-secondary">See all milestones</a>
+    </div>
+</div>
+
+<h2>M1 Milestones (February 18 Final, rev. 2/20)</h2>
+
+<div class="row">
+    <div class="col">
+        <p class="text-italic">Please submit a new Milestones Form as soon as possible after each milestone event has occurred.</p>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col">
+        <form asp-action="Edit" class="counterreset">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Which milesone type are you reporting?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-inline" asp-for="MilestoneType" id="MilestoneType[0]" value="A" />
+                                    <label class="form-check-label" for="MilestoneType[0]">Change followed by <span class="font-weight-light font-italic text-primary">CONTINUED CONTACT</span> with participant <span class="badge badge-pill badge-primary">A</span></label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-inline" asp-for="MilestoneType" id="MilestoneType[1]" value="B" />
+                                    <label class="form-check-label" for="MilestoneType[1]">Change followed by <span class="font-weight-light font-italic text-primary">NO FURTHER CONTACT</span> with participant <span class="badge badge-pill badge-primary">B</span></label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <partial name="_FormBoxA" model="Model" />
+            <partial name="_FormBoxB" model="Model" />
+
+            <input type="hidden" asp-for="Id" data-always-enabled />
+            <input type="hidden" asp-for="FriendlyId" data-always-enabled />
+            <input type="hidden" asp-for="FormStatus" data-always-enabled />
+            <div class="btn-group">
+                <input formnovalidate type="submit" name="save" value="Save" class="btn btn-primary" data-always-enabled />
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="px-3 py-4">
+                        <div class="form-group">
+                            <label asp-for="ExaminerInitials" class="control-label"></label>
+                            <input asp-for="ExaminerInitials" class="form-control" data-always-enabled />
+                            <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+                        </div>
+                        <input type="submit" name="complete" value="Complete" class="btn btn-primary" data-always-enabled />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/Milestones/ConditionalLogic.js"></script>
+    <script src="~/js/RadioFieldToggle.js"></script>
+    <script src="~/js/CheckBoxToggle.js"></script>
+}

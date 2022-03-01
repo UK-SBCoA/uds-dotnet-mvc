@@ -1,0 +1,57 @@
+﻿[
+    {
+        "Name": "DXMETHOD",
+        "Description": "Diagnosis method — responses in this form are based on diagnosis by",
+        "Codes": {
+            "1": "A single clinician",
+            "2": "A formal consensus panel",
+            "3": "Other (e.g., two or more clinicians or other informal group)"
+        }
+    },
+    {
+        "Name": "PPASYNT",
+        "Description": "If PPA present",
+        "Codes": {
+            "1": "Meets criteria for semantic PPA",
+            "2": "Meets criteria for logopenic PPA",
+            "3": "Meets criteria for nonfluent/agrammatic PPA",
+            "4": "PPA other/ not otherwise specified"
+        }
+    },
+    {
+        "Name": "FINDINGS",
+        "Description": "Codes for findings",
+        "Codes": {
+            "0": "No",
+            "1": "Yes",
+            "8": "Unknown/ not assessed"
+        }
+    },
+    {
+        "Name": "FINDINGSSUBS",
+        "Description": "Codes for findings",
+        "Codes": {
+            "0": "No",
+            "1": "Yes",
+            "9": "Unknown/ not assessed"
+        }
+    },
+    {
+        "Name": "ETIOLOGIC",
+        "Description": "Codes for etiologic diagnoses",
+        "Codes": {
+            "1": "Primary",
+            "2": "Contributing",
+            "3": "Non-contributing"
+        }
+    },
+    {
+        "Name": "ETIOLOGICSUBS",
+        "Description": "Codes for sub-questions",
+        "Codes": {
+            "0": "No",
+            "1": "Yes",
+            "9": "Unknown; no relevant imaging data available"
+        }
+    }
+]

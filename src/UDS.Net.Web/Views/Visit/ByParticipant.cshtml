@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Visit>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="display-4">Visits</h2>
+
+<p>
+    <a asp-action="Create" asp-route-friendlyId="@ViewBag.FriendlyId">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VisitNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VisitDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VisitType)
+            </th>
+            <th>
+                Coordinator
+            </th>
+            <th>
+                Clinician
+            </th>
+            <th>
+                Social worker
+            </th>
+            <th>Progress</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoordinatorInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClinicianInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SocialWorkerInitials)
+            </td>
+            <td>Progress</td>
+            <td>
+                @if (item.IsSubmittedToNACC == true)
+                {
+                    <a asp-action="Details" asp-route-id="@item.Id">View</a>
+                }
+                else
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

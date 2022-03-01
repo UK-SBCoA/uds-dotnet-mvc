@@ -1,0 +1,156 @@
+@model AdminVisitViewModel
+
+@{ ViewData["Title"] = "Visits"; }
+
+<h2 class="display-4">All visits</h2>
+<hr />
+<form class="form-inline mb-2" asp-action="Index" method="get">
+    <div class="input-group mr-2">
+        <div class="input-group-prepend">
+            <span style="background:transparent;" class="input-group-text"><i class="bi bi-search form-control-feedback"></i></span>
+        </div>
+        <input style="border-left: 0px;" class="form-control" asp-for="FriendlyId" placeholder="Search by friendly id">
+    </div>
+    <div class="input-group mr-2">
+        <select asp-for="VisitStatus" class="form-control text-secondary">
+            <option default value="">-- Narrow by visit status --</option>
+            <option value="InProgress">In-progress</option>
+            <option value="AwaitingConsensus">Awaiting consensus</option>
+            <option value="Prioritized">Prioritized</option>
+            <option value="Tabled">Tabled</option>
+            <option value="Complete">Complete</option>
+        </select>
+    </div>
+    <div class="input-group mr-2">
+        <label class="control-label text-muted mr-2"><small>Only show packets submitted to NACC</small></label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" asp-for="IsSubmittedToNACC" id="isSubmittedToNACCYes" value="true">
+            <label class="form-check-label" for="isSubmittedToNACCYes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" asp-for="IsSubmittedToNACC" id="isSubmittedToNACCNo" value="false">
+            <label class="form-check-label" for="isSubmittedToNACCNo">No</label>
+        </div>
+    </div>
+    <div class="input-group mr-2">
+        <button type="submit" class="btn btn-outline-primary btn-sm">Apply filters</button>
+    </div>
+    <div class="input-group mr-2">
+        <a asp-action="Index" asp-route-pageNumber="1" class="btn btn-link btn-sm">Reset</a>
+    </div>
+    <input type="hidden" asp-for="PageSize" />
+    <input type="hidden" asp-for="PageNumber" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Visit Date
+            </th>
+            <th>
+                Friendly Id
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Is Submitted to NACC
+            </th>
+            <th>
+                Visit Number
+            </th>
+            <th>
+                Visit Type
+            </th>
+            <th>
+                Coordinator Initials
+            </th>
+            <th>
+                Clinical Initials
+            </th>
+            <th>
+                Social Worker Initials
+            </th>
+            <th>
+                Last Edited By
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Visits.Count() > 0)
+        {
+    @foreach (var item in Model.Visits)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitDate)
+            </td>
+            <td>
+                <a asp-controller="Participation" asp-action="Details" asp-route-id="@item.FriendlyId">@Html.DisplayFor(modelItem => item.FriendlyId)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+                @if (item.Status == VisitStatus.Prioritized)
+                {
+        @Html.DisplayFor(modelItem => item.PriorityWeight)}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSubmittedToNACC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoordinatorInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClinicianInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SocialWorkerInitials)
+            </td>
+            <td class="text-muted">
+                <small>
+                    <span class="d-block">@item.ModifiedBy</span>
+                </small>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">View</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            </td>
+        </tr>} }
+                else
+                {<tr>
+                    <td colspan="9">
+                        <p class="lead text-center p-5 font-italic">
+                            No Visits Found
+                        </p>
+                    </td>
+                </tr>
+                    
+                }
+    </tbody>
+</table>
+
+@{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+       var nextDisabled = !Model.HasNextPage? "disabled" : ""; }
+
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageNumber - 1)"
+   asp-route-visitStatus="@Model.VisitStatus"
+   asp-route-friendlyId="@Model.FriendlyId"
+   class="btn btn-outline-secondary @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageNumber + 1)"
+   asp-route-visitStatus="@Model.VisitStatus"
+   asp-route-friendlyId="@Model.FriendlyId"
+   class="btn btn-outline-secondary @nextDisabled">
+    Next
+</a>

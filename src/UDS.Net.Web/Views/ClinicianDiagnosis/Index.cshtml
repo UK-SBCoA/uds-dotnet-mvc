@@ -1,0 +1,827 @@
+@model IEnumerable<ClinicianDiagnosis>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DiagnosisMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasNormalCognition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeetsCriteriaForDementia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmnesticMultiDomainPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PosteriorCorticalAtrophyPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrimaryProgressiveAphasiaPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrimaryProgressiveAphasiaType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BehavioralVariantFTDPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LewyBodyPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMultiDomainPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmnesticMCISingleDomainPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomains)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsLanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsAttention)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsExecutive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsVisuospatial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomain)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainLanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainAttention)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainExecutive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainVisuospatial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomains)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsLanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsAttention)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsExecutive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsVisuospatial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CognitivelyImpairedNotMCIPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbnormallyElevatedAmyloidInPET)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbnormallyLowAmyloidInCSF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FDGPETPattern)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HippocampalAtrophy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TauPETEvidenceForAD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbnormallyElevatedCSFTauOrPtau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TauPETEvidence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StructuralMREvidence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DopamineTransporterScanEvidence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherEvidenceExists)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherEvidenceSpecified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LargeVesselInfarcts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LacunarInfarcts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Macrohemorrhages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Microhemorrhages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModerateWhiteMatterHyperintensity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExtensiveWhiteMatterHyperintensity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DominantlyInheritedADMutation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HereditaryFTLDMutation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HereditaryMutationOther)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HereditaryMutationOtherSpecified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlzheimersDiseasePresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlzheimersDiseaseDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LewyBodyDiseasePresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LewyBodyDiseaseDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonsDiseasePresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MultipleSystemAtrophyPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MultipleSystemAtrophyDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgressiveSupranuclearPaslyPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgressiveSupranuclearPaslyDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticobasalDegenerationPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticobasalDegenerationDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FTLDWithMotorNeuronDiseasePresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FTLDWithMotorNeuronDiseaseDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FTLDNOSPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FTLDNOSDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FTLDSubtype)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FTLDSubtypeOtherSpecified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VascularBrainInjuryPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VascularBrainInjuryDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreviousSymptomaticStroke)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TemporalRelationshipBetweenStrokeAndCognitive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConfirmationOfStrokeByNeuroImaging)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagingEvidenceOfCysticInfarctionInCognitiveNetwork)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EssentialTremorPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EssentialTremorDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DownSyndromePresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DownSyndromeDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HuntingtonsDiseasePresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HuntingtonsDiseaseDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrionDiseasePresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrionDiseaseDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TraumaticBrainInjuryPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TraumaticBrainInjuryDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChronicTraumaticEncephalopathySymptom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NormalPressureHydrocephalusPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NormalPressureHydropcephalusDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpilepsyPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpilepsyDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNSNeoplasmPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNSNeoplasmDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNSNeoplasmType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HumanImmunodeficiencyVirusPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HumanImmunodeficiencyVirusDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherCognitiveImpairmentPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherCognitiveImpairmentDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherCognitiveImpairmentSpecified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActiveDepressionPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActiveDepressionDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActiveDepressionTreatment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BipolarDisorderPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BipolarDisorderDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchizophreniaPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchizophreniaDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnxietyDisorderPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnxietyDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliriumPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliriumDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostTraumaticStressDisorderPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostTraumaticStressDisorderDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherPsychiatricDiseasePresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherPsychiatricDiseaseDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherPsychiatricDiseaseSpecified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlcoholAbuse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlcoholAbuseDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentAlcoholAbuse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubstanceAbuse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubstanceAbuseDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SystemicDisease)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SystemicDiseaseDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medications)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicationsDiagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOS1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOS1Diagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOS1Specified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOS2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOS2Diagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOS2Specified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOS3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOS3Diagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOS3Specified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiagnosisMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasNormalCognition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetsCriteriaForDementia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmnesticMultiDomainPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PosteriorCorticalAtrophyPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimaryProgressiveAphasiaPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimaryProgressiveAphasiaType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BehavioralVariantFTDPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LewyBodyPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMultiDomainPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmnesticMCISingleDomainPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmnesticMCIMultipleDomains)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmnesticMCIMultipleDomainsLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmnesticMCIMultipleDomainsAttention)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmnesticMCIMultipleDomainsExecutive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmnesticMCIMultipleDomainsVisuospatial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCISingleDomain)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCISingleDomainLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCISingleDomainAttention)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCISingleDomainExecutive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCISingleDomainVisuospatial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCIMultipleDomains)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCIMultipleDomainsLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCIMultipleDomainsAttention)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCIMultipleDomainsExecutive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonAmnesticMCIMultipleDomainsVisuospatial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CognitivelyImpairedNotMCIPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbnormallyElevatedAmyloidInPET)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbnormallyLowAmyloidInCSF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FDGPETPattern)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HippocampalAtrophy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TauPETEvidenceForAD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbnormallyElevatedCSFTauOrPtau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TauPETEvidence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StructuralMREvidence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DopamineTransporterScanEvidence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherEvidenceExists)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherEvidenceSpecified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LargeVesselInfarcts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LacunarInfarcts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Macrohemorrhages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Microhemorrhages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModerateWhiteMatterHyperintensity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExtensiveWhiteMatterHyperintensity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DominantlyInheritedADMutation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HereditaryFTLDMutation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HereditaryMutationOther)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HereditaryMutationOtherSpecified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlzheimersDiseasePresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlzheimersDiseaseDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LewyBodyDiseasePresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LewyBodyDiseaseDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonsDiseasePresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MultipleSystemAtrophyPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MultipleSystemAtrophyDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgressiveSupranuclearPaslyPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgressiveSupranuclearPaslyDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticobasalDegenerationPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticobasalDegenerationDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FTLDWithMotorNeuronDiseasePresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FTLDWithMotorNeuronDiseaseDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FTLDNOSPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FTLDNOSDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FTLDSubtype)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FTLDSubtypeOtherSpecified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VascularBrainInjuryPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VascularBrainInjuryDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreviousSymptomaticStroke)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TemporalRelationshipBetweenStrokeAndCognitive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConfirmationOfStrokeByNeuroImaging)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImagingEvidenceOfCysticInfarctionInCognitiveNetwork)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EssentialTremorPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EssentialTremorDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DownSyndromePresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DownSyndromeDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HuntingtonsDiseasePresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HuntingtonsDiseaseDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrionDiseasePresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrionDiseaseDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TraumaticBrainInjuryPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TraumaticBrainInjuryDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChronicTraumaticEncephalopathySymptom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NormalPressureHydrocephalusPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NormalPressureHydropcephalusDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EpilepsyPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EpilepsyDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CNSNeoplasmPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CNSNeoplasmDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CNSNeoplasmType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HumanImmunodeficiencyVirusPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HumanImmunodeficiencyVirusDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherCognitiveImpairmentPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherCognitiveImpairmentDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherCognitiveImpairmentSpecified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveDepressionPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveDepressionDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveDepressionTreatment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BipolarDisorderPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BipolarDisorderDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchizophreniaPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchizophreniaDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnxietyDisorderPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnxietyDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliriumPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliriumDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostTraumaticStressDisorderPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostTraumaticStressDisorderDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherPsychiatricDiseasePresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherPsychiatricDiseaseDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherPsychiatricDiseaseSpecified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlcoholAbuse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlcoholAbuseDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentAlcoholAbuse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubstanceAbuse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubstanceAbuseDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SystemicDisease)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SystemicDiseaseDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medications)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicationsDiagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOS1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOS1Diagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOS1Specified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOS2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOS2Diagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOS2Specified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOS3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOS3Diagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOS3Specified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

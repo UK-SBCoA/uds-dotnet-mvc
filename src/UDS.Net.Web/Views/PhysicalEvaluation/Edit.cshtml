@@ -1,0 +1,268 @@
+@model PhysicalEvaluation
+@{
+    var title = "B1 Physical Evaluation";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+}
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+<div>
+    <p class="lead">INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see UDS Coding Guidebook for Initial Visit Packet, Form B1. Check <u>only</u> one box per question.</p>
+</div>
+
+<form method="POST" asp-action="Edit" class="counterreset">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="table-primary">
+                <th colspan="2">Subject physical measurements</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Height -->
+            <tr>
+                <td>
+                    <span class="counter"></span> <label asp-for="HeightInches"></label>
+                </td>
+                <td>
+                    <div class="form-row">
+                        <div class="col-2">
+                            <input asp-for="HeightInches" class="form-control" />
+                        </div>
+                        <div>
+                            <span>.</span>
+                        </div>
+                        <div class="col-2">
+                            <input maxlength="1" type="text" asp-for="HeightInchesDecimal" class="form-control" />
+                        </div>
+                        <div class="col">
+                            <p>(88.8 = not assessed)</p>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div>
+                                <span asp-validation-for="HeightInches" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <span asp-validation-for="HeightInchesDecimal" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <!-- Weight -->
+            <tr>
+                <td>
+                    <span class="counter"></span> <label asp-for="Weight"></label>
+                </td>
+                <td>
+                    <div class="form-row">
+                        <div class="col-2">
+                            <input asp-for="Weight" class="form-control" />
+                        </div>
+                        <div class="col">
+                            <p>(888 = not assessed)</p>
+                        </div>
+                    </div>
+
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+                </td>
+            </tr>
+            <!-- blood pressure initial reading -->
+            <tr>
+                <td>
+                    <span class="counter"></span> <label asp-for="BloodPressureSystolic"></label>
+                </td>
+                <td>
+                    <div class="form-row">
+                        <div class="col-2">
+                            <input asp-for="BloodPressureSystolic" class="form-control" />
+                        </div>
+                        <div>
+                            <span> / </span>
+                        </div>
+                        <div class="col-2">
+                            <input asp-for="BloodPressureDiastolic" class="form-control" />
+                        </div>
+                        <div class="col">
+                            <p>(888/888 = not assessed)</p>
+                        </div>
+                    </div>
+                    <div>
+                        <span asp-validation-for="BloodPressureSystolic" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <span asp-validation-for="BloodPressureDiastolic" class="text-danger"></span>
+                    </div>
+                </td>
+            </tr>
+            <!-- resting heart rate -->
+            <tr>
+                <td>
+                    <span class="counter"></span> <label asp-for="RestingHeartRate"></label>
+                </td>
+                <td>
+                    <div class="form-row">
+                        <div class="col-2">
+                            <input asp-for="RestingHeartRate" class="form-control" />
+                        </div>
+                        <div>
+                            <p>(888 = not assessed)</p>
+                        </div>
+                    </div>
+
+                    <span asp-validation-for="RestingHeartRate" class="text-danger"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <thead>
+            <tr class="table-primary">
+                <th>
+                    Additional physical observations
+                </th>
+                <th>
+                    No
+                </th>
+                <th>
+                    Yes
+                </th>
+                <th>
+                    Unknown
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="counter"></span> <label asp-for="SubjectsVision"></label>
+                    <span asp-validation-for="SubjectsVision" class="text-danger"></span>
+                </td>
+                <td>
+                    <input type="radio" asp-for="SubjectsVision" id="SubjectsVision[0]" value="0" />
+                    <label class="form-check-label" for="SubjectsVision[0]"> <span class="badge badge-pillbadge-light">0</span>No</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="SubjectsVision" id="SubjectsVision[1]" value="1" />
+                    <label class="form-check-label" for="SubjectsVision[1]"> <span class="badge badge-pillbadge-light">1</span>Yes</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="SubjectsVision" id="SubjectsVision[2]" value="9" />
+                    <label class="form-check-label" for="SubjectsVision[2]"> <span class="badge badge-pillbadge-light">9</span>Unknown</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="counter"></span> <label asp-for="CorrectiveLenses"></label>
+                    <div>(If no or unknown, <b>SKIP TO QUESTION 7)</b></div>
+                    <span asp-validation-for="CorrectiveLenses" class="text-danger"></span>
+                </td>
+                <td>
+                    <input type="radio" asp-for="CorrectiveLenses" id="CorrectiveLenses[0]" value="0" data-toggle-values="[0,9]" data-toggle-targets="CorrectiveLensesNormal" />
+                    <label class="form-check-label" for="CorrectiveLenses[0]"> <span class="badge badge-pillbadge-light">0</span>No</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="CorrectiveLenses" id="CorrectiveLenses[1]" value="1" data-toggle-values="[0,9]" data-toggle-targets="CorrectiveLensesNormal" />
+                    <label class="form-check-label" for="CorrectiveLenses[1]"> <span class="badge badge-pillbadge-light">1</span>Yes</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="CorrectiveLenses" id="CorrectiveLenses[2]" value="9" data-toggle-values="[0,9]" data-toggle-targets="CorrectiveLensesNormal" />
+                    <label class="form-check-label" for="CorrectiveLenses[2]"> <span class="badge badge-pillbadge-light">9</span>Unknown</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span><b>6a.</b></span> <label for="CorrectiveLensesNormal">If yes, is the subject's vision functionally normal <u>with</u> corrective lenses?</label>
+                    <span asp-validation-for="CorrectiveLensesNormal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input type="radio" asp-for="CorrectiveLensesNormal" id="CorrectiveLensesNormal[0]" value="0" />
+                    <label class="form-check-label" for="CorrectiveLensesNormal[0]"> <span class="badge badge-pillbadge-light">0</span>No</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="CorrectiveLensesNormal" id="CorrectiveLensesNormal[1]" value="1" />
+                    <label class="form-check-label" for="CorrectiveLensesNormal[1]"> <span class="badge badge-pillbadge-light">1</span>Yes</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="CorrectiveLensesNormal" id="CorrectiveLensesNormal[2]" value="9" />
+                    <label class="form-check-label" for="CorrectiveLensesNormal[2]"> <span class="badge badge-pillbadge-light">9</span>Unknown</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="counter"></span> <label asp-for="SubjectsHearing"></label>
+                    <span asp-validation-for="SubjectsHearing" class="text-danger"></span>
+                </td>
+                <td>
+                    <input type="radio" asp-for="SubjectsHearing" id="SubjectsHearing[0]" value="0" />
+                    <label class="form-check-label" for="SubjectsHearing[0]"> <span class="badge badge-pillbadge-light">0</span>No</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="SubjectsHearing" id="SubjectsHearing[1]" value="1" />
+                    <label class="form-check-label" for="SubjectsHearing[1]"> <span class="badge badge-pillbadge-light">1</span>Yes</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="SubjectsHearing" id="SubjectsHearing[2]" value="9" />
+                    <label class="form-check-label" for="SubjectsHearing[2]"> <span class="badge badge-pillbadge-light">9</span>Unknown</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="counter"></span> <label asp-for="HearingAids"></label>
+                    <div>(If no or unknown, <b>END FORM HERE)</b></div>
+                    <span asp-validation-for="HearingAids" class="text-danger"></span>
+                </td>
+                <td>
+                    <input type="radio" asp-for="HearingAids" id="HearingAids[0]" value="0" data-toggle-values="[0,9]" data-toggle-targets="HearingAidsNormal" />
+                    <label class="form-check-label" for="HearingAids[0]"> <span class="badge badge-pillbadge-light">0</span>No</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="HearingAids" id="HearingAids[1]" value="1" data-toggle-values="[0,9]" data-toggle-targets="HearingAidsNormal" />
+                    <label class="form-check-label" for="HearingAids[1]"> <span class="badge badge-pillbadge-light">1</span>Yes</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="HearingAids" id="HearingAids[2]" value="9" data-toggle-values="[0,9]" data-toggle-targets="HearingAidsNormal" />
+                    <label class="form-check-label" for="HearingAids[2]"> <span class="badge badge-pillbadge-light">9</span>Unknown</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span><b>8a.</b></span> <label for="HearingAidsNormal">If yes, is the subject's hearing functionally normal <u>with</u> hearing aid(s)?</label>
+                    <span asp-validation-for="HearingAidsNormal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input type="radio" asp-for="HearingAidsNormal" id="HearingAidsNormal[0]" value="0" />
+                    <label class="form-check-label" for="HearingAidsNormal[0]"> <span class="badge badge-pillbadge-light">0</span>No</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="HearingAidsNormal" id="HearingAidsNormal[1]" value="1" />
+                    <label class="form-check-label" for="HearingAidsNormal[1]"> <span class="badge badge-pillbadge-light">1</span>Yes</label>
+                </td>
+                <td>
+                    <input type="radio" asp-for="HearingAidsNormal" id="HearingAidsNormal[2]" value="9" />
+                    <label class="form-check-label" for="HearingAidsNormal[2]"> <span class="badge badge-pillbadge-light">9</span>Unknown</label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <small>Adapted with permission.</small>
+        <p class="reference">Copyright© 2006, 2008, 2015 University of Washington. Created and published by the ADC Clinical Task Force (John C. Morris, MD, Chair) and the National Alzheimer's Coordinating Center (U01 AG016076 - Walter A. Kukull, PhD, Director).</p>
+    </div>
+    <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/RadioFieldToggle.js"></script>
+}

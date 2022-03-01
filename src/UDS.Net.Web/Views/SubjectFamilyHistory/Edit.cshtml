@@ -1,0 +1,656 @@
+﻿@model SubjectFamilyHistory;
+@{ var title = "A3 Subject Family History";
+                var visitInfo = "";
+                if (visitInfo == null)
+                {
+                    visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+                }
+                ViewData["Title"] = title + visitInfo; }
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+<form asp-action="Edit">
+    <h2>
+        Form A3: Subject Family History
+    </h2>
+    <input type="hidden" asp-for="Visit.VisitType"> 
+    <!-- Information Section -->
+    @if(Model.Visit.VisitType != VisitType.IVP)
+    {
+    <div class="card mb-2">
+            <div class="card-body">
+                <b>
+                    SPECIAL INSTRUCTIONS for subjects who are receiving UDS Version 3 of Form A3 for the first time:
+                </b>
+                <br />
+                <em>
+                    NOTE: A subject is receiving UDS v3 Form A3 for the first time if:
+                </em>
+                <ul class="list-unstyled pl-3">
+                    <li>No A3 data has been submitted yet for this subject –OR–</li>
+                    <li>A3 data has been submitted for this subject, but it was collected using UDS v2</li>
+                </ul>
+                <b>
+                    For such subjects, you must fill out this form in its entirety, meaning:
+                </b>
+                <ol>
+                    <li>
+                        You must answer <b>1=Yes</b> to Question 1 on genetic mutations and complete 2a — 4b.
+                    </li>
+                    <li>
+                        You must answer <b>1=Yes</b> to Question 5 on parents and complete 5a — 5b.
+                    </li>
+                    <li>
+                        You must answer <b>1=Yes</b> to Question 6a on siblings and complete 6a — 6t, as appropriate.
+                    </li>
+                    <li>
+                        You must answer <b>1=Yes</b> to Question 7a on children and complete 7a — 7o, as appropriate.
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="card mb-2">
+            <div class="card-body">
+                <b>Corrections or new information on previously submitted family members</b> — For family members who were denoted as being "affected" with a neurological or psychiatric condition or who were not affected at a previous UDS visit, any corrections to their data should be made to that previous A3 Form. Any newly obtained information (e.g., new mutation information, new diagnoses, new method of evaluation), including for family members previously reported as being affected at a past UDS visit, should be indicated on this form and should not be submitted as a correction to a previously submitted Form A3.
+            </div>
+        </div>
+    }
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                @if (Model.Visit.VisitType == VisitType.IVP)
+                {
+                    <td>
+                        1. Are there affected first-degree relatives (biological parents, full siblings, or biological children)?
+                        <br />
+                        <em>“Affected” = having dementia or one of the non-normal diagnoses listed in Appendix 1 at the end of this form</em>
+                        <br />
+                        <span class="text-danger" asp-validation-for="AffectedRelatives"></span>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AffectedRelatives" id="AffectedRelatives1" value="0">
+                                <label class="form-check-label" for="AffectedRelatives1">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AffectedRelatives" id="AffectedRelatives2" value="1">
+                                <label class="form-check-label" for="AffectedRelatives2">No</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AffectedRelatives" id="AffectedRelatives3" value="9">
+                                <label class="form-check-label" for="AffectedRelatives3">Unknown</label>
+                            </div>
+                        </div>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        1. Since the last visit, is new information available concerning genetic mutations addressed by Questions 2a through 4b, below?
+                        <br />
+                        <em>“Affected” = having dementia or one of the non-normal diagnoses listed in Appendix 1 at the end of this form</em>
+                        <br />
+                        <span class="text-danger" asp-validation-for="NewInfo"></span>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input data-toggle-values="[0,9]" data-toggle-targets="AD_Source,AD_Evidence,FTLD_Source,FTLD_Evidence,Other_Source,Other_Evidence" class="form-check-input" type="radio" asp-for="NewInfo" id="NewInfo1" value="0">
+                                <label class="form-check-label" for="NewInfo1">0 No <b>(SKIP TO QUESTION 5)</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input data-toggle-values="[0,9]" data-toggle-targets="AD_Source,AD_Evidence,FTLD_Source,FTLD_Evidence,Other_Source,Other_Evidence" class="form-check-input" type="radio" asp-for="NewInfo" id="NewInfo2" value="1">
+                                <label class="form-check-label" for="NewInfo2">1 Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input data-toggle-values="[0,9]" data-toggle-targets="AD_Source,AD_Evidence,FTLD_Source,FTLD_Evidence,Other_Source,Other_Evidence" class="form-check-input" type="radio" asp-for="NewInfo" id="NewInfo3" value="9">
+                                <label class="form-check-label" for="NewInfo3">9 Unknown<b>(SKIP TO QUESTION 5)</b></label>
+                            </div>
+
+                        </div>
+                    </td>
+
+
+                }
+            </tr>
+            <tr>
+                <td>
+                    2a. In this family, is there evidence for an AD mutation? If Yes, select predominant mutation.
+                    <br />
+                    NOTE: APOE should not be reported here.
+                    <br />
+                    <span class="text-danger" asp-validation-for="AD_Evidence"></span>
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="AD_Source" class="form-check-input" type="radio" asp-for="AD_Evidence" id="AD_Evidence1" value="0">
+                        <label class="form-check-label" for="AD_Evidence1">0 No <b>(SKIP TO QUESTION 3a)</b></label>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="AD_Source" class="form-check-input" type="radio" asp-for="AD_Evidence" id="AD_Evidence2" value="1">
+                        <label class="form-check-label" for="AD_Evidence2">1 Yes, APP</label>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="AD_Source" class="form-check-input" type="radio" asp-for="AD_Evidence" id="AD_Evidence3" value="2">
+                        <label class="form-check-label" for="AD_Evidence3">2 Yes, PS-1 (PSEN-1)</label>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="AD_Source" class="form-check-input" type="radio" asp-for="AD_Evidence" id="AD_Evidence4" value="3">
+                        <label class="form-check-label" for="AD_Evidence4">3 Yes, PS-2 (PSEN-2)</label>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="AD_Source" class="form-check-input" type="radio" asp-for="AD_Evidence" id="AD_Evidence5" value="8">
+                        <label class="form-check-label" for="AD_Evidence5">8 Yes, other <b>(SPECIFY)</b>:</label>
+                        <input class="form-control" asp-for="AD_Evidence_Specify" />
+                        <span class="text-danger" asp-validation-for="AD_Evidence_Specify"></span>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="AD_Source" class="form-check-input" type="radio" asp-for="AD_Evidence" id="AD_Evidence6" value="9">
+                        <label class="form-check-label" for="AD_Evidence6">9 Unknown whether mutation exists <b>(SKIP TO QUESTION 3a)</b></label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    2b. Source of evidence for AD mutation (check one):
+                    <br />
+                    <span class="text-danger" asp-validation-for="AD_Source"></span>
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="AD_Source" id="AD_Source1" value="1">
+                        <label class="form-check-label" for="AD_Source1">
+                            1 Family report (no test documentation available)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="AD_Source" id="AD_Source2" value="2">
+                        <label class="form-check-label" for="AD_Source2">
+                            2 Commercial test documentation
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="AD_Source" id="AD_Source3" value="3">
+                        <label class="form-check-label" for="AD_Source3">
+                            3 Research lab test documentation
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="AD_Source" id="AD_Source4" value="8">
+                        <label class="form-check-label" for="AD_Source4">
+                            8 Other <b>(SPECIFY)</b>:
+                        </label>
+                        <input class="form-control" asp-for="AD_Source_Specify" />
+                        <span class="text-danger" asp-validation-for="AD_Source_Specify"></span>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="AD_Source" id="AD_Source5" value="9">
+                        <label class="form-check-label" for="AD_Source5">9 Unknown</label>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    3a. In this family, is there evidence for an FTLD mutation? If Yes, select predominant mutation.
+                    <br />
+                    <span class="text-danger" asp-validation-for="FTLD_Evidence"></span>
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="FTLD_Source" class="form-check-input" type="radio" asp-for="FTLD_Evidence" id="FTLD_Evidence1" value="0">
+                        <label class="form-check-label" for="FTLD_Evidence1">0 No <b>(SKIP TO QUESTION 4a)</b></label>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="FTLD_Source" class="form-check-input" type="radio" asp-for="FTLD_Evidence" id="FTLD_Evidence2" value="1">
+                        <label class="form-check-label" for="FTLD_Evidence2">1 Yes, MAPT</label>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="FTLD_Source" class="form-check-input" type="radio" asp-for="FTLD_Evidence" id="FTLD_Evidence3" value="2">
+                        <label class="form-check-label" for="FTLD_Evidence3">2 Yes, PGRN</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="FTLD_Evidence" id="FTLD_Evidence4" value="3">
+                        <label class="form-check-label" for="FTLD_Evidence4">3 Yes, C9orf72</label>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="FTLD_Source" class="form-check-input" type="radio" asp-for="FTLD_Evidence" id="FTLD_Evidence5" value="4">
+                        <label class="form-check-label" for="FTLD_Evidence5">3 Yes, FUS</label>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="FTLD_Source" class="form-check-input" type="radio" asp-for="FTLD_Evidence" id="FTLD_Evidence6" value="8">
+                        <label class="form-check-label" for="FTLD_Evidence6">8 Yes, other <b>(SPECIFY)</b>:</label>
+                        <input class="form-control" asp-for="FTLD_Evidence_Specify" />
+                        <span class="text-danger" asp-validation-for="FTLD_Evidence_Specify"></span>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0]" data-toggle-targets="FTLD_Source" class="form-check-input" type="radio" asp-for="FTLD_Evidence" id="FTLD_Evidence7" value="9">
+                        <label class="form-check-label" for="FTLD_Evidence7">9 Unknown whether mutation exists <b>(SKIP TO QUESTION 3a)</b></label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    3b. Source of evidence for FTLD mutation (check one):
+                    <br />
+                    <span class="text-danger" asp-validation-for="FTLD_Source"></span>
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="FTLD_Source" id="FTLD_Source1" value="1">
+                        <label class="form-check-label" for="FTLD_Source1">
+                            1 Family report (no test documentation available)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="FTLD_Source" id="FTLD_Source2" value="2">
+                        <label class="form-check-label" for="FTLD_Source2">
+                            2 Commercial test documentation
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="FTLD_Source" id="FTLD_Source3" value="3">
+                        <label class="form-check-label" for="FTLD_Source3">
+                            3 Research lab test documentation
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="FTLD_Source" id="FTLD_Source4" value="8">
+                        <label class="form-check-label" for="FTLD_Source4">
+                            8 Other <b>(SPECIFY)</b>:
+                        </label>
+                        <input class="form-control" asp-for="FTLD_Source_Specify" />
+                        <span class="text-danger" asp-validation-for="FTLD_Source_Specify"></span>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="FTLD_Source" id="FTLD_Source5" value="9">
+                        <label class="form-check-label" for="FTLD_Source5">9 Unknown</label>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    4a. In this family, is there evidence for a mutation other than an AD or FTLD mutation?
+                    <br />
+                    <span class="text-danger" asp-validation-for="Other_Evidence"></span>
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input data-toggle-values="[0, 9]" data-toggle-targets="Other_Source" class="form-check-input" type="radio" asp-for="Other_Evidence" id="Other_Evidence1" value="0">
+                        <label class="form-check-label" for="Other_Evidence1">No <b>(SKIP TO QUESTION 5)</b></label>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0, 9]" data-toggle-targets="Other_Source" class="form-check-input" type="radio" asp-for="Other_Evidence" id="Other_Evidence2" value="1">
+                        <label class="form-check-label" for="Other_Evidence2">Yes <b>(SPECIFY)</b></label>
+                        <input class="form-control" asp-for="Other_Evidence_Specify" />
+                        <span class="text-danger" asp-validation-for="Other_Evidence_Specify"></span>
+                    </div>
+                    <div class="form-check">
+                        <input data-toggle-values="[0, 9]" data-toggle-targets="Other_Source" class="form-check-input" type="radio" asp-for="Other_Evidence" id="Other_Evidence3" value="9">
+                        <label class="form-check-label" for="Other_Evidence3">Unknown <b>(SKIP TO QUESTION 5)</b></label>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    4b. Source of evidence for Other mutation (check one):
+                    <br />
+                    <span class="text-danger" asp-validation-for="Other_Source"></span>
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="Other_Source" id="Other_Source1" value="1">
+                        <label class="form-check-label" for="Other_Source1">
+                            1 Family report (no test documentation available)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="Other_Source" id="Other_Source2" value="2">
+                        <label class="form-check-label" for="Other_Source2">
+                            2 Commercial test documentation
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="Other_Source" id="Other_Source3" value="3">
+                        <label class="form-check-label" for="Other_Source3">
+                            3 Research lab test documentation
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="Other_Source" id="Other_Source4" value="8">
+                        <label class="form-check-label" for="Other_Source4">
+                            8 Other <b>(SPECIFY)</b>:
+                        </label>
+                        <input class="form-control" asp-for="Other_Source_Specify" />
+                        <span class="text-danger" asp-validation-for="Other_Source_Specify"></span>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="Other_Source" id="Other_Source5" value="9">
+                        <label class="form-check-label" for="Other_Source5">9 Unknown</label>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <!-- Parents -->
+    <div class="card">
+        <div class="card-header text-white bg-primary mb-3">
+            <h5>BIOLOGICAL PARENTS</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Visit.VisitType == VisitType.IVP)
+            {
+                <p>
+                    Provide information on biological parents below. If birth year is unknown, please provide an approximate year on the Initial Visit Form A3 and
+                    ensure that it is consistently reported on any Follow-up Visit Form A3, as applicable. If it is impossible for the subject and co-participant to
+                    estimate the birth year, enter <em>9999=Unknown</em>.
+                </p>
+                <br />
+                <p>
+                    For any biological parent with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the
+                    primary neurological problem/psychiatric condition after reviewing all available evidence, enter <em>9=Unknown</em> in the <b>Primary neurological problem/ psychiatric condition</b>
+                    column, and then skip the subsequent questions in the row. For a biological parent with no neurological or psychiatric problem, enter 8=N/A —
+                    <em>no neurological problem or psychiatric condition</em> in the<b>Primary neurological problem/psychiatric condition</b> column, and then skip the subsequent questions in the row.
+                </p>
+            }
+            else
+            {
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label class="control-label">5. Since the last UDS visit, is new information available concerning the status of the subject’s biological mother or father ?</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check form-check-inline">
+                                <!-- Rename this field to parent-->
+                                <input class="form-check-input" type="radio" asp-for="ParentChange" id="ParentChange1" value="0">
+                                <label class="form-check-label" for="ParentChange1">
+                                    0 No <b>(SKIP TO QUESTION 6) </b>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" asp-for="ParentChange" id="ParentChange2" value="1">
+                                <label class="form-check-label" for="ParentChange2">
+                                    1 Yes <b>(COMPLETE QUESTIONS 5A-5B, AS APPLICABLE)</b>
+                                </label>
+                            </div>
+                            <br />
+                            <span class="text-danger" asp-validation-for="ParentChange"></span>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    If birth year is unknown, please provide an approximate year on the Initial Visit Form A3 and ensure that it is consistently reported on all Forms A3 submitted (Initial Visit and Follow-up).
+                    If it is impossible for the subject and co-participant to estimate year of birth, enter 9999=Unknown. For any biological parent with a neurological or psychiatric problem,
+                    the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence,
+                    enter 9=Unknown in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row.
+                    If the parent has no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/psychiatric condition column,
+                    and then skip the subsequent questions in the row.
+                </p>
+            }
+        </div>
+        <div class="table-responsive">
+            <table id="ParentTable" class="table table-bordered">
+                <thead>
+                    <partial name="./_RelativeHead">
+                </thead>
+                <tbody>
+                    @{ int relativeIndex = 0; }
+                    @foreach (var parent in Model.Relatives.Where(x => x.Relation == FamilyRelationship.Mother || x.Relation == FamilyRelationship.Father).OrderBy(x => x.RelationshipNumber))
+                    {
+                        var rel = new RelativeRowViewModel { Index = relativeIndex, Relative = parent };
+                        @await Html.PartialAsync("_RelativeRow", rel);
+                        relativeIndex++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <partial name="./_CodeList.cshtml" />
+    <!-- Siblings -->
+    <div class="card">
+        <div class="card-header text-white bg-primary mb-3">
+            <h5>FULL SIBLINGS</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label class="control-label">
+                    6. How many full siblings does the subject have? <input class="form-control" asp-for="SiblingNumber" /><br>
+                    <span class="text-danger" asp-validation-for="SiblingNumber"></span>
+                </label>
+                @if (Model.Visit.VisitType == VisitType.IVP)
+                {
+                    <p>
+                        If subject has no full siblings, <b>SKIP TO QUESTION 7</b>; otherwise, provide information on all full siblings below.
+                    </p>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col">
+                            <label>6. Since the last UDS visit, is new information available concerning the status of the subject’s siblings?</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <!-- Rename this field to parent-->
+                                    <input class="form-check-input" type="radio" asp-for="SiblingChange" id="SiblingChange1" value="0">
+                                    <label class="form-check-label" for="SiblingChange1">
+                                        0 No <b>(SKIP TO QUESTION 7)   </b>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="SiblingChange" id="SiblingChange2" value="1">
+                                    <label class="form-check-label" for="SiblingChange2">
+                                        1 Yes <b>(COMPLETE QUESTIONS 6aa-6at, AS APPLICABLE)</b>
+                                    </label>
+                                </div>
+                                <br />
+                                <span class="text-danger" asp-validation-for="SiblingChange"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+                <p>
+                    For any full sibling with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the
+                    primary neurological problem/psychiatric condition after reviewing all available evidence, enter <em>9=Unknown</em> in the <b>Primary neurological problem/psychiatric condition</b> column
+                    , and then skip the subsequent questions in the row. For a sibling with no neurological or psychiatric problem, enter <em>8=N/A</em> — no neurological problem or psychiatric condition
+                    in the <b>Primary neurological problem/psychiatric condition</b> column, and then skip the subsequent questions in the row.
+                </p>
+                <table id="SiblingTable" class="table table-bordered">
+                    <thead>
+                        <partial name="./_RelativeHead">
+                    </thead>
+                    <tbody>
+                        @foreach (var sibling in Model.Relatives.Where(x => x.Relation == FamilyRelationship.Sibling).OrderBy(x => x.RelationshipNumber))
+                        {
+                            var rel = new RelativeRowViewModel { Index = relativeIndex, Relative = sibling };
+                            @await Html.PartialAsync("_RelativeRow", rel);
+                            relativeIndex++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <partial name="./_CodeList.cshtml" />
+    <!-- Children -->
+    <div class="card">
+        <div class="card-header text-white bg-primary mb-3">
+            <h5>BIOLOGICAL CHILDREN</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label class="control-label">
+                    7. How many biological children does the subject have? <input class="form-control" asp-for="ChildrenNumber" />
+                    <br>
+                    <span class="text-danger" asp-validation-for="ChildrenNumber"></span>
+                </label>
+                @if (Model.Visit.VisitType == VisitType.IVP)
+                {
+                    <p>
+                        If subject has no biological children, <em>END FORM HERE</em>; otherwise, provide information on all biological children below.
+                    </p>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col">
+                            <label>6. Since the last UDS visit, is new information available concerning the status of the subject’s siblings?</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <!-- Rename this field to parent-->
+                                    <input class="form-check-input" type="radio" asp-for="ChildrenChange" id="ChildrenChange1" value="0">
+                                    <label class="form-check-label" for="ChildrenChange1">
+                                        0 No <b>(END FORM HERE) </b>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="ChildrenChange" id="ChildrenChange2" value="1">
+                                    <label class="form-check-label" for="ChildrenChange2">
+                                        1 Yes <b>(COMPLETE QUESTIONS 7aa-7ao, AS APPLICABLE)</b>
+                                    </label>
+                                </div>
+                                <br />
+                                <span class="text-danger" asp-validation-for="SiblingChange"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+                <br />
+                <p>
+                    For any biological child with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the
+                    primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the <em>Primary neurological problem/psychiatric condition</em>
+                    column, and then skip the subsequent questions in the row. For a biological child with no neurological or psychiatric problem,
+                    enter <em>8=N/A </em>— no neurological problem or psychiatric condition in the <em>Primary neurological problem/ psychiatric condition</em> column, and then skip the subsequent questions in the row.
+                </p>
+                <div class="table-responsive">
+                    <table id="ChildrenTable" class="table table-bordered">
+                        <thead>
+                            <partial name="./_RelativeHead">
+                        </thead>
+                        <tbody>
+                            @foreach (var child in Model.Relatives.Where(x => x.Relation == FamilyRelationship.Child).OrderBy(x => x.RelationshipNumber))
+                            {
+                                var rel = new RelativeRowViewModel { Index = relativeIndex, Relative = child };
+                                @await Html.PartialAsync("_RelativeRow", rel);
+                                relativeIndex++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <partial name="./_CodeList.cshtml" />
+    <div class="row">
+        <div class="col">
+            <table id="PrimaryDiagnosisCodes" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <sup>2</sup>APPENDIX 1: PRIMARY DIAGNOSIS CODES
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (KeyValuePair<string, string> code in ViewBag.PrimaryDiagnosis.Codes)
+                    {
+                        <tr>
+                            <td>
+                                @code.Key @code.Value
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <ol style="list-style:">
+                <li>
+                    <p>
+                        <b>Autopsy</b>
+                        <br />
+                        If the autopsy was performed at an outside institution, <b>you must have the report</b> to code as diagnosis by autopsy.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>Examination</b>
+                        <br />
+                        The subject must have been examined in person at your ADC/institution or by genetic studies staff associated with your ADC/institution to code as diagnosis by examination. Medical records may or may not have been used when assigning diagnosis.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>
+                            Medical record review from formal dementia evaluation
+                        </b>
+                        <br />
+                        Medical records should be from an examination that focused specifically on dementia; that was performed by a neurologist, geriatrician, or psychiatrist; and that includes a neurologic examination, an imaging study, and cognitive testing (e.g., MMSE, Blessed, or more formal tests). A telephone interview may also be used to collect additional information.                        <br />
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>
+                            Review of general medical records AND co-participant and/or subject telephone interview
+                        </b>
+                        <br />
+                        General medical records can be of various types, including those from a primary-care physician’s office, hospitalization records, nursing home records, etc. They may include a neurologic exam and a cognitive test such as the MMSE along with a medical history. The telephone interview with the subject and/or the co-participant should include a medical history to capture the nature and presentation of cognitive deficits, if present, and age of onset if symptomatic. If the subject is normal or is in the early stages of cognitive impairment, brief formal cognitive testing should be included in the interview.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>
+                            Review of general medical records ONLY
+                        </b>
+                        <br />
+                        See definition No. 4 above. If general medical records are used to diagnose a subject as demented or not demented, they should include a medical history, neurologic exam, and a cognitive test such as an MMSE. In most cases, general medical records alone should not be used to assign a diagnosis of mild cognitive impairment, or of any of the FTLD spectrum subtypes, or of parkinsonian disorders other than Parkinson’s disease.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>
+                            Subject and/or co-participant telephone interview
+                        </b>
+                        <br />
+                        See definition No. 4 above.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>
+                            Family report
+                        </b>
+                        <br />
+                        Family report should be coded when the co-participant for the family reports a subject as having been diagnosed with a particular disorder. In most cases, family report alone should not be used to assign a diagnosis of mild cognitive impairment, or of any of the FTLD spectrum subtypes, or of parkinsonian disorders other than Parkinson’s disease.
+                    </p>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/RadioFieldToggle.js"></script>
+    <script src="~/js/SubjectFamilyHistory/Edit.js"></script>
+}

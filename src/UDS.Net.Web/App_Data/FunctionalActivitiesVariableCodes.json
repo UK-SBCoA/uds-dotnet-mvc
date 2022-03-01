@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "BasicResponse",
+    "Description": "Basic Codes",
+    "Codes": {
+      "8":"Not applicable (e.g., never did)",
+      "0": "Normal",
+      "1": "Has difficulty, but does by self",
+      "2": "Requires assistance",
+      "3": "Dependent",
+      "9": "Unknown"
+    }
+  }
+]

@@ -1,0 +1,60 @@
+﻿@model Milestone
+@{
+}
+
+<tr>
+    <td>
+        @if (Model.DateOfDeathYear.HasValue)
+        {
+            <span>@string.Format("{0}-{1}-{2}", Model.DateOfDeathYear, Model.DateOfDeathMonth, Model.DateOfDeathDay)</span>
+        }
+        else if (Model.WithdrawnYear.HasValue)
+        {
+            <span>@string.Format("{0}-{1}-{2}", Model.WithdrawnYear, Model.WithdrawnMonth, Model.WithdrawnMonth)</span>
+        }
+    </td>
+    <td>
+        <p>Change followed by NO FURTHER CONTACT</p>
+    </td>
+    <td>
+        @if (Model.ParticipantIsDeceased.HasValue && Model.ParticipantIsDeceased.Value == true)
+        {
+            <span>Participant has died.</span>
+        }
+        else if (Model.ParticipantHasWithdrawn.HasValue && Model.ParticipantHasWithdrawn.Value == true)
+        {
+            <span>Participant has been dropped from ADC.</span>
+        }
+    </td>
+    <td>
+        @if (Model.IsSubmittedToNACC)
+        {
+            <small>Submitted to NACC</small>
+        }
+        else
+        {
+            @Model.FormStatus
+        }
+    </td>
+    <td>
+        <a asp-controller="Milestone" asp-action="Details" asp-route-id="@Model.Id">View</a>
+        @if (Model.IsSubmittedToNACC)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Milestone" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            }
+        }
+        else
+        {
+            <a asp-controller="Milestone" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+
+            if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Milestone" asp-action="Remove" asp-route-id="@Model.Id">Remove</a>
+            }
+        }
+
+
+    </td>
+</tr>

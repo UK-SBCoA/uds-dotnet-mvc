@@ -1,0 +1,58 @@
+@model MedicationReferenceWithOriginatingVisit
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Medication Reference</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="MedicationReference" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MedicationReference.DrugId" class="control-label"></label>
+                <input asp-for="MedicationReference.DrugId" class="form-control" />
+                <span asp-validation-for="MedicationReference.DrugId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicationReference.DisplayName" class="control-label"></label>
+                <input asp-for="MedicationReference.DisplayName" class="form-control" />
+                <small id="displayNameHelpBlock" class="form-text text-muted">
+                    Example: acetaminophen (Anacin, Tempra, Tylenol)
+                </small>
+                <span asp-validation-for="MedicationReference.DisplayName" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="MedicationReference.IsOverTheCounter" /> @Html.DisplayNameFor(model => model.MedicationReference.IsOverTheCounter)
+                </label>
+            </div>
+            <input type="hidden" asp-for="MedicationReference.FromNACCDefaultReference" value="false" />
+            <input type="hidden" asp-for="VisitId" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <div class="card text-white bg-info m-3">
+            <h5 class="card-header">Medication Lookup</h5>
+            <div class="card-body">
+                <h5 class="card-title">Use NACC's tool to find drugID</h5>
+                <p class="card-text">Create a new reference for the drug or brand name and determine its drugID by using the Lookup Tool on the NACC website.</p>
+                <a class="btn btn-warning" href="https://www.alz.washington.edu/MEMBER/DrugCodeLookUp.html" target="_blank">NACC Lookup Tool</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">View full Medications Reference</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

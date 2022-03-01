@@ -1,0 +1,311 @@
+@model IEnumerable<NeurologicalExaminationFindings>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AbnormalNeurologicalExamFindings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianSigns)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianLeftRestingTremorArm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianRightRestingTremorArm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianRightSlowingOfFineMotorMovements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianLeftSlowingOfFineMotorMovements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianRightRigidityArm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianLeftRigidityArm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianBradykinesia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianGaitDisorder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkinsonianPosturalInstability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CerebrovascularDiseaseSigns)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticalCognitiveDeficit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticalSIVD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticalMotorLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticalMotorRight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticalVisualFieldLossLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticalVisualFieldLossRight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticalSomatosensoryLossLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorticalSomatosensoryLossRight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HigherCorticalVisual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PSP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PSP_EyeMovement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PSP_Dysarthria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PSP_Axial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PSP_Gait)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PSP_Apraxia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_ApraxiaLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_ApraxiaRight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_CorticalSensoryDeficitsLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_CorticalSensoryDeficitsRight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_AtaxiaLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_AtaxiaRight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_AlienLimbLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_AlienLimbRight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_DystoniaLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_DystoniaRight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_MyoclonusLeft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBS_MyoclonusRight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ALS_Findings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GaitApraxia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherFindings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherFindingsSpeicify)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExaminerInitials)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Version)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbnormalNeurologicalExamFindings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianSigns)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianLeftRestingTremorArm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianRightRestingTremorArm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianRightSlowingOfFineMotorMovements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianLeftSlowingOfFineMotorMovements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianRightRigidityArm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianLeftRigidityArm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianBradykinesia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianGaitDisorder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkinsonianPosturalInstability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CerebrovascularDiseaseSigns)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticalCognitiveDeficit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticalSIVD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticalMotorLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticalMotorRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticalVisualFieldLossLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticalVisualFieldLossRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticalSomatosensoryLossLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorticalSomatosensoryLossRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HigherCorticalVisual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PSP_EyeMovement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PSP_Dysarthria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PSP_Axial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PSP_Gait)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PSP_Apraxia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_ApraxiaLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_ApraxiaRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_CorticalSensoryDeficitsLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_CorticalSensoryDeficitsRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_AtaxiaLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_AtaxiaRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_AlienLimbLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_AlienLimbRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_DystoniaLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_DystoniaRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_MyoclonusLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBS_MyoclonusRight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ALS_Findings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GaitApraxia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherFindings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherFindingsSpeicify)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExaminerInitials)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

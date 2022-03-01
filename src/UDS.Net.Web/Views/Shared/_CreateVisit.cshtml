@@ -1,0 +1,72 @@
+﻿@model Visit
+@{
+}
+
+
+
+
+<div class="modal-content">
+    <form asp-controller="Visit" asp-action="Create">
+        <div class="modal-header">
+            <h5 class="modal-title">PTID @Model.FriendlyId</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="VisitDate" class="control-label"></label>
+                        <input asp-for="VisitDate" class="form-control" />
+                        <span asp-validation-for="VisitDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="VisitType" class="control-label"></label>
+                        @if (@Model.VisitType == VisitType.IVP)
+                        {
+                            <select asp-for="VisitType" class="form-control" asp-items="Html.GetEnumSelectList(typeof(VisitType))" disabled="disabled">
+                            </select>
+                        }
+                        else
+                        {
+                            <select asp-for="VisitType" class="form-control">
+                                <option value="FVP">In-person follow-up</option>
+                                <option value="TFP">Telephone follow-up</option>
+                            </select>
+                        }
+                        <span asp-validation-for="VisitType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Coordinator" class="control-label"></label>
+                        <select asp-for="CoordinatorInitials" class="form-control" asp-items="@(new SelectList(ViewBag.Examiners,"Initials","Name"))">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Clinician" class="control-label"></label>
+                        <select asp-for="ClinicianInitials" class="form-control" asp-items="@(new SelectList(ViewBag.Examiners,"Initials","Name"))">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SocialWorker" class="control-label"></label>
+                        <select asp-for="SocialWorkerInitials" class="form-control" asp-items="@(new SelectList(ViewBag.Examiners,"Initials","Name"))">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="FriendlyId" />
+            <input type="hidden" asp-for="VisitNumber" />
+            <input type="hidden" asp-for="Status" value="InProgress" />
+            <input type="hidden" asp-for="IsSubmittedToNACC" value="false" />
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" value="Create" class="btn btn-primary">Create new visit</button>
+        </div>
+    </form>
+</div>
