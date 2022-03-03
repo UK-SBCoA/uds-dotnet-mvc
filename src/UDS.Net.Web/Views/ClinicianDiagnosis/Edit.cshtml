@@ -14,6 +14,11 @@
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
 
 <div class="row">
+    <div class="col-md-12">
+        <p class="lead">INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form D1. Check <u>only</u> one box per question.</p>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-10 m-auto p-3 pb-5">
         <div class="card">
             <div class="card-body">
@@ -2171,6 +2176,7 @@
 
 </form>
 
+<partial name="_CopyrightStatement" />
 
 @section Scripts {
 

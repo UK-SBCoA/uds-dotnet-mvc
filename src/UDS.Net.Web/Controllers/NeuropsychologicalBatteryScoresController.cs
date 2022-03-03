@@ -100,12 +100,21 @@ namespace UDS.Net.Web.Controllers
                 return NotFound();
             }
 
-            var neuropsychologicalBatteryScores = await _context.NeuropsychologicalBatteryScores.FindAsync(id);
+            var neuropsychologicalBatteryScores = await _context.NeuropsychologicalBatteryScores
+                .Include(c => c.Visit)
+                    .ThenInclude(v => v.Participant)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             if (neuropsychologicalBatteryScores == null)
             {
                 return NotFound();
             }
             ViewData["Id"] = new SelectList(_context.Visits, "Id", "Id", neuropsychologicalBatteryScores.Id);
+
+            var participantIdentity = await _participantService.GetParticipantAsync(neuropsychologicalBatteryScores.Visit.Participant.Id);
+            neuropsychologicalBatteryScores.Visit.Participant.Profile = participantIdentity;
+
             return View(neuropsychologicalBatteryScores);
         }
 

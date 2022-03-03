@@ -1,7 +1,7 @@
 @model NPIQ
 
 @{
-    var title = "B5 BEHAVIORAL ASSESSMENT Neuropsychiatric Inventory Questionnaire";
+    var title = "B5 Neuropsychiatric Inventory Questionnaire (NPI-Q)";
     var visitInfo = "";
     if (visitInfo == null)
     {
@@ -13,28 +13,26 @@
 @await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
 
-
-<div class="py-5 px-3">
-    <h5 class="lead font-weight-bold">Instructions</h5>
-    <h6 class="lead">Please answer the following questions based upon <strong>changes</strong> that have occurred since the patient first began to experience memory (i.e., cognitive) problems.</h6>
-    <p class="lead">
-        <strong>
-            Select 1=Yes <u>only</u> if the symptom(s) has been present <u>in the last month.</u>  Otherwise, select 0=No.
-        </strong>
-    </p>
-    <p class="lead">For each item marked 1=Yes, rate the SEVERITY of the symptom (how it affects the patient):</p>
-    <p class="lead font-weight-light">
-        1=<span class="bold">Mild</span>
-        <span style="font-size: 10px">(noticeable, but not a significant change)</span>
-        &emsp;2=<span class="bold">Moderate</span>
-        <span style="font-size: 10px">(significant, but not a dramatic change)</span>
-        &emsp;3=<span class="bold">Severe</span>
-        <span style="font-size: 10px">(very marked or prominent; a dramatic change)</span>
-    </p>
-</div>
-
-
 <div class="row">
+    <div class="col-md-12 pb-3">
+        <p class="lead">INSTRUCTIONS: Please answer the following questions based upon <strong>changes</strong> that have occurred since the patient first began to experience memory (i.e., cognitive) problems.
+            <strong>
+                Select 1=Yes <u>only</u> if the symptom(s) has been present <u>in the last month.</u>  Otherwise, select 0=No.
+            </strong>
+        </p>
+        <p class="lead">For each item marked 1=Yes, rate the SEVERITY of the symptom (how it affects the patient):</p>
+        <div class="row">
+            <div class="col">
+                <p class="lead">1=<strong>Mild</strong> <small>(noticeable, but not a significant change)</small></p>
+            </div>
+            <div class="col">
+                <p class="lead">2=<strong>Moderate</strong> <small>(significant, but not a dramatic change)</small></p>
+            </div>
+            <div class="col">
+                <p class="lead">3=<strong>Severe</strong> <small>(very marked or prominent; a dramatic change)</small></p>
+            </div>
+        </div>
+    </div>
     <div class="col-md-12 p-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -421,24 +419,29 @@
                         <td></td>
                         @foreach (KeyValuePair<string, string> code in ViewBag.SymptomSeverity.Codes)
                         {
-            <td>
+                            <td>
 
-                <div class="form-check form-check-inline">
-                    <input type="radio" asp-for="AppetiteSeverity" id="appetiteSev[@code.Key]" value="@code.Key" />
-                    <label class="form-check-label" for="appetiteSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
-                </div>
-            </td>}
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" asp-for="AppetiteSeverity" id="appetiteSev[@code.Key]" value="@code.Key" />
+                                    <label class="form-check-label" for="appetiteSev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> </label>
+                                </div>
+                            </td>
+                        }
                     </tr>
                 </tbody>
             </table>
-            <p class="reference"><sup>1</sup>Copyright© Jeffrey L. Cummings, MD. Reproduced by permission.</p>
 
             <partial name="_SaveComplete" model='Model' view-data="ViewData" />
 
         </form>
     </div>
 </div>
-
+<div>
+    <p class="font-weight-lighter font-italic">
+        <sup>1</sup>Copyright© Jeffrey L. Cummings, MD. Reproduced by permission.
+    </p>
+</div>
+<partial name="_CopyrightStatement" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

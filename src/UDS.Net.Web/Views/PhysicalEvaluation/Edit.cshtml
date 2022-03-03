@@ -12,10 +12,12 @@
 @await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
 
-<div>
-    <p class="lead">INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see UDS Coding Guidebook for Initial Visit Packet, Form B1. Check <u>only</u> one box per question.</p>
-</div>
-
+<div class="row">
+    <div class="col">
+        <p class="lead">INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form B1. Check only <u>one</u> box per question.</p>
+    </div>
+ </div>
+   
 <form method="POST" asp-action="Edit" class="counterreset">
     <table class="table table-bordered">
         <thead>
@@ -252,15 +254,9 @@
             </tr>
         </tbody>
     </table>
-    <div>
-        <small>Adapted with permission.</small>
-        <p class="reference">Copyright© 2006, 2008, 2015 University of Washington. Created and published by the ADC Clinical Task Force (John C. Morris, MD, Chair) and the National Alzheimer's Coordinating Center (U01 AG016076 - Walter A. Kukull, PhD, Director).</p>
-    </div>
     <partial name="_SaveComplete" model='Model' view-data="ViewData" />
 </form>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<partial name="_CopyrightStatement" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

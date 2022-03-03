@@ -1,7 +1,7 @@
 @model UnifiedParkinsonsDiseaseRatingScale
 
 @{
-    var title = "B3 UPDRS";
+    var title = "B3 UPDRS Evaluation";
     var visitInfo = "";
     if (visitInfo == null)
     {
@@ -13,7 +13,11 @@
 @await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
 
-<hr />
+<div class="row">
+    <div class="col-md-12">
+        <p class="lead">NOTE: This form is to be completed by the clinician or other trained health professional. For additional clarification and examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form B3. Check <u>only</u> one box per question.</p>
+    </div>
+</div>
 <form method="POST" asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
@@ -732,93 +736,10 @@
 
 </form>
 
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<partial name="_CopyrightStatement" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    @*<script>
-
-        var setTextAreasWithValue =()=> {
-
-             $('input[type="radio"]:checked').each((index, elem) => {
-                 var elemName = $(elem).attr('name')
-                 var elemValue = parseInt($(elem).val())
-                  var isDisabled = true;
-
-                if(elemValue == 8) {
-                    isDisabled = false;
-                }
-
-                $(`input[name="${elemName}Untestable"]`).attr('disabled', isDisabled)
-                $(`input[name="${elemName}Other"]`).attr('disabled', isDisabled)
-             })
-        }   
-         
-        $('input[name=IsNormal]').on('change', (event) => {
-            var isNormal = $(event.target).is(':checked');
-            if(isNormal) {
-                $('input').each((index, elem) => {
-                    if(elem.getAttribute('name') != 'IsNormal' && elem.getAttribute('type') != 'hidden' && elem.getAttribute('name') != 'ExaminerInitials' && elem.getAttribute('type') != 'submit') {
-                        $(elem).prop('disabled', true);
-                    }
-                });
-            }
-            else {
-                $('input[type="radio"]').each((index, elem) => {
-                    $(elem).prop('disabled', false);
-                });
-
-                setTextAreasWithValue();
-            }
-        });
-        $('input[type=text]').prop('disabled', true);
-            var inputs = $('input[type=radio]').filter((index, obj) => {
-            var attrName = obj.getAttribute('name');
-            if(attrName != null) {
-                var untestable = attrName.includes('Untestable');
-                var other = attrName.includes('Other');
-                if(!untestable && !other) {
-                    return obj;
-                }
-            }
-        }).each((index, elem) => {
-            $(elem).on('change', (event) => {
-                var jElement = $(event.target);
-                var jValue = jElement.val();
-                var attrName = event.target.getAttribute('name');
-                var textBoxUn = $('input[name=' + attrName + 'Untestable]');
-                var textBoxOth = $('input[name=' + attrName + 'Other]');
-                if(jValue == 8) {
-                    textBoxUn.prop('disabled', false);
-                    textBoxOth.prop('disabled', false);
-                }
-                else {
-                    textBoxUn.prop('disabled', true);
-                    textBoxOth.prop('disabled', true);
-                }
-            });
-        }); 
-
-        //disable examiner initials, this was done like this to avoid rewriting the original logic above (lines: 815 - 841)
-        $('input[name="ExaminerInitials"]').prop('disabled', false);
-
-
-
-        //if disbale all is selected on load, disable fields
-        if($('input[name="IsNormal"]:checked').val()) {
-            $('input').each((index, elem) => {
-                if(elem.getAttribute('name') != 'IsNormal' && elem.getAttribute('type') != 'hidden' && elem.getAttribute('name') != 'ExaminerInitials' && elem.getAttribute('type') != 'submit') {
-                    $(elem).prop('disabled', true);
-                }
-            });
-        }
-
-        setTextAreasWithValue();
-
-    </script>*@
 
     <script>
         $(() => {

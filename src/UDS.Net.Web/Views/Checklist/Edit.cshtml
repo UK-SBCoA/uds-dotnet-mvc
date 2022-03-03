@@ -23,6 +23,11 @@
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Checklist.Visit, currentForm = Model.Checklist, formTitle = title })
 
 <div class="row">
+    <div class="col-md-12">
+        <p class="lead">INSTRUCTIONS: This form is to be completed by clinic staff.</p>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-10 m-auto p-3 pb-5">
         <div class="card">
             <div class="card-body">
@@ -427,6 +432,9 @@
     <input type="hidden" asp-for="Checklist.ExaminerInitials" />
     <partial name="_SaveComplete" model='Model.Checklist' view-data="ViewData" />
 </form>
+
+<partial name="_CopyrightStatement" />
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/RadioFieldToggle.js"></script>

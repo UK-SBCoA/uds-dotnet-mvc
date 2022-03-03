@@ -18,7 +18,7 @@
         <form asp-action="Edit">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="lead"><h5>INSTRUCTIONS:</h5> For information on the required online CDR training, see UDS Coding Guidebook for Initial Visit Packet, Form B4. This form is to be completed by the clinician or other trained health professional, based on co-participant report and behavioral and neurological exam of the subject. In the extremely rare instances when no co-participant is available, the clinician or other trained health professional must complete this form using all other available information and his/her best clinical judgment. Score only as decline from previous level due to cognitive loss, not impairment due to other factors, such as physical disability. For further information, see UDS Coding Guidebook for Initial Visit Packet, Form B4.</p>
+                    <p class="lead">INSTRUCTIONS: For information on the required online CDR training, see UDS Coding Guidebook for Initial Visit Packet, Form B4. This form is to be completed by the clinician or other trained health professional, based on co-participant report and behavioral and neurological exam of the subject. In the extremely rare instances when no co-participant is available, the clinician or other trained health professional must complete this form using all other available information and his/her best clinical judgment. Score only as decline from previous level due to <u>cognitive loss</u>, not impairment due to other factors, such as physical disability. For further information, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form B4.</p>
                 </div>
             </div>
             <div class="row">
@@ -28,7 +28,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>Please enter score below:</th>
-                                <th colspan="5" class="text-center">Impariment</th>
+                                <th colspan="5" class="text-center">Impairment</th>
                             </tr>
                             <tr>
                                 <th>&nbsp;</th>
@@ -137,7 +137,7 @@
                                     Fully oriented except for slight difficulty with time relationships
                                 </td>
                                 <td>
-                                    Moderate memory loss, more marked for recent events; defect interferes with everyday activities
+                                    Moderate difficulty with time relationships; oriented for place at examination; may have geographic disorientation elsewhere
                                 </td>
                                 <td>
                                     Severe difficulty with time relationships; usually disoriented to time, often to place
@@ -394,7 +394,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="text-muted"><sup>1</sup>Morris, JC. The Clinical Dementia Rating (CDR): Current version and scoring rules. Neurology 43(11):2412–4, 1993. Copyright© Lippincott, Williams & Wilkins. Reproduced by permission.</p>
+                    <p class="font-weight-lighter font-italic"><sup>1</sup>Morris, JC. The Clinical Dementia Rating (CDR): Current version and scoring rules. Neurology 43(11):2412–4, 1993. Copyright© Lippincott, Williams & Wilkins. Reproduced by permission.</p>
                 </div>
             </div>
 
@@ -405,7 +405,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>Please enter score below:</th>
-                                <th colspan="5" class="text-center">Impariment</th>
+                                <th colspan="5" class="text-center">Impairment</th>
                             </tr>
                             <tr>
                                 <th colspan="1">&nbsp;</th>
@@ -419,7 +419,7 @@
                         <tbody>
                             <tr>
                                  <td>
-                                    <label asp-for="BehaviorComportmentAndPersonality" for="BehaviorComportmentAndPersonality"></label><sup>2</sup>
+                                     <label asp-for="BehaviorComportmentAndPersonality" for="BehaviorComportmentAndPersonality">Behavior, comportment, and personality<sup>2</sup></label>
                                     <span class="text-danger" asp-validation-for="BehaviorComportmentAndPersonality"></span>
 
                                     <ul class="list-unstyled">
@@ -530,11 +530,11 @@
                 </div>
             </div>
             <div>
-                <p class="text-muted">
+                <p class="font-weight-lighter font-italic">
                     <sup>2</sup>Excerpted from the Frontotemporal Dementia Multicenter Instrument & MR Study (Mayo Clinic, UCSF, UCLA, UW).
                 </p>
-                <p class="text-muted">
-                    <sup>3</sup>Excerpted from the Frontotemporal Dementia Multicenter Instrument & MR Study (Mayo Clinic, UCSF, UCLA, UW).
+                <p class="font-weight-lighter font-italic">
+                    <sup>3</sup>Excerpted from the PPA-CRD: A modification of the CDR for assessing dementia severity in persons with primary progressive aphasia (Johnson N, Weintraub S, Mesulam MM), 2002.
                 </p>
             </div>
             <div class="row form-group">
@@ -564,7 +564,7 @@
         </form>
     </div>
 </div>
-
+<partial name="_CopyrightStatement" />
 
 
 @section Scripts {

@@ -1,7 +1,7 @@
 @model FunctionalActivitiesQuestionnaire
 
 @{
-    var title = "B7 FUNCTIONAL ASSESSMENT Functional Activities Questionnaire";
+    var title = "B7 Functional Activities Questionnaire (FAQ)";
     var visitInfo = "";
     if (visitInfo == null)
     {
@@ -17,8 +17,7 @@
 <div class="row">
     <div class="col-md-12 p-4">
         <p class="lead">
-            <h5 class="lead font-weight-bold">Instructions</h5>
-        <p>This form is to be completed by the clinician or other trained health professional, based on information provided by the co-participant. For further information, see UDS Coding Guidebook for Telephone Visit Packet, Form B7. Indicate the level of performance for each activity by checking the one appropriate response.</p>
+            INSTRUCTIONS: This form is to be completed by the clinician or other trained health professional, based on information provided by the co-participant. For further information, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form B7. Indicate the level of performance for each activity by checking the one appropriate response.
         </p>
 
         <form asp-action="Edit">
@@ -230,6 +229,11 @@
         </form>
     </div>
 </div>
+<div>
+    <p class="font-weight-lighter font-italic"><sup>1</sup>Pfeffer RI, Kurasaki TT, Harrah CH, et al. Measurement of functional activities of older adults in community. J Gerontol 37:323–9, 1982. Copyright© 1982. The Gerontological Society of America. Reproduced by permission of the publisher.</p>
+</div>
+
+<partial name="_CopyrightStatement" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,7 +1,7 @@
 @model GeriatricDepressionScale
 
 @{
-    var title = "Geriatric Depression Scale";
+    var title = "B6 Geriatric Depression Scale (GDS)";
     var visitInfo = "";
     if (visitInfo == null)
     {
@@ -15,7 +15,10 @@
 
 
 <div class="row">
-    <div class="col-md-8 p-4">
+    <div class="col-md-12">
+        <p class="lead">INSTRUCTIONS: This form is to be completed by the clinician or other trained health professional, based on subject response. For additional clarification and examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form B6. Check only one answer per question.</p>
+    </div>
+    <div class="col-md-12 p-4">
         <form asp-action="Edit">
             <!-- Geriatric Depression Scale -->
             <div class="form-group">
@@ -24,12 +27,17 @@
                     @Html.DisplayNameFor(model => model.NoGDS)
                 </div>
             </div>
+            <p class="text-info">
+                <strong>Instruct the subject:</strong> "In the next part of this interview, I will ask you questions about your feelings. Some of the questions I will ask you may not apply, and some may make you feel uncomfortable. For each question, please answer "yes" or "no," depending on how you have been feeling <strong>in the past week, including today.</strong>"
+            </p>
             <table class="table table-bordered table-striped">
                 <thead>
-                <th></th>
-                <th>Yes</th>
-                <th>No</th>
-                <th>Did not answer</th>
+                    <tr>
+                        <th></th>
+                        <th>Yes</th>
+                        <th>No</th>
+                        <th>Did not answer</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>
@@ -504,6 +512,13 @@
         </form>
     </div>
 </div>
+
+<div>
+    <p class="font-weight-lighter font-italic">
+        <sup>1</sup>Sheikh JI, Yesavage JA. Geriatric Depression Scale (GDS): Recent evidence and development of a shorter version. Clinical Gerontology: A Guide to Assessment and Intervention 165–173, NY: The Haworth Press, 1986. Reproduced by permission of the publisher.
+    </p>
+</div>
+<partial name="_CopyrightStatement" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

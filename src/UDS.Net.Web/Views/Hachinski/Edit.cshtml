@@ -1,7 +1,7 @@
 @model Hachinski
 
 @{
-    var title = "Hachinski";
+    var title = "B2 Hachinski";
     var visitInfo = "";
     if (visitInfo == null)
     {
@@ -15,7 +15,10 @@
 
 <div class="row">
     <div class="col-md-12 p-4">
-        <p>
+        <p class="lead">
+            NOTE: This form is to be completed by the clinician or other trained health professional. For additional clarification and examples, see UDS Coding Guidebook Form B2. Check only one number per characteristic.
+        </p>
+        <p class="lead">
             Please complete the following scale using information obtained from history/physical/neurological exam and/or medical records. Check the appropriate box to indicate if a specific item is present (chacteristic of the patient) or absent.
         </p>
         <form asp-action="Edit">
@@ -51,7 +54,7 @@
                             </td>
                             <td>
                                 <div class="form-check form-group">
-                                     <div>
+                                    <div>
                                         <input class="form-check-input hachinskiValue" asp-for="AbruptOnset" type="radio" id="AbruptOnset[2]" value="0" name="AbruptOnset">
                                         <label class="form-check-label" for="AbruptOnset[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
                                     </div>
@@ -76,7 +79,7 @@
                             </td>
                             <td>
                                 <div class="form-check form-group">
-                                     <div>
+                                    <div>
                                         <input class="form-check-input hachinskiValue" asp-for="StepwiseDeterioration" type="radio" id="StepwiseDeterioration[2]" value="0" name="StepwiseDeterioration">
                                         <label class="form-check-label" for="StepwiseDeterioration[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
                                     </div>
@@ -101,7 +104,7 @@
                             </td>
                             <td>
                                 <div class="form-check form-group">
-                                     <div>
+                                    <div>
                                         <input class="form-check-input hachinskiValue" asp-for="SomaticComplaints" type="radio" id="SomaticComplaints[2]" value="0" name="SomaticComplaints">
                                         <label class="form-check-label" for="SomaticComplaints[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
                                     </div>
@@ -126,7 +129,7 @@
                             </td>
                             <td>
                                 <div class="form-check form-group">
-                                     <div>
+                                    <div>
                                         <input class="form-check-input hachinskiValue" asp-for="EmotionalIncontinence" type="radio" id="EmotionalIncontinence[2]" value="0" name="EmotionalIncontinence">
                                         <label class="form-check-label" for="EmotionalIncontinence[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
                                     </div>
@@ -151,7 +154,7 @@
                             </td>
                             <td>
                                 <div class="form-check form-group">
-                                     <div>
+                                    <div>
                                         <input class="form-check-input hachinskiValue" asp-for="Hypertension" type="radio" id="Hypertension[2]" value="0" name="Hypertension">
                                         <label class="form-check-label" for="Hypertension[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
                                     </div>
@@ -176,7 +179,7 @@
                             </td>
                             <td>
                                 <div class="form-check form-group">
-                                     <div>
+                                    <div>
                                         <input class="form-check-input hachinskiValue" asp-for="Stroke" type="radio" id="Stroke[2]" value="0" name="Stroke">
                                         <label class="form-check-label" for="Stroke[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
                                     </div>
@@ -201,7 +204,7 @@
                             </td>
                             <td>
                                 <div class="form-check form-group">
-                                     <div>
+                                    <div>
                                         <input class="form-check-input hachinskiValue" asp-for="Symptoms" type="radio" id="Symptoms[2]" value="0" name="Symptoms">
                                         <label class="form-check-label" for="Symptoms[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
                                     </div>
@@ -226,7 +229,7 @@
                             </td>
                             <td>
                                 <div class="form-check form-group">
-                                     <div>
+                                    <div>
                                         <input class="form-check-input hachinskiValue" asp-for="Signs" type="radio" id="Signs[2]" value="0" name="Signs">
                                         <label class="form-check-label" for="Signs[2]"><span class="badge badge-pillbadge-light">0</span>Absent<span class="text-uppercase font-weight-light font-italic text-primary"></label>
                                     </div>
@@ -262,27 +265,22 @@
                 </div>
             </div>
 
-            <div>
-                <p class="text-muted">Adapted with permission.</br>Copyright&#169; 2006, 2008, 2015 University of Washington. Created and published by the ADC Clinical Task 
-                Force (John C. Morris, MD, Chair) and the National Alzheimer's Coordinating Center (U01 AG016976 - Walter A. Kukull, PhD, Director).</p>
-            </div>
-
             <partial name="_SaveComplete" model='Model' view-data="ViewData" />
         </form>
     </div>
 </div>
 
+<partial name="_CopyrightStatement" />
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script type="text/javascript">
-
-        let calculateTotals = () => {
+    <script type="text/javascript">let calculateTotals = () => {
             let hachinskiTotal = 0;
 
             $(".hachinskiValue:checked").each(function (index, radioElement) {
-               let radioValue = parseInt($(radioElement).val())
-               hachinskiTotal += radioValue;
+                let radioValue = parseInt($(radioElement).val())
+                hachinskiTotal += radioValue;
             })
 
             $(".hachinskiTotal").val(hachinskiTotal);
@@ -290,8 +288,7 @@
 
         calculateTotals();
 
-        $('input[type="radio"]').on("change", function() {
+        $('input[type="radio"]').on("change", function () {
             calculateTotals();
-        })
-    </script>
+        })</script>
 }

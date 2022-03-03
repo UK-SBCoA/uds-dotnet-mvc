@@ -1,7 +1,7 @@
 @model ParticipantDemographics
 
 @{
-    var title = "Participant Demographics";
+    var title = "A1 Participant Demographics";
     var visitInfo = "";
     if (visitInfo == null)
     {
@@ -16,7 +16,7 @@
 
 <div class="row">
     <div class="col-md-12 pb-3">
-        <p class="lead">INSTRUCTIONS: This form is to be completed by intake interviewer based on ADC scheduling records, participant interview, medical records, and proxy co-participant report (as needed). For additional clarification and examples, see UDS Coding Guidebook for Initial Visit Packet, Form A1. Check only <u>one</u> box per question.</p>
+        <p class="lead">INSTRUCTIONS: This form is to be completed by intake interviewer based on ADC scheduling records, participant interview, medical records, and proxy co-participant report (as needed). For additional clarification and examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form A1. Check only <u>one</u> box per question.</p>
     </div>
     <div class="col-md-12">
         <form asp-action="Edit">
@@ -327,7 +327,7 @@
         </form>
     </div>
 </div>
-
+<partial name="_CopyrightStatement" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

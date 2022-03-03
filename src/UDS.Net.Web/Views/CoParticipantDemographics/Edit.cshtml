@@ -12,6 +12,9 @@
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
 
 <div class="row">
+    <div class="col-md-12 pb-3">
+        <p class="lead">INSTRUCTIONS: This form is to be completed by intake interviewer based on co-participant's report. For additional clarification and examples, see UDS Coding Guidebook for Initial Visit Packet, Form A2. Check only <u>one</u> box per question.</p>
+    </div>
     <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -29,13 +32,13 @@
                                 <div><span asp-validation-for="BirthYear" class="text-danger" type="number"></span></div>
                             </div>
                         </td>
-                        <td class="colspan="1">
+                        <td class="colspan=" 1">
                             <input asp-for="BirthMonth" class="form-control" type="number" />
                         </td>
-                        <td class="colspan="1">
+                        <td class="colspan=" 1">
                             <input asp-for="BirthDay" class="form-control" type="number" />
                         </td>
-                        <td class="colspan="1">
+                        <td class="colspan=" 1">
                             <input asp-for="BirthYear" class="form-control" type="number" />
                         </td>
                     </tr>
@@ -44,7 +47,7 @@
                             <label>2. @Html.DisplayNameFor(model => model.Sex)</label>
                             <div><span asp-validation-for="Sex" class="text-danger"></span></div>
                         </td>
-                        <td colspan="3"> 
+                        <td colspan="3">
                             <div>
                                 <input asp-for="Sex" type="radio" name="Sex" value="1" id="Sex[0]" /><span class="badge badge-pill badge-light">1</span>
                                 <label for="Sex[0]">Male</label>
@@ -62,15 +65,15 @@
                         </td>
                         <td colspan="3">
                             <div>
-                                <input class="HispanicLatinoEthnicity" type="radio" asp-for="HispanicLatinoEthnicity" value="0" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[1]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins"/><span class="badge badge-pill badge-light">0</span>
+                                <input class="HispanicLatinoEthnicity" type="radio" asp-for="HispanicLatinoEthnicity" value="0" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[1]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins" /><span class="badge badge-pill badge-light">0</span>
                                 <label for="HispanicLatinoEthnicity[1]">No (if No, SKIP TO QUESTION 5)</label>
-                            </div> 
+                            </div>
                             <div>
-                                <input class="HispanicLatinoEthnicity" type="radio" asp-for="HispanicLatinoEthnicity" value="1" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[2]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins"/><span class="badge badge-pill badge-light">1</span>
+                                <input class="HispanicLatinoEthnicity" type="radio" asp-for="HispanicLatinoEthnicity" value="1" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[2]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins" /><span class="badge badge-pill badge-light">1</span>
                                 <label for="HispanicLatinoEthnicity[2]">Yes</label>
                             </div>
                             <div>
-                                <input class="HispanicLatinoEthnicity" type="radio" asp-for="HispanicLatinoEthnicity" value="9" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[3]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins"/><span class="badge badge-pill badge-light">9</span>
+                                <input class="HispanicLatinoEthnicity" type="radio" asp-for="HispanicLatinoEthnicity" value="9" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[3]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins" /><span class="badge badge-pill badge-light">9</span>
                                 <label for="HispanicLatinoEthnicity[3]">Uknown (if Unknown, SKIP TO QUESTION 5)</label>
                             </div>
                         </td>
@@ -82,36 +85,36 @@
                         </td>
                         <td colspan="3">
                             <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="1" name="EthnicOrigins" id="EthnicOrigins[1]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther"/><span class="badge badge-pill badge-light">1</span>
+                                <input type="radio" asp-for="EthnicOrigins" value="1" name="EthnicOrigins" id="EthnicOrigins[1]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">1</span>
                                 <label for="EthnicOrigins[1]">Mexican, Chicano, or Mexican-American</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="2" name="EthnicOrigins" id="EthnicOrigins[2]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther"/><span class="badge badge-pill badge-light">2</span>
+                                <input type="radio" asp-for="EthnicOrigins" value="2" name="EthnicOrigins" id="EthnicOrigins[2]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">2</span>
                                 <label for="EthnicOrigins[2]">Puerto Rican</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="3" name="EthnicOrigins" id="EthnicOrigins[3]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther"/><span class="badge badge-pill badge-light">3</span>
+                                <input type="radio" asp-for="EthnicOrigins" value="3" name="EthnicOrigins" id="EthnicOrigins[3]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">3</span>
                                 <label for="EthnicOrigins[3]">Cuban</label>
-                            </div>                          
+                            </div>
                             <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="4" name="EthnicOrigins" id="EthnicOrigins[4]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther"/><span class="badge badge-pill badge-light">4</span>
+                                <input type="radio" asp-for="EthnicOrigins" value="4" name="EthnicOrigins" id="EthnicOrigins[4]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">4</span>
                                 <label for="EthnicOrigins[4]">Dominican</label>
                             </div>
-                            <div>                            
-                                <input type="radio" asp-for="EthnicOrigins" value="5" name="EthnicOrigins" id="EthnicOrigins[5]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther"/><span class="badge badge-pill badge-light">5</span>
+                            <div>
+                                <input type="radio" asp-for="EthnicOrigins" value="5" name="EthnicOrigins" id="EthnicOrigins[5]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">5</span>
                                 <label for="EthnicOrigins[5]">Central American</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="6" name="EthnicOrigins" id="EthnicOrigins[6]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther"/><span class="badge badge-pill badge-light">6</span>
+                                <input type="radio" asp-for="EthnicOrigins" value="6" name="EthnicOrigins" id="EthnicOrigins[6]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">6</span>
                                 <label for="EthnicOrigins[6]">South American</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="50" name="EthnicOrigins" id="EthnicOrigins[7]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther"/><span class="badge badge-pill badge-light">50</span>
+                                <input type="radio" asp-for="EthnicOrigins" value="50" name="EthnicOrigins" id="EthnicOrigins[7]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">50</span>
                                 <label for="EthnicOrigins[7]">Other (SPECIFY)</label>
-                                <input class="form-control" type="text" name="EthnicOriginsOther" asp-for="EthnicOriginsOther" disabled/>
+                                <input class="form-control" type="text" name="EthnicOriginsOther" asp-for="EthnicOriginsOther" disabled />
                             </div>
                             <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="99" name="EthnicOrigins" id="EthnicOrigins[8]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther"/><span class="badge badge-pill badge-light">99</span>
+                                <input type="radio" asp-for="EthnicOrigins" value="99" name="EthnicOrigins" id="EthnicOrigins[8]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">99</span>
                                 <label for="EthnicOrigins[8]">Unknown</label>
                             </div>
                         </td>
@@ -124,32 +127,32 @@
                         </td>
                         <td colspan="3">
                             <div>
-                                <input type="radio" asp-for="Race" value="1" name="Race" id="Race[1]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther"/><span class="badge badge-pill badge-light">1</span>
+                                <input type="radio" asp-for="Race" value="1" name="Race" id="Race[1]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">1</span>
                                 <label for="Race[1]">White</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="Race" value="2" name="Race" id="Race[2]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther"/><span class="badge badge-pill badge-light">2</span>
+                                <input type="radio" asp-for="Race" value="2" name="Race" id="Race[2]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">2</span>
                                 <label for="Race[2]">Black or African American</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="Race" value="3" name="Race" id="Race[3]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther"/><span class="badge badge-pill badge-light">3</span>
+                                <input type="radio" asp-for="Race" value="3" name="Race" id="Race[3]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">3</span>
                                 <label for="Race[3]">American Indian or Alaska Native</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="Race" value="4" name="Race" id="Race[4]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther"/><span class="badge badge-pill badge-light">4</span>
+                                <input type="radio" asp-for="Race" value="4" name="Race" id="Race[4]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">4</span>
                                 <label for="Race[4]">Native Hawaiian or other Pacific Islander</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="Race" value="5" name="Race" id="Race[5]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther"/><span class="badge badge-pill badge-light">5</span>
+                                <input type="radio" asp-for="Race" value="5" name="Race" id="Race[5]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">5</span>
                                 <label for="Race[5]">Asian</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="Race" value="50" name="Race" id="Race[6]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther"/><span class="badge badge-pill badge-light">50</span>
+                                <input type="radio" asp-for="Race" value="50" name="Race" id="Race[6]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">50</span>
                                 <label for="Race[6]">Other (SPECIFY)</label>
-                                <input class="form-control" type="text" asp-for="RaceOther" name="RaceOther" disabled/>
+                                <input class="form-control" type="text" asp-for="RaceOther" name="RaceOther" disabled />
                             </div>
                             <div>
-                                <input type="radio" asp-for="Race" value="99" name="Race" id="Race[7]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther"/><span class="badge badge-pill badge-light">99</span>
+                                <input type="radio" asp-for="Race" value="99" name="Race" id="Race[7]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">99</span>
                                 <label for="Race[7]">Uknown</label>
                             </div>
                         </td>
@@ -184,7 +187,7 @@
                             <div>
                                 <input type="radio" asp-for="SecondaryRace" value="50" name="SecondaryRace" id="SecondaryRace[6]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">50</span>
                                 <label for="SecondaryRace[6]">Other (SPECIFY)</label>
-                                <input class="form-control" type="text" asp-for="SecondaryRaceOther" disabled/>
+                                <input class="form-control" type="text" asp-for="SecondaryRaceOther" disabled />
                             </div>
                             <div>
                                 <input type="radio" asp-for="SecondaryRace" value="88" name="SecondaryRace" id="SecondaryRace[7]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">88</span>
@@ -204,36 +207,36 @@
                         </td>
                         <td colspan="3">
                             <div>
-                                <input type="radio" asp-for="AdditionalRace" value="1" name="AdditionalRace" id="AdditionalRace[1]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther"/><span class="badge badge-pill badge-light">1</span>
+                                <input type="radio" asp-for="AdditionalRace" value="1" name="AdditionalRace" id="AdditionalRace[1]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">1</span>
                                 <label for="AdditionalRace[1]">White</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="AdditionalRace" value="2" name="AdditionalRace" id="AdditionalRace[2]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther"/><span class="badge badge-pill badge-light">2</span>
+                                <input type="radio" asp-for="AdditionalRace" value="2" name="AdditionalRace" id="AdditionalRace[2]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">2</span>
                                 <label for="AdditionalRace[2]">Black or African American</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="AdditionalRace" value="3" name="AdditionalRace" id="AdditionalRace[3]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther"/><span class="badge badge-pill badge-light">3</span>
+                                <input type="radio" asp-for="AdditionalRace" value="3" name="AdditionalRace" id="AdditionalRace[3]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">3</span>
                                 <label for="AdditionalRace[3]">American Indian or Alaska Native</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="AdditionalRace" value="4" name="AdditionalRace" id="AdditionalRace[4]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther"/><span class="badge badge-pill badge-light">4</span>
+                                <input type="radio" asp-for="AdditionalRace" value="4" name="AdditionalRace" id="AdditionalRace[4]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">4</span>
                                 <label for="AdditionalRace[4]">Native Hawaiian or other Pacific Islander</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="AdditionalRace" value="5" name="AdditionalRace" id="AdditionalRace[5]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther"/><span class="badge badge-pill badge-light">5</span>
+                                <input type="radio" asp-for="AdditionalRace" value="5" name="AdditionalRace" id="AdditionalRace[5]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">5</span>
                                 <label for="AdditionalRace[5]">Asian</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="AdditionalRace" value="50" name="AdditionalRace" id="AdditionalRace[6]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther"/><span class="badge badge-pill badge-light">50</span>
+                                <input type="radio" asp-for="AdditionalRace" value="50" name="AdditionalRace" id="AdditionalRace[6]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">50</span>
                                 <label for="AdditionalRace[6]">Other (SPECIFY)</label>
-                                <input class="form-control" type="text" asp-for="AdditionalRaceOther" disabled/>
+                                <input class="form-control" type="text" asp-for="AdditionalRaceOther" disabled />
                             </div>
                             <div>
-                                <input type="radio" asp-for="AdditionalRace" value="88" name="AdditionalRace" id="AdditionalRace[7]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther"/><span class="badge badge-pill badge-light">88</span>
+                                <input type="radio" asp-for="AdditionalRace" value="88" name="AdditionalRace" id="AdditionalRace[7]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">88</span>
                                 <label for="AdditionalRace[7]">None Reported</label>
                             </div>
                             <div>
-                                <input type="radio" asp-for="AdditionalRace" value="99" name="AdditionalRace" id="AdditionalRace[8]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther"/><span class="badge badge-pill badge-light">99</span>
+                                <input type="radio" asp-for="AdditionalRace" value="99" name="AdditionalRace" id="AdditionalRace[8]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">99</span>
                                 <label for="AdditionalRace[8]">Unknown</label>
                             </div>
                         </td>
@@ -333,11 +336,11 @@
                         </td>
                         <td colspan="3">
                             <div>
-                                <input asp-for="LivesWith" type="radio" name="LivesWith" value="false" id="LivesWith[1]" data-toggle-bool="[true]" data-toggle-targets="FrequencyOfVisit,FrequencyOfTele"/><span class="badge badge-pill badge-light">0</span>
+                                <input asp-for="LivesWith" type="radio" name="LivesWith" value="false" id="LivesWith[1]" data-toggle-bool="[true]" data-toggle-targets="FrequencyOfVisit,FrequencyOfTele" /><span class="badge badge-pill badge-light">0</span>
                                 <label for="LivesWith[1]">No</label>
                             </div>
                             <div>
-                                <input asp-for="LivesWith" type="radio" name="LivesWith" value="true" id="LivesWith[0]" data-toggle-bool="[true]" data-toggle-targets="FrequencyOfVisit,FrequencyOfTele"/><span class="badge badge-pill badge-light">1</span>
+                                <input asp-for="LivesWith" type="radio" name="LivesWith" value="true" id="LivesWith[0]" data-toggle-bool="[true]" data-toggle-targets="FrequencyOfVisit,FrequencyOfTele" /><span class="badge badge-pill badge-light">1</span>
                                 <label for="LivesWith[0]">Yes (If Yes, SKIP TO QUESTION 10)</label>
                             </div>
                         </td>
@@ -426,7 +429,7 @@
                     </tr>
                 </tbody>
             </table>
-            
+
             <input type="hidden" asp-for="IsNewCoParticipant" value="true" />
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="FormStatus" />
@@ -450,6 +453,7 @@
         </form>
     </div>
 </div>
+<partial name="_CopyrightStatement" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

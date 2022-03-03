@@ -18,7 +18,7 @@
             </thead>
             <tbody>
                 <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.ParticipantDemographics, FormDisplayName = "A1 Demographics", ControllerName = "ParticipantDemographics" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.SubjectFamilyHistory, FormDisplayName = "A3 Subject Family History", ControllerName = "SubjectFamilyHistory" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.SubjectFamilyHistory, FormDisplayName = "A3 Family History", ControllerName = "SubjectFamilyHistory" }' />
             </tbody>
         </table>
 
@@ -31,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.PhysicalEvaluation, FormDisplayName = "B1 Physical Evaluation", ControllerName = "Consent" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.PhysicalEvaluation, FormDisplayName = "B1 Physical Evaluation", ControllerName = "PhysicalEvaluation" }' />
                 <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.SubjectHealthHistory, FormDisplayName = "A5 Health History", ControllerName = "SubjectHealthHistory" }' />
                 <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.MedicalConditions, FormDisplayName = "D2 Medical Conditions", ControllerName = "MedicalConditions"}' />
                 <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.MedicationsReview, FormDisplayName = "A4 Medications", ControllerName = "MedicationsReview" }' />

@@ -14,7 +14,7 @@
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
 
 <p class="lead p-4">
-    INSTRUCTIONS: This form is to be completed by a physician, physician's assistant, nurse practitioner, or other qualified practitioner. For additional clarifications and examples, see UDS Coding Guidebook for Initial Visit Packet, Form D2.
+    INSTRUCTIONS: This form is to be completed by a physician, physician's assistant, nurse practitioner, or other qualified practitioner. For additional clarifications and examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form D2.
 </p>
 
 <div class="row">
@@ -693,6 +693,8 @@
         </form>
     </div>
 </div>
+
+<partial name="_CopyrightStatement" />
 
 
 @section Scripts {

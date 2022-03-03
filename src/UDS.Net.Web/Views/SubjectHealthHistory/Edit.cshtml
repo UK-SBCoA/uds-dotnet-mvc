@@ -1,29 +1,23 @@
 @model SubjectHealthHistory
 
-@{ var title = "A5 Health History";
-                var visitInfo = "";
-                if (visitInfo == null)
-                {
-                    visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
-                }
-                ViewData["Title"] = title + visitInfo; }
+@{
+    var title = "A5 Health History";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
+}
 @await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
-<div class="py-5 px-3">
-    <h5 class="lead font-weight-bold">Instructions</h5>
-    <h6 class="lead">
-        Please answer the following questions based upon <strong>changes</strong>
-        that have occurred since the patient first began to experience memory
-        (i.e., cognitive) problems.
-    </h6>
-    <p class="lead">
-        This form is to be completed by the clinician or ADC staff. For
-        additional clarification and examples, see UDS Coding Guidebook for
-        Initial Visit Packet, Form A5. Check only one box per question.
-    </p>
-</div>
-<hr />
+
 <div class="row">
+    <div class="col-md-12">
+        <p class="lead">
+            INSTRUCTIONS: This form is to be completed by the clinician or ADC staff. For additional clarification and examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form A5. Check only <u>one</u> box per question.
+        </p>
+    </div>
     <div class="col-md-12">
         <form asp-action="Edit">
             <table class="table table-striped table-bordered">
@@ -843,9 +837,8 @@
                 <tbody>
                     <!-- Diabeties -->
                     <tr>
-                        <div>
                         <td colspan="5">If any of the conditions still require active management and/or medications, please select “Recent/active.</td>
-    </div>
+
     </tr>
     <tr>
         <td>
@@ -1017,7 +1010,8 @@
                data-toggle-targets="ArthritisType"/>
         <label class="form-check-label" for="Arthritis[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
     </div>
-</td>}
+</td>
+        }
     </tr>
     <tr>
         <td>
@@ -1166,267 +1160,269 @@
     </tr>
     </tbody>
     </table>
-    <!-- 6. Substance abuse -->
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th colspan="6">
-                    <strong>6. Substance abuse</strong>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <label asp-for="AlcoholAbuse" class="control-label"></label><br>
-                    <span asp-validation-for="AlcoholAbuse" class="text-danger"></span>
-                </td>
-                @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
-                {
-    <td>
-        <div class="form-check">
-            <input type="radio" asp-for="AlcoholAbuse"
-                   id="AlcoholAbuse[@code.Key]"
-                   value="@code.Key"
-                   class="form-check-input" />
-            <label class="form-check-label" for="AlcoholAbuse[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
-        </div>
-    </td>}
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="AbuseOther" class="control-label"></label><br>
-                    <span asp-validation-for="AlcoholAbuse" class="text-danger"></span>
-                </td>
-                @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
-                {
-    <td>
-        <div class="form-check">
-            <input type="radio" asp-for="AbuseOther"
-                   id="AbuseOther[@code.Key]"
-                   value="@code.Key"
-                   class="form-check-input"
-                   data-toggle-values="[0,9]" 
-                   data-toggle-targets="AbuseOtherSpecify"
-                   />
-            <label class="form-check-label" for="AbuseOther[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
-        </div>
-    </td>}
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="AbuseOtherSpecify" class="control-label"></label><br>
-                    <span asp-validation-for="AbuseOtherSpecify" class="text-danger"></span>
-                </td>
-                <td colspan="4">
-                    <input asp-for="AbuseOtherSpecify" class="form-control" data-abuse-skip />
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th colspan="6">
-                    <strong>7. Psychiatric conditions, diagnosed or treated by a physician</strong>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <label asp-for="PTSD" class="control-label"></label><br>
-                    <span asp-validation-for="PTSD" class="text-danger"></span>
-                </td>
-                @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
-                {
-    <td>
-        <div class="form-check">
-            <input type="radio" asp-for="PTSD"
-                   id="PTSD[@code.Key]"
-                   value="@code.Key"
-                   class="form-check-input" />
-            <label class="form-check-label" for="PTSD[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
-        </div>
-    </td>}
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="BipolarDisorder" class="control-label"></label><br>
-                    <span asp-validation-for="BipolarDisorder" class="text-danger"></span>
-                </td>
-                @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
-                {
-    <td>
-        <div class="form-check">
-            <input type="radio" asp-for="BipolarDisorder"
-                   id="BipolarDisorder[@code.Key]"
-                   value="@code.Key"
-                   class="form-check-input" />
-            <label class="form-check-label" for="BipolarDisorder[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
-        </div>
-    </td>}
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Schizophrenia" class="control-label"></label><br>
-                    <span asp-validation-for="Schizophrenia" class="text-danger"></span>
-                </td>
-                @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
-                {
-    <td>
-        <div class="form-check">
-            <input type="radio" asp-for="Schizophrenia"
-                   id="Schizophrenia[@code.Key]"
-                   value="@code.Key"
-                   class="form-check-input" />
-            <label class="form-check-label" for="Schizophrenia[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
-        </div>
-    </td>}
-            </tr>
-            <tr>
-                <td>
-                    <label class="control-label">7d. Depression</label><br>
-                    <span asp-validation-for="Schizophrenia" class="text-danger"></span>
-                </td>
-                <td colspan="4"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colspan="4">
-                    <label asp-for="DepressionLastTwoYears" class="control-label"></label><br>
-                    <span asp-validation-for="DepressionLastTwoYears" class="text-danger"></span>
-                    <div class="row">
-                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+            <!-- 6. Substance abuse -->
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="6">
+                            <strong>6. Substance abuse</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label asp-for="AlcoholAbuse" class="control-label"></label><br>
+                            <span asp-validation-for="AlcoholAbuse" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
                         {
-            <div class="col">
+            <td>
                 <div class="form-check">
-                    <input type="radio" asp-for="DepressionLastTwoYears"
-                           id="DepressionLastTwoYears[@code.Key]"
+                    <input type="radio" asp-for="AlcoholAbuse"
+                           id="AlcoholAbuse[@code.Key]"
                            value="@code.Key"
                            class="form-check-input" />
-                    <label class="form-check-label" for="DepressionLastTwoYears[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
+                    <label class="form-check-label" for="AlcoholAbuse[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
                 </div>
-            </div>}
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colspan="4">
-                    <label asp-for="DepressionPriorTwoYears" class="control-label"></label><br>
-                    <span asp-validation-for="DepressionPriorTwoYears" class="text-danger"></span>
-                    <div class="row">
-                        @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="AbuseOther" class="control-label"></label><br>
+                            <span asp-validation-for="AlcoholAbuse" class="text-danger"></span>
+                        </td>
+                        @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
                         {
-            <div class="col">
+            <td>
                 <div class="form-check">
-                    <input type="radio" asp-for="DepressionPriorTwoYears"
-                           id="DepressionPriorTwoYears[@code.Key]"
+                    <input type="radio" asp-for="AbuseOther"
+                           id="AbuseOther[@code.Key]"
                            value="@code.Key"
-                           class="form-check-input" />
-                    <label class="form-check-label" for="DepressionPriorTwoYears[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
+                           class="form-check-input"
+                           data-toggle-values="[0,9]" 
+                           data-toggle-targets="AbuseOtherSpecify"
+                           />
+                    <label class="form-check-label" for="AbuseOther[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
                 </div>
-            </div>}
+            </td>}
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="AbuseOtherSpecify" class="control-label"></label><br>
+                            <span asp-validation-for="AbuseOtherSpecify" class="text-danger"></span>
+                        </td>
+                        <td colspan="4">
+                            <input asp-for="AbuseOtherSpecify" class="form-control" data-abuse-skip />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="6">
+                        <strong>7. Psychiatric conditions, diagnosed or treated by a physician</strong>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label asp-for="PTSD" class="control-label"></label><br>
+                        <span asp-validation-for="PTSD" class="text-danger"></span>
+                    </td>
+                    @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
+                    {
+        <td>
+            <div class="form-check">
+                <input type="radio" asp-for="PTSD"
+                       id="PTSD[@code.Key]"
+                       value="@code.Key"
+                       class="form-check-input" />
+                <label class="form-check-label" for="PTSD[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
+            </div>
+        </td>}
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="BipolarDisorder" class="control-label"></label><br>
+                        <span asp-validation-for="BipolarDisorder" class="text-danger"></span>
+                    </td>
+                    @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
+                    {
+        <td>
+            <div class="form-check">
+                <input type="radio" asp-for="BipolarDisorder"
+                       id="BipolarDisorder[@code.Key]"
+                       value="@code.Key"
+                       class="form-check-input" />
+                <label class="form-check-label" for="BipolarDisorder[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
+            </div>
+        </td>}
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Schizophrenia" class="control-label"></label><br>
+                        <span asp-validation-for="Schizophrenia" class="text-danger"></span>
+                    </td>
+                    @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
+                    {
+        <td>
+            <div class="form-check">
+                <input type="radio" asp-for="Schizophrenia"
+                       id="Schizophrenia[@code.Key]"
+                       value="@code.Key"
+                       class="form-check-input" />
+                <label class="form-check-label" for="Schizophrenia[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
+            </div>
+        </td>}
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">7d. Depression</label><br>
+                        <span asp-validation-for="Schizophrenia" class="text-danger"></span>
+                    </td>
+                    <td colspan="4"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4">
+                        <label asp-for="DepressionLastTwoYears" class="control-label"></label><br>
+                        <span asp-validation-for="DepressionLastTwoYears" class="text-danger"></span>
+                        <div class="row">
+                            @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                            {
+                <div class="col">
+                    <div class="form-check">
+                        <input type="radio" asp-for="DepressionLastTwoYears"
+                               id="DepressionLastTwoYears[@code.Key]"
+                               value="@code.Key"
+                               class="form-check-input" />
+                        <label class="form-check-label" for="DepressionLastTwoYears[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Anxiety" class="control-label"></label>
-                    <br>
-                    <span asp-validation-for="Anxiety" class="text-danger"></span>
-                </td>
-                @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
-                {
-    <td>
-        <div class="form-check">
-            <input type="radio" asp-for="Anxiety"
-                   id="Anxiety[@code.Key]"
-                   value="@code.Key"
-                   class="form-check-input" />
-            <label class="form-check-label" for="Anxiety[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
-        </div>
-    </td>}
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="OCD" class="control-label"></label>
-                    <br>
-                    <span asp-validation-for="Anxiety" class="text-danger"></span>
-                </td>
-                @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
-                {
-    <td>
-        <div class="form-check">
-            <input type="radio" asp-for="OCD"
-                   id="OCD[@code.Key]"
-                   value="@code.Key"
-                   class="form-check-input" />
-            <label class="form-check-label" for="OCD[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
-        </div>
-    </td>}
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="NpsyDev" class="control-label"></label>
-                    <br><span asp-validation-for="NpsyDev" class="text-danger"></span>
-                </td>
-                @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
-                {
-    <td>
-        <div class="form-check">
-            <input type="radio" asp-for="NpsyDev"
-                   id="NpsyDev[@code.Key]"
-                   value="@code.Key"
-                   class="form-check-input" />
-            <label class="form-check-label" for="NpsyDev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
-        </div>
-    </td>}
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="PsychOther" class="control-label"></label>
-                    <br><span asp-validation-for="PsychOther" class="text-danger"></span>
-                </td>
-                @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
-                {
-    <td>
-        <div class="form-check">
-            <input type="radio" asp-for="PsychOther"
-                   id="PsychOther[@code.Key]"
-                   value="@code.Key"
-                   class="form-check-input"
-                   data-toggle-values="[0,9]" 
-                   data-toggle-targets="PsychOtherSpecify"
-                   />
-            <label class="form-check-label" for="PsychOther[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
-        </div>
-    </td>}
-            </tr>
-            <tr>
-                <td></td>
-                <td colspan="4">
-                    <div class="row">
-                        <div class="col">
-                            <label asp-for="PsychOtherSpecify" class="control-label"></label>
-                            <br><span asp-validation-for="PsychOtherSpecify" class="text-danger"></span>
+                </div>}
                         </div>
-                        <div class="col">
-                            <input asp-for="PsychOtherSpecify" class="form-control" data-psych-other-skip />
-                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4">
+                        <label asp-for="DepressionPriorTwoYears" class="control-label"></label><br>
+                        <span asp-validation-for="DepressionPriorTwoYears" class="text-danger"></span>
+                        <div class="row">
+                            @foreach (KeyValuePair<string, string> code in ViewBag.BasicResponse.Codes)
+                            {
+                <div class="col">
+                    <div class="form-check">
+                        <input type="radio" asp-for="DepressionPriorTwoYears"
+                               id="DepressionPriorTwoYears[@code.Key]"
+                               value="@code.Key"
+                               class="form-check-input" />
+                        <label class="form-check-label" for="DepressionPriorTwoYears[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
                     </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </div>}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Anxiety" class="control-label"></label>
+                        <br>
+                        <span asp-validation-for="Anxiety" class="text-danger"></span>
+                    </td>
+                    @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
+                    {
+        <td>
+            <div class="form-check">
+                <input type="radio" asp-for="Anxiety"
+                       id="Anxiety[@code.Key]"
+                       value="@code.Key"
+                       class="form-check-input" />
+                <label class="form-check-label" for="Anxiety[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
+            </div>
+        </td>}
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="OCD" class="control-label"></label>
+                        <br>
+                        <span asp-validation-for="Anxiety" class="text-danger"></span>
+                    </td>
+                    @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
+                    {
+        <td>
+            <div class="form-check">
+                <input type="radio" asp-for="OCD"
+                       id="OCD[@code.Key]"
+                       value="@code.Key"
+                       class="form-check-input" />
+                <label class="form-check-label" for="OCD[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
+            </div>
+        </td>}
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="NpsyDev" class="control-label"></label>
+                        <br><span asp-validation-for="NpsyDev" class="text-danger"></span>
+                    </td>
+                    @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
+                    {
+        <td>
+            <div class="form-check">
+                <input type="radio" asp-for="NpsyDev"
+                       id="NpsyDev[@code.Key]"
+                       value="@code.Key"
+                       class="form-check-input" />
+                <label class="form-check-label" for="NpsyDev[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
+            </div>
+        </td>}
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="PsychOther" class="control-label"></label>
+                        <br><span asp-validation-for="PsychOther" class="text-danger"></span>
+                    </td>
+                    @foreach (KeyValuePair<string, string> code in ViewBag.ConditionPresence.Codes)
+                    {
+        <td>
+            <div class="form-check">
+                <input type="radio" asp-for="PsychOther"
+                       id="PsychOther[@code.Key]"
+                       value="@code.Key"
+                       class="form-check-input"
+                       data-toggle-values="[0,9]" 
+                       data-toggle-targets="PsychOtherSpecify"
+                       />
+                <label class="form-check-label" for="PsychOther[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span> @code.Value</label>
+            </div>
+        </td>}
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4">
+                        <div class="row">
+                            <div class="col">
+                                <label asp-for="PsychOtherSpecify" class="control-label"></label>
+                                <br><span asp-validation-for="PsychOtherSpecify" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <input asp-for="PsychOtherSpecify" class="form-control" data-psych-other-skip />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     
-    <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="FormStatus" />
-    <partial name="_SaveComplete" model='Model' view-data="ViewData" />
-    </form>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="FormStatus" />
+            <partial name="_SaveComplete" model='Model' view-data="ViewData" />
+        </form>
+    </div>
 </div>
-</div>
+<partial name="_CopyrightStatement" />
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/SubjectHealthHistory/Edit.js"></script>

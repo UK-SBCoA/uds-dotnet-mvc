@@ -1,8 +1,6 @@
 @model NeurologicalExaminationFindings
-
-
 @{
-    var title = "B8 Neurological Findings";
+    var title = "B8 Neurological Examination Findings";
     var visitInfo = "";
     if (visitInfo == null)
     {
@@ -13,6 +11,12 @@
 
 @await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+<div class="row">
+    <div class="col">
+        <p class="lead">INSTRUCTIONS: This form must be completed by a clinician with experience in assessing the neurological signs listed below and in attributing the observed findings to a particular syndrome. Please use your best clinical judgment in assigning the syndrome. For additional clarification and examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form B8.</p>
+    </div>
+</div>
 
 <form method="POST" asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -911,7 +915,7 @@
     </table>
     <partial name="_SaveComplete" model='Model' view-data="ViewData" />
 </form>
-
+<partial name="_CopyrightStatement" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
