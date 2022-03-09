@@ -1,19 +1,121 @@
-﻿@model FormBase
+﻿@model FormStatusViewModel
 @{
+
+    @*
+        This is used in a couple places: visit views and checklist view
+        Checklist is included on visit view pages, but purposely not in the checklist view
+        isIncluded should be submitted as null for the checklist form view and for forms that are required
+
+        This essentially maps forms to controllers to checklist property for inclusion/exclusion
+    *@
+    void GetStatus(FormBase form, bool? isIncluded)
+    {
+        if (form != null && form.Id > 0)
+        {
+            if (isIncluded.HasValue)
+            {
+                if (isIncluded.Value)
+                {
+                    <span class="@(form.FormStatus == FormStatus.Incomplete ? "text-danger" : "text-success")">@form.FormStatus</span>
+                }
+                else
+                {
+                    <span class="text-secondary">Not included (see Z1)</span>
+                }
+            }
+            else
+            {
+                <span class="@(form.FormStatus == FormStatus.Incomplete ? "text-danger" : "text-success")">@form.FormStatus</span>
+            }
+        }
+        else
+        {
+            // form has not been started yet
+            if (isIncluded.HasValue)
+            {
+                if (isIncluded.Value)
+                {
+                    <span class="text-warning">To be included</span>
+                }
+                else
+                {
+                    <span class="text-secondary">Not included (see Z1)</span>
+                }
+            }
+            else
+            {
+                <span class="text-secondary">Not started</span>
+            }
+        }
+    }
 }
 
-@if (Model != null && Model.Id > 0)
+
+@if (Model.Checklist != null && Model.Checklist.Id > 0)
 {
-    @if (Model.FormStatus == FormStatus.Incomplete)
+    @switch (Model.ControllerName)
     {
-        <span class="text-danger">@Model.FormStatus</span>
-    }
-    else
-    {
-        <span class="text-success">@Model.FormStatus</span>
+        case "ParticipantDemographics": // A1
+            GetStatus(Model.Form, null);
+            break;
+        case "SubjectFamilyHistory": // A3
+            GetStatus(Model.Form, Model.Checklist.A3_IsIncluded);
+            break;
+        case "PhysicalEvaluation": // B1
+            GetStatus(Model.Form, Model.Checklist.B1_IsIncluded);
+            break;
+        case "SubjectHealthHistory": //A5
+            GetStatus(Model.Form, null);
+            break;
+        case "MedicalConditions": // D2
+            GetStatus(Model.Form, null);
+            break;
+        case "MedicationsReview": //A4
+            GetStatus(Model.Form, Model.Checklist.A4_IsIncluded);
+            break;
+        case "UnifiedParkinsonsDiseaseRatingScale": // B3
+            GetStatus(Model.Form, null);
+            break;
+        case "NeurologicalExaminationFindings": // B8
+            GetStatus(Model.Form, null);
+            break;
+        case "Symptoms": // B9
+            GetStatus(Model.Form, null);
+            break;
+        case "Hachinski": // B2
+            GetStatus(Model.Form, null);
+            break;
+        case "CDRPlusNACCFTLD": // B4
+            GetStatus(Model.Form, null);
+            break;
+        case "NeuropsychologicalBatteryScores": // C2
+            GetStatus(Model.Form, null);
+            break;
+        case "GeriatricDepressionScale": //B6
+            GetStatus(Model.Form, Model.Checklist.B6_IsIncluded);
+            break;
+        case "CoParticipantDemographics": // A2
+            GetStatus(Model.Form, Model.Checklist.A2_IsIncluded);
+            break;
+        case "NPIQ": // B5
+            GetStatus(Model.Form, Model.Checklist.B5_IsIncluded);
+            break;
+        case "FunctionalActivitiesQuestionnaire": // B7
+            GetStatus(Model.Form, Model.Checklist.B7_IsIncluded);
+            break;
+        case "ClinicianDiagnosis": // D1
+            GetStatus(Model.Form, null);
+            break;
+        case "Inclusion": // T1
+            GetStatus(Model.Form, null);
+            break;
+        default:
+            GetStatus(Model.Form, null);
+            break;
     }
 }
 else
 {
-    <span>Not started</span>
+    // This case is for showing status in the checklist form itself
+    GetStatus(Model.Form, null);
 }

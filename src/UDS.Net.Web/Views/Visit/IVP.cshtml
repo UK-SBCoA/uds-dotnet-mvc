@@ -19,7 +19,6 @@
             <tbody>
                 <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.ParticipantDemographics, FormDisplayName = "A1 Demographics", ControllerName = "ParticipantDemographics" }' />
                 <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.SubjectFamilyHistory, FormDisplayName = "A3 Family History", ControllerName = "SubjectFamilyHistory" }' />
-
             </tbody>
         </table>
 
@@ -32,15 +31,23 @@
                 </tr>
             </thead>
             <tbody>
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.PhysicalEvaluation, FormDisplayName = "B1 Physical Evaluation", ControllerName = "PhysicalEvaluation" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.SubjectHealthHistory, FormDisplayName = "A5 Health History", ControllerName = "SubjectHealthHistory" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.MedicalConditions, FormDisplayName = "D2 Medical Conditions", ControllerName = "MedicalConditions"}' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.MedicationsReview, FormDisplayName = "A4 Medications", ControllerName = "MedicationsReview" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.UnifiedParkinsonsDiseaseRatingScale, FormDisplayName = "B3 UPDRS", ControllerName = "UnifiedParkinsonsDiseaseRatingScale" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.NeurologicalExaminationFindings, FormDisplayName = "B8 Neurological Findings", ControllerName = "NeurologicalExaminationFindings" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.Symptoms, FormDisplayName = "B9 Symptoms", ControllerName = "Symptoms"}' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.Hachinski, FormDisplayName = "B2 Hachinski", ControllerName = "Hachinski" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.CDRPlusNACCFTLD, FormDisplayName = "B4 CDR® Plus FTLD", ControllerName = "CDRPlusNACCFTLD" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.PhysicalEvaluation, FormDisplayName = "B1 Physical Evaluation", ControllerName = "PhysicalEvaluation", Checklist = Model.Checklist }' />
+
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.SubjectHealthHistory, FormDisplayName = "A5 Health History", ControllerName = "SubjectHealthHistory", Checklist = Model.Checklist }' />
+
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.MedicalConditions, FormDisplayName = "D2 Medical Conditions", ControllerName = "MedicalConditions", Checklist = Model.Checklist }' />
+
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.MedicationsReview, FormDisplayName = "A4 Medications", ControllerName = "MedicationsReview", Checklist = Model.Checklist }' />
+
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.UnifiedParkinsonsDiseaseRatingScale, FormDisplayName = "B3 UPDRS", ControllerName = "UnifiedParkinsonsDiseaseRatingScale", Checklist = Model.Checklist }' />
+
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.NeurologicalExaminationFindings, FormDisplayName = "B8 Neurological Findings", ControllerName = "NeurologicalExaminationFindings", Checklist = Model.Checklist }' />
+
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.Symptoms, FormDisplayName = "B9 Symptoms", ControllerName = "Symptoms", Checklist = Model.Checklist }' />
+
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.Hachinski, FormDisplayName = "B2 Hachinski", ControllerName = "Hachinski", Checklist = Model.Checklist }' />
+
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.CDRPlusNACCFTLD, FormDisplayName = "B4 CDR® Plus FTLD", ControllerName = "CDRPlusNACCFTLD", Checklist = Model.Checklist }' />
             </tbody>
         </table>
 
@@ -53,8 +60,8 @@
                 </tr>
             </thead>
             <tbody>
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.NeuropsychologicalBatteryScores, FormDisplayName = "C2 Neuropsych Battery Scores", ControllerName = "NeuropsychologicalBatteryScores" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.GeriatricDepressionScale, FormDisplayName = "B6 GDS", ControllerName = "GeriatricDepressionScale" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.NeuropsychologicalBatteryScores, FormDisplayName = "C2 Neuropsych Battery Scores", ControllerName = "NeuropsychologicalBatteryScores", Checklist = Model.Checklist }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.GeriatricDepressionScale, FormDisplayName = "B6 GDS", ControllerName = "GeriatricDepressionScale", Checklist = Model.Checklist }' />
             </tbody>
         </table>
 
@@ -71,9 +78,9 @@
                 </tr>
             </thead>
             <tbody>
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.CoParticipantDemographics, FormDisplayName = "A2 Co-participant Demographics", ControllerName = "CoParticipantDemographics" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.NPIQ, FormDisplayName = "B5 NPI-Q", ControllerName = "NPIQ" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.FunctionalActivitiesQuestionnaire, FormDisplayName = "B7 Functional Assessment (FAQ)", ControllerName = "FunctionalActivitiesQuestionnaire" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.CoParticipantDemographics, FormDisplayName = "A2 Co-participant Demographics", ControllerName = "CoParticipantDemographics", Checklist = Model.Checklist }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.NPIQ, FormDisplayName = "B5 NPI-Q", ControllerName = "NPIQ", Checklist = Model.Checklist }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.FunctionalActivitiesQuestionnaire, FormDisplayName = "B7 Functional Assessment (FAQ)", ControllerName = "FunctionalActivitiesQuestionnaire", Checklist = Model.Checklist }' />
             </tbody>
         </table>
 
@@ -86,8 +93,8 @@
                 </tr>
             </thead>
             <tbody>
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.Checklist, FormDisplayName = "Z1 Checklist", ControllerName = "Checklist" }' />
-                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.ClinicianDiagnosis, FormDisplayName = "D1 Diagnosis", ControllerName = "ClinicianDiagnosis" }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.Checklist, FormDisplayName = "Z1 Checklist", ControllerName = "Checklist", Checklist = Model.Checklist }' />
+                <partial name="_FormRow" model='new VisitForm { VisitId = Model.Id, VisitStatus = Model.Status, FormBase = Model.ClinicianDiagnosis, FormDisplayName = "D1 Diagnosis", ControllerName = "ClinicianDiagnosis", Checklist = Model.Checklist }' />
             </tbody>
         </table>
         @{

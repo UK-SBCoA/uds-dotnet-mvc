@@ -79,7 +79,7 @@
                         <div><span asp-validation-for="A1_IsIncluded" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.ParticipantDemographics" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.ParticipantDemographics }" />
                     </td>
                     <td colspan="4" class="table-primary">
                     </td>
@@ -93,7 +93,7 @@
                         <div><span asp-validation-for="A2_IfIncludedThenCompleted" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.CoParticipantDemographics" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.CoParticipantDemographics }" />
                     </td>
                     @if (Model.Visit.VisitType == VisitType.TFP)
                     {
@@ -132,7 +132,7 @@
                         <div><span asp-validation-for="A3_IfIncludedThenCompleted" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.SubjectFamilyHistory" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.SubjectFamilyHistory }" />
                     </td>
                     <td>
                         <div class="form-check">
@@ -162,7 +162,7 @@
                         <div><span asp-validation-for="A4_IfIncludedThenCompleted" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.MedicationsReview" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.MedicationsReview }" />
                     </td>
                     <td>
                         <div class="form-check">
@@ -193,7 +193,7 @@
                             <div><span asp-validation-for="A5_IsIncluded" class="text-danger"></span></div>
                         </td>
                         <td>
-                            <partial name="_FormStatusDisplay" model="@Model.Visit.SubjectHealthHistory" />
+                            <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.SubjectHealthHistory }" />
                         </td>
                         <td colspan="4" class="table-primary">
                         </td>
@@ -208,7 +208,7 @@
                             <div><span asp-validation-for="B1_IfIncludedThenCompleted" class="text-danger"></span></div>
                         </td>
                         <td>
-                            <partial name="_FormStatusDisplay" model="@Model.Visit.PhysicalEvaluation" />
+                            <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.PhysicalEvaluation }" />
                         </td>
 
                         <td>
@@ -239,7 +239,7 @@
                         <div><span asp-validation-for="B4_IsIncluded" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.CDRPlusNACCFTLD" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.CDRPlusNACCFTLD }" />
                     </td>
                     <td colspan="4" class="table-primary">
                     </td>
@@ -251,7 +251,7 @@
                         <div><span asp-validation-for="B5_IfIncludedThenCompleted" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.NPIQ" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.NPIQ }" />
                     </td>
                     <td>
                         <div class="form-check">
@@ -283,7 +283,7 @@
                             <div><span asp-validation-for="B6_IfIncludedThenCompleted" class="text-danger"></span></div>
                         </td>
                         <td>
-                            <partial name="_FormStatusDisplay" model="@Model.Visit.GeriatricDepressionScale" />
+                            <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.GeriatricDepressionScale }" />
                         </td>
                         <td>
                             <div class="form-check">
@@ -314,7 +314,7 @@
                         <div><span asp-validation-for="B7_IfIncludedThenCompleted" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.FunctionalActivitiesQuestionnaire" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.FunctionalActivitiesQuestionnaire }" />
                     </td>
                     <td>
                         <div class="form-check">
@@ -345,7 +345,7 @@
                             <div><span asp-validation-for="B8_IsIncluded" class="text-danger"></span></div>
                         </td>
                         <td>
-                            <partial name="_FormStatusDisplay" model="@Model.Visit.NeurologicalExaminationFindings" />
+                            <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.NeurologicalExaminationFindings }" />
                         </td>
                         <td colspan="4" class="table-primary">
                         </td>
@@ -357,7 +357,7 @@
                         <div><span asp-validation-for="B9_IsIncluded" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.Symptoms" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.Symptoms }" />
                     </td>
                     <td colspan="4" class="table-primary">
                     </td>
@@ -370,7 +370,7 @@
                             <div><span asp-validation-for="C2_IsIncluded" class="text-danger"></span></div>
                         </td>
                         <td>
-                            <partial name="_FormStatusDisplay" model="@Model.Visit.NeuropsychologicalBatteryScores" />
+                            <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.NeuropsychologicalBatteryScores }" />
                         </td>
                         <td colspan="4" class="table-primary">
                         </td>
@@ -382,7 +382,7 @@
                         <div><span asp-validation-for="D1_IsIncluded" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.ClinicianDiagnosis" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.ClinicianDiagnosis }" />
                     </td>
                     <td colspan="4" class="table-primary">
                     </td>
@@ -393,7 +393,7 @@
                         <div><span asp-validation-for="@Model.D2_IsIncluded" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.MedicalConditions" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.MedicalConditions }" />
                     </td>
                     <td colspan="4" class="table-primary">
                     </td>
@@ -406,7 +406,7 @@
                             <div><span asp-validation-for="@Model.T1_IsIncluded" class="text-danger"></span></div>
                         </td>
                         <td>
-                            <partial name="_FormStatusDisplay" model="@Model.Visit.Inclusion" />
+                            <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.Inclusion }" />
                         </td>
                         <td colspan="4" class="table-primary">
                         </td>
@@ -418,7 +418,7 @@
                         <div><span asp-validation-for="ChecklistCanBeCompleted" class="text-danger"></span></div>
                     </td>
                     <td>
-                        <partial name="_FormStatusDisplay" model="@Model.Visit.Checklist" />
+                        <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.Visit.Checklist }" />
                     </td>
                     <td colspan="4" class="table-primary">
                     </td>

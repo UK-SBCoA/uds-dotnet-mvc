@@ -35,21 +35,16 @@
         }
     </td>
     <td class="status-column">
-        @if (Model.FormBase != null && Model.FormBase.Id > 0)
+
+        @if (Model.Disabled)
         {
-            @if (Model.Disabled)
-            {
-                <span class="font-italic text-muted">Not available</span>
-            }
-            else
-            {
-                <partial name="_FormStatusDisplay" model="@Model.FormBase" />
-            }
+            <span class="font-italic text-muted">Not available</span>
         }
         else
         {
-            <span class="text-secondary">Not started</span>
+            <partial name="_FormStatusDisplay" model="new FormStatusViewModel { Form = @Model.FormBase, ControllerName = Model.ControllerName, Checklist = Model.Checklist }" />
         }
+
     </td>
     <td class="full-button-column">
         <div class="btn-group">

@@ -312,13 +312,7 @@ namespace UDS.Net.Web.Services
                             FormStatus = visit.CDRPlusNACCFTLD.FormStatus,
                             Version = visit.CDRPlusNACCFTLD.Version
                         },
-                        Checklist = new FormBase
-                        {
-                            Id = visit.Checklist.Id,
-                            ExaminerInitials = visit.Checklist.ExaminerInitials,
-                            FormStatus = visit.Checklist.FormStatus,
-                            Version = visit.Checklist.Version
-                        },
+                        Checklist = visit.Checklist, // include the whole thing
                         ClinicianDiagnosis = new FormBase
                         {
                             Id = visit.ClinicianDiagnosis.Id,

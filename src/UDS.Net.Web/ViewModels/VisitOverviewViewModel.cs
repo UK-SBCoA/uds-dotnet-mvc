@@ -78,7 +78,7 @@ namespace UDS.Net.Web.ViewModels
         public FormBase SubjectFamilyHistory { get; set; }
 
         // Z1
-        public FormBase Checklist { get; set; }
+        public Checklist Checklist { get; set; }
 
         // B9
         public FormBase Symptoms { get; set; }

@@ -154,10 +154,17 @@ namespace UDS.Net.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                _context.Add(visit);
-                await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
-                return RedirectToAction("Details", "Visit", new { id = visit.Id });
+                int visitRedirectId;
+                // Prevents Race Conditions and Create of Multiple In-Progress Visits
+                var visitsInProgress = ParticipantsVisitsInProgress(visit.FriendlyId);
+                if(visitsInProgress.Any()) {
+                    visitRedirectId = visitsInProgress.First().Id;
+                } else {
+                    _context.Add(visit);
+                    await _context.SaveChangesAsync(HttpContext.User.Identity.Name); 
+                    visitRedirectId = visit.Id;
+                }
+                return RedirectToAction("Details", "Visit", new { id = visitRedirectId });
             }
             return View(visit);
         }
@@ -199,7 +206,10 @@ namespace UDS.Net.Web.Controllers
                 return NotFound();
             }
 
-            var existingVisit = await _context.Visits.FindAsync(id);
+            var existingVisit = await _context.Visits
+                .Include(v => v.Checklist)
+                .FirstOrDefaultAsync(v => v.Id == id);
+
             if (existingVisit == null)
             {
                 return NotFound();
@@ -279,7 +289,14 @@ namespace UDS.Net.Web.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        /// <summary>
+        /// Checks if user currently has an In-Progress Visit 
+        /// </summary>
+        /// <param name="friendlyId">Friendly ID user to identify the user</param>
+        /// <returns>One or more in-progress visits in decending order or null</returns>
+        private IEnumerable<Visit> ParticipantsVisitsInProgress(int friendlyId) {
+            return _context.Visits.Where(x => x.FriendlyId == friendlyId && x.Status == VisitStatus.InProgress).OrderByDescending(x => x.VisitNumber).ToList();
+        }
         private bool VisitExists(int id)
         {
             return _context.Visits.Any(e => e.Id == id);

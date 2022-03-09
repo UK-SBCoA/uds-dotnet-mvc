@@ -19,5 +19,7 @@ namespace UDS.Net.Web.ViewModels
         public string ReturnUrl { get; set; }
 
         public bool Disabled { get; set; } = false;
+
+        public Checklist Checklist { get; set; }
     }
 }
