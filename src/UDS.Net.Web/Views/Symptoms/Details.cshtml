@@ -1,0 +1,179 @@
+@model Symptoms
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div>
+  <h1>B9 Symptoms</h1>
+  @Html.DisplayNameFor(x => x.SubjectMemory)
+  @Html.DisplayFor(x => x.SubjectMemory)
+  <br>
+  @Html.DisplayNameFor(x => x.CoParticipantMemory)
+  @Html.DisplayFor(x => x.CoParticipantMemory)
+  <br>
+  @Html.DisplayNameFor(x => x.CognitionImpairment)
+  @Html.DisplayFor(x => x.CognitionImpairment)
+  <br>
+  @Html.DisplayNameFor(x => x.Memory)
+  @Html.DisplayFor(x => x.Memory)
+  <br>
+  @Html.DisplayNameFor(x => x.Orientation)
+  @Html.DisplayFor(x => x.Orientation)
+  <br>
+  @Html.DisplayNameFor(x => x.ExecutiveFunction)
+  @Html.DisplayFor(x => x.ExecutiveFunction)
+  <br>
+  @Html.DisplayNameFor(x => x.Language)
+  @Html.DisplayFor(x => x.Language)
+  <br>
+  @Html.DisplayNameFor(x => x.VisuospatialFunction)
+  @Html.DisplayFor(x => x.VisuospatialFunction)
+  <br>
+  @Html.DisplayNameFor(x => x.AttentionConcentration)
+  @Html.DisplayFor(x => x.AttentionConcentration)
+  <br>
+  @Html.DisplayNameFor(x => x.FluctuatingCognition)
+  @Html.DisplayFor(x => x.FluctuatingCognition)
+  <br>
+  @Html.DisplayNameFor(x => x.FluctuatingCognitionAge)
+  @Html.DisplayFor(x => x.FluctuatingCognitionAge)
+  <br>
+  @Html.DisplayNameFor(x => x.ImpairedOther)
+  @Html.DisplayFor(x => x.ImpairedOther)
+  <br>
+  @Html.DisplayNameFor(x => x.ImpairedOtherSpecify)
+  @Html.DisplayFor(x => x.ImpairedOtherSpecify)
+  <br>
+  @Html.DisplayNameFor(x => x.PredominantSymptom)
+  @Html.DisplayFor(x => x.PredominantSymptom)
+  <br>
+  @Html.DisplayNameFor(x => x.PredominantSymptomOther)
+  @Html.DisplayFor(x => x.PredominantSymptomOther)
+  <br>
+  @Html.DisplayNameFor(x => x.CognitiveSymptoms)
+  @Html.DisplayFor(x => x.CognitiveSymptoms)
+  <br>
+  @Html.DisplayNameFor(x => x.CognitiveSymptomsOther)
+  @Html.DisplayFor(x => x.CognitiveSymptomsOther)
+  <br>
+  @Html.DisplayNameFor(x => x.AgeOfDecline)
+  @Html.DisplayFor(x => x.AgeOfDecline)
+  <br>
+  @Html.DisplayNameFor(x => x.BehavioralSymptoms)
+  @Html.DisplayFor(x => x.BehavioralSymptoms)
+  <br>
+  @Html.DisplayNameFor(x => x.ApathyWithdrawal)
+  @Html.DisplayFor(x => x.ApathyWithdrawal)
+  <br>
+  @Html.DisplayNameFor(x => x.DepressedMood)
+  @Html.DisplayFor(x => x.DepressedMood)
+  <br>
+  @Html.DisplayNameFor(x => x.VisualHallucinations)
+  @Html.DisplayFor(x => x.VisualHallucinations)
+  <br>
+  @Html.DisplayNameFor(x => x.DetailedHallucinations)
+  @Html.DisplayFor(x => x.DetailedHallucinations)
+  <br>
+  @Html.DisplayNameFor(x => x.HallucinationsAge)
+  @Html.DisplayFor(x => x.HallucinationsAge)
+  <br>
+  @Html.DisplayNameFor(x => x.AuditoryHallucinations)
+  @Html.DisplayFor(x => x.AuditoryHallucinations)
+  <br>
+  @Html.DisplayNameFor(x => x.AbnormalBeliefs)
+  @Html.DisplayFor(x => x.AbnormalBeliefs)
+  <br>
+  @Html.DisplayNameFor(x => x.Disinhibition)
+  @Html.DisplayFor(x => x.Disinhibition)
+  <br>
+  @Html.DisplayNameFor(x => x.Irritability)
+  @Html.DisplayFor(x => x.Irritability)
+  <br>
+  @Html.DisplayNameFor(x => x.Agitation)
+  @Html.DisplayFor(x => x.Agitation)
+  <br>
+  @Html.DisplayNameFor(x => x.PersonalityChange)
+  @Html.DisplayFor(x => x.PersonalityChange)
+  <br>
+  @Html.DisplayNameFor(x => x.RemDisorder)
+  @Html.DisplayFor(x => x.RemDisorder)
+  <br>
+  @Html.DisplayNameFor(x => x.RemDisorderAge)
+  @Html.DisplayFor(x => x.RemDisorderAge)
+  <br>
+  @Html.DisplayNameFor(x => x.Anxiety)
+  @Html.DisplayFor(x => x.Anxiety)
+  <br>
+  @Html.DisplayNameFor(x => x.ChangeInBehavior)
+  @Html.DisplayFor(x => x.ChangeInBehavior)
+  <br>
+  @Html.DisplayNameFor(x => x.ChangeInBehaviorOther)
+  @Html.DisplayFor(x => x.ChangeInBehaviorOther)
+  <br>
+  @Html.DisplayNameFor(x => x.BehaviorDecline)
+  @Html.DisplayFor(x => x.BehaviorDecline)
+  <br>
+  @Html.DisplayNameFor(x => x.BehaviorDeclineOther)
+  @Html.DisplayFor(x => x.BehaviorDeclineOther)
+  <br>
+  @Html.DisplayNameFor(x => x.OnsetBehavioral)
+  @Html.DisplayFor(x => x.OnsetBehavioral)
+  <br>
+  @Html.DisplayNameFor(x => x.OnsetBehavioralOther)
+  @Html.DisplayFor(x => x.OnsetBehavioralOther)
+  <br>
+  @Html.DisplayNameFor(x => x.BehaviorSymptomsAge)
+  @Html.DisplayFor(x => x.BehaviorSymptomsAge)
+  <br>
+  @Html.DisplayNameFor(x => x.MotorSymptoms)
+  @Html.DisplayFor(x => x.MotorSymptoms)
+  <br>
+  @Html.DisplayNameFor(x => x.GaitDisorder)
+  @Html.DisplayFor(x => x.GaitDisorder)
+  <br>
+  @Html.DisplayNameFor(x => x.Falls)
+  @Html.DisplayFor(x => x.Falls)
+  <br>
+  @Html.DisplayNameFor(x => x.Tremor)
+  @Html.DisplayFor(x => x.Tremor)
+  <br>
+  @Html.DisplayNameFor(x => x.Slowness)
+  @Html.DisplayFor(x => x.Slowness)
+  <br>
+  @Html.DisplayNameFor(x => x.PredominantMotorDecline)
+  @Html.DisplayFor(x => x.PredominantMotorDecline)
+  <br>
+  @Html.DisplayNameFor(x => x.ModeOfMotorSymptoms)
+  @Html.DisplayFor(x => x.ModeOfMotorSymptoms)
+  <br>
+  @Html.DisplayNameFor(x => x.ModeOfMotorSymptomsOther)
+  @Html.DisplayFor(x => x.ModeOfMotorSymptomsOther)
+  <br>
+  @Html.DisplayNameFor(x => x.SuggestiveOfParkinsonism)
+  @Html.DisplayFor(x => x.SuggestiveOfParkinsonism)
+  <br>
+  @Html.DisplayNameFor(x => x.SuggestiveOfParkinsonismAge)
+  @Html.DisplayFor(x => x.SuggestiveOfParkinsonismAge)
+  <br>
+  @Html.DisplayNameFor(x => x.SuggestiveOfSclerosis)
+  @Html.DisplayFor(x => x.SuggestiveOfSclerosis)
+  <br>
+    @Html.DisplayNameFor(x => x.SuggestiveOfSclerosisAge)
+  @Html.DisplayFor(x => x.SuggestiveOfSclerosisAge)
+  <br>
+    @Html.DisplayNameFor(x => x.AssessmentOfSclerosisAge)
+  @Html.DisplayFor(x => x.AssessmentOfSclerosisAge)
+  <br>
+    @Html.DisplayNameFor(x => x.OverallDecline)
+  @Html.DisplayFor(x => x.OverallDecline)
+  <br>
+    @Html.DisplayNameFor(x => x.PredominantDomain)
+  @Html.DisplayFor(x => x.PredominantDomain)
+  <br>
+    @Html.DisplayNameFor(x => x.LewyBodyDisease)
+  @Html.DisplayFor(x => x.LewyBodyDisease)
+  <br>
+    @Html.DisplayNameFor(x => x.FrontotemporalLobarDegeneration)
+  @Html.DisplayFor(x => x.FrontotemporalLobarDegeneration)
+  <br>
+</div>

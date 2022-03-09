@@ -65,7 +65,7 @@ namespace UDS.Net.Data.Entities
         [RequiredIf(nameof(CognitionImpairment), 1, ErrorMessage = "Please provide a value")]
         [Display(Name = "Does the subject have a short attention span or limited ability to concentrate? Is s/he easily distracted?")]
         [Range(0, 9, ErrorMessage = "Value outside of required range")]
-        public int? AttentionCconcentration { get; set; }
+        public int? AttentionConcentration { get; set; }
 
         [Column("COGFLUC")]
         [RequiredIf(nameof(CognitionImpairment), 1, ErrorMessage = "Please provide a value")]

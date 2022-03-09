@@ -1,5 +1,6 @@
 ﻿@model Symptoms
 @using UDS.Net.Data.Dtos;
+
 @{
     var title = "B9 Symptoms";
     var visitInfo = "";
@@ -15,1208 +16,1218 @@
 @await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
 
 <div class="row">
-    <div class="col-md-12">
+
+    <div class="col-md-12 p-4">
         <p class="lead">INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form B9. Check <u>only</u> one box per question.</p>
     </div>
+
     <div class="col-md-12 p-4">
         <form method="POST" asp-action="Edit" class="counterreset">
-
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="2">
-                                Declines in memory reported by subject and co-participant
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="w-50">
-                                1. <label asp-for="SubjectMemory"></label>
-                                <div><span class="text-danger" asp-validation-for="SubjectMemory"></span></div>
-                            </td>
-                            <td>
-                                <div>
-                                    <input type="radio" asp-for="SubjectMemory" id="SubjectMemory[0]" value="0" /><label for="SubjectMemory[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="SubjectMemory" id="SubjectMemory[1]" value="1" /><label for="SubjectMemory[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="SubjectMemory" id="SubjectMemory[8]" value="8" /><label for="SubjectMemory[8]"><span class="badge badge-pill badge-light">8</span> Could not be assessed/subject is too impaired</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                2. <label asp-for="CoParticipantMemory"></label>
-                                <div><span class="text-danger" asp-validation-for="CoParticipantMemory"></span></div>
-                            </td>
-                            <td>
-                                <div>
-                                    <input type="radio" asp-for="CoParticipantMemory" id="CoParticipantMemory[0]" value="0" /><label for="CoParticipantMemory[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="CoParticipantMemory" id="CoParticipantMemory[1]" value="1" /><label for="CoParticipantMemory[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="CoParticipantMemory" id="CoParticipantMemory[8]" value="8" /><label for="CoParticipantMemory[8]"><span class="badge badge-pill badge-light">8</span> There is no co-participant</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="4">
-                                Cognitive symptoms
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="1" class="w-50">
-                                3. <label asp-for="CognitionImpairment"></label>
-                                <div>(If No, <b>SKIP TO QUESTION 8</b>)</div>
-                                <div><span class="text-danger" asp-validation-for="CognitionImpairment"></span></div>
-                            </td>
-                            <td colspan="3">
-                                <div>
-                                    <input type="radio" asp-for="CognitionImpairment" id="CognitionImpairment[0]" value="0" data-toggle-targets="Memory,Orientation,ExecutiveFunction,Language,,VisuospatialFunction,AttentionCconcentration,FluctuatingCognition,FluctuatingCognitionAge,ImpairedOther,ImpairedOtherSpecify,PredominantSymptom,PredominantSymptomOther,CognitiveSymptoms,CognitiveSymptomsOther,AgeOfDecline" data-toggle-values="[0]" /><label for="CognitionImpairment[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="CognitionImpairment" id="CognitionImpairment[1]" value="1" data-toggle-targets="Memory,Orientation,ExecutiveFunction,Language,,VisuospatialFunction,AttentionCconcentration,FluctuatingCognition,FluctuatingCognitionAge,ImpairedOther,ImpairedOtherSpecify,PredominantSymptom,PredominantSymptomOther,CognitiveSymptoms,CognitiveSymptomsOther,AgeOfDecline" data-toggle-values="[0]" /><label for="CognitionImpairment[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                    </tbody>
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="1">
-                                <span class="font-weight-normal">
-                                    4. Indicate whether the subject currently is meaningfully impaired, relative to previously attained abilities,
-                                    in the following cognitive domains, or has fluctuating cognition
-                                </span>
-                            </th>
-                            <th class="pr-5" colspan="1">
-                                No
-                            </th>
-                            <th class="pr-5" colspan="1">
-                                Yes
-                            </th>
-                            <th colspan="1">
-                                Unknown
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                4a. <b>Memory</b> <label asp-for="Memory"></label>
-                                <div><span class="text-danger" asp-validation-for="Memory"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Memory" id="Memory[0]" value="0" /><label for="Memory[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Memory" id="Memory[1]" value="1" /><label for="Memory[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Memory" id="Memory[9]" value="9" /><label for="Memory[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4b. <b>Orientation</b> <label asp-for="Orientation"></label>
-                                <div><span class="text-danger" asp-validation-for="Orientation"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Orientation" id="Orientation[0]" value="0" /><label for="Orientation[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Orientation" id="Orientation[1]" value="1" /><label for="Orientation[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Orientation" id="Orientation[9]" value="9" /><label for="Orientation[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4c.<b> Executive function — judgment, planning, problem-solving</b> <label asp-for="ExecutiveFunction"></label>
-                                <div><span class="text-danger" asp-validation-for="ExecutiveFunction"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="ExecutiveFunction" id="ExecutiveFunction[0]" value="0" /><label for="ExecutiveFunction[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="ExecutiveFunction" id="ExecutiveFunction[1]" value="1" /><label for="ExecutiveFunction[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="ExecutiveFunction" id="ExecutiveFunction[9]" value="9" /><label for="ExecutiveFunction[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4d. <b>Language</b> <label asp-for="Language"></label>
-                                <div><span class="text-danger" asp-validation-for="Language"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Language" id="Language[0]" value="0" /><label for="Language[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Language" id="Language[1]" value="1" /><label for="Language[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Language" id="Language[9]" value="9" /><label for="Language[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4e. <b>Visuospatial function</b> <label asp-for="VisuospatialFunction"></label>
-                                <div><span class="text-danger" asp-validation-for="VisuospatialFunction"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="VisuospatialFunction" id="VisuospatialFunction[0]" value="0" /><label for="VisuospatialFunction[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="VisuospatialFunction" id="VisuospatialFunction[1]" value="1" /><label for="VisuospatialFunction[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="VisuospatialFunction" id="VisuospatialFunction[9]" value="9" /><label for="VisuospatialFunction[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4f. <b>Attention, concentration</b> <label asp-for="AttentionCconcentration"></label>
-                                <div><span class="text-danger" asp-validation-for="AttentionCconcentration"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="AttentionCconcentration" id="AttentionCconcentration[0]" value="0" /><label for="AttentionCconcentration[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="AttentionCconcentration" id="AttentionCconcentration[1]" value="1" /><label for="AttentionCconcentration[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="AttentionCconcentration" id="AttentionCconcentration[9]" value="9" /><label for="AttentionCconcentration[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4g. <b>Fluctuating cognition</b> <label asp-for="FluctuatingCognition"></label>
-                                <div><span class="text-danger" asp-validation-for="FluctuatingCognition"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="FluctuatingCognition" id="FluctuatingCognition[0]" value="0" data-toggle-targets="FluctuatingCognitionAge" data-toggle-values="[0,9]"><label for="FluctuatingCognition[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="FluctuatingCognition" id="FluctuatingCognition[1]" value="1" data-toggle-targets="FluctuatingCognitionAge" data-toggle-values="[0,9]"><label for="FluctuatingCognition[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="FluctuatingCognition" id="FluctuatingCognition[9]" value="9" data-toggle-targets="FluctuatingCognitionAge" data-toggle-values="[0,9]"><label for="FluctuatingCognition[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    4g1. <label asp-for="FluctuatingCognitionAge"></label>
-                                    <div><span class="text-danger" asp-validation-for="FluctuatingCognitionAge"></span></div>
-                                </div>
-                                <div>
-                                    (The clinician must use his/her best judgment to estimate an age of onset.)
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div class="form-check form-check-inline">
-                                    <input type="number" class="form-control" asp-for="FluctuatingCognitionAge" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="1">
-                                <div>
-                                    4h. Other (Specify)
-                                    <div><span class="text-danger" asp-validation-for="ImpairedOther"></span></div>
-                                    <div><span class="text-danger" asp-validation-for="ImpairedOtherSpecify"></span></div>
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div>
-                                    <input type="radio" asp-for="ImpairedOther" id="ImpairedOther[0]" value="0" data-toggle-targets="ImpairedOtherSpecify" data-toggle-values="[0]" />
-                                    <label for="ImpairedOther[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <input type="radio" asp-for="ImpairedOther" id="ImpairedOther[1]" value="1" data-toggle-targets="ImpairedOtherSpecify" data-toggle-values="[0]" />
-                                <label for="ImpairedOther[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                <input type="text" asp-for="ImpairedOtherSpecify" class="form-control" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-50">
-                                5. <label asp-for="PredominantSymptom"></label>
-                                <div><span class="text-danger" asp-validation-for="PredominantSymptom"></span></div>
-                                <div><span class="text-danger" asp-validation-for="PredominantSymptomOther"></span></div>
-                            </td>
-                            <td colspan="4">
-                                <div>
-                                    <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[1]" value="1" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
-                                    <label for="PredominantSymptom[1]"><span class="badge badge-pill badge-light">1</span> Memory</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[2]" value="2" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
-                                    <label for="PredominantSymptom[2]"><span class="badge badge-pill badge-light">2</span> Orientation</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[3]" value="3" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
-                                    <label for="PredominantSymptom[3]"><span class="badge badge-pill badge-light">3</span> Executive function — judgment, planning, problem-solving</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[4]" value="4" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
-                                    <label for="PredominantSymptom[4]"><span class="badge badge-pill badge-light">4</span> Language</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[5]" value="5" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
-                                    <label for="PredominantSymptom[5]"><span class="badge badge-pill badge-light">5</span> Visuospatial function</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[6]" value="6" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
-                                    <label for="PredominantSymptom[6]"><span class="badge badge-pill badge-light">6</span> Attention / concentration</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[7]" value="7" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
-                                    <label for="PredominantSymptom[7]"><span class="badge badge-pill badge-light">7</span> Fluctuating cognition</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[8]" value="8" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
-                                    <label for="PredominantSymptom[8]"><span class="badge badge-pill badge-light">8</span> Other (Specify)</label>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-control" asp-for="PredominantSymptomOther" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[99]" value="99" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
-                                    <label for="PredominantSymptom[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-50">
-                                6. <label asp-for="CognitiveSymptoms"></label>
-                                <div><span class="text-danger" asp-validation-for="CognitiveSymptoms"></span></div>
-                                <div><span class="text-danger" asp-validation-for="CognitiveSymptomsOther"></span></div>
-                            </td>
-                            <td colspan="4">
-                                <div>
-                                    <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[1]" value="1" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="CognitiveSymptoms[1]"><span class="badge badge-pill badge-light">1</span> Gradual</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[2]" value="2" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="CognitiveSymptoms[2]"><span class="badge badge-pill badge-light">2</span> Subacute</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[3]" value="3" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="CognitiveSymptoms[3]"><span class="badge badge-pill badge-light">3</span> Abrupt</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[4]" value="4" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="CognitiveSymptoms[4]"><span class="badge badge-pill badge-light">4</span> Other (Specify)</label>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-control" asp-for="CognitiveSymptomsOther" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[99]" value="99" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="CognitiveSymptoms[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    7. <label asp-for="AgeOfDecline"></label>
-                                    <div>(The clinician must use his/her best judgment to estimate an age of onset.)</div>
-                                    <div><span class="text-danger" asp-validation-for="AgeOfDecline"></span></div>
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div class="form-check form-check-inline">
-                                    <label for="AgeOfDecline"></label>
-                                    <input type="number" asp-for="AgeOfDecline" class="form-control" />
-                                </div>
-                                @if (!isIVP)
-                                {
-                                    <div class="pt-2">
-                                        <p>(777 = Age of onset entered at a previous UDS visit)</p>
-                                    </div>
-                                }
-                                @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AgeOfDecline").Any()))
-                                {
-                                    @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AgeOfDecline").FirstOrDefault());
-                                }
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="4">Behavioral symptoms</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="1" class="w-50">
-                                8. <label asp-for="BehavioralSymptoms"></label>
-                                <div>(If No, <b>SKIP TO QUESTION 13</b>)</div>
-                                <div><span class="text-danger" asp-validation-for="BehavioralSymptoms"></span></div>
-                            </td>
-                            <td colspan="3">
-                                <div>
-                                    <input type="radio" asp-for="BehavioralSymptoms" id="BehavioralSymptoms[0]" value="0" data-toggle-targets="ApathyWithdrawal,DepressedMood,VisualHallucinations,DetailedHallucinations,HallucinationsAge,AuditoryHallucinations,AbnormalBeliefs,Disinhibition,Irritability,Agitation,PersonalityChange,RemDisorder,RemDisorderAge,Anxiety,ChangeInBehavior,ChangeInBehaviorOther,BehaviorDecline,BehaviorDeclineOther,OnsetBehavioral,OnsetBehavioralOther,BehaviorSymptomsAge" data-toggle-values="[0]" /><label for="BehavioralSymptoms[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehavioralSymptoms" id="BehavioralSymptoms[1]" value="1" data-toggle-targets="ApathyWithdrawal,DepressedMood,VisualHallucinations,DetailedHallucinations,HallucinationsAge,AuditoryHallucinations,AbnormalBeliefs,Disinhibition,Irritability,Agitation,PersonalityChange,RemDisorder,RemDisorderAge,Anxiety,ChangeInBehavior,ChangeInBehaviorOther,BehaviorDecline,BehaviorDeclineOther,OnsetBehavioral,OnsetBehavioralOther,BehaviorSymptomsAge" data-toggle-values="[0]" /><label for="BehavioralSymptoms[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="1" class="font-weight-normal">
-                                9. Indicate whether the subject currently manifests meaningful change in behavior in any
-                                of the following ways
-                            </th>
-                            <th class="pr-5" colspan="1">
-                                No
-                            </th>
-                            <th class="pr-5" colspan="1">
-                                Yes
-                            </th>
-                            <th colspan="1">
-                                Unknown
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                9a. <b>Apathy, withdrawal</b> <label asp-for="ApathyWithdrawal"></label>
-                                <div><span class="text-danger" asp-validation-for="ApathyWithdrawal"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="ApathyWithdrawal" id="ApathyWithdrawal[0]" value="0" /><label for="ApathyWithdrawal[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="ApathyWithdrawal" id="ApathyWithdrawal[1]" value="1" /><label for="ApathyWithdrawal[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="ApathyWithdrawal" id="ApathyWithdrawal[9]" value="9" /><label for="ApathyWithdrawal[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9b. <b>Depressed mood</b> <label asp-for="DepressedMood"></label>
-                                <div><span class="text-danger" asp-validation-for="DepressedMood"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="DepressedMood" id="DepressedMood[0]" value="0" /><label for="DepressedMood[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="DepressedMood" id="DepressedMood[1]" value="1" /><label for="DepressedMood[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="DepressedMood" id="DepressedMood[9]" value="9" /><label for="DepressedMood[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="4" class="font-weight-normal">9c. Psychosis</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                9c1. <label asp-for="VisualHallucinations"></label>
-                                <div><span class="text-danger" asp-validation-for="VisualHallucinations"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="VisualHallucinations" id="VisualHallucinations[0]" value="0" data-toggle-targets="DetailedHallucinations,HallucinationsAge" data-toggle-values="[0,9]" /><label for="VisualHallucinations[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="VisualHallucinations" id="VisualHallucinations[1]" value="1" data-toggle-targets="DetailedHallucinations,HallucinationsAge" data-toggle-values="[0,9]" /><label for="VisualHallucinations[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="VisualHallucinations" id="VisualHallucinations[9]" value="9" data-toggle-targets="DetailedHallucinations,HallucinationsAge" data-toggle-values="[0,9]" /><label for="VisualHallucinations[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9c1a. <label asp-for="DetailedHallucinations"></label>
-                                <div><span class="text-danger" asp-validation-for="DetailedHallucinations"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="DetailedHallucinations" id="DetailedHallucinations[0]" value="0" data-toggle-targets="HallucinationsAge" data-toggle-values="[0,9]" /><label for="DetailedHallucinations[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="DetailedHallucinations" id="DetailedHallucinations[1]" value="1" data-toggle-targets="HallucinationsAge" data-toggle-values="[0,9]" /><label for="DetailedHallucinations[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="DetailedHallucinations" id="DetailedHallucinations[9]" value="9" data-toggle-targets="HallucinationsAge" data-toggle-values="[0,9]" /><label for="DetailedHallucinations[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    9c1b. <label asp-for="HallucinationsAge"></label>
-                                    <div><span class="text-danger" asp-validation-for="HallucinationsAge"></span></div>
-                                </div>
-                                <div>
-                                    (The clinician must use his/her best judgment to estimate an age of onset.)
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-control" asp-for="HallucinationsAge" />
-                                </div>
-                                <div class="pt-2">
-                                    (888 = N/A, not well-formed)
-                                </div>
-                                @if (!isIVP)
-                                {
-                                    <div class="pt-2">
-                                        (777 = Age of onset provided at a previous UDS visit)
-                                    </div>
-                                }
-                                @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "HallucinationsAge").Any()))
-                                {
-                                    @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "HallucinationsAge").FirstOrDefault());
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9c2. <label asp-for="AuditoryHallucinations"></label>
-                                <div><span class="text-danger" asp-validation-for="AuditoryHallucinations"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="AuditoryHallucinations" id="AuditoryHallucinations[0]" value="0" /><label for="AuditoryHallucinations[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="AuditoryHallucinations" id="AuditoryHallucinations[1]" value="1" /><label for="AuditoryHallucinations[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="AuditoryHallucinations" id="AuditoryHallucinations[9]" value="9" /><label for="AuditoryHallucinations[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9c3. <label asp-for="AbnormalBeliefs"></label>
-                                <div><span class="text-danger" asp-validation-for="AbnormalBeliefs"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="AbnormalBeliefs" id="AbnormalBeliefs[0]" value="0" /><label for="AbnormalBeliefs[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="AbnormalBeliefs" id="AbnormalBeliefs[1]" value="1" /><label for="AbnormalBeliefs[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="AbnormalBeliefs" id="AbnormalBeliefs[9]" value="9" /><label for="AbnormalBeliefs[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9d. <b>Disinhibition</b> <label asp-for="Disinhibition"></label>
-                                <div><span class="text-danger" asp-validation-for="Disinhibition"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Disinhibition" id="Disinhibition[0]" value="0" /><label for="Disinhibition[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Disinhibition" id="Disinhibition[1]" value="1" /><label for="Disinhibition[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Disinhibition" id="Disinhibition[9]" value="9" /><label for="Disinhibition[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9e. <b>Irritability</b> <label asp-for="Irritability"></label>
-                                <div><span class="text-danger" asp-validation-for="Irritability"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Irritability" id="Irritability[0]" value="0" /><label for="Irritability[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Irritability" id="Irritability[1]" value="1" /><label for="Irritability[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Irritability" id="Irritability[9]" value="9" /><label for="Irritability[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9f. <b>Agitation</b> <label asp-for="Agitation"></label>
-                                <div><span class="text-danger" asp-validation-for="Agitation"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Agitation" id="Agitation[0]" value="0" /><label for="Agitation[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Agitation" id="Agitation[1]" value="1" /><label for="Agitation[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Agitation" id="Agitation[9]" value="9" /><label for="Agitation[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9g. <b>Personality change</b> <label asp-for="PersonalityChange"></label>
-                                <div><span class="text-danger" asp-validation-for="PersonalityChange"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="PersonalityChange" id="PersonalityChange[0]" value="0" /><label for="PersonalityChange[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="PersonalityChange" id="PersonalityChange[1]" value="1" /><label for="PersonalityChange[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="PersonalityChange" id="PersonalityChange[9]" value="9" /><label for="PersonalityChange[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9h. <b>REM sleep behavior disorder</b> <label asp-for="RemDisorder"></label>
-                                <div><span class="text-danger" asp-validation-for="RemDisorder"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="RemDisorder" id="RemDisorder[0]" value="0" data-toggle-targets="RemDisorderAge" data-toggle-values="[0,9]" /><label for="RemDisorder[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="RemDisorder" id="RemDisorder[1]" value="1" data-toggle-targets="RemDisorderAge" data-toggle-values="[0,9]" /><label for="RemDisorder[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="RemDisorder" id="RemDisorder[9]" value="9" data-toggle-targets="RemDisorderAge" data-toggle-values="[0,9]" /><label for="RemDisorder[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    9h1. <label asp-for="RemDisorderAge"></label>
-                                    <div><span class="text-danger" asp-validation-for="RemDisorderAge"></span></div>
-                                </div>
-                                <div>
-                                    (The clinician must use his/her best judgment to estimate an age of onset.)
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-control" asp-for="RemDisorderAge" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9i. <b>Anxiety</b> <label asp-for="Anxiety"></label>
-                                <div><span class="text-danger" asp-validation-for="Anxiety"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Anxiety" id="Anxiety[0]" value="0" /><label for="Anxiety[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Anxiety" id="Anxiety[1]" value="1" /><label for="Anxiety[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Anxiety" id="Anxiety[9]" value="9" /><label for="Anxiety[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="1">
-                                <div>
-                                    9j. Other (Specify)
-                                    <div><span class="text-danger" asp-validation-for="ChangeInBehavior"></span></div>
-                                    <div><span class="text-danger" asp-validation-for="ChangeInBehaviorOther"></span></div>
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div>
-                                    <input type="radio" asp-for="ChangeInBehavior" id="ChangeInBehavior[0]" value="0" data-toggle-targets="ChangeInBehaviorOther" data-toggle-values="[0]" />
-                                    <label for="ChangeInBehavior[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <input type="radio" asp-for="ChangeInBehavior" id="ChangeInBehavior[1]" value="1" data-toggle-targets="ChangeInBehaviorOther" data-toggle-values="[0]" />
-                                <label for="ChangeInBehavior[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                <input type="text" asp-for="ChangeInBehaviorOther" class="form-control" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-50">
-                                10. <label asp-for="BehaviorDecline"></label>
-                                @if (!isIVP)
-                                {
-                                    <div class="pt-2">
-                                        <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
-                                    </div>
-                                }
-                                @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorDecline").Any()))
-                                {
-                                    @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorDecline").FirstOrDefault());
-                                }
-                                <div class="pt-2">
-                                </div>
-                                <div><span class="text-danger" asp-validation-for="BehaviorDecline"></span></div>
-                                <div><span class="text-danger" asp-validation-for="BehaviorDeclineOther"></span></div>
-                            </td>
-                            <td colspan="4">
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[0]" value="0" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[1]" value="1" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[1]"><span class="badge badge-pill badge-light">1</span> Apathy/withdrawal</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[2]" value="2" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[2]"><span class="badge badge-pill badge-light">2</span> Depressed mood</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[3]" value="3" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[3]"><span class="badge badge-pill badge-light">3</span> Psychosis</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[4]" value="4" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[4]"><span class="badge badge-pill badge-light">4</span> Disinhibition</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[5]" value="5" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[5]"><span class="badge badge-pill badge-light">5</span> Irritability</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[6]" value="6" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[6]"><span class="badge badge-pill badge-light">6</span> Agitation</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[7]" value="7" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[7]"><span class="badge badge-pill badge-light">7</span> Personality change</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[8]" value="8" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[8]"><span class="badge badge-pill badge-light">8</span> Personality change</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[9]" value="9" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[9]"><span class="badge badge-pill badge-light">9</span> Anxiety</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[10]" value="10" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[10]"><span class="badge badge-pill badge-light">10</span> Other (Specify)</label>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-control" asp-for="BehaviorDeclineOther" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[99]" value="99" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="BehaviorDecline[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
-                                </div>
-                            </td>
-                        <tr>
-                            <td class="w-50">
-                                11. <label asp-for="OnsetBehavioral"></label>
-                                <div><span class="text-danger" asp-validation-for="OnsetBehavioral"></span></div>
-                                <div><span class="text-danger" asp-validation-for="OnsetBehavioralOther"></span></div>
-                            </td>
-                            <td colspan="4">
-                                <div>
-                                    <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[1]" value="1" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
-                                    <label for="OnsetBehavioral[1]"><span class="badge badge-pill badge-light">1</span> Gradual</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[2]" value="2" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
-                                    <label for="OnsetBehavioral[2]"><span class="badge badge-pill badge-light">2</span> Subacute</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[3]" value="3" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
-                                    <label for="OnsetBehavioral[3]"><span class="badge badge-pill badge-light">3</span> Abrupt</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[4]" value="4" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
-                                    <label for="OnsetBehavioral[4]"><span class="badge badge-pill badge-light">4</span> Other (Specify)</label>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-control" asp-for="OnsetBehavioralOther" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[5]" value="5" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,4,5,6,7,8,9,99]" />
-                                    <label for="OnsetBehavioral[5]"><span class="badge badge-pill badge-light">5</span> Unknown</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    12. <label asp-for="BehaviorSymptomsAge"></label>
-                                    <div><span class="text-danger" asp-validation-for="BehaviorSymptomsAge"></span></div>
-                                </div>
-                                <div>
-                                    (The clinician must use his/her best judgment to estimate an age of onset.)
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div class="form-check form-check-inline">
-                                    <label for="BehaviorSymptomsAge"></label>
-                                    <input type="number" asp-for="BehaviorSymptomsAge" class="form-control" />
-                                </div>
-                                @if (!isIVP)
-                                {
-                                    <div class="pt-2">
-                                        <p>(777 = Age of onset entered at a previous UDS visit)</p>
-                                    </div>
-                                }
-                                @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").Any()))
-                                {
-                                    @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").FirstOrDefault());
-                                }
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="4">
-                                Motor symptoms
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="1" class="w-50">
-                                13. <label asp-for="MotorSymptoms"></label>
-                                <div><span class="text-danger" asp-validation-for="MotorSymptoms"></span></div>
-                            </td>
-                            <td colspan="3">
-                                <div>
-                                    <input type="radio" asp-for="MotorSymptoms" id="MotorSymptoms[0]" value="0" data-toggle-targets="GaitDisorder,Falls,Tremor,Slowness,PredominantMotorDecline,ModeOfMotorSymptoms,ModeOfMotorSymptomsOther,SuggestiveOfParkinsonism,SuggestiveOfParkinsonismAge,SuggestiveOfSclerosis,SuggestiveOfSclerosisAge,AssessmentOfSclerosisAge" data-toggle-values="[0]" /><label for="MotorSymptoms[0]"><span class="badge badge-pill badge-light">0</span> No (If No, <b>SKIP TO QUESTION 20)</b></label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="MotorSymptoms" id="MotorSymptoms[1]" value="1" data-toggle-targets="GaitDisorder,Falls,Tremor,Slowness,PredominantMotorDecline,ModeOfMotorSymptoms,ModeOfMotorSymptomsOther,SuggestiveOfParkinsonism,SuggestiveOfParkinsonismAge,SuggestiveOfSclerosis,SuggestiveOfSclerosisAge,AssessmentOfSclerosisAge" data-toggle-values="[0]" /><label for="MotorSymptoms[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="1" class="font-weight-normal">
-                                14. Indicate whether the subject currently has meaningful change in motor
-                                function in any of the following areas
-                            </th>
-                            <th class="pr-5" colspan="1">
-                                No
-                            </th>
-                            <th class="pr-5" colspan="1">
-                                Yes
-                            </th>
-                            <th colspan="1">
-                                Unknown
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                14a. <b>Gait disorder</b> <label asp-for="GaitDisorder"></label>
-                                <div><span class="text-danger" asp-validation-for="GaitDisorder"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="GaitDisorder" id="GaitDisorder[0]" value="0" /><label for="GaitDisorder[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="GaitDisorder" id="GaitDisorder[1]" value="1" /><label for="GaitDisorder[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="GaitDisorder" id="GaitDisorder[9]" value="9" /><label for="GaitDisorder[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                14b. <b>Falls</b> <label asp-for="Falls"></label>
-                                <div><span class="text-danger" asp-validation-for="Falls"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Falls" id="Falls[0]" value="0" /><label for="Falls[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Falls" id="Falls[1]" value="1" /><label for="Falls[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Falls" id="Falls[9]" value="9" /><label for="Falls[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                14c. <b>Tremor</b> <label asp-for="Tremor"></label>
-                                <div><span class="text-danger" asp-validation-for="Tremor"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Tremor" id="Tremor[0]" value="0" /><label for="Tremor[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Tremor" id="Tremor[1]" value="1" /><label for="Tremor[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Tremor" id="Tremor[9]" value="9" /><label for="Tremor[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                14d. <b>Slowness</b> <label asp-for="Slowness"></label>
-                                <div><span class="text-danger" asp-validation-for="Slowness"></span></div>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Slowness" id="Slowness[0]" value="0" /><label for="Slowness[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Slowness" id="Slowness[1]" value="1" /><label for="Slowness[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                            </td>
-                            <td>
-                                <input type="radio" asp-for="Slowness" id="Slowness[9]" value="9" /><label for="Slowness[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-50">
-                                15. <label asp-for="PredominantMotorDecline"></label>
-                                @if (!isIVP)
-                                {
-                                    <div class="pt-2">
-                                        <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
-                                    </div>
-                                }
-                                @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantMotorDecline").Any()))
-                                {
-                                    @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantMotorDecline").FirstOrDefault());
-                                }
-                                <div><span class="text-danger" asp-validation-for="PredominantMotorDecline"></span></div>
-                            </td>
-                            <td colspan="4">
-                                <div>
-                                    <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[0]" value="0" />
-                                    <label for="PredominantMotorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[1]" value="1" />
-                                    <label for="PredominantMotorDecline[1]"><span class="badge badge-pill badge-light">1</span> Gait disorder</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[2]" value="2" />
-                                    <label for="PredominantMotorDecline[2]"><span class="badge badge-pill badge-light">2</span> Falls</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[3]" value="3" />
-                                    <label for="PredominantMotorDecline[3]"><span class="badge badge-pill badge-light">3</span> Tremor</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[4]" value="4" />
-                                    <label for="PredominantMotorDecline[4]"><span class="badge badge-pill badge-light">4</span> Slowness</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[99]" value="99" />
-                                    <label for="PredominantMotorDecline[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-50">
-                                16. <label asp-for="ModeOfMotorSymptoms"></label>
-                                <div><span class="text-danger" asp-validation-for="ModeOfMotorSymptoms"></span></div>
-                                <div><span class="text-danger" asp-validation-for="ModeOfMotorSymptomsOther"></span></div>
-                            </td>
-                            <td colspan="4">
-                                <div>
-                                    <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[1]" value="1" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="ModeOfMotorSymptoms[1]"><span class="badge badge-pill badge-light">1</span> Gradual</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[2]" value="2" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="ModeOfMotorSymptoms[2]"><span class="badge badge-pill badge-light">2</span> Subacute</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[3]" value="3" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="ModeOfMotorSymptoms[3]"><span class="badge badge-pill badge-light">3</span> Abrupt</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[4]" value="4" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="ModeOfMotorSymptoms[4]"><span class="badge badge-pill badge-light">4</span> Other (Specify)</label>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-control" asp-for="ModeOfMotorSymptomsOther" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[99]" value="99" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
-                                    <label for="ModeOfMotorSymptoms[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                17. <label asp-for="SuggestiveOfParkinsonism"></label>
-                                <div>(If No or Unknown, <b>SKIP TO QUESTION 18</b>)</div>
-                                <div><span class="text-danger" asp-validation-for="SuggestiveOfParkinsonism"></span></div>
-                            </td>
-                            <td colspan="3">
-                                <div>
-                                    <input type="radio" asp-for="SuggestiveOfParkinsonism" id="SuggestiveOfParkinsonism[0]" value="0" data-toggle-targets="SuggestiveOfParkinsonismAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfParkinsonism[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="SuggestiveOfParkinsonism" id="SuggestiveOfParkinsonism[1]" value="1" data-toggle-targets="SuggestiveOfParkinsonismAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfParkinsonism[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="SuggestiveOfParkinsonism" id="SuggestiveOfParkinsonism[9]" value="9" data-toggle-targets="SuggestiveOfParkinsonismAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfParkinsonism[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    17a. <label asp-for="SuggestiveOfParkinsonismAge"></label>
-                                    <div><span class="text-danger" asp-validation-for="SuggestiveOfParkinsonismAge"></span></div>
-                                </div>
-                                <div>
-                                    (The clinician must use his/her best judgment to estimate an age of onset of motor changes.)
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div class="form-check form-check-inline">
-                                    <label for="SuggestiveOfParkinsonismAge"></label>
-                                    <input type="number" asp-for="SuggestiveOfParkinsonismAge" class="form-control" />
-                                </div>
-                                @if (!isIVP)
-                                {
-                                    <div class="pt-2">
-                                        <p>(777 = Age of onset entered at a previous UDS visit)</p>
-                                    </div>
-                                }
-                                @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").Any()))
-                                {
-                                    @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").FirstOrDefault());
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                18. <label asp-for="SuggestiveOfSclerosis"></label>
-                                <div>(If No or Unknown, <b>SKIP TO QUESTION 19</b>)</div>
-                                <div><span class="text-danger" asp-validation-for="SuggestiveOfSclerosis"></span></div>
-                            </td>
-                            <td colspan="3">
-                                <div>
-                                    <input type="radio" asp-for="SuggestiveOfSclerosis" id="SuggestiveOfSclerosis[0]" value="0" data-toggle-targets="SuggestiveOfSclerosisAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfSclerosis[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="SuggestiveOfSclerosis" id="SuggestiveOfSclerosis[1]" value="1" data-toggle-targets="SuggestiveOfSclerosisAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfSclerosis[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="SuggestiveOfSclerosis" id="SuggestiveOfSclerosis[9]" value="9" data-toggle-targets="SuggestiveOfSclerosisAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfSclerosis[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    18a. <label asp-for="SuggestiveOfSclerosisAge"></label>
-                                    <div><span class="text-danger" asp-validation-for="SuggestiveOfSclerosisAge"></span></div>
-                                </div>
-                                <div>
-                                    (The clinician must use his/her best judgment to estimate an age of onset of motor changes.)
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div class="form-check form-check-inline">
-                                    <label for="SuggestiveOfSclerosisAge"></label>
-                                    <input type="number" asp-for="SuggestiveOfSclerosisAge" class="form-control" />
-                                </div>
-                                @if (!isIVP)
-                                {
-                                    <div class="pt-2">
-                                        <p>(777 = Age of onset entered at a previous UDS visit)</p>
-                                    </div>
-                                }
-                                @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").Any()))
-                                {
-                                    @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").FirstOrDefault());
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    19. <label asp-for="AssessmentOfSclerosisAge"></label>
-                                    <div><span class="text-danger" asp-validation-for="AssessmentOfSclerosisAge"></span></div>
-                                </div>
-                                <div>
-                                    (The clinician must use his/her best judgment to estimate an age of onset of motor changes.)
-                                </div>
-                            </td>
-                            <td colspan="3">
-                                <div class="form-check form-check-inline">
-                                    <label for="AssessmentOfSclerosisAge"></label>
-                                    <input type="number" asp-for="AssessmentOfSclerosisAge" class="form-control" />
-                                </div>
-                                @if (!isIVP)
-                                {
-                                    <div class="pt-2">
-                                        <p>(777 = Age of onset entered at a previous UDS visit)</p>
-                                    </div>
-                                }
-                                @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").Any()))
-                                {
-                                    @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").FirstOrDefault());
-                                }
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="4">
-                                Overall course of decline and predominant domain
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="w-50">
-                                20. <label asp-for="OverallDecline"></label>
-                                <div><span class="text-danger" asp-validation-for="OverallDecline"></span></div>
-                            </td>
-                            <td colspan="4">
-                                <div>
-                                    <input type="radio" asp-for="OverallDecline" id="OverallDecline[1]" value="1" />
-                                    <label for="OverallDecline[1]"><span class="badge badge-pill badge-light">1</span> Gradually progressive</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OverallDecline" id="OverallDecline[2]" value="2" />
-                                    <label for="OverallDecline[2]"><span class="badge badge-pill badge-light">2</span> Stepwise</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OverallDecline" id="OverallDecline[3]" value="3" />
-                                    <label for="OverallDecline[3]"><span class="badge badge-pill badge-light">3</span> Static</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OverallDecline" id="OverallDecline[4]" value="4" />
-                                    <label for="OverallDecline[4]"><span class="badge badge-pill badge-light">4</span> Fluctuating</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OverallDecline" id="OverallDecline[5]" value="5" />
-                                    <label for="OverallDecline[5]"><span class="badge badge-pill badge-light">5</span> Improved</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OverallDecline" id="OverallDecline[8]" value="8" />
-                                    <label for="OverallDecline[8]"><span class="badge badge-pill badge-light">8</span> NA</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="OverallDecline" id="OverallDecline[9]" value="9">
-                                    <label for="OverallDecline[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-50">
-                                21. <label asp-for="PredominantDomain"></label>
-                                @if (!isIVP)
-                                {
-                                    <div class="pt-2">
-                                        <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
-                                    </div>
-                                }
-                                @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantDomain").Any()))
-                                {
-                                    @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantDomain").FirstOrDefault());
-                                }
-                                <div><span class="text-danger" asp-validation-for="PredominantDomain"></span></div>
-                            </td>
-                            <td colspan="4">
-                                <div>
-                                    <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[0]" value="0" />
-                                    <label for="PredominantDomain[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[1]" value="1" />
-                                    <label for="PredominantDomain[1]"><span class="badge badge-pill badge-light">1</span> Cognition</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[2]" value="2" />
-                                    <label for="PredominantDomain[2]"><span class="badge badge-pill badge-light">2</span> Behavior</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[3]" value="3" />
-                                    <label for="PredominantDomain[3]"><span class="badge badge-pill badge-light">3</span> Motor function</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[8]" value="8" />
-                                    <label for="PredominantDomain[8]"><span class="badge badge-pill badge-light">8</span> NA</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[9]" value="9">
-                                    <label for="PredominantDomain[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="2">
-                                Candidate for further evaluation for Lewy body disease or frontotemporal lobar degeneration
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="w-50">
-                                22. </span> <label asp-for="LewyBodyDisease"></label>
-                                <div><span class="text-danger" asp-validation-for="LewyBodyDisease"></span></div>
-                            </td>
-                            <td>
-                                <div>
-                                    <input type="radio" asp-for="LewyBodyDisease" id="LewyBodyDisease[0]" value="0" /><label for="LewyBodyDisease[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="LewyBodyDisease" id="LewyBodyDisease[1]" value="1" /><label for="LewyBodyDisease[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                23. <label asp-for="FrontotemporalLobarDegeneration"></label>
-                                <div><span class="text-danger" asp-validation-for="FrontotemporalLobarDegeneration"></span></div>
-                            </td>
-                            <td class="w-75">
-                                <div>
-                                    <input type="radio" asp-for="FrontotemporalLobarDegeneration" id="FrontotemporalLobarDegeneration[0]" value="0" /><label for="FrontotemporalLobarDegeneration[0]"><span class="badge badge-pill badge-light">0</span> No</label>
-                                </div>
-                                <div>
-                                    <input type="radio" asp-for="FrontotemporalLobarDegeneration" id="FrontotemporalLobarDegeneration[1]" value="1" /><label for="FrontotemporalLobarDegeneration[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="2">
+                                        Declines in memory reported by subject and co-participant
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="w-50">
+                                        1. <label asp-for="SubjectMemory"></label>
+                                        <div><span class="text-danger" asp-validation-for="SubjectMemory"></span></div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="radio" asp-for="SubjectMemory" id="SubjectMemory[0]" value="0" /><label for="SubjectMemory[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="SubjectMemory" id="SubjectMemory[1]" value="1" /><label for="SubjectMemory[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="SubjectMemory" id="SubjectMemory[8]" value="8" /><label for="SubjectMemory[8]"><span class="badge badge-pill badge-light">8</span> Could not be assessed/subject is too impaired</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        2. <label asp-for="CoParticipantMemory"></label>
+                                        <div><span class="text-danger" asp-validation-for="CoParticipantMemory"></span></div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="radio" asp-for="CoParticipantMemory" id="CoParticipantMemory[0]" value="0" /><label for="CoParticipantMemory[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="CoParticipantMemory" id="CoParticipantMemory[1]" value="1" /><label for="CoParticipantMemory[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="CoParticipantMemory" id="CoParticipantMemory[8]" value="8" /><label for="CoParticipantMemory[8]"><span class="badge badge-pill badge-light">8</span> There is no co-participant</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="4">
+                                        Cognitive symptoms
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="1" class="w-50">
+                                        3. <label asp-for="CognitionImpairment"></label>
+                                        <div>(If No, <b>SKIP TO QUESTION 8</b>)</div>
+                                        <div><span class="text-danger" asp-validation-for="CognitionImpairment"></span></div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div>
+                                            <input type="radio" asp-for="CognitionImpairment" id="CognitionImpairment[0]" value="0" data-toggle-targets="Memory,Orientation,ExecutiveFunction,Language,,VisuospatialFunction,AttentionConcentration,FluctuatingCognition,FluctuatingCognitionAge,ImpairedOther,ImpairedOtherSpecify,PredominantSymptom,PredominantSymptomOther,CognitiveSymptoms,CognitiveSymptomsOther,AgeOfDecline" data-toggle-values="[0]" /><label for="CognitionImpairment[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="CognitionImpairment" id="CognitionImpairment[1]" value="1" data-toggle-targets="Memory,Orientation,ExecutiveFunction,Language,,VisuospatialFunction,AttentionConcentration,FluctuatingCognition,FluctuatingCognitionAge,ImpairedOther,ImpairedOtherSpecify,PredominantSymptom,PredominantSymptomOther,CognitiveSymptoms,CognitiveSymptomsOther,AgeOfDecline" data-toggle-values="[0]" /><label for="CognitionImpairment[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                            </tbody>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="1">
+                                        <span class="font-weight-normal">
+                                            4. Indicate whether the subject currently is meaningfully impaired, relative to previously attained abilities,
+                                            in the following cognitive domains, or has fluctuating cognition
+                                        </span>
+                                    </th>
+                                    <th class="pr-5" colspan="1">
+                                        No
+                                    </th>
+                                    <th class="pr-5" colspan="1">
+                                        Yes
+                                    </th>
+                                    <th colspan="1">
+                                        Unknown
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        4a. <b>Memory</b> <label asp-for="Memory"></label>
+                                        <div><span class="text-danger" asp-validation-for="Memory"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Memory" id="Memory[0]" value="0" /><label for="Memory[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Memory" id="Memory[1]" value="1" /><label for="Memory[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Memory" id="Memory[9]" value="9" /><label for="Memory[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        4b. <b>Orientation</b> <label asp-for="Orientation"></label>
+                                        <div><span class="text-danger" asp-validation-for="Orientation"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Orientation" id="Orientation[0]" value="0" /><label for="Orientation[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Orientation" id="Orientation[1]" value="1" /><label for="Orientation[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Orientation" id="Orientation[9]" value="9" /><label for="Orientation[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        4c.<b> Executive function — judgment, planning, problem-solving</b> <label asp-for="ExecutiveFunction"></label>
+                                        <div><span class="text-danger" asp-validation-for="ExecutiveFunction"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="ExecutiveFunction" id="ExecutiveFunction[0]" value="0" /><label for="ExecutiveFunction[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="ExecutiveFunction" id="ExecutiveFunction[1]" value="1" /><label for="ExecutiveFunction[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="ExecutiveFunction" id="ExecutiveFunction[9]" value="9" /><label for="ExecutiveFunction[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        4d. <b>Language</b> <label asp-for="Language"></label>
+                                        <div><span class="text-danger" asp-validation-for="Language"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Language" id="Language[0]" value="0" /><label for="Language[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Language" id="Language[1]" value="1" /><label for="Language[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Language" id="Language[9]" value="9" /><label for="Language[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        4e. <b>Visuospatial function</b> <label asp-for="VisuospatialFunction"></label>
+                                        <div><span class="text-danger" asp-validation-for="VisuospatialFunction"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="VisuospatialFunction" id="VisuospatialFunction[0]" value="0" /><label for="VisuospatialFunction[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="VisuospatialFunction" id="VisuospatialFunction[1]" value="1" /><label for="VisuospatialFunction[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="VisuospatialFunction" id="VisuospatialFunction[9]" value="9" /><label for="VisuospatialFunction[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        4f. <b>Attention, concentration</b> <label asp-for="AttentionConcentration"></label>
+                                        <div><span class="text-danger" asp-validation-for="AttentionConcentration"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="AttentionConcentration" id="AttentionConcentration[0]" value="0" /><label for="AttentionConcentration[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="AttentionConcentration" id="AttentionConcentration[1]" value="1" /><label for="AttentionConcentration[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="AttentionConcentration" id="AttentionConcentration[9]" value="9" /><label for="AttentionConcentration[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        4g. <b>Fluctuating cognition</b> <label asp-for="FluctuatingCognition"></label>
+                                        <div><span class="text-danger" asp-validation-for="FluctuatingCognition"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="FluctuatingCognition" id="FluctuatingCognition[0]" value="0" data-toggle-targets="FluctuatingCognitionAge" data-toggle-values="[0,9]"><label for="FluctuatingCognition[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="FluctuatingCognition" id="FluctuatingCognition[1]" value="1" data-toggle-targets="FluctuatingCognitionAge" data-toggle-values="[0,9]"><label for="FluctuatingCognition[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="FluctuatingCognition" id="FluctuatingCognition[9]" value="9" data-toggle-targets="FluctuatingCognitionAge" data-toggle-values="[0,9]"><label for="FluctuatingCognition[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            4g1. <label asp-for="FluctuatingCognitionAge"></label>
+                                            <div><span class="text-danger" asp-validation-for="FluctuatingCognitionAge"></span></div>
+                                        </div>
+                                        <div>
+                                            (The clinician must use his/her best judgment to estimate an age of onset.)
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="form-check form-check-inline">
+                                            <input type="number" class="form-control" asp-for="FluctuatingCognitionAge" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1">
+                                        <div>
+                                            4h. Other (Specify)
+                                            <div><span class="text-danger" asp-validation-for="ImpairedOther"></span></div>
+                                            <div><span class="text-danger" asp-validation-for="ImpairedOtherSpecify"></span></div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div>
+                                            <input type="radio" asp-for="ImpairedOther" id="ImpairedOther[0]" value="0" data-toggle-targets="ImpairedOtherSpecify" data-toggle-values="[0]" />
+                                            <label for="ImpairedOther[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <input type="radio" asp-for="ImpairedOther" id="ImpairedOther[1]" value="1" data-toggle-targets="ImpairedOtherSpecify" data-toggle-values="[0]" />
+                                        <label for="ImpairedOther[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        <input type="text" asp-for="ImpairedOtherSpecify" class="form-control" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="w-50">
+                                        5. <label asp-for="PredominantSymptom"></label>
+                                        <div><span class="text-danger" asp-validation-for="PredominantSymptom"></span></div>
+                                        <div><span class="text-danger" asp-validation-for="PredominantSymptomOther"></span></div>
+                                    </td>
+                                    <td colspan="4">
+                                        <div>
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[1]" value="1" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <label for="PredominantSymptom[1]"><span class="badge badge-pill badge-light">1</span> Memory</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[2]" value="2" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <label for="PredominantSymptom[2]"><span class="badge badge-pill badge-light">2</span> Orientation</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[3]" value="3" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <label for="PredominantSymptom[3]"><span class="badge badge-pill badge-light">3</span> Executive function — judgment, planning, problem-solving</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[4]" value="4" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <label for="PredominantSymptom[4]"><span class="badge badge-pill badge-light">4</span> Language</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[5]" value="5" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <label for="PredominantSymptom[5]"><span class="badge badge-pill badge-light">5</span> Visuospatial function</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[6]" value="6" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <label for="PredominantSymptom[6]"><span class="badge badge-pill badge-light">6</span> Attention / concentration</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[7]" value="7" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <label for="PredominantSymptom[7]"><span class="badge badge-pill badge-light">7</span> Fluctuating cognition</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[8]" value="8" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <label for="PredominantSymptom[8]"><span class="badge badge-pill badge-light">8</span> Other (Specify)</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-control" asp-for="PredominantSymptomOther" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[99]" value="99" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <label for="PredominantSymptom[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="w-50">
+                                        6. <label asp-for="CognitiveSymptoms"></label>
+                                        <div><span class="text-danger" asp-validation-for="CognitiveSymptoms"></span></div>
+                                        <div><span class="text-danger" asp-validation-for="CognitiveSymptomsOther"></span></div>
+                                    </td>
+                                    <td colspan="4">
+                                        <div>
+                                            <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[1]" value="1" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="CognitiveSymptoms[1]"><span class="badge badge-pill badge-light">1</span> Gradual</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[2]" value="2" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="CognitiveSymptoms[2]"><span class="badge badge-pill badge-light">2</span> Subacute</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[3]" value="3" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="CognitiveSymptoms[3]"><span class="badge badge-pill badge-light">3</span> Abrupt</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[4]" value="4" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="CognitiveSymptoms[4]"><span class="badge badge-pill badge-light">4</span> Other (Specify)</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-control" asp-for="CognitiveSymptomsOther" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="CognitiveSymptoms" id="CognitiveSymptoms[99]" value="99" data-toggle-targets="CognitiveSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="CognitiveSymptoms[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            7. <label asp-for="AgeOfDecline"></label>
+                                            <div>(The clinician must use his/her best judgment to estimate an age of onset.)</div>
+                                            <div><span class="text-danger" asp-validation-for="AgeOfDecline"></span></div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="form-check form-check-inline">
+                                            <label for="AgeOfDecline"></label>
+                                            <input type="number" asp-for="AgeOfDecline" class="form-control" />
+                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p>(777 = Age of onset entered at a previous UDS visit)</p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AgeOfDecline").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AgeOfDecline").FirstOrDefault());
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="4">Behavioral symptoms</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="1" class="w-50">
+                                        8. <label asp-for="BehavioralSymptoms"></label>
+                                        <div>(If No, <b>SKIP TO QUESTION 13</b>)</div>
+                                        <div><span class="text-danger" asp-validation-for="BehavioralSymptoms"></span></div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div>
+                                            <input type="radio" asp-for="BehavioralSymptoms" id="BehavioralSymptoms[0]" value="0" data-toggle-targets="ApathyWithdrawal,DepressedMood,VisualHallucinations,DetailedHallucinations,HallucinationsAge,AuditoryHallucinations,AbnormalBeliefs,Disinhibition,Irritability,Agitation,PersonalityChange,RemDisorder,RemDisorderAge,Anxiety,ChangeInBehavior,ChangeInBehaviorOther,BehaviorDecline,BehaviorDeclineOther,OnsetBehavioral,OnsetBehavioralOther,BehaviorSymptomsAge" data-toggle-values="[0]" /><label for="BehavioralSymptoms[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehavioralSymptoms" id="BehavioralSymptoms[1]" value="1" data-toggle-targets="ApathyWithdrawal,DepressedMood,VisualHallucinations,DetailedHallucinations,HallucinationsAge,AuditoryHallucinations,AbnormalBeliefs,Disinhibition,Irritability,Agitation,PersonalityChange,RemDisorder,RemDisorderAge,Anxiety,ChangeInBehavior,ChangeInBehaviorOther,BehaviorDecline,BehaviorDeclineOther,OnsetBehavioral,OnsetBehavioralOther,BehaviorSymptomsAge" data-toggle-values="[0]" /><label for="BehavioralSymptoms[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="1" class="font-weight-normal">
+                                        9. Indicate whether the subject currently manifests meaningful change in behavior in any
+                                        of the following ways
+                                    </th>
+                                    <th class="pr-5" colspan="1">
+                                        No
+                                    </th>
+                                    <th class="pr-5" colspan="1">
+                                        Yes
+                                    </th>
+                                    <th colspan="1">
+                                        Unknown
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        9a. <b>Apathy, withdrawal</b> <label asp-for="ApathyWithdrawal"></label>
+                                        <div><span class="text-danger" asp-validation-for="ApathyWithdrawal"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="ApathyWithdrawal" id="ApathyWithdrawal[0]" value="0" /><label for="ApathyWithdrawal[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="ApathyWithdrawal" id="ApathyWithdrawal[1]" value="1" /><label for="ApathyWithdrawal[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="ApathyWithdrawal" id="ApathyWithdrawal[9]" value="9" /><label for="ApathyWithdrawal[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9b. <b>Depressed mood</b> <label asp-for="DepressedMood"></label>
+                                        <div><span class="text-danger" asp-validation-for="DepressedMood"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="DepressedMood" id="DepressedMood[0]" value="0" /><label for="DepressedMood[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="DepressedMood" id="DepressedMood[1]" value="1" /><label for="DepressedMood[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="DepressedMood" id="DepressedMood[9]" value="9" /><label for="DepressedMood[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="4" class="font-weight-normal">9c. Psychosis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        9c1. <label asp-for="VisualHallucinations"></label>
+                                        <div><span class="text-danger" asp-validation-for="VisualHallucinations"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="VisualHallucinations" id="VisualHallucinations[0]" value="0" data-toggle-targets="DetailedHallucinations,HallucinationsAge" data-toggle-values="[0,9]" /><label for="VisualHallucinations[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="VisualHallucinations" id="VisualHallucinations[1]" value="1" data-toggle-targets="DetailedHallucinations,HallucinationsAge" data-toggle-values="[0,9]" /><label for="VisualHallucinations[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="VisualHallucinations" id="VisualHallucinations[9]" value="9" data-toggle-targets="DetailedHallucinations,HallucinationsAge" data-toggle-values="[0,9]" /><label for="VisualHallucinations[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9c1a. <label asp-for="DetailedHallucinations"></label>
+                                        <div><span class="text-danger" asp-validation-for="DetailedHallucinations"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="DetailedHallucinations" id="DetailedHallucinations[0]" value="0" data-toggle-targets="HallucinationsAge" data-toggle-values="[0,9]" /><label for="DetailedHallucinations[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="DetailedHallucinations" id="DetailedHallucinations[1]" value="1" data-toggle-targets="HallucinationsAge" data-toggle-values="[0,9]" /><label for="DetailedHallucinations[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="DetailedHallucinations" id="DetailedHallucinations[9]" value="9" data-toggle-targets="HallucinationsAge" data-toggle-values="[0,9]" /><label for="DetailedHallucinations[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            9c1b. <label asp-for="HallucinationsAge"></label>
+                                            <div><span class="text-danger" asp-validation-for="HallucinationsAge"></span></div>
+                                        </div>
+                                        <div>
+                                            (The clinician must use his/her best judgment to estimate an age of onset.)
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-control" asp-for="HallucinationsAge" />
+                                        </div>
+                                        <div class="pt-2">
+                                            (888 = N/A, not well-formed)
+                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                (777 = Age of onset provided at a previous UDS visit)
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "HallucinationsAge").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "HallucinationsAge").FirstOrDefault());
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9c2. <label asp-for="AuditoryHallucinations"></label>
+                                        <div><span class="text-danger" asp-validation-for="AuditoryHallucinations"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="AuditoryHallucinations" id="AuditoryHallucinations[0]" value="0" /><label for="AuditoryHallucinations[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="AuditoryHallucinations" id="AuditoryHallucinations[1]" value="1" /><label for="AuditoryHallucinations[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="AuditoryHallucinations" id="AuditoryHallucinations[9]" value="9" /><label for="AuditoryHallucinations[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9c3. <label asp-for="AbnormalBeliefs"></label>
+                                        <div><span class="text-danger" asp-validation-for="AbnormalBeliefs"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="AbnormalBeliefs" id="AbnormalBeliefs[0]" value="0" /><label for="AbnormalBeliefs[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="AbnormalBeliefs" id="AbnormalBeliefs[1]" value="1" /><label for="AbnormalBeliefs[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="AbnormalBeliefs" id="AbnormalBeliefs[9]" value="9" /><label for="AbnormalBeliefs[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9d. <b>Disinhibition</b> <label asp-for="Disinhibition"></label>
+                                        <div><span class="text-danger" asp-validation-for="Disinhibition"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Disinhibition" id="Disinhibition[0]" value="0" /><label for="Disinhibition[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Disinhibition" id="Disinhibition[1]" value="1" /><label for="Disinhibition[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Disinhibition" id="Disinhibition[9]" value="9" /><label for="Disinhibition[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9e. <b>Irritability</b> <label asp-for="Irritability"></label>
+                                        <div><span class="text-danger" asp-validation-for="Irritability"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Irritability" id="Irritability[0]" value="0" /><label for="Irritability[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Irritability" id="Irritability[1]" value="1" /><label for="Irritability[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Irritability" id="Irritability[9]" value="9" /><label for="Irritability[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9f. <b>Agitation</b> <label asp-for="Agitation"></label>
+                                        <div><span class="text-danger" asp-validation-for="Agitation"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Agitation" id="Agitation[0]" value="0" /><label for="Agitation[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Agitation" id="Agitation[1]" value="1" /><label for="Agitation[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Agitation" id="Agitation[9]" value="9" /><label for="Agitation[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9g. <b>Personality change</b> <label asp-for="PersonalityChange"></label>
+                                        <div><span class="text-danger" asp-validation-for="PersonalityChange"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="PersonalityChange" id="PersonalityChange[0]" value="0" /><label for="PersonalityChange[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="PersonalityChange" id="PersonalityChange[1]" value="1" /><label for="PersonalityChange[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="PersonalityChange" id="PersonalityChange[9]" value="9" /><label for="PersonalityChange[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9h. <b>REM sleep behavior disorder</b> <label asp-for="RemDisorder"></label>
+                                        <div><span class="text-danger" asp-validation-for="RemDisorder"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="RemDisorder" id="RemDisorder[0]" value="0" data-toggle-targets="RemDisorderAge" data-toggle-values="[0,9]" /><label for="RemDisorder[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="RemDisorder" id="RemDisorder[1]" value="1" data-toggle-targets="RemDisorderAge" data-toggle-values="[0,9]" /><label for="RemDisorder[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="RemDisorder" id="RemDisorder[9]" value="9" data-toggle-targets="RemDisorderAge" data-toggle-values="[0,9]" /><label for="RemDisorder[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            9h1. <label asp-for="RemDisorderAge"></label>
+                                            <div><span class="text-danger" asp-validation-for="RemDisorderAge"></span></div>
+                                        </div>
+                                        <div>
+                                            (The clinician must use his/her best judgment to estimate an age of onset.)
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-control" asp-for="RemDisorderAge" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9i. <b>Anxiety</b> <label asp-for="Anxiety"></label>
+                                        <div><span class="text-danger" asp-validation-for="Anxiety"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Anxiety" id="Anxiety[0]" value="0" /><label for="Anxiety[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Anxiety" id="Anxiety[1]" value="1" /><label for="Anxiety[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Anxiety" id="Anxiety[9]" value="9" /><label for="Anxiety[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1">
+                                        <div>
+                                            9j. Other (Specify)
+                                            <div><span class="text-danger" asp-validation-for="ChangeInBehavior"></span></div>
+                                            <div><span class="text-danger" asp-validation-for="ChangeInBehaviorOther"></span></div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div>
+                                            <input type="radio" asp-for="ChangeInBehavior" id="ChangeInBehavior[0]" value="0" data-toggle-targets="ChangeInBehaviorOther" data-toggle-values="[0]" />
+                                            <label for="ChangeInBehavior[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <input type="radio" asp-for="ChangeInBehavior" id="ChangeInBehavior[1]" value="1" data-toggle-targets="ChangeInBehaviorOther" data-toggle-values="[0]" />
+                                        <label for="ChangeInBehavior[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        <input type="text" asp-for="ChangeInBehaviorOther" class="form-control" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="w-50">
+                                        10. <label asp-for="BehaviorDecline"></label>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorDecline").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorDecline").FirstOrDefault());
+                                        }
+                                        <div class="pt-2">
+                                        </div>
+                                        <div><span class="text-danger" asp-validation-for="BehaviorDecline"></span></div>
+                                        <div><span class="text-danger" asp-validation-for="BehaviorDeclineOther"></span></div>
+                                    </td>
+                                    <td colspan="4">
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[0]" value="0" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[1]" value="1" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[1]"><span class="badge badge-pill badge-light">1</span> Apathy/withdrawal</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[2]" value="2" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[2]"><span class="badge badge-pill badge-light">2</span> Depressed mood</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[3]" value="3" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[3]"><span class="badge badge-pill badge-light">3</span> Psychosis</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[4]" value="4" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[4]"><span class="badge badge-pill badge-light">4</span> Disinhibition</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[5]" value="5" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[5]"><span class="badge badge-pill badge-light">5</span> Irritability</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[6]" value="6" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[6]"><span class="badge badge-pill badge-light">6</span> Agitation</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[7]" value="7" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[7]"><span class="badge badge-pill badge-light">7</span> Personality change</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[8]" value="8" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[8]"><span class="badge badge-pill badge-light">8</span> Personality change</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[9]" value="9" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[9]"><span class="badge badge-pill badge-light">9</span> Anxiety</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[10]" value="10" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[10]"><span class="badge badge-pill badge-light">10</span> Other (Specify)</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-control" asp-for="BehaviorDeclineOther" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[99]" value="99" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="BehaviorDecline[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                <tr>
+                                    <td class="w-50">
+                                        11. <label asp-for="OnsetBehavioral"></label>
+                                        <div><span class="text-danger" asp-validation-for="OnsetBehavioral"></span></div>
+                                        <div><span class="text-danger" asp-validation-for="OnsetBehavioralOther"></span></div>
+                                    </td>
+                                    <td colspan="4">
+                                        <div>
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[1]" value="1" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
+                                            <label for="OnsetBehavioral[1]"><span class="badge badge-pill badge-light">1</span> Gradual</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[2]" value="2" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
+                                            <label for="OnsetBehavioral[2]"><span class="badge badge-pill badge-light">2</span> Subacute</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[3]" value="3" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
+                                            <label for="OnsetBehavioral[3]"><span class="badge badge-pill badge-light">3</span> Abrupt</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[4]" value="4" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
+                                            <label for="OnsetBehavioral[4]"><span class="badge badge-pill badge-light">4</span> Other (Specify)</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-control" asp-for="OnsetBehavioralOther" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[5]" value="5" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,4,5,6,7,8,9,99]" />
+                                            <label for="OnsetBehavioral[5]"><span class="badge badge-pill badge-light">5</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            12. <label asp-for="BehaviorSymptomsAge"></label>
+                                            <div><span class="text-danger" asp-validation-for="BehaviorSymptomsAge"></span></div>
+                                        </div>
+                                        <div>
+                                            (The clinician must use his/her best judgment to estimate an age of onset.)
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="form-check form-check-inline">
+                                            <label for="BehaviorSymptomsAge"></label>
+                                            <input type="number" asp-for="BehaviorSymptomsAge" class="form-control" />
+                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p>(777 = Age of onset entered at a previous UDS visit)</p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").FirstOrDefault());
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="4">
+                                        Motor symptoms
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="1" class="w-50">
+                                        13. <label asp-for="MotorSymptoms"></label>
+                                        <div><span class="text-danger" asp-validation-for="MotorSymptoms"></span></div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div>
+                                            <input type="radio" asp-for="MotorSymptoms" id="MotorSymptoms[0]" value="0" data-toggle-targets="GaitDisorder,Falls,Tremor,Slowness,PredominantMotorDecline,ModeOfMotorSymptoms,ModeOfMotorSymptomsOther,SuggestiveOfParkinsonism,SuggestiveOfParkinsonismAge,SuggestiveOfSclerosis,SuggestiveOfSclerosisAge,AssessmentOfSclerosisAge" data-toggle-values="[0]" /><label for="MotorSymptoms[0]"><span class="badge badge-pill badge-light">0</span> No (If No, <b>SKIP TO QUESTION 20)</b></label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="MotorSymptoms" id="MotorSymptoms[1]" value="1" data-toggle-targets="GaitDisorder,Falls,Tremor,Slowness,PredominantMotorDecline,ModeOfMotorSymptoms,ModeOfMotorSymptomsOther,SuggestiveOfParkinsonism,SuggestiveOfParkinsonismAge,SuggestiveOfSclerosis,SuggestiveOfSclerosisAge,AssessmentOfSclerosisAge" data-toggle-values="[0]" /><label for="MotorSymptoms[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="1" class="font-weight-normal">
+                                        14. Indicate whether the subject currently has meaningful change in motor
+                                        function in any of the following areas
+                                    </th>
+                                    <th class="pr-5" colspan="1">
+                                        No
+                                    </th>
+                                    <th class="pr-5" colspan="1">
+                                        Yes
+                                    </th>
+                                    <th colspan="1">
+                                        Unknown
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        14a. <b>Gait disorder</b> <label asp-for="GaitDisorder"></label>
+                                        <div><span class="text-danger" asp-validation-for="GaitDisorder"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="GaitDisorder" id="GaitDisorder[0]" value="0" /><label for="GaitDisorder[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="GaitDisorder" id="GaitDisorder[1]" value="1" /><label for="GaitDisorder[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="GaitDisorder" id="GaitDisorder[9]" value="9" /><label for="GaitDisorder[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        14b. <b>Falls</b> <label asp-for="Falls"></label>
+                                        <div><span class="text-danger" asp-validation-for="Falls"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Falls" id="Falls[0]" value="0" /><label for="Falls[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Falls" id="Falls[1]" value="1" /><label for="Falls[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Falls" id="Falls[9]" value="9" /><label for="Falls[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        14c. <b>Tremor</b> <label asp-for="Tremor"></label>
+                                        <div><span class="text-danger" asp-validation-for="Tremor"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Tremor" id="Tremor[0]" value="0" /><label for="Tremor[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Tremor" id="Tremor[1]" value="1" /><label for="Tremor[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Tremor" id="Tremor[9]" value="9" /><label for="Tremor[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        14d. <b>Slowness</b> <label asp-for="Slowness"></label>
+                                        <div><span class="text-danger" asp-validation-for="Slowness"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Slowness" id="Slowness[0]" value="0" /><label for="Slowness[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Slowness" id="Slowness[1]" value="1" /><label for="Slowness[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" asp-for="Slowness" id="Slowness[9]" value="9" /><label for="Slowness[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="w-50">
+                                        15. <label asp-for="PredominantMotorDecline"></label>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantMotorDecline").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantMotorDecline").FirstOrDefault());
+                                        }
+                                        <div><span class="text-danger" asp-validation-for="PredominantMotorDecline"></span></div>
+                                    </td>
+                                    <td colspan="4">
+                                        <div>
+                                            <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[0]" value="0" />
+                                            <label for="PredominantMotorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[1]" value="1" />
+                                            <label for="PredominantMotorDecline[1]"><span class="badge badge-pill badge-light">1</span> Gait disorder</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[2]" value="2" />
+                                            <label for="PredominantMotorDecline[2]"><span class="badge badge-pill badge-light">2</span> Falls</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[3]" value="3" />
+                                            <label for="PredominantMotorDecline[3]"><span class="badge badge-pill badge-light">3</span> Tremor</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[4]" value="4" />
+                                            <label for="PredominantMotorDecline[4]"><span class="badge badge-pill badge-light">4</span> Slowness</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[99]" value="99" />
+                                            <label for="PredominantMotorDecline[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="w-50">
+                                        16. <label asp-for="ModeOfMotorSymptoms"></label>
+                                        <div><span class="text-danger" asp-validation-for="ModeOfMotorSymptoms"></span></div>
+                                        <div><span class="text-danger" asp-validation-for="ModeOfMotorSymptomsOther"></span></div>
+                                    </td>
+                                    <td colspan="4">
+                                        <div>
+                                            <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[1]" value="1" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="ModeOfMotorSymptoms[1]"><span class="badge badge-pill badge-light">1</span> Gradual</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[2]" value="2" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="ModeOfMotorSymptoms[2]"><span class="badge badge-pill badge-light">2</span> Subacute</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[3]" value="3" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="ModeOfMotorSymptoms[3]"><span class="badge badge-pill badge-light">3</span> Abrupt</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[4]" value="4" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="ModeOfMotorSymptoms[4]"><span class="badge badge-pill badge-light">4</span> Other (Specify)</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-control" asp-for="ModeOfMotorSymptomsOther" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="ModeOfMotorSymptoms" id="ModeOfMotorSymptoms[99]" value="99" data-toggle-targets="ModeOfMotorSymptomsOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="ModeOfMotorSymptoms[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        17. <label asp-for="SuggestiveOfParkinsonism"></label>
+                                        <div>(If No or Unknown, <b>SKIP TO QUESTION 18</b>)</div>
+                                        <div><span class="text-danger" asp-validation-for="SuggestiveOfParkinsonism"></span></div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div>
+                                            <input type="radio" asp-for="SuggestiveOfParkinsonism" id="SuggestiveOfParkinsonism[0]" value="0" data-toggle-targets="SuggestiveOfParkinsonismAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfParkinsonism[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="SuggestiveOfParkinsonism" id="SuggestiveOfParkinsonism[1]" value="1" data-toggle-targets="SuggestiveOfParkinsonismAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfParkinsonism[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="SuggestiveOfParkinsonism" id="SuggestiveOfParkinsonism[9]" value="9" data-toggle-targets="SuggestiveOfParkinsonismAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfParkinsonism[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            17a. <label asp-for="SuggestiveOfParkinsonismAge"></label>
+                                            <div><span class="text-danger" asp-validation-for="SuggestiveOfParkinsonismAge"></span></div>
+                                        </div>
+                                        <div>
+                                            (The clinician must use his/her best judgment to estimate an age of onset of motor changes.)
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="form-check form-check-inline">
+                                            <label for="SuggestiveOfParkinsonismAge"></label>
+                                            <input type="number" asp-for="SuggestiveOfParkinsonismAge" class="form-control" />
+                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p>(777 = Age of onset entered at a previous UDS visit)</p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").FirstOrDefault());
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        18. <label asp-for="SuggestiveOfSclerosis"></label>
+                                        <div>(If No or Unknown, <b>SKIP TO QUESTION 19</b>)</div>
+                                        <div><span class="text-danger" asp-validation-for="SuggestiveOfSclerosis"></span></div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div>
+                                            <input type="radio" asp-for="SuggestiveOfSclerosis" id="SuggestiveOfSclerosis[0]" value="0" data-toggle-targets="SuggestiveOfSclerosisAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfSclerosis[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="SuggestiveOfSclerosis" id="SuggestiveOfSclerosis[1]" value="1" data-toggle-targets="SuggestiveOfSclerosisAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfSclerosis[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="SuggestiveOfSclerosis" id="SuggestiveOfSclerosis[9]" value="9" data-toggle-targets="SuggestiveOfSclerosisAge" data-toggle-values="[0,9]" /><label for="SuggestiveOfSclerosis[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            18a. <label asp-for="SuggestiveOfSclerosisAge"></label>
+                                            <div><span class="text-danger" asp-validation-for="SuggestiveOfSclerosisAge"></span></div>
+                                        </div>
+                                        <div>
+                                            (The clinician must use his/her best judgment to estimate an age of onset of motor changes.)
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="form-check form-check-inline">
+                                            <label for="SuggestiveOfSclerosisAge"></label>
+                                            <input type="number" asp-for="SuggestiveOfSclerosisAge" class="form-control" />
+                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p>(777 = Age of onset entered at a previous UDS visit)</p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").FirstOrDefault());
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            19. <label asp-for="AssessmentOfSclerosisAge"></label>
+                                            <div><span class="text-danger" asp-validation-for="AssessmentOfSclerosisAge"></span></div>
+                                        </div>
+                                        <div>
+                                            (The clinician must use his/her best judgment to estimate an age of onset of motor changes.)
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="form-check form-check-inline">
+                                            <label for="AssessmentOfSclerosisAge"></label>
+                                            <input type="number" asp-for="AssessmentOfSclerosisAge" class="form-control" />
+                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p>(777 = Age of onset entered at a previous UDS visit)</p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").FirstOrDefault());
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="4">
+                                        Overall course of decline and predominant domain
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="w-50">
+                                        20. <label asp-for="OverallDecline"></label>
+                                        <div><span class="text-danger" asp-validation-for="OverallDecline"></span></div>
+                                    </td>
+                                    <td colspan="4">
+                                        <div>
+                                            <input type="radio" asp-for="OverallDecline" id="OverallDecline[1]" value="1" />
+                                            <label for="OverallDecline[1]"><span class="badge badge-pill badge-light">1</span> Gradually progressive</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OverallDecline" id="OverallDecline[2]" value="2" />
+                                            <label for="OverallDecline[2]"><span class="badge badge-pill badge-light">2</span> Stepwise</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OverallDecline" id="OverallDecline[3]" value="3" />
+                                            <label for="OverallDecline[3]"><span class="badge badge-pill badge-light">3</span> Static</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OverallDecline" id="OverallDecline[4]" value="4" />
+                                            <label for="OverallDecline[4]"><span class="badge badge-pill badge-light">4</span> Fluctuating</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OverallDecline" id="OverallDecline[5]" value="5" />
+                                            <label for="OverallDecline[5]"><span class="badge badge-pill badge-light">5</span> Improved</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OverallDecline" id="OverallDecline[8]" value="8" />
+                                            <label for="OverallDecline[8]"><span class="badge badge-pill badge-light">8</span> NA</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="OverallDecline" id="OverallDecline[9]" value="9">
+                                            <label for="OverallDecline[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="w-50">
+                                        21. <label asp-for="PredominantDomain"></label>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantDomain").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantDomain").FirstOrDefault());
+                                        }
+                                        <div><span class="text-danger" asp-validation-for="PredominantDomain"></span></div>
+                                    </td>
+                                    <td colspan="4">
+                                        <div>
+                                            <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[0]" value="0" />
+                                            <label for="PredominantDomain[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[1]" value="1" />
+                                            <label for="PredominantDomain[1]"><span class="badge badge-pill badge-light">1</span> Cognition</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[2]" value="2" />
+                                            <label for="PredominantDomain[2]"><span class="badge badge-pill badge-light">2</span> Behavior</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[3]" value="3" />
+                                            <label for="PredominantDomain[3]"><span class="badge badge-pill badge-light">3</span> Motor function</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[8]" value="8" />
+                                            <label for="PredominantDomain[8]"><span class="badge badge-pill badge-light">8</span> NA</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[9]" value="9">
+                                            <label for="PredominantDomain[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="2">
+                                        Candidate for further evaluation for Lewy body disease or frontotemporal lobar degeneration
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="w-50">
+                                        22. <label asp-for="LewyBodyDisease"></label>
+                                        <div><span class="text-danger" asp-validation-for="LewyBodyDisease"></span></div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="radio" asp-for="LewyBodyDisease" id="LewyBodyDisease[0]" value="0" /><label for="LewyBodyDisease[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="LewyBodyDisease" id="LewyBodyDisease[1]" value="1" /><label for="LewyBodyDisease[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        23. <label asp-for="FrontotemporalLobarDegeneration"></label>
+                                        <div><span class="text-danger" asp-validation-for="FrontotemporalLobarDegeneration"></span></div>
+                                    </td>
+                                    <td class="w-75">
+                                        <div>
+                                            <input type="radio" asp-for="FrontotemporalLobarDegeneration" id="FrontotemporalLobarDegeneration[0]" value="0" /><label for="FrontotemporalLobarDegeneration[0]"><span class="badge badge-pill badge-light">0</span> No</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" asp-for="FrontotemporalLobarDegeneration" id="FrontotemporalLobarDegeneration[1]" value="1" /><label for="FrontotemporalLobarDegeneration[1]"><span class="badge badge-pill badge-light">1</span> Yes</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <partial name="_SaveComplete" model='Model' view-data="ViewData" />
             </div>
-
-            <partial name="_SaveComplete" model='Model' view-data="ViewData" />
         </form>
     </div>
 </div>
+
 <partial name="_CopyrightStatement" />
 
 
@@ -1226,3 +1237,4 @@
         <script src="~/js/RadioFieldToggle.js"></script>
     }
 }
+
