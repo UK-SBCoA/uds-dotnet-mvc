@@ -32,6 +32,11 @@ namespace UDS.Net.Web.Controllers
             return View();
         }
 
+        public IActionResult Details()
+        {
+            return View();
+        }
+
         [HttpGet("Milestone/Create/{friendlyId}")]
         public async Task<IActionResult> Create(int friendlyId)
         {
