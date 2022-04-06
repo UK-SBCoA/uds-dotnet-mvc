@@ -279,7 +279,11 @@ namespace UDS.Net.Web.Controllers
             return View(visit);
         }
 
-        // POST: Visit/Delete/5
+        /// <summary>
+        /// EF Core will cascade delete all related forms along with the packet/visit.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

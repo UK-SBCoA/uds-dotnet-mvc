@@ -4,39 +4,57 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Delete visit</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this visit and data collected?</h3>
 <div>
-    <h4>Visit</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.VisitDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.VisitDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FriendlyId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FriendlyId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.VisitNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.VisitNumber)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.VisitType)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.VisitType)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoordinatorInitials)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoordinatorInitials)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClinicianInitials)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClinicianInitials)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SocialWorkerInitials)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SocialWorkerInitials)
+        </dd>
     </dl>
-    
+    <strong class="text-danger">All data collected for forms within the packet will also be removed</strong>
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
