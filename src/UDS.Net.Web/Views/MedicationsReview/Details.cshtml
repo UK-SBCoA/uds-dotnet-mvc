@@ -1,48 +1,93 @@
 @model MedicationsReview
 
 @{
-    ViewData["Title"] = "Details";
+    var title = "A4 Medications";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
 }
 
-<h1>Details</h1>
+
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
 
 <div>
-    <h4>MedicationsReview</h4>
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CurrentlyTakingMedications)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CurrentlyTakingMedications)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Comments)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Comments)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Visit)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Visit.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExaminerInitials)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExaminerInitials)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FormStatus)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FormStatus)
         </dd>
     </dl>
 </div>
 <div>
+    <h4 class="font-weight-light">Medications taken within the two weeks before the visit</h4>
+    @if(Model.CurrentMedications.Count > 0)
+    {
+     <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Generic and brand name(s)
+                    </th>
+                    <th>
+                        NACC drugID
+                    </th>
+                    <th>
+                        Medication Type
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="counterreset">
+                @foreach (MedicationCurrent medication in Model.CurrentMedications)
+                {
+                    <tr>
+                        <td><span class="counter"></span></td>
+                        <td>
+                            @medication.MedicationReference.DisplayName
+                        </td>
+                        <td>
+                            <span class="badge badge-pill badge-secondary">@medication.MedicationReference.DrugId</span>
+                        </td>
+                        <td>
+                            @if(medication.MedicationReference.IsOverTheCounter)
+                            {
+                                <p>Over the counter</p>        
+                            }
+                            else
+                            {
+                                <p>Prescription</p>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    } else {
+        <p>Not currently taking any medications</p>
+    }
+</div>
+<div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Visit" asp-action="Details" asp-route-id="@Model.Visit.Id">Back to visit</a>
 </div>

@@ -76,12 +76,11 @@ namespace UDS.Net.Data
 
             builder.Entity<Relative>()
                 .Property(x => x.Relation)
+                .HasMaxLength(20)
                 .HasConversion(
                     x => x.ToString(),
                     x => (FamilyRelationship)Enum.Parse(typeof(FamilyRelationship), x)
                 );
-
-
 
         }
         public virtual async Task<int> SaveChangesAsync(string username)

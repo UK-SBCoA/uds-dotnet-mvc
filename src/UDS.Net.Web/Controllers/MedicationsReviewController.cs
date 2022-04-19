@@ -40,11 +40,20 @@ namespace UDS.Net.Web.Controllers
 
             var medicationsReview = await _context.MedicationsReviews
                 .Include(m => m.Visit)
+                .ThenInclude(v => v.Participant)
+                .Include(m => m.CurrentMedications)
+                .ThenInclude(m => m.MedicationReference)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (medicationsReview == null)
             {
                 return NotFound();
             }
+
+
+            var participantIdentity = await _participantsService.GetParticipantAsync(medicationsReview.Visit.Participant.Id);
+            medicationsReview.Visit.Participant.Profile = participantIdentity;
 
             return View(medicationsReview);
         }

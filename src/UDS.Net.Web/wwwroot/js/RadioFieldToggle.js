@@ -71,4 +71,11 @@ $(function() {
       $(`input[name="${this.name}Other"]`).prop('disabled', true);
     })
   })
+
+  //run code on checkbox changes
+  $(`input[type="checkbox"]`).on("change", function() {
+    $(`input[type="radio"]:checked`).map(function() {
+      SectionToggle($(this))
+    })
+  })
 })

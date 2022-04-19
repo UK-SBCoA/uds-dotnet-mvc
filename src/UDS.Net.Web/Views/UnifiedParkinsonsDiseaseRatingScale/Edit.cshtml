@@ -22,69 +22,53 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <div class="form-check">
-            @Html.CheckBox("IsNormal", Model.IsNormal != null && (bool)Model.IsNormal, new
-       {
-           data_value_assign_targets = "Speech,SpeechUntestable,FacialExpression,FacialExpressionUntestable,TremorRestFaceLipsChin,TremorRestFaceLipsChinUntestable,TremorRestRightHand,TremorRestRightHandUntestable,TremorRestLeftHand," +
-                                        "TremorRestLeftHandUntestable,TremorRestRightFoot,TremorRestRightFootUntestable,TremorRestLeftFoot,TremorRestLeftFootOther," +
-                                        "TremorActionRightHand,TremorActionRightHandOther,TremorActionLeftHand,TremorActionLeftHandOther,RigidityNeck,RigidityNeckUntestable," +
-                                        "RigidityRightUpper,RigidityRightUpperUntestable,RigidityLeftUpper,RigidityLeftUpperUntestable,RigidityRightLower," +
-                                        "RigidityRightLowerUntestable,RigidityLeftLower,RigidityLeftLowerUntestable,FingerTapsRightHand,FingerTapsRightHandUntestable," +
-                                        "FingerTapsLeftHand,FingerTapsLeftHandUntestable,HandMovementsRightHand,HandMovementsRightHandUntestable,HandMovemonetsLeftHand," +
-                                        "HandMovemonetsLeftHandUntestable,RapidRightHand,RapidRightHandUntestable,RapidLeftHand,RapidLeftHandUntestable,RightLegAgility," +
-                                        "RightLegAgilityUntestable,LeftLegAgility,LeftLegAgilityUntestable,ArisingFromChair,ArisingFromChairUntestable,Posture," +
-                                        "PostureUntestable,Gait,GaitUntestable,PostureStability,PostureStabilityUntestable,BradykinesiaAndHypokinesia,BradykinesiaAndHypokinesiaUntestable",
-           data_value_assign_values = "0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null," +
-                                      "0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null,0,null"
-       })
+            @Html.CheckBox("IsNormal", Model.IsNormal != null && (bool)Model.IsNormal, new { data_assign_parent = "IsNormal" })
             @Html.DisplayNameFor(model => model.IsNormal)
         </div>
     </div>
     <table class="table table-bordered table-striped">
-        <tbody>        
-        <!-- SPEECH --> 
-        <tr>
-            <td width="20%">
-                <label asp-for="Speech" class="control-label"></label>
-                <span asp-validation-for="Speech" class="text-danger"></span>
-            </td>
-            <td data-answers>
-                <div class="newspaper-layout">
-                    @foreach(KeyValuePair<string,string> code in ViewBag.Speech.Codes) {
-                    
-                        <div class="form-check">
-                            <input class="form-check-input isNormalChild" type="radio" asp-for="Speech" id="Speech[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="SpeechUntestable"/>
-                            <label class="form-check-label" for="Speech[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                        </div>
-                
-                    }
+        <tbody>
+            <!-- SPEECH -->
+            <tr>
+                <td width="20%">
+                    <label asp-for="Speech" class="control-label"></label>
+                    <span asp-validation-for="Speech" class="text-danger"></span>
+                </td>
+                <td>
+                    <div class="newspaper-layout">
+                        @foreach (KeyValuePair<string, string> code in ViewBag.Speech.Codes)
+                        {
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="Speech" id="Speech[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="SpeechUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="Speech[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
 
-                    <input asp-for="SpeechUntestable" class="form-control" />
-                    <span asp-validation-for="SpeechUntestable" class="text-danger"></span>
-                </div>
-            </td>
-        </tr>
-        <!-- FacialExpression --> 
-        <tr>
-            <td width="20%">
-                <label asp-for="FacialExpression" class="control-label"></label>
-                <span asp-validation-for="FacialExpression" class="text-danger"></span>
-            </td>
-            <td data-answers>
-                <div class="newspaper-layout">
-                    @foreach(KeyValuePair<string,string> code in ViewBag.FacialExpression.Codes) {
-                    
-                        <div class="form-check">
-                            <input class="form-check-input isNormalChild" type="radio" asp-for="FacialExpression" id="FacialExpression[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="FacialExpressionUntestable"/>
-                            <label class="form-check-label" for="FacialExpression[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                        </div>
-                
-                    }
+                        <input asp-for="SpeechUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
+                        <span asp-validation-for="SpeechUntestable" class="text-danger"></span>
+                    </div>
+                </td>
+            </tr>
+            <!-- FacialExpression -->
+            <tr>
+                <td width="20%">
+                    <label asp-for="FacialExpression" class="control-label"></label>
+                    <span asp-validation-for="FacialExpression" class="text-danger"></span>
+                </td>
+                <td>
+                    <div class="newspaper-layout">
+                        @foreach (KeyValuePair<string, string> code in ViewBag.FacialExpression.Codes)
+                        {
 
-                    <input asp-for="FacialExpressionUntestable" class="form-control" />
-                    <span asp-validation-for="FacialExpressionUntestable" class="text-danger"></span>
-                </div>
-            </td>
-        </tr>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="FacialExpression" id="FacialExpression[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="FacialExpressionUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="FacialExpression[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="FacialExpressionUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
+                        <span asp-validation-for="FacialExpressionUntestable" class="text-danger"></span>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
     <table class="table table-bordered table-striped">
@@ -94,24 +78,23 @@
             </tr>
         </thead>
         <tbody>
-            <!-- SPEECH --> 
+            <!-- TremorRestFaceLipsChin -->
             <tr>
                 <td width="20%">
                     <label asp-for="TremorRestFaceLipsChin" class="control-label"></label>
                     <span asp-validation-for="TremorRestFaceLipsChin" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.TremorAtRest.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="TremorRestFaceLipsChin" id="TremorRestFaceLipsChin[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestFaceLipsChinUntestable"/>
-                                <label class="form-check-label" for="TremorRestFaceLipsChin[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.TremorAtRest.Codes)
+                        {
 
-                        <input asp-for="TremorRestFaceLipsChinUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="TremorRestFaceLipsChin" id="TremorRestFaceLipsChin[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestFaceLipsChinUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="TremorRestFaceLipsChin[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="TremorRestFaceLipsChinUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="TremorRestFaceLipsChinUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -121,16 +104,15 @@
                     <label asp-for="TremorRestRightHand" class="control-label"></label>
                     <span asp-validation-for="TremorRestRightHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.TremorAtRest.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="TremorRestRightHand" id="TremorRestRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestRightHandUntestable"/>
-                                <label class="form-check-label" for="TremorRestRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.TremorAtRest.Codes)
+                        {
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="TremorRestRightHand" id="TremorRestRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestRightHandUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="TremorRestRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
 
                         <input asp-for="TremorRestRightHandUntestable" class="form-control" />
                         <span asp-validation-for="TremorRestRightHandUntestable" class="text-danger"></span>
@@ -142,16 +124,15 @@
                     <label asp-for="TremorRestLeftHand" class="control-label"></label>
                     <span asp-validation-for="TremorRestLeftHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.TremorAtRest.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="TremorRestLeftHand" id="TremorRestLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestLeftHandUntestable"/>
-                                <label class="form-check-label" for="TremorRestLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.TremorAtRest.Codes)
+                        {
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="TremorRestLeftHand" id="TremorRestLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestLeftHandUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="TremorRestLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
 
                         <input asp-for="TremorRestLeftHandUntestable" class="form-control" />
                         <span asp-validation-for="TremorRestLeftHandUntestable" class="text-danger"></span>
@@ -163,14 +144,14 @@
                     <label asp-for="TremorRestRightFoot" class="control-label"></label>
                     <span asp-validation-for="TremorRestRightFoot" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.TremorAtRest.Codes) {
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="TremorRestRightFoot" id="TremorRestRightFoot[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestRightFootUntestable"/>
-                                <label class="form-check-label" for="TremorRestRightFoot[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.TremorAtRest.Codes)
+                        {
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="TremorRestRightFoot" id="TremorRestRightFoot[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestRightFootUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="TremorRestRightFoot[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
 
                         <input asp-for="TremorRestRightFootUntestable" class="form-control" />
                         <span asp-validation-for="TremorRestRightFootUntestable" class="text-danger"></span>
@@ -182,16 +163,15 @@
                     <label asp-for="TremorRestLeftFoot" class="control-label"></label>
                     <span asp-validation-for="TremorRestLeftFoot" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.TremorAtRest.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="TremorRestLeftFoot" id="TremorRestLeftFoot[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestLeftFootOther"/>
-                                <label class="form-check-label" for="TremorRestLeftFoot[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.TremorAtRest.Codes)
+                        {
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="TremorRestLeftFoot" id="TremorRestLeftFoot[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorRestLeftFootOther" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="TremorRestLeftFoot[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
 
                         <input asp-for="TremorRestLeftFootOther" class="form-control" />
                         <span asp-validation-for="TremorRestLeftFootOther" class="text-danger"></span>
@@ -208,40 +188,39 @@
         </thead>
         <tbody>
             @* <tr>
-                <td width="20%">
-                    <label asp-for="TremorActionRightHand" class="control-label"></label>
-                    <span asp-validation-for="TremorActionRightHand" class="text-danger"></span>
-                </td>
-                <td data-answers>
-                    @foreach(KeyValuePair<string,string> code in ViewBag.ActionOrPostural.Codes) {
-                    <li style="list-style-type: none;">
-                        <div class="form-check form-check-inline">
-                            <input type="radio" asp-for="TremorActionRightHand"
-                                id="TremorActionRightHand[@code.Key]"
-                                value="@code.Key" />
-                            <label class="form-check-label" for="TremorActionRightHand[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key</span>@code.Value</label>
-                        </div>
-                    </li>
-                    }
-                    <input asp-for="TremorActionRightHandOther" class="form-control" />
-                    <span asp-validation-for="TremorActionRightHandOther" class="text-danger"></span>
-                </td>
-            </tr> *@
+                    <td width="20%">
+                        <label asp-for="TremorActionRightHand" class="control-label"></label>
+                        <span asp-validation-for="TremorActionRightHand" class="text-danger"></span>
+                    </td>
+                    <td>
+                        @foreach(KeyValuePair<string,string> code in ViewBag.ActionOrPostural.Codes) {
+                        <li style="list-style-type: none;">
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="TremorActionRightHand"
+                                    id="TremorActionRightHand[@code.Key]"
+                                    value="@code.Key" />
+                                <label class="form-check-label" for="TremorActionRightHand[@code.Key]"> <span class="badge badge-pillbadge-light">@code.Key</span>@code.Value</label>
+                            </div>
+                        </li>
+                        }
+                        <input asp-for="TremorActionRightHandOther" class="form-control" />
+                        <span asp-validation-for="TremorActionRightHandOther" class="text-danger"></span>
+                    </td>
+                </tr> *@
             <tr>
                 <td width="20%">
                     <label asp-for="TremorActionRightHand" class="control-label"></label>
                     <span asp-validation-for="TremorActionRightHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.ActionOrPostural.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="TremorActionRightHand" id="TremorActionRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorActionRightHandOther"/>
-                                <label class="form-check-label" for="TremorActionRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.ActionOrPostural.Codes)
+                        {
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="TremorActionRightHand" id="TremorActionRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorActionRightHandOther" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="TremorActionRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
 
                         <input asp-for="TremorActionRightHandOther" class="form-control" />
                         <span asp-validation-for="TremorActionRightHandOther" class="text-danger"></span>
@@ -253,16 +232,15 @@
                     <label asp-for="TremorActionLeftHand" class="control-label"></label>
                     <span asp-validation-for="TremorActionLeftHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.ActionOrPostural.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="TremorActionLeftHand" id="TremorActionLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorActionLeftHandOther"/>
-                                <label class="form-check-label" for="TremorActionLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.ActionOrPostural.Codes)
+                        {
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="TremorActionLeftHand" id="TremorActionLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="TremorActionLeftHandOther" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="TremorActionLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
 
                         <input asp-for="TremorActionLeftHandOther" class="form-control" />
                         <span asp-validation-for="TremorActionLeftHandOther" class="text-danger"></span>
@@ -271,7 +249,7 @@
             </tr>
         </tbody>
     </table>
-        <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th colspan="2">5. Rigidity (judged on passive movement of major joints with patient relaxed in sitting position; cogwheeling to be ignored)</th>
@@ -283,16 +261,15 @@
                     <label asp-for="RigidityNeck" class="control-label"></label>
                     <span asp-validation-for="RigidityNeck" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.Rigidity.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="RigidityNeck" id="RigidityNeck[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityNeckUntestable"/>
-                                <label class="form-check-label" for="RigidityNeck[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.Rigidity.Codes)
+                        {
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="RigidityNeck" id="RigidityNeck[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityNeckUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="RigidityNeck[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
 
                         <input asp-for="RigidityNeckUntestable" class="form-control" />
                         <span asp-validation-for="RigidityNeckUntestable" class="text-danger"></span>
@@ -304,18 +281,17 @@
                     <label asp-for="RigidityRightUpper" class="control-label"></label>
                     <span asp-validation-for="RigidityRightUpper" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.Rigidity.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="RigidityRightUpper" id="RigidityRightUpper[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityRightUpperUntestable"/>
-                                <label class="form-check-label" for="RigidityRightUpper[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.Rigidity.Codes)
+                        {
 
-                        <input asp-for="RigidityRightUpperUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="RigidityRightUpper" id="RigidityRightUpper[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityRightUpperUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="RigidityRightUpper[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="RigidityRightUpperUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="RigidityRightUpperUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -325,18 +301,17 @@
                     <label asp-for="RigidityLeftUpper" class="control-label"></label>
                     <span asp-validation-for="RigidityLeftUpper" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.Rigidity.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="RigidityLeftUpper" id="RigidityLeftUpper[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityLeftUpperUntestable"/>
-                                <label class="form-check-label" for="RigidityLeftUpper[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.Rigidity.Codes)
+                        {
 
-                        <input asp-for="RigidityLeftUpperUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="RigidityLeftUpper" id="RigidityLeftUpper[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityLeftUpperUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="RigidityLeftUpper[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="RigidityLeftUpperUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="RigidityLeftUpperUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -346,18 +321,17 @@
                     <label asp-for="RigidityRightLower" class="control-label"></label>
                     <span asp-validation-for="RigidityRightLower" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.Rigidity.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="RigidityRightLower" id="RigidityRightLower[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityRightLowerUntestable"/>
-                                <label class="form-check-label" for="RigidityRightLower[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.Rigidity.Codes)
+                        {
 
-                        <input asp-for="RigidityRightLowerUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="RigidityRightLower" id="RigidityRightLower[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityRightLowerUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="RigidityRightLower[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="RigidityRightLowerUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="RigidityRightLowerUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -367,18 +341,17 @@
                     <label asp-for="RigidityLeftLower" class="control-label"></label>
                     <span asp-validation-for="RigidityLeftLower" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.Rigidity.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="RigidityLeftLower" id="RigidityLeftLower[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityLeftLowerUntestable"/>
-                                <label class="form-check-label" for="RigidityLeftLower[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.Rigidity.Codes)
+                        {
 
-                        <input asp-for="RigidityLeftLowerUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="RigidityLeftLower" id="RigidityLeftLower[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RigidityLeftLowerUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="RigidityLeftLower[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="RigidityLeftLowerUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="RigidityLeftLowerUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -397,18 +370,17 @@
                     <label asp-for="FingerTapsRightHand" class="control-label"></label>
                     <span asp-validation-for="FingerTapsRightHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.FingerTaps.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="FingerTapsRightHand" id="FingerTapsRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="FingerTapsRightHandUntestable"/>
-                                <label class="form-check-label" for="FingerTapsRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.FingerTaps.Codes)
+                        {
 
-                        <input asp-for="FingerTapsRightHandUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="FingerTapsRightHand" id="FingerTapsRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="FingerTapsRightHandUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="FingerTapsRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="FingerTapsRightHandUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="FingerTapsRightHandUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -418,18 +390,17 @@
                     <label asp-for="FingerTapsLeftHand" class="control-label"></label>
                     <span asp-validation-for="FingerTapsLeftHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.FingerTaps.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="FingerTapsLeftHand" id="FingerTapsLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="FingerTapsLeftHandUntestable"/>
-                                <label class="form-check-label" for="FingerTapsLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.FingerTaps.Codes)
+                        {
 
-                        <input asp-for="FingerTapsLeftHandUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="FingerTapsLeftHand" id="FingerTapsLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="FingerTapsLeftHandUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="FingerTapsLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="FingerTapsLeftHandUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="FingerTapsLeftHandUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -448,18 +419,17 @@
                     <label asp-for="HandMovementsRightHand" class="control-label"></label>
                     <span asp-validation-for="HandMovementsRightHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.HandRapidLeg.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="HandMovementsRightHand" id="HandMovementsRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="HandMovementsRightHandUntestable"/>
-                                <label class="form-check-label" for="HandMovementsRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.HandRapidLeg.Codes)
+                        {
 
-                        <input asp-for="HandMovementsRightHandUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="HandMovementsRightHand" id="HandMovementsRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="HandMovementsRightHandUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="HandMovementsRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="HandMovementsRightHandUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="HandMovementsRightHandUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -469,18 +439,17 @@
                     <label asp-for="HandMovemonetsLeftHand" class="control-label"></label>
                     <span asp-validation-for="HandMovemonetsLeftHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.HandRapidLeg.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="HandMovemonetsLeftHand" id="HandMovemonetsLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="HandMovemonetsLeftHandUntestable"/>
-                                <label class="form-check-label" for="HandMovemonetsLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.HandRapidLeg.Codes)
+                        {
 
-                        <input asp-for="HandMovemonetsLeftHandUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="HandMovemonetsLeftHand" id="HandMovemonetsLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="HandMovemonetsLeftHandUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="HandMovemonetsLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="HandMovemonetsLeftHandUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="HandMovemonetsLeftHandUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -489,7 +458,7 @@
     </table>
     <table class="table table-bordered table-striped">
         <thead>
-            <th colspan="2">8.  Rapid alternating movements of hands (pronation-supination movements of hands, vertically and horizontally, with as large an amplitude as possible, both hands simultaneously)</th>
+        <th colspan="2">8.  Rapid alternating movements of hands (pronation-supination movements of hands, vertically and horizontally, with as large an amplitude as possible, both hands simultaneously)</th>
         </thead>
         <tbody>
             <tr>
@@ -497,18 +466,17 @@
                     <label asp-for="RapidRightHand" class="control-label"></label>
                     <span asp-validation-for="RapidRightHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.HandRapidLeg.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="RapidRightHand" id="RapidRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RapidRightHandUntestable"/>
-                                <label class="form-check-label" for="RapidRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.HandRapidLeg.Codes)
+                        {
 
-                        <input asp-for="RapidRightHandUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="RapidRightHand" id="RapidRightHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RapidRightHandUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="RapidRightHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="RapidRightHandUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="RapidRightHandUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -518,18 +486,17 @@
                     <label asp-for="RapidLeftHand" class="control-label"></label>
                     <span asp-validation-for="RapidLeftHand" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.HandRapidLeg.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="RapidLeftHand" id="RapidLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RapidLeftHandUntestable"/>
-                                <label class="form-check-label" for="RapidLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.HandRapidLeg.Codes)
+                        {
 
-                        <input asp-for="RapidLeftHandUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="RapidLeftHand" id="RapidLeftHand[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RapidLeftHandUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="RapidLeftHand[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="RapidLeftHandUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="RapidLeftHandUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -540,7 +507,7 @@
         <thead>
             <tr>
                 <th colspan="2">9.  Leg agility (patient taps heel on the ground in rapid succession, picking up entire leg; amplitude should be at least 3 inches)</th>
-            </tr>    
+            </tr>
         </thead>
         <tbody>
             <tr>
@@ -548,18 +515,17 @@
                     <label asp-for="RightLegAgility" class="control-label"></label>
                     <span asp-validation-for="RightLegAgility" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.HandRapidLeg.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="RightLegAgility" id="RightLegAgility[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RightLegAgilityUntestable"/>
-                                <label class="form-check-label" for="RightLegAgility[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.HandRapidLeg.Codes)
+                        {
 
-                        <input asp-for="RightLegAgilityUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="RightLegAgility" id="RightLegAgility[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="RightLegAgilityUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="RightLegAgility[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="RightLegAgilityUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="RightLegAgilityUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -569,18 +535,17 @@
                     <label asp-for="LeftLegAgility" class="control-label"></label>
                     <span asp-validation-for="LeftLegAgility" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.HandRapidLeg.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="LeftLegAgility" id="LeftLegAgility[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="LeftLegAgilityUntestable"/>
-                                <label class="form-check-label" for="LeftLegAgility[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.HandRapidLeg.Codes)
+                        {
 
-                        <input asp-for="LeftLegAgilityUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="LeftLegAgility" id="LeftLegAgility[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="LeftLegAgilityUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="LeftLegAgility[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="LeftLegAgilityUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="LeftLegAgilityUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -594,18 +559,17 @@
                     <label asp-for="ArisingFromChair" class="control-label"></label>
                     <span asp-validation-for="ArisingFromChair" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.ArisingFromChair.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="ArisingFromChair" id="ArisingFromChair[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="ArisingFromChairUntestable"/>
-                                <label class="form-check-label" for="ArisingFromChair[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.ArisingFromChair.Codes)
+                        {
 
-                        <input asp-for="ArisingFromChairUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="ArisingFromChair" id="ArisingFromChair[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="ArisingFromChairUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="ArisingFromChair[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="ArisingFromChairUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="ArisingFromChairUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -619,18 +583,17 @@
                     <label asp-for="Posture" class="control-label"></label>
                     <span asp-validation-for="Posture" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.Posture.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="Posture" id="Posture[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="PostureUntestable"/>
-                                <label class="form-check-label" for="Posture[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.Posture.Codes)
+                        {
 
-                        <input asp-for="PostureUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="Posture" id="Posture[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="PostureUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="Posture[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="PostureUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="PostureUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -644,18 +607,17 @@
                     <label asp-for="Gait" class="control-label"></label>
                     <span asp-validation-for="Gait" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.Gait.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="Gait" id="Gait[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="GaitUntestable"/>
-                                <label class="form-check-label" for="Gait[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.Gait.Codes)
+                        {
 
-                        <input asp-for="GaitUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="Gait" id="Gait[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="GaitUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="Gait[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="GaitUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="GaitUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -669,18 +631,17 @@
                     <label asp-for="PostureStability" class="control-label"></label>
                     <span asp-validation-for="PostureStability" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.PostureStability.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="PostureStability" id="PostureStability[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="PostureStabilityUntestable"/>
-                                <label class="form-check-label" for="PostureStability[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.PostureStability.Codes)
+                        {
 
-                        <input asp-for="PostureStabilityUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="PostureStability" id="PostureStability[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="PostureStabilityUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="PostureStability[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="PostureStabilityUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="PostureStabilityUntestable" class="text-danger"></span>
                     </div>
                 </td>
@@ -694,44 +655,43 @@
                     <label asp-for="BradykinesiaAndHypokinesia" class="control-label"></label>
                     <span asp-validation-for="BradykinesiaAndHypokinesia" class="text-danger"></span>
                 </td>
-                <td data-answers>
+                <td>
                     <div class="newspaper-layout">
-                        @foreach(KeyValuePair<string,string> code in ViewBag.BodyBradykinesia.Codes) {
-                        
-                            <div class="form-check">
-                                <input class="form-check-input isNormalChild" type="radio" asp-for="BradykinesiaAndHypokinesia" id="BradykinesiaAndHypokinesia[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="BradykinesiaAndHypokinesiaUntestable"/>
-                                <label class="form-check-label" for="BradykinesiaAndHypokinesia[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
-                            </div>
-                    
-                        }
+                        @foreach (KeyValuePair<string, string> code in ViewBag.BodyBradykinesia.Codes)
+                        {
 
-                        <input asp-for="BradykinesiaAndHypokinesiaUntestable" class="form-control" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="BradykinesiaAndHypokinesia" id="BradykinesiaAndHypokinesia[@code.Key]" value="@code.Key" data-toggle-values="[0,1,2,3,4]" data-toggle-targets="BradykinesiaAndHypokinesiaUntestable" data-assign-child="IsNormal" data-assign-value="0"/>
+                <label class="form-check-label" for="BradykinesiaAndHypokinesia[@code.Key]"> <span class="badge badge-pill badge-light">@code.Key</span>@code.Value</label>
+            </div>}
+
+                        <input asp-for="BradykinesiaAndHypokinesiaUntestable" class="form-control" data-assign-child="IsNormal" data-assign-value="disable"/>
                         <span asp-validation-for="BradykinesiaAndHypokinesiaUntestable" class="text-danger"></span>
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
-    
+
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="FormStatus" />
     <input type="hidden" asp-for="Visit.VisitType" />
 
     <div class="btn-group">
-    <input formnovalidate type="submit" name="save" value="Save" class="btn btn-primary" />
-    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="sr-only">Toggle Dropdown</span>
-    </button>
-    <div class="dropdown-menu">
-        <div class="px-3 py-4">
-            <div class="form-group">
-                <label asp-for="ExaminerInitials" class="control-label"></label>
-                <input name="ExaminerInitials" asp-for="ExaminerInitials" class="form-control" />
-                <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+        <input formnovalidate type="submit" name="save" value="Save" class="btn btn-primary" />
+        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu">
+            <div class="px-3 py-4">
+                <div class="form-group">
+                    <label asp-for="ExaminerInitials" class="control-label"></label>
+                    <input name="ExaminerInitials" asp-for="ExaminerInitials" class="form-control" />
+                    <span asp-validation-for="ExaminerInitials" class="text-danger"></span>
+                </div>
+                <input type="submit" name="complete" value="Complete" class="btn btn-primary" />
             </div>
-            <input type="submit" name="complete" value="Complete" class="btn btn-primary" />
         </div>
-    </div>
     </div>
 
 </form>
@@ -740,17 +700,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script>
-        $(() => {
-            $('.isNormalChild').on("change", () => {
-                if ($('input[name="IsNormal"]').is(':checked')) {
-                    $('input[name="IsNormal"]').prop('checked', false);
-                }
-            })
-        })
-    </script>
-
-    <script src="~/js/ManualValueAssign.js"></script>
     <script src="~/js/RadioFieldToggle.js"></script>
+    <script src="~/js/ManualValueAssign.js"></script>
 }

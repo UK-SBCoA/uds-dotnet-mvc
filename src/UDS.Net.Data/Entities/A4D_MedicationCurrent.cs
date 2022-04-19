@@ -28,5 +28,8 @@ namespace UDS.Net.Data.Entities
         /// User who modified Medication
         /// </summary>
         public string ModifiedBy {get;set;}
+
+        [ForeignKey("DrugId")]
+        public virtual MedicationReference MedicationReference { get; set; }
     }
 }

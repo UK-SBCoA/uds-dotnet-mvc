@@ -9,6 +9,10 @@ namespace UDS.Net.Data.Entities
     [Table("tbl_B5")]
     public class NPIQ : FormBase
     {
+        public NPIQ()
+        {
+            Version = "3.1.0";
+        }
         [Display(Name = "NPI CO-PARTICIPANT")]
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Please indicate subject's co-participant.")]
         [Column("NPIQINF")]

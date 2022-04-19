@@ -10,6 +10,7 @@ namespace UDS.Net.Data.Entities
     {
         [Key]
         public int Id { get; set; }
+        [Column("PacketId")]
         public int SubjectFamilyHistoryId { get; set; }
         public int RelationshipNumber { get; set; }
         public FamilyRelationship Relation { get; set; }

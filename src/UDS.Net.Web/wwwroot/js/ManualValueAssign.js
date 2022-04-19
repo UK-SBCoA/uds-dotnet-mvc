@@ -1,93 +1,101 @@
-﻿//INSTRUCTIONS
+﻿/*
+Docuementation
 
-//1. Add data attribute of "data_value_assign_targets" to the element you would like to be the trigger and set equal to string of names to target seperated by a comma
-//example: data_value_assign_targets = "Speech,SpeechUntestable,FacialExpression"
+Step 1: Apply "data-assign-parent" to the input element you wish to use
+as the group parent (as of now, checkbox type inputs are only supported)
 
-//2. Add data attribute of data_value_assign_values to the element you would like to be the trigger and set equal to string of values to set seperated by a comma
-//   The values will need to be in the order listed in the data_value_assign_targets
-//example: data_value_assign_values = "1,2,3"
+Step 2: Apply "data-assign-child" and "data-assign-value" to the elements you
+wish to be modified by the group parent. "data-assign-child" will match the
+"data-assign-parent" name of the group parent. Text and number values are
+accepted into the "data-assign-value", if you wish to disable the field,
+instead of set a value provide the string 'disable'.
 
-//3. Accepted values are:
-//text = "text", for setting input fields
-//integer = "1", for setting radio options
-//null = will disable the field
+- Make sure to have the ManualValueAssign.js loaded last in your <script>
+order in the view. Including other client side js before will overwite some
+of the disable logic on load
+
+*/
+
+
 
 $(() => {
     class ManualValueAssign {
-        constructor(parentElement) {
-            this.manualAssignParent = parentElement;
-            this.targets = this.manualAssignParent.attr("data-value-assign-targets").split(",");
-            this.values = this.manualAssignParent.attr("data-value-assign-values").split(",");
-            this.parentValueActive = this.SetManualAssignParentValue(this.manualAssignParent);
-            this.firstLoadDone = false;
+        constructor() {
+            this.allParents = $('[data-assign-parent]').toArray();
         }
 
-        SetManualAssignParentValue = (parentElement) => {
-            if ($(parentElement).is(":checked")) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+        /**
+         * This function will run through each element with "data-assign-parent"
+         * and find their matching "data-assign-child" elements to set their
+         * value using "data-assign-value"
+         * 
+         * @param {string} parent - data-assign-parent value
+         * @param {boolean} parentIsChecked - parent checkbox state
+         */
+        SetManualValues = (parent, parentIsChecked) => {
+            let children = $(`[data-assign-child=${parent}]`).toArray();
 
-        CheckDataLengthOnLoad(targets, values) {
-            if (targets.length != values.length) {
-                this.InvalidDataLengthError(this.manualAssignParent, this.targets, this.values);
-            }
-        }
+            children.forEach((child) => {
+                let childAssignValue = $(child).data('assign-value');
+                let childName = $(child).attr('name');
+                let disableChild = false;
 
-        SetDisabledOnLoad = (targets, values) => {
-            targets.forEach((target, index) => {
-                if (values[index] === "null") {
-                    $(`input[name="${target}"]`).prop("disabled", this.parentValueActive);
+                if (parentIsChecked) {
+                    if (childAssignValue != "disable") {
+                        //set radio buttons groups
+                        $(`input[name="${childName}"][type="radio"][value="${childAssignValue}"]`).prop('checked', true);
+                        $(`input[name="${childName}"][type="text"]`).val(childAssignValue);
+                    } else {
+                        disableChild = true;
+                    }
                 }
+
+                $(`input[name="${childName}"]`).prop('disabled', disableChild);
             })
         }
 
-        SetDisable = (target, parentValueActive) => {
-            $(`input[name="${target}"]`).prop("disabled", parentValueActive);
+        /**
+        * React to parent value change and set data occoringly
+        */
+        watchParentValue = (elem) => {
+            let parent = $(elem.target).data('assign-parent');
+            let parentIsChecked = false;
+
+            if ($(elem.target).is(':checked')) {
+                parentIsChecked = true;
+            }
+            manualValueAssign.SetManualValues(parent, parentIsChecked);
         }
 
-        SetValue = (target, value) => {
-            if ($(`input[name="${target}"]`).is('input:radio')) {
-                $(`input[name="${target}"][value="${value}"]`).prop('checked', true);
-            }
-
-            if ($(`input[name="${target}"]`).is('input:text')) {
-                $(`input[name="${target}"]`).val(value)
-            }
+        /**
+        * React to child value change and set data occoringly
+        */
+        watchChildValue = (elem) => {
+            let inputGroup = ($(elem.target).data('assign-child'));
+            $(`[data-assign-parent="${inputGroup}"]`).prop('checked', false);
         }
 
-        InvalidDataLengthError(manualAssignParent, targets, values) {
-            console.error(`The length of the data attributes targets and values on the manual assign parent element ${manualAssignParent} are not equal. Targets length is: ${targets.length} and values length is: ${values.length}. Please double check attribute value lengths and fix error before the manual value assign can be run`)
-        }
-
-        CheckQuestions = (targets, values) => {
-            if (targets.length == values.length) {
-                this.parentValueActive = this.SetManualAssignParentValue(this.manualAssignParent);
-
-                targets.forEach((target, index) => {
-                    if (values[index] === "null") {
-                        this.SetDisable(target, this.parentValueActive)
-                    }
-                    
-                    if (values[index] != "null") {
-                        this.SetValue(target, values[index])
-                    }
-                })
-            } else {
-                this.InvalidDataLengthError(this.manualAssignParent, this.targets, this.values);
-            }
+        /**
+        * Onload function for applying logic with existing data before user
+        * interaction
+        */
+        onLoad = () => {
+            manualValueAssign.allParents.forEach((elem) => {
+                let parent = $(elem).data('assign-parent');
+                manualValueAssign.SetManualValues(parent, $(elem).is(':checked'))
+            })
         }
     }
 
-    let manualValueAssign = new ManualValueAssign($('[data-value-assign-targets]'));
-    manualValueAssign.SetDisabledOnLoad(manualValueAssign.targets, manualValueAssign.values)
-    manualValueAssign.CheckDataLengthOnLoad(manualValueAssign.targets, manualValueAssign.values)
+    let manualValueAssign = new ManualValueAssign();
 
-    $('[data-value-assign-targets]').on("change", () => {
-        if ($('[data-value-assign-targets]').is(':checked')) {
-            manualValueAssign.CheckQuestions(manualValueAssign.targets, manualValueAssign.values);
-        }
+    $('[data-assign-parent]').change((elem) => {
+        manualValueAssign.watchParentValue(elem);
+    });
+
+    $('[data-assign-child]').change((elem) => {
+        manualValueAssign.watchChildValue(elem);
     })
+
+    manualValueAssign.onLoad();
 })

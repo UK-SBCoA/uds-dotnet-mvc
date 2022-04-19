@@ -41,11 +41,15 @@ namespace UDS.Net.Web.Controllers
 
             var neuropsychologicalBatteryScores = await _context.NeuropsychologicalBatteryScores
                 .Include(n => n.Visit)
+                .ThenInclude(v => v.Participant)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (neuropsychologicalBatteryScores == null)
             {
                 return NotFound();
             }
+
+            var participantIdentity = await _participantService.GetParticipantAsync(neuropsychologicalBatteryScores.Visit.Participant.Id);
+            neuropsychologicalBatteryScores.Visit.Participant.Profile = participantIdentity;
 
             return View(neuropsychologicalBatteryScores);
         }

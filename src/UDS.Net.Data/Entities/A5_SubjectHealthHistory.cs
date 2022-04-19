@@ -309,7 +309,7 @@ namespace UDS.Net.Data.Entities
         public string PsychOtherSpecify { get; set; }
         public SubjectHealthHistory()
         {
-            Version = "3.1.0";
+            Version = "3.0.0";
         }
     }
 } 

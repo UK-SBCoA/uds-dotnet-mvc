@@ -32,7 +32,7 @@ namespace UDS.Net.Data.Entities
     [RequiredIf(nameof(MoCAPartAdministered), true, ErrorMessage = "Value Required")]
     public int? MoCALanguage { get; set; }
 
-    [Display(Name = "Language of MoCA administration — 0ther specify?")]
+    [Display(Name = "Language of MoCA administration — Other specify?")]
     [MaxLength(60)]
     [Column("MOCALANX")]
     [RequiredIf(nameof(MoCALanguage), 3, ErrorMessage = "Value Required")]

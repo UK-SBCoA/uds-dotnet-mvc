@@ -1,460 +1,805 @@
 @model NeuropsychologicalBatteryScores
 
 @{
-    ViewData["Title"] = "Details";
+    var title = "C2 Neuropsychological Battery Scores";
+    var visitInfo = "";
+    string label = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
 }
 
-<h1>Details</h1>
 
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId = Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
+
+<div class="col-md-12">
+    <p class="lead">INSTRUCTIONS: This form is to be completed by ADC or clinic staff. For test administration and scoring, see Instructions for Neuropsychological Battery Form C2. Any new subjects who enroll in the UDS after the implementation of UDS3 must be assessed with the new neuropsychological test battery (Form C2).</p>
+    <p class="lead">KEY:  If the subject cannot complete any of the following exams, please give the reason by entering one of the following codes:</p>
+    <div class="row">
+        <div class="col"><p class="lead"><strong>95 / 995 = Physical problem</strong></p></div>
+        <div class="col"><p class="lead"><strong>96 / 996 = Cognitive/behavior problem</strong></p></div>
+        <div class="col"><p class="lead"><strong>97 / 997 = Other problem</strong></p></div>
+        <div class="col"><p class="lead"><strong>98 / 998 = Verbal refusal</strong></p></div>
+    </div>
+</div>
 <div>
-    <h4>NeuropsychologicalBatteryScores</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAPartAdministered)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAPartAdministered)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAPartAdministeredCode)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAPartAdministeredCode)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAAdministered)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAAdministered)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCALanguage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCALanguage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCALanguageOther)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCALanguageOther)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAVisualImpairment)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAVisualImpairment)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAHearingImpairment)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAHearingImpairment)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalRawScore)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalRawScore)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCATrials)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCATrials)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCACube)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCACube)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAClockContour)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAClockContour)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAClockNumbers)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAClockNumbers)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAHands)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAHands)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCANaming)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCANaming)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCARegistration)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCARegistration)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCADigits)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCADigits)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCALetter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCALetter)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCASerial)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCASerial)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCARepetition)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCARepetition)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAFluency)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAFluency)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAAbstraction)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAAbstraction)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCANoCue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCANoCue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCACategoryCue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCACategoryCue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCARecognition)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCARecognition)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCADate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCADate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAMonth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAMonth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAYear)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAYear)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCADay)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCADay)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCAPlace)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCAPlace)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCACity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCACity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCATestsAdministered)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCATestsAdministered)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCATestLanguage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCATestLanguage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoCATestLanguageOther)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoCATestLanguageOther)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CraftStoryVerbatim)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CraftStoryVerbatim)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CraftStoryParaphrase)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CraftStoryParaphrase)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BensonFigureScore)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BensonFigureScore)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberSpanTestForwardCorrectTrials)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberSpanTestForwardCorrectTrials)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberSpanTestForwardLongestSpanForward)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberSpanTestForwardLongestSpanForward)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberSpanTestBackwardCorrectTrials)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberSpanTestBackwardCorrectTrials)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberSpanTestBackwardLongestSpanBackward)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberSpanTestBackwardLongestSpanBackward)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryFluencyAnimals)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryFluencyAnimals)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryFluencyVegetables)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryFluencyVegetables)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrailMakingTestASecondsToComplete)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrailMakingTestASecondsToComplete)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrailMakingTestANumberOfErrors)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrailMakingTestANumberOfErrors)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrailMakingTestANumberOfCorrect)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrailMakingTestANumberOfCorrect)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrailMakingTestBSecondsToComplete)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrailMakingTestBSecondsToComplete)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrailMakingTestBNumberOfErrors)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrailMakingTestBNumberOfErrors)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrailMakingTestBNumberOfCorrect)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrailMakingTestBNumberOfCorrect)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CraftStoryRecallUnitsRecallVerbatim)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CraftStoryRecallUnitsRecallVerbatim)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CraftStoryRecallUnitsRecallParaphrase)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CraftStoryRecallUnitsRecallParaphrase)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CraftStoryRecallUnitsRecallDelay)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CraftStoryRecallUnitsRecallDelay)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CraftStoryRecallCueNeeded)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CraftStoryRecallCueNeeded)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BensonComplexFigureRecallTotalDrawingScore)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BensonComplexFigureRecallTotalDrawingScore)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BensonComplexFigureRecallRecognizedOriginalStiumulus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BensonComplexFigureRecallRecognizedOriginalStiumulus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MINTTotalScore)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MINTTotalScore)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MINTTotalCorrectWithoutSemanticCue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MINTTotalCorrectWithoutSemanticCue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MINTSemanticCuesNumberGiven)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MINTSemanticCuesNumberGiven)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MINTSemanticCuesNumberCorrectWithoutCue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MINTSemanticCuesNumberCorrectWithoutCue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MINTPhonemicCuesNumberGiven)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MINTPhonemicCuesNumberGiven)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MINTPhonemicCuesNumberCorrectWithCue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MINTPhonemicCuesNumberCorrectWithCue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestGeneratedFWords)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestGeneratedFWords)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestRepeatedFWords)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestRepeatedFWords)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestFWordErrors)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestFWordErrors)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestGeneratedLWords)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestGeneratedLWords)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestRepeatedLWords)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestRepeatedLWords)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestLWordErrors)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestLWordErrors)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestTotalCorrectFAndLWords)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestTotalCorrectFAndLWords)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestTotalFAndLViolationErrors)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestTotalFAndLViolationErrors)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OverallAppraisal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OverallAppraisal)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Visit)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Visit.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExaminerInitials)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExaminerInitials)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FormStatus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FormStatus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Version)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Version)
-        </dd>
-    </dl>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered counterreset">
+            <tr>
+                <td colspan="3"><span class="counter"></span> Montreal Cognitive Assessment (MoCA)</td>
+            </tr>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td class="col-1"><span class="subcounter"></span></td>
+                    <td class="col-6">
+                        <div>
+                            @Html.DisplayNameFor(model => model.MoCAPartAdministered)
+                        </div>
+                        <div>
+                            @Html.DisplayNameFor(model => model.MoCAPartAdministeredCode)
+                            @Html.TextBoxFor(model => model.MoCAPartAdministeredCode, new { @disabled = "true" })
+                        </div>
+                    </td>
+                    <td>
+                        @Html.Raw(Model.MoCAPartAdministered == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : "<span class='badge'>2</span> No")
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAAdministered)
+                    </td>
+                    <td>
+                        @switch (Model.MoCAAdministered)
+                        {
+                            case 1:
+                                label = "<span class='badge badge-pill badge-light'>1</span> In ADC or clinic";
+                                break;
+                            case 2:
+                                label = "<span class='badge badge-pill badge-light'>2</span> In Home";
+                                break;
+                            case 3:
+                                label = "<span class='badge badge-pill badge-light'>3</span> In Person - other";
+                                break;
+                        }
+                        <p>@Html.Raw(label)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        <div>
+                            @Html.DisplayNameFor(model => model.MoCALanguage)
+                        </div>
+                        <div>
+                            @Html.DisplayNameFor(model => model.MoCALanguageOther)
+                            @Html.TextBoxFor(model => model.MoCALanguageOther, new { @disabled = "true" })
+                        </div>
+                    </td>
+                    <td>
+                        @switch (Model.MoCALanguage)
+                        {
+                            case 1:
+                                label = "<span class='badge badge-pill badge-light'>1</span> English";
+                                break;
+                            case 2:
+                                label = "<span class='badge badge-pill badge-light'>2</span> Spanish";
+                                break;
+                            case 3:
+                                label = "<span class='badge badge-pill badge-light'>3</span> Other (Specify)";
+                                break;
+                        }
+                        <p>@Html.Raw(label)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAVisualImpairment)
+                    </td>
+                    <td>
+                        @Html.Raw(Model.MoCAVisualImpairment == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : "<span class='badge'>2</span> No")
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAHearingImpairment)
+                    </td>
+                    <td>
+                        @Html.Raw(Model.MoCAHearingImpairment == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : "<span class='badge'>2</span> No")
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.TotalRawScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TotalRawScore)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCATrials)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCATrials)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCACube)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCACube)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAClockContour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCAClockContour)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAClockNumbers)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCAClockNumbers)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAHands)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCAHands)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCANaming)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCANaming)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCARegistration)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCARegistration)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCADigits)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCADigits)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCALetter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCALetter)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCASerial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCASerial)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCARepetition)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCARepetition)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAFluency)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCAFluency)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAAbstraction)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCAAbstraction)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCANoCue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCANoCue)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCACategoryCue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCACategoryCue)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCARecognition)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCARecognition)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCADate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCADate)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAMonth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCAMonth)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCAYear)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCADay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCADay)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCAPlace)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCAPlace)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>1bb.</span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCACity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MoCACity)
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Administration of the remainder of the battery</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MoCATestsAdministered)
+                    </td>
+                    <td>
+                        @switch (Model.MoCATestsAdministered)
+                        {
+                            case "1":
+                                label = "<span class='badge badge-pill badge-light'>1</span> In ADC or clinic";
+                                break;
+                            case "2":
+                                label = "<span class='badge badge-pill badge-light'>2</span> In Home";
+                                break;
+                            case "3":
+                                label = "<span class='badge badge-pill badge-light'>3</span> In Person - other";
+                                break;
+                        }
+                        <p>@Html.Raw(label)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        <div>
+                            @Html.DisplayNameFor(model => model.MoCATestLanguage)
+                        </div>
+                        <div>
+                            @Html.DisplayNameFor(model => model.MoCATestLanguageOther)
+                            @Html.TextBoxFor(model => model.MoCATestLanguageOther, new { @disabled = "true" })
+                        </div>
+                    </td>
+                    <td>
+                        @switch (Model.MoCATestLanguage)
+                        {
+                            case "1":
+                                label = "<span class='badge badge-pill badge-light'>1</span> English";
+                                break;
+                            case "2":
+                                label = "<span class='badge badge-pill badge-light'>2</span> Spanish";
+                                break;
+                            case "3":
+                                label = "<span class='badge badge-pill badge-light'>3</span> Other (Specify)";
+                                break;
+                        }
+                        <p>@Html.Raw(label)</p>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Craft Story 21 Recall (Immediate)</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CraftStoryVerbatim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CraftStoryVerbatim)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CraftStoryParaphrase)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CraftStoryParaphrase)
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Benson Complex Figure Copy</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BensonFigureScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.BensonFigureScore)
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Number Span Test: Forward</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NumberSpanTestForwardCorrectTrials)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.NumberSpanTestForwardCorrectTrials)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NumberSpanTestForwardLongestSpanForward)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.NumberSpanTestForwardLongestSpanForward)
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Number Span Test: Backward</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NumberSpanTestBackwardCorrectTrials)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.NumberSpanTestBackwardCorrectTrials)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NumberSpanTestBackwardLongestSpanBackward)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.NumberSpanTestBackwardLongestSpanBackward)
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Category Fluency</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CategoryFluencyAnimals)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CategoryFluencyAnimals)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CategoryFluencyVegetables)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CategoryFluencyVegetables)
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Trail Making Test</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.TrailMakingTestASecondsToComplete)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TrailMakingTestASecondsToComplete)
+                    </td>
+                </tr>
+                <tr>
+                    <td>8a1.</td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.TrailMakingTestANumberOfErrors)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TrailMakingTestANumberOfErrors)
+                    </td>
+                </tr>
+                <tr>
+                    <td>8a2.</td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.TrailMakingTestANumberOfCorrect)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TrailMakingTestANumberOfCorrect)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.TrailMakingTestBSecondsToComplete)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TrailMakingTestBSecondsToComplete)
+                    </td>
+                </tr>
+                <tr>
+                    <td>8b1.</td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.TrailMakingTestBNumberOfErrors)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TrailMakingTestBNumberOfErrors)
+                    </td>
+                </tr>
+                <tr>
+                    <td>8b2.</td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.TrailMakingTestBNumberOfCorrect)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TrailMakingTestBNumberOfCorrect)
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Craft Story 21 Recall (Delayed)</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CraftStoryRecallUnitsRecallVerbatim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CraftStoryRecallUnitsRecallVerbatim)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CraftStoryRecallUnitsRecallParaphrase)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CraftStoryRecallUnitsRecallParaphrase)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CraftStoryRecallUnitsRecallDelay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CraftStoryRecallUnitsRecallDelay)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CraftStoryRecallCueNeeded)
+                    </td>
+                    <td>
+                        @Html.Raw(Model.CraftStoryRecallCueNeeded == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : "<span class='badge'>2</span> No")
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Benson Complex Figure Recall</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BensonComplexFigureRecallTotalDrawingScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.BensonComplexFigureRecallTotalDrawingScore)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BensonComplexFigureRecallRecognizedOriginalStiumulus)
+                    </td>
+                    <td>
+                        @Html.Raw(Model.BensonComplexFigureRecallRecognizedOriginalStiumulus == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : "<span class='badge'>2</span> No")
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Multilingual Naming Test (MINT)</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MINTTotalScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MINTTotalScore)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MINTTotalCorrectWithoutSemanticCue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MINTTotalCorrectWithoutSemanticCue)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MINTSemanticCuesNumberGiven)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MINTSemanticCuesNumberGiven)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MINTSemanticCuesNumberCorrectWithoutCue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MINTSemanticCuesNumberCorrectWithoutCue)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MINTPhonemicCuesNumberGiven)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MINTPhonemicCuesNumberGiven)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.MINTPhonemicCuesNumberCorrectWithCue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.MINTPhonemicCuesNumberCorrectWithCue)
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Verbal Fluency: Phonemic Test</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestGeneratedFWords)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestGeneratedFWords)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestRepeatedFWords)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestRepeatedFWords)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestFWordErrors)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestFWordErrors)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestGeneratedLWords)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestGeneratedLWords)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestRepeatedLWords)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestRepeatedLWords)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestLWordErrors)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestLWordErrors)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestTotalCorrectFAndLWords)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestTotalCorrectFAndLWords)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors)
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VerbalFluencyPhonemicTestTotalFAndLViolationErrors)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VerbalFluencyPhonemicTestTotalFAndLViolationErrors)
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td colspan="3"><span class="counter"></span> Overall appraisal</td>
+                </tr>
+                <tr>
+                    <td><span class="subcounter"></span></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.OverallAppraisal)
+                    </td>
+                    <td>
+                        @switch (Model.OverallAppraisal)
+                        {
+                            case 1:
+                                label = "<span class='badge badge-pill badge-light'>1</span> Better than normal for age";
+                                break;
+                            case 2:
+                                label = "<span class='badge badge-pill badge-light'>2</span> Normal for age";
+                                break;
+                            case 3:
+                                label = "<span class='badge badge-pill badge-light'>3</span> One or two test scores are abnormal";
+                                break;
+                            case 4:
+                                label = "<span class='badge badge-pill badge-light'>4</span> Three or more test scores are abnormal or lower than expected";
+                                break;
+                            case 0:
+                                label = "<span class='badge badge-pill badge-light'>0</span> Clinician unable to render opinion";
+                                break;
+                        }
+                        <p>@Html.Raw(label)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ExaminerInitials)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ExaminerInitials)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.FormStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FormStatus)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
