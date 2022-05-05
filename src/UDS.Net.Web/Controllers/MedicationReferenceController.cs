@@ -84,7 +84,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     // Catches duplicate drugID keys
                     // One day highlight the already existing drug, for now just redirect to list
-                    ModelState.AddModelError("DrugId", "DrugID already exists. Please review medication reference list.");
+                    ModelState.AddModelError("DrugId", String.Format("<p class='text-danger'>This drug already exists in the medication reference list.</p><p><a href='/MedicationsReview/edit/{0}'>Go back and select this medication from the reference list.</a></p>", medicationReferenceWithOriginatingVisit.VisitId));
                     return View(medicationReferenceWithOriginatingVisit);
                 }
                 if (medicationReferenceWithOriginatingVisit.VisitId.HasValue)

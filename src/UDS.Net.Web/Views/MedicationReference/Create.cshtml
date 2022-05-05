@@ -1,7 +1,7 @@
 @model MedicationReferenceWithOriginatingVisit
 
 @{
-    ViewData["Title"] = "Create";
+  ViewData["Title"] = "Create";
 }
 
 <h1>Create</h1>
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" asp-controller="MedicationReference" >
+        <form asp-action="Create" asp-controller="MedicationReference">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="MedicationReference.DrugId" class="control-label"></label>
@@ -36,6 +36,15 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+        @{ foreach (var modelStateKey in ViewData.ModelState.Keys)
+          {
+              var modelStateVal = ViewData.ModelState[modelStateKey];
+              foreach (var error in modelStateVal.Errors)
+              {
+                  @Html.Raw(error.ErrorMessage);
+              }
+          }
+        }
     </div>
     <div class="col-md-8">
         <div class="card text-white bg-info m-3">
