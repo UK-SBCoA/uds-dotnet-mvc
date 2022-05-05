@@ -90,13 +90,13 @@ namespace UDS.Net.Web.Controllers
                     newRelatives.Add(new Relative()
                     {
                         RelationshipNumber = 1,
-                        Relation = FamilyRelationship.Father,
+                        Relation = FamilyRelationship.Mother,
                         SubjectFamilyHistoryId = id
                     });
                     newRelatives.Add(new Relative()
                     {
                         RelationshipNumber = 2,
-                        Relation = FamilyRelationship.Mother,
+                        Relation = FamilyRelationship.Father,
                         SubjectFamilyHistoryId = id
                     });
                     for (var i = 1; i <= _siblingNumber; i++)
@@ -212,15 +212,18 @@ namespace UDS.Net.Web.Controllers
                                     ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "Please enter a valid code");
                                 }
                             }
-                            if (!relative.PrimaryDx.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
+
+                            bool hasNeurologicalProblemPsycyiatricCondition = relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 8;
+
+                            if (!relative.PrimaryDx.HasValue && hasNeurologicalProblemPsycyiatricCondition)
                             {
                                 ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryDx", relativeIndex), "Please provide a Primary Dx, refer to the codes in APPENDIX 1");
                             }
-                            if (!relative.MethodOfEvaluation.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
+                            if (!relative.MethodOfEvaluation.HasValue && hasNeurologicalProblemPsycyiatricCondition)
                             {
                                 ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "Please provide a method of evaluation, refer to the codes below");
                             }
-                            if (!relative.AgeOfOnSet.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
+                            if (!relative.AgeOfOnSet.HasValue && hasNeurologicalProblemPsycyiatricCondition)
                             {
                                 ModelState.AddModelError(String.Format("Relatives[{0}].AgeOfOnSet", relativeIndex), "Please provide the age of onset");
                             }

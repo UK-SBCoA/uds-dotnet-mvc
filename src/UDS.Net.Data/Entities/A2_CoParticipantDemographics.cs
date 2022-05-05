@@ -35,13 +35,49 @@ namespace UDS.Net.Data.Entities
 
         [Display(Name = "Is this a new co-participant—ie., one who was not a co-participant at any past UDS visit?")]
         [Column("NEWINF")]
-        [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Please indicate if this is a new co-participant")]
-    
+        [RequiredIf(nameof(FollowUpIsComplete), true, ErrorMessage = "Please indicate if this is a new co-participant on follow-up visits")]
         public bool? IsNewCoParticipant { get; set; }
+
+        [NotMapped]
+        public bool FollowUpIsComplete
+        {
+            get
+            {
+                if (FormStatus == FormStatus.Complete && Visit.VisitType == VisitType.FVP)
+                {
+                    return true;
+                }
+                return false;
+
+            }
+        }
+        [NotMapped]
+        public bool InitialVisitIsComplete
+        {
+            get
+            {
+                if (FormStatus == FormStatus.Complete && Visit.VisitType == VisitType.IVP)
+                {
+                    return true;
+                }
+                return false;
+
+            }
+        }
+        [NotMapped]
+        public bool ShouldCompleteDemographics {
+            get {
+                if((IsNewCoParticipant == true && FollowUpIsComplete) || (InitialVisitIsComplete)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
 
         [Display(Name = "Does the co-participant report being of Hispanic/Latino ethnicity  (i.e., having origins from a mainly Spanish-speaking Latin American country), regardless of race?")]
         [Column("INHISP")]
-        [RequiredIf(nameof(IsNewCoParticipant), true, ErrorMessage = "Please indicate Hispanic/Latino ethnicity")]
+        [RequiredIf(nameof(ShouldCompleteDemographics), true, ErrorMessage = "Please indicate Hispanic/Latino ethnicity")]
         public int? HispanicLatinoEthnicity { get; set; }
 
         [Display(Name = "If yes, what are the co-participant's reported origins?")]
@@ -57,7 +93,7 @@ namespace UDS.Net.Data.Entities
 
         [Display(Name = "What does the co-participant report as his or her race?")]
         [Column("INRACE")]
-        [RequiredIf(nameof(IsNewCoParticipant), true, ErrorMessage = "Please indicate race")]
+        [RequiredIf(nameof(ShouldCompleteDemographics), true, ErrorMessage = "Please indicate race")]
         public int? Race { get; set; }
 
         [Display(Name = "Other (SPECIFY)")]
@@ -68,7 +104,7 @@ namespace UDS.Net.Data.Entities
 
         [Display(Name = "What additional race does the co-participant report?")]
         [Column("INRASEC")]
-        [RequiredIf(nameof(IsNewCoParticipant), true, ErrorMessage = "Please indicate secondary race")]
+        [RequiredIf(nameof(ShouldCompleteDemographics), true, ErrorMessage = "Please indicate secondary race")]
         public int? SecondaryRace { get; set; }
 
         [Display(Name = "Other (SPECIFY)")]
@@ -79,7 +115,7 @@ namespace UDS.Net.Data.Entities
 
         [Display(Name = "What additional race, beyond those reported in Questions 4 and 5, does the co-participant report?")]
         [Column("INRATER")]
-        [RequiredIf(nameof(IsNewCoParticipant), true, ErrorMessage = "Please indicate additional race")]
+        [RequiredIf(nameof(ShouldCompleteDemographics), true, ErrorMessage = "Please indicate additional race")]
         public int? AdditionalRace { get; set; }
 
         [Display(Name = "Other(SPECIFY)")]
@@ -91,7 +127,7 @@ namespace UDS.Net.Data.Entities
         [Display(Name = "Co-participant's years of education — use the codes below to report the level achieved; if an attempted level is not completed, enter the number of years completed")]
         [Column("INEDUC")]
         [Range(0, 99, ErrorMessage = "Co-participants years of education must be within 0 and 99")]
-        [RequiredIf(nameof(IsNewCoParticipant), true, ErrorMessage = "Please provide years of education")]
+        [RequiredIf(nameof(ShouldCompleteDemographics), true, ErrorMessage = "Please provide years of education")]
         public int? YearsOfEducation { get; set; }
 
         [Display(Name = "What is the co-participant's relationship to the subject?")]
@@ -112,11 +148,11 @@ namespace UDS.Net.Data.Entities
 
         [Display(Name = "If no, approximate frequency of in-person visits?")]
         [Column("INVISITS")]
-        [RequiredIf(nameof(LivesWith), 0, ErrorMessage = "Please indicate frequency of in-person visits")]
+        [RequiredIf(nameof(LivesWith), false, ErrorMessage = "Please indicate frequency of in-person visits")]
         public int? FrequencyOfVisit { get; set; }
 
         [Display(Name = "If no, approximate frequency of telephone contact?")]
-        [RequiredIf(nameof(LivesWith), 0, ErrorMessage = "Please indicate frequency of telephone contact")]
+        [RequiredIf(nameof(LivesWith), false, ErrorMessage = "Please indicate frequency of telephone contact")]
         [Column("INCALLS")]
         public int? FrequencyOfTele { get; set; }
 

@@ -24,11 +24,11 @@
     <div class="input-group mr-2">
         <label class="control-label text-muted mr-2"><small>Only show packets submitted to NACC</small></label>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" asp-for="IsSubmittedToNACC" id="isSubmittedToNACCYes" value="true">
+            <input class="form-check-input" type="radio" asp-for="IsSubmittedToNACC" id="isSubmittedToNACCYes" value="True">
             <label class="form-check-label" for="isSubmittedToNACCYes">Yes</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" asp-for="IsSubmittedToNACC" id="isSubmittedToNACCNo" value="false">
+            <input class="form-check-input" type="radio" asp-for="IsSubmittedToNACC" id="isSubmittedToNACCNo" value="False">
             <label class="form-check-label" for="isSubmittedToNACCNo">No</label>
         </div>
     </div>
@@ -39,7 +39,7 @@
         <a asp-action="Index" asp-route-pageNumber="1" class="btn btn-link btn-sm">Reset</a>
     </div>
     <input type="hidden" asp-for="PageSize" />
-    <input type="hidden" asp-for="PageNumber" />
+    <input type="hidden" asp-for="PageNumber" value="1" />
 </form>
 
 <table class="table">
@@ -141,22 +141,24 @@
     </tbody>
 </table>
 
-@{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+@{ string prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    string nextDisabled = !Model.HasNextPage ? "disabled" : ""; 
+
+}
 
 <a asp-action="Index"
-   asp-route-pageNumber="@(Model.PageNumber - 1)"
-   asp-route-visitStatus="@Model.VisitStatus"
-   asp-route-friendlyId="@Model.FriendlyId"
-   asp-route-isSubmittedToNACC="@Model.IsSubmittedToNACC"
-   class="btn btn-outline-secondary @prevDisabled">
+asp-route-pageNumber="@(Model.PageNumber - 1)"
+asp-route-visitStatus="@Model.VisitStatus"
+asp-route-friendlyId="@Model.FriendlyId"
+asp-route-isSubmittedToNACC="@Model.IsSubmittedToNACC"
+class="btn btn-outline-secondary @prevDisabled">
     Previous
 </a>
 <a asp-action="Index"
-   asp-route-pageNumber="@(Model.PageNumber + 1)"
-   asp-route-visitStatus="@Model.VisitStatus"
-   asp-route-friendlyId="@Model.FriendlyId"
-   asp-route-isSubmittedToNACC="@Model.IsSubmittedToNACC"
-   class="btn btn-outline-secondary @nextDisabled">
+asp-route-pageNumber="@(Model.PageNumber + 1)"
+asp-route-visitStatus="@Model.VisitStatus"
+asp-route-friendlyId="@Model.FriendlyId"
+asp-route-isSubmittedToNACC="@Model.IsSubmittedToNACC"
+class="btn btn-outline-secondary @nextDisabled">
     Next
 </a>

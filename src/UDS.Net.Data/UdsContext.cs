@@ -91,10 +91,12 @@ namespace UDS.Net.Data
             }
             foreach(var entry in ChangeTracker.Entries())
             {
-                var modifiedByProperty = entry.Properties.Where(x => x.Metadata.Name == "ModifiedBy");
-                if (modifiedByProperty.Any())
-                {
-                    entry.Property("ModifiedBy").CurrentValue = username;
+                if(entry.State == EntityState.Modified || entry.State == EntityState.Added) {
+                    var modifiedByProperty = entry.Properties.Where(x => x.Metadata.Name == "ModifiedBy");
+                    if (modifiedByProperty.Any())
+                    {
+                        entry.Property("ModifiedBy").CurrentValue = username;
+                    }
                 }
             }
             var result = await base.SaveChangesAsync();

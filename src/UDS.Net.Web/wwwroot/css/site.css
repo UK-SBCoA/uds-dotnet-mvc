@@ -156,6 +156,7 @@ input[type=checkbox], input[type=radio] {
     content: counter(section) counter(subsection, lower-alpha) counter(subsubsection, decimal) ".";
 }
 
+
 /* Medication form */
 .medication-checkbox:nth-child(even) {
     border-top: 1px solid #dee2e6;

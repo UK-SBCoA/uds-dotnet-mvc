@@ -1,31 +1,24 @@
 ﻿@model RelativeRowViewModel
-@{ char[] aplha = "ABCDEFGHIJKLMNOPQRSTUVQXYZ".ToLower().ToCharArray(); }
 @{
     string TableName = "";
-    int questionNumber = 0;
     switch(Model.Relative.Relation) {
         case FamilyRelationship.Father:
             TableName = "Parent";
-            questionNumber = 5;
             break;
         case FamilyRelationship.Mother:
             TableName = "Parent";
-            questionNumber = 5;
             break;
         case FamilyRelationship.Sibling:
             TableName = "Sibling";
-            questionNumber = 6;
             break;
         case FamilyRelationship.Child:
             TableName = "Children";
-            questionNumber = 7;
             break;
     }
 }
 <tr id="@String.Format("{0}Row{1}", TableName, Model.Relative.RelationshipNumber )" data-state="disabled">
     <td>
-
-        <p>@String.Format("{0}{1}. {2} {3}", questionNumber ,aplha.GetValue(Model.Relative.RelationshipNumber - 1), Model.Relative.Relation.ToString(), Model.Relative.RelationshipNumber)</p>
+        <p><span class="subcounter"></span> @String.Format("{0} {1}", Model.Relative.Relation.ToString(), Model.Relative.RelationshipNumber)</p>
         <input type="hidden" name="Relatives[@Model.Index].Id" value="@Model.Relative.Id" />
         <input type="hidden" name="Relatives[@Model.Index].SubjectFamilyHistoryId" value="@Model.Relative.SubjectFamilyHistoryId" />
         <input type="hidden" name="Relatives[@Model.Index].RelationshipNumber" value="@Model.Relative.RelationshipNumber" />
@@ -51,13 +44,12 @@
         <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].AgeAtDeath", Model.Index))</span>
     </td>
     <td>
-        <input class="form-control" name="Relatives[@Model.Index].PrimaryNeurologicalProblemPsychiatricCondition" value="@Model.Relative.PrimaryNeurologicalProblemPsychiatricCondition" />
+        <input class="form-control" data-row-index="@Model.Index" name="Relatives[@Model.Index].PrimaryNeurologicalProblemPsychiatricCondition" value="@Model.Relative.PrimaryNeurologicalProblemPsychiatricCondition" />
         <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].PrimaryNeurologicalProblemPsychiatricCondition", Model.Index))</span>
     </td>
     <td>
         <input class="form-control" name="Relatives[@Model.Index].PrimaryDx" value="@Model.Relative.PrimaryDx" data-neurocon />
         <span class="text-danger">@Html.ValidationMessage(String.Format("Relatives[{0}].PrimaryDx", Model.Index))</span>
-
     </td>
     <td>
         <input class="form-control" name="Relatives[@Model.Index].MethodOfEvaluation" value="@Model.Relative.MethodOfEvaluation" data-neurocon />

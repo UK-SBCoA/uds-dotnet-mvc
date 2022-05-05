@@ -131,7 +131,7 @@ namespace UDS.Net.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BirthMonthUk,BirthDay,BirthYearUK,Name,ContactForResearch,BirthMonth,BirthYear,Sex,HispanicLatinoEthnicity,EthnicOrigins,EthnicOriginsOther,Race,RaceOther,SecondaryRace,SecondaryRaceOther,AdditionalRace,AdditionalRaceOther,YearsOfEducation,Relationship,YearsKnown,LivesWith,FrequencyOfVisit,FrequencyOfTele,Reliability,Id,ExaminerInitials,FormStatus,IsNewCoParticipant")] CoParticipantDemographics coParticipantDemographics, string save, string complete)
+        public async Task<IActionResult> Edit(int id, CoParticipantDemographics coParticipantDemographics, string save, string complete)
         {
 
             if (id != coParticipantDemographics.Id)
@@ -176,7 +176,7 @@ namespace UDS.Net.Web.Controllers
                     return View(viewToReturn, coParticipantDemographics);
                 }
             }
-
+            
             if (ModelState.IsValid)
             {
                 try

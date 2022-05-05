@@ -82,6 +82,7 @@
                         <td>
                             <label>3a. @Html.DisplayNameFor(model => model.EthnicOrigins)</label>
                             <div><span asp-validation-for="EthnicOrigins" class="text-danger"></span></div>
+                            <div><span asp-validation-for="EthnicOriginsOther" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
                             <div>
@@ -429,8 +430,6 @@
                     </tr>
                 </tbody>
             </table>
-
-            <input type="hidden" asp-for="IsNewCoParticipant" value="true" />
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="FormStatus" />
             <input type="hidden" asp-for="Visit.VisitType" />
