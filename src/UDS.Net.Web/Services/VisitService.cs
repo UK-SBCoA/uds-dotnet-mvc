@@ -117,6 +117,7 @@ namespace UDS.Net.Web.Services
         /// IVP visit required form count = 9 (A1, A5, B4, B8, B9, C2, D1, D2, Z1)
         /// FVP visit required form count = 8 (A1, B4, B8, B9, C2, D1, D2, Z1)
         /// TFP visit required form count = 8 (A1, A2, B4, B9, D1, D2, T1, Z1)
+        /// TODO this should use the checklist service
         /// </summary>
         /// <param name="visit"></param>
         /// <param name="formStatus"></param>

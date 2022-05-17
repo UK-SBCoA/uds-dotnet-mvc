@@ -10,15 +10,10 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class ParticipantDemographicsController : Controller
+    public class ParticipantDemographicsController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
-
-        public ParticipantDemographicsController(UdsContext context, IParticipantsService participantsService)
+        public ParticipantDemographicsController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
         }
 
         // GET: ParticipantDemographics
@@ -107,22 +102,26 @@ namespace UDS.Net.Web.Controllers
                 return NotFound();
             }
 
-            var ParticipantDemographics = await _context.ParticipantDemographics
-                .Include("Visit")
+            var participantDemographics = await _context.ParticipantDemographics
                 .Include(c => c.Visit)
                     .ThenInclude(v => v.Participant)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id);
-            if (ParticipantDemographics == null)
+
+            if (participantDemographics == null)
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(participantDemographics.Visit.Status))
+            {
+                return View("Details", participantDemographics);
+            }
 
 
-            var participantIdentity = await _participantsService.GetParticipantAsync(ParticipantDemographics.Visit.Participant.Id);
-            ParticipantDemographics.Visit.Participant.Profile = participantIdentity;
+            var participantIdentity = await _participantsService.GetParticipantAsync(participantDemographics.Visit.Participant.Id);
+            participantDemographics.Visit.Participant.Profile = participantIdentity;
 
-            return View(ParticipantDemographics);
+            return View(participantDemographics);
         }
 
         // POST: ParticipantDemographics/Edit/5
@@ -130,9 +129,9 @@ namespace UDS.Net.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Reason,ReferralSource,Learned,EnrollmentDiseaseStatus,PresumedParticipation,EnrollmentType,BirthMonth,BirthYear,Sex,HispanicLatinoEthnicity,HispanicLatinoOrigins,HispanicLatinoOriginsOther,Race,RaceOther,SecondaryRace,SecondaryRaceOther,AdditionalRace,AdditionalRaceOther,PrimaryLanguage,PrimaryLanguageOther,Education,MarriageStatus,LivingSituation,LevelOfIndependence,Residence,Zip,Handedness,Id,ExaminerInitials,FormStatus,Version")] ParticipantDemographics ParticipantDemographics, string save, string complete)
+        public async Task<IActionResult> Edit(int id, [Bind("Reason,ReferralSource,Learned,EnrollmentDiseaseStatus,PresumedParticipation,EnrollmentType,BirthMonth,BirthYear,Sex,HispanicLatinoEthnicity,HispanicLatinoOrigins,HispanicLatinoOriginsOther,Race,RaceOther,SecondaryRace,SecondaryRaceOther,AdditionalRace,AdditionalRaceOther,PrimaryLanguage,PrimaryLanguageOther,Education,MarriageStatus,LivingSituation,LevelOfIndependence,Residence,Zip,Handedness,Id,ExaminerInitials,FormStatus,Version")] ParticipantDemographics participantDemographics, string save, string complete)
         {
-             if (id != ParticipantDemographics.Id)
+             if (id != participantDemographics.Id)
             {
                 return NotFound();
             }
@@ -140,58 +139,64 @@ namespace UDS.Net.Web.Controllers
             var visit = await _context.Visits
                .AsNoTracking()
                .Include("Participant")
-               .FirstOrDefaultAsync(v => v.Id == ParticipantDemographics.Id);
+               .FirstOrDefaultAsync(v => v.Id == participantDemographics.Id);
 
-            ParticipantDemographics.Visit = visit;
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(participantDemographics);
+            }
 
-            var participantIdentity = await _participantsService.GetParticipantAsync(ParticipantDemographics.Visit.Participant.Id);
-            ParticipantDemographics.Visit.Participant.Profile = participantIdentity;
+            participantDemographics.Visit = visit;
+
+            var participantIdentity = await _participantsService.GetParticipantAsync(participantDemographics.Visit.Participant.Id);
+            participantDemographics.Visit.Participant.Profile = participantIdentity;
 
             if (!String.IsNullOrEmpty(save))
             {
-                ParticipantDemographics.FormStatus = FormStatus.Incomplete;
+                participantDemographics.FormStatus = FormStatus.Incomplete;
             }
             else if (!String.IsNullOrEmpty(complete))
             {
-                ParticipantDemographics.FormStatus = FormStatus.Complete;
-                if (TryValidateModel(ParticipantDemographics))
+                participantDemographics.FormStatus = FormStatus.Complete;
+                if (TryValidateModel(participantDemographics))
                 {
-                    if (ParticipantDemographics.Visit.VisitType == VisitType.IVP)
+                    if (participantDemographics.Visit.VisitType == VisitType.IVP)
                     {
                         // several fields are required for initial visits
-                        if (!ParticipantDemographics.Reason.HasValue)
+                        if (!participantDemographics.Reason.HasValue)
                             ModelState.AddModelError("Reason", "Provide a reason");
-                        if (!ParticipantDemographics.ReferralSource.HasValue)
+                        if (!participantDemographics.ReferralSource.HasValue)
                             ModelState.AddModelError("ReferralSource", "Provide the referral source");
-                        if (!ParticipantDemographics.EnrollmentDiseaseStatus.HasValue)
+                        if (!participantDemographics.EnrollmentDiseaseStatus.HasValue)
                             ModelState.AddModelError("EnrollmentDiseaseStatus", "Indicate the presumed the disease status");
-                        if (!ParticipantDemographics.PresumedParticipation.HasValue)
+                        if (!participantDemographics.PresumedParticipation.HasValue)
                             ModelState.AddModelError("PresumedParticipation", "Indicate the participation");
-                        if (!ParticipantDemographics.EnrollmentType.HasValue)
+                        if (!participantDemographics.EnrollmentType.HasValue)
                             ModelState.AddModelError("EnrollmentType", "Indicate the enrollment type");
-                        if (!ParticipantDemographics.HispanicLatinoEthnicity.HasValue)
+                        if (!participantDemographics.HispanicLatinoEthnicity.HasValue)
                             ModelState.AddModelError("HispanicLatinoEthnicity", "Indicate ethnicity");
-                        if (!ParticipantDemographics.Race.HasValue)
+                        if (!participantDemographics.Race.HasValue)
                             ModelState.AddModelError("Race", "Indicate race");
-                        if (!ParticipantDemographics.SecondaryRace.HasValue)
+                        if (!participantDemographics.SecondaryRace.HasValue)
                             ModelState.AddModelError("SecondaryRace", "Indicate secondary race");
-                        if (!ParticipantDemographics.AdditionalRace.HasValue)
+                        if (!participantDemographics.AdditionalRace.HasValue)
                             ModelState.AddModelError("AdditionalRace", "Indicate additional race");
-                        if (!ParticipantDemographics.PrimaryLanguage.HasValue)
+                        if (!participantDemographics.PrimaryLanguage.HasValue)
                             ModelState.AddModelError("PrimaryLanguage", "Indicate primary language");
-                        if (!ParticipantDemographics.Education.HasValue)
+                        if (!participantDemographics.Education.HasValue)
                             ModelState.AddModelError("Education", "Indicate education level");
-                        if (!ParticipantDemographics.Handedness.HasValue)
+                        if (!participantDemographics.Handedness.HasValue)
                             ModelState.AddModelError("Handedness", "Indicate participant's handedness");
 
                     }
 
                     if (!ModelState.IsValid) // if any of the above added errors return the view
-                        return View(ParticipantDemographics);
+                        return View(participantDemographics);
                 }
                 else
                 {
-                    return View(ParticipantDemographics);
+                    return View(participantDemographics);
                 }
             }
 
@@ -199,12 +204,13 @@ namespace UDS.Net.Web.Controllers
             {
                 try
                 {
-                    _context.Update(ParticipantDemographics);
+                    _context.Update(participantDemographics);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(ParticipantDemographics));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ParticipantDemographicsExists(ParticipantDemographics.Id))
+                    if (!ParticipantDemographicsExists(participantDemographics.Id))
                     {
                         return NotFound();
                     }
@@ -213,10 +219,10 @@ namespace UDS.Net.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "Visit", new { id = ParticipantDemographics.Id });
+                return RedirectToAction("Details", "Visit", new { id = participantDemographics.Id });
             }
 
-            return View(ParticipantDemographics);
+            return View(participantDemographics);
         }
 
         // GET: ParticipantDemographics/Delete/5

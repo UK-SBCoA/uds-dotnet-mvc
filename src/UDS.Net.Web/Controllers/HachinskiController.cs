@@ -10,17 +10,12 @@ using UDS.Net.Data.Entities;
 using UDS.Net.Data.Enums;
 using UDS.Net.Web.Services;
 
-namespace COA.UDS.Web.Controllers
+namespace UDS.Net.Web.Controllers
 {
-    public class HachinskiController : Controller
+    public class HachinskiController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
-
-        public HachinskiController(UdsContext context, IParticipantsService participantsService)
+        public HachinskiController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
         }
 
         // GET: Hachinski
@@ -100,6 +95,10 @@ namespace COA.UDS.Web.Controllers
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(hachinski.Visit.Status))
+            {
+                return View("Details", hachinski);
+            }
 
             var participantIdentity = await _participantsService.GetParticipantAsync(hachinski.Visit.Participant.Id);
             hachinski.Visit.Participant.Profile = participantIdentity;
@@ -121,6 +120,12 @@ namespace COA.UDS.Web.Controllers
                 .Include("Participant")
                 .AsNoTracking() // only the form is being modified, so we don't need to track the visit
                 .FirstOrDefaultAsync(v => v.Id == hachinski.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(hachinski);
+            }
 
             hachinski.Visit = visit;
 
@@ -145,6 +150,7 @@ namespace COA.UDS.Web.Controllers
                 {
                     _context.Update(hachinski);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(Hachinski));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

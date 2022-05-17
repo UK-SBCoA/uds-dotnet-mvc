@@ -12,23 +12,16 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class ClinicianDiagnosisController : Controller
+    public class ClinicianDiagnosisController : PacketFormController
     {
-        private readonly UdsContext _context;
         private ProtocolVariable _findings;
         private ProtocolVariable _findingsSubs;
         private ProtocolVariable _etiologic;
         private ProtocolVariable[] _protocolVariables;
-        private readonly IParticipantsService _participantsService;
 
-        public ClinicianDiagnosisController(UdsContext context, IParticipantsService participantsService)
+        public ClinicianDiagnosisController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
-
-
             GetVariablesCodes();
-
         }
 
         private async void GetVariablesCodes()
@@ -126,6 +119,10 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(clinicianDiagnosis.Visit.Status))
+            {
+                return View("Details", clinicianDiagnosis);
+            }
 
             var participantIdentity = await _participantsService.GetParticipantAsync(clinicianDiagnosis.Visit.Participant.Id);
             clinicianDiagnosis.Visit.Participant.Profile = participantIdentity;
@@ -154,6 +151,12 @@ namespace UDS.Net.Web.Controllers
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == clinicianDiagnosis.Id);
 
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(clinicianDiagnosis);
+            }
+
             clinicianDiagnosis.Visit = visit;
 
             var participantIdentity = await _participantsService.GetParticipantAsync(clinicianDiagnosis.Visit.Participant.Id);
@@ -181,6 +184,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(clinicianDiagnosis);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(ClinicianDiagnosis));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

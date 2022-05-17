@@ -7,16 +7,6 @@
         visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
     }
     ViewData["Title"] = title + visitInfo;
-
-    var requiredForms = "A1, B4, B8, B9, C2, D1, D2, Z1";
-    if (Model.Visit.VisitType == VisitType.IVP)
-    {
-        requiredForms = "A1, A5, B4, B8, B9, C2, D1, D2, Z1";
-    }
-    else if (Model.Visit.VisitType == VisitType.TFP)
-    {
-        requiredForms = "A1, A2, B4, B9, D1, D2, T1, Z1";
-    }
 }
 
 @await Component.InvokeAsync("VisitHeader", new { visitId = Model.Checklist.Visit.Id, participationId = Model.Checklist.Visit.Participant.Id, participantProfile = Model.Checklist.Visit.Participant.Profile })
@@ -32,10 +22,10 @@
         <div class="card">
             <div class="card-body">
                 <p class="lead">
-                    @Model.Visit.VisitType visits require @requiredForms
+                    @Model.Visit.VisitType visits require @ViewBag.RequiredForms
                 </p>
                 <p>
-                    NACC expects and intends that all UDS forms will be attempted on all participants, but we realize this may be impossible when the patient is terminally ill, or when there is no co-participant, or for other reasons. However, for a participant to be included in national NACC UDS database, Forms <strong>@requiredForms</strong> must be submitted, even though these forms may include some items with missing data. An explanation is required below for forms that are not submitted.
+                    NACC expects and intends that all UDS forms will be attempted on all participants, but we realize this may be impossible when the patient is terminally ill, or when there is no co-participant, or for other reasons. However, for a participant to be included in national NACC UDS database, Forms <strong>@ViewBag.RequiredForms</strong> must be submitted, even though these forms may include some items with missing data. An explanation is required below for forms that are not submitted.
                 </p>
                 <p>
                     <strong>KEY</strong> If the specified form was not completed, please enter one of the following codes:

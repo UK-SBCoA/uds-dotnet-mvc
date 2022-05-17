@@ -13,16 +13,12 @@ using UDS.Net.Data.Dtos;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class SymptomsController : Controller
+    public class SymptomsController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
         private List<NonMatchingValueDto> _nonMatchingValues = new List<NonMatchingValueDto>();
 
-        public SymptomsController(UdsContext context, IParticipantsService participantsService)
+        public SymptomsController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
         }
 
         // GET: Symptoms
@@ -93,35 +89,40 @@ namespace UDS.Net.Web.Controllers
                 return NotFound();
             }
 
-            var currentForm =
-            await _context.Symptoms
+            var symptoms = await _context.Symptoms
             .Include(c => c.Visit)
-            .ThenInclude(c => c.Participant)
+                .ThenInclude(c => c.Participant)
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id);
-            if (currentForm == null)
+
+            if (symptoms == null)
             {
                 return NotFound();
             }
-            var participantIdentity = await _participantsService.GetParticipantAsync(currentForm.Visit.Participant.Id);
-            currentForm.Visit.Participant.Profile = participantIdentity;
+            else if (!FormCanBeEdited(symptoms.Visit.Status))
+            {
+                return View("Details", symptoms);
+            }
 
-            var previousForm = GetPreviousForm(currentForm.Visit.VisitNumber, currentForm.Visit.Participant.Id);
+            var participantIdentity = await _participantsService.GetParticipantAsync(symptoms.Visit.Participant.Id);
+            symptoms.Visit.Participant.Profile = participantIdentity;
 
-            CheckValue(previousForm, currentForm, "AgeOfDecline", 777);
-            CheckValue(previousForm, currentForm, "HallucinationsAge", 777);
-            CheckValue(previousForm, currentForm, "BehaviorDecline", 0);
-            CheckValue(previousForm, currentForm, "BehaviorSymptomsAge", 777);
-            CheckValue(previousForm, currentForm, "PredominantMotorDecline", 0);
-            CheckValue(previousForm, currentForm, "SuggestiveOfParkinsonismAge", 777);
-            CheckValue(previousForm, currentForm, "SuggestiveOfSclerosisAge", 777);
-            CheckValue(previousForm, currentForm, "AssessmentOfSclerosisAge", 777);
-            CheckValue(previousForm, currentForm, "PredominantDomain", 0);
+            var previousForm = GetPreviousForm(symptoms.Visit.VisitNumber, symptoms.Visit.Participant.Id);
+
+            CheckValue(previousForm, symptoms, "AgeOfDecline", 777);
+            CheckValue(previousForm, symptoms, "HallucinationsAge", 777);
+            CheckValue(previousForm, symptoms, "BehaviorDecline", 0);
+            CheckValue(previousForm, symptoms, "BehaviorSymptomsAge", 777);
+            CheckValue(previousForm, symptoms, "PredominantMotorDecline", 0);
+            CheckValue(previousForm, symptoms, "SuggestiveOfParkinsonismAge", 777);
+            CheckValue(previousForm, symptoms, "SuggestiveOfSclerosisAge", 777);
+            CheckValue(previousForm, symptoms, "AssessmentOfSclerosisAge", 777);
+            CheckValue(previousForm, symptoms, "PredominantDomain", 0);
 
             ViewBag.NonmatchingValues = _nonMatchingValues;
-            ViewBag.VisitType = currentForm.Visit.VisitType;
+            ViewBag.VisitType = symptoms.Visit.VisitType;
 
-            return View(currentForm);
+            return View(symptoms);
         }
 
         // POST: Symptoms/Edit/5
@@ -129,43 +130,55 @@ namespace UDS.Net.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Symptoms Symptoms, string save, string complete)
+        public async Task<IActionResult> Edit(int id, Symptoms symptoms, string save, string complete)
         {
-            if (id != Symptoms.Id)
+            if (id != symptoms.Id)
             {
                 return NotFound();
             }
+
+            ViewBag.NonmatchingValues = _nonMatchingValues;
+
             var visit = await _context.Visits
                 .AsNoTracking()
                 .Include("Participant")
-                .FirstOrDefaultAsync(v => v.Id == Symptoms.Id);
-            ViewBag.NonmatchingValues = _nonMatchingValues;
+                .FirstOrDefaultAsync(v => v.Id == symptoms.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(symptoms);
+            }
+
+            symptoms.Visit = visit;
             ViewBag.VisitType = visit.VisitType;
-            Symptoms.Visit = visit;
-            var participantIdentity = await _participantsService.GetParticipantAsync(Symptoms.Visit.Participant.Id);
-            Symptoms.Visit.Participant.Profile = participantIdentity;
+
+            var participantIdentity = await _participantsService.GetParticipantAsync(symptoms.Visit.Participant.Id);
+            symptoms.Visit.Participant.Profile = participantIdentity;
+
             if (!String.IsNullOrEmpty(save))
             {
-                Symptoms.FormStatus = FormStatus.Incomplete;
+                symptoms.FormStatus = FormStatus.Incomplete;
             }
             else if (!String.IsNullOrEmpty(complete))
             {
-                Symptoms.FormStatus = FormStatus.Complete;
-                if (!TryValidateModel(Symptoms))
+                symptoms.FormStatus = FormStatus.Complete;
+                if (!TryValidateModel(symptoms))
                 {
-                    return View(Symptoms);
+                    return View(symptoms);
                 }
             }
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(Symptoms);
+                    _context.Update(symptoms);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(Symptoms));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SymptomsExists(Symptoms.Id))
+                    if (!SymptomsExists(symptoms.Id))
                     {
                         return NotFound();
                     }
@@ -174,9 +187,9 @@ namespace UDS.Net.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "Visit", new { id = Symptoms.Id });
+                return RedirectToAction("Details", "Visit", new { id = symptoms.Id });
             }
-            return View(Symptoms);
+            return View(symptoms);
         }
 
         // GET: Symptoms/Delete/5

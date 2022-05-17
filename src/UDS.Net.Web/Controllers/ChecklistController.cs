@@ -13,17 +13,13 @@ using UDS.Net.Web.ViewModels;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class ChecklistController : Controller
+    public class ChecklistController : PacketFormController
     {
-        private readonly UdsContext _context;
         private readonly IVisitService _visitService;
-        private readonly IParticipantsService _participantsService;
 
-        public ChecklistController(UdsContext context, IVisitService visitService, IParticipantsService participantsService)
+        public ChecklistController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService, IVisitService visitService) : base(context, participantsService, checklistService)
         {
-            _context = context;
             _visitService = visitService;
-            _participantsService = participantsService;
         }
 
         // GET: /<controller>/
@@ -89,6 +85,9 @@ namespace UDS.Net.Web.Controllers
                 Checklist = checklist,
                 Visit = visitBase
             };
+
+            var requiredForms = _checklistService.GetRequiredFormsDisplay(checklist.Visit);
+            ViewData["RequiredForms"] = requiredForms;
             
             return View(vm); 
         }
@@ -114,6 +113,7 @@ namespace UDS.Net.Web.Controllers
 
             var visitBase = await _visitService.GetVisitWithParticipantAndFormBases(id);
 
+            // All the logic for different visit types and required forms is in this model
             var vm = new VisitCompletionViewModel
             {
                 Checklist = checklist,

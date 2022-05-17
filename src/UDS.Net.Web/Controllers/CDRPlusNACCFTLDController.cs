@@ -12,15 +12,10 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class CDRPlusNACCFTLDController : Controller
+    public class CDRPlusNACCFTLDController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
-
-        public CDRPlusNACCFTLDController(UdsContext context, IParticipantsService participantsService)
+        public CDRPlusNACCFTLDController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base (context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
         }
 
         // GET: CDRPlusNACCFTLD
@@ -84,6 +79,8 @@ namespace UDS.Net.Web.Controllers
             return View(cDRPlusNACCFTLD);
         }
 
+
+
         // GET: CDRPlusNACCFTLD/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -102,7 +99,10 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
-
+            else if (!FormCanBeEdited(cDRPlusNACCFTLD.Visit.Status))
+            {
+                return View("Details", cDRPlusNACCFTLD); // don't allow edits for most users if the visit is complete
+            }
 
             var participantIdentity = await _participantsService.GetParticipantAsync(cDRPlusNACCFTLD.Visit.Participant.Id);
             cDRPlusNACCFTLD.Visit.Participant.Profile = participantIdentity;
@@ -126,6 +126,12 @@ namespace UDS.Net.Web.Controllers
                 .AsNoTracking()
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == cDRPlusNACCFTLD.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(cDRPlusNACCFTLD);
+            }
 
             cDRPlusNACCFTLD.Visit = visit;
 
@@ -151,6 +157,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(cDRPlusNACCFTLD);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(CDRPlusNACCFTLD));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

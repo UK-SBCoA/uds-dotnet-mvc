@@ -12,7 +12,7 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class SubjectHealthHistoryController : Controller
+    public class SubjectHealthHistoryController : PacketFormController
     {   
         private ProtocolVariable[] _protocolVariables;
         private ProtocolVariable _basicResponse;
@@ -23,14 +23,8 @@ namespace UDS.Net.Web.Controllers
         private ProtocolVariable _diabeteis;
         private ProtocolVariable _arthritis;
 
-
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
-
-        public SubjectHealthHistoryController(UdsContext context, IParticipantsService participantsService)
+        public SubjectHealthHistoryController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
             string jsonString = System.IO.File.ReadAllText("App_Data/HealthHistoryReference.json");
             _protocolVariables = JsonSerializer.Deserialize<ProtocolVariable[]>(jsonString);
             _basicResponse = _protocolVariables.Where(p => p.Name == "BASIC").FirstOrDefault();
@@ -103,6 +97,11 @@ namespace UDS.Net.Web.Controllers
         // GET: SubjectHealthHistory/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             ViewBag.BasicResponse = _basicResponse;
             ViewBag.SmokingYears = _smokingFrequency;
             ViewBag.ConditionPresence = _conditionPresence;
@@ -111,20 +110,21 @@ namespace UDS.Net.Web.Controllers
             ViewBag.Arthritis = _arthritis;
             ViewBag.Diabetes = _diabeteis;
             
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var subjectHealthHistory = await _context.SubjectHealthHistories
                 .Include(c => c.Visit)
-                .ThenInclude(v => v.Participant)
+                    .ThenInclude(v => v.Participant)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id);
+
             if (subjectHealthHistory == null)
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(subjectHealthHistory.Visit.Status))
+            {
+                return View("Details", subjectHealthHistory);
+            }
+
             var participantIdentity = await _participantsService.GetParticipantAsync(subjectHealthHistory.Visit.Participant.Id);
             subjectHealthHistory.Visit.Participant.Profile = participantIdentity;
             return View(subjectHealthHistory);
@@ -146,13 +146,23 @@ namespace UDS.Net.Web.Controllers
             ViewBag.Severity = _severity;
             ViewBag.Arthritis = _arthritis;
             ViewBag.Diabetes = _diabeteis;
+
             var visit = await _context.Visits
                 .AsNoTracking()
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == subjectHealthHistory.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(subjectHealthHistory);
+            }
+
             subjectHealthHistory.Visit = visit;
+
             var participantIdentity = await _participantsService.GetParticipantAsync(subjectHealthHistory.Visit.Participant.Id);
             subjectHealthHistory.Visit.Participant.Profile = participantIdentity;
+
             if (!String.IsNullOrEmpty(save))
             {
                 subjectHealthHistory.FormStatus = FormStatus.Incomplete;
@@ -172,6 +182,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(subjectHealthHistory);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(SubjectHealthHistory));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

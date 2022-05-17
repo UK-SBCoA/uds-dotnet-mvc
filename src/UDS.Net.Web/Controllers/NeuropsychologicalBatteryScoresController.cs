@@ -12,15 +12,10 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class NeuropsychologicalBatteryScoresController : Controller
+    public class NeuropsychologicalBatteryScoresController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantService;
-
-        public NeuropsychologicalBatteryScoresController(UdsContext context, IParticipantsService participantsService)
+        public NeuropsychologicalBatteryScoresController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantService = participantsService;_participantService = participantsService;
         }
 
         // GET: neuropsychologicalBatteryScores
@@ -48,7 +43,7 @@ namespace UDS.Net.Web.Controllers
                 return NotFound();
             }
 
-            var participantIdentity = await _participantService.GetParticipantAsync(neuropsychologicalBatteryScores.Visit.Participant.Id);
+            var participantIdentity = await _participantsService.GetParticipantAsync(neuropsychologicalBatteryScores.Visit.Participant.Id);
             neuropsychologicalBatteryScores.Visit.Participant.Profile = participantIdentity;
 
             return View(neuropsychologicalBatteryScores);
@@ -114,9 +109,14 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(neuropsychologicalBatteryScores.Visit.Status))
+            {
+                return View("Details", neuropsychologicalBatteryScores);
+            }
+
             ViewData["Id"] = new SelectList(_context.Visits, "Id", "Id", neuropsychologicalBatteryScores.Id);
 
-            var participantIdentity = await _participantService.GetParticipantAsync(neuropsychologicalBatteryScores.Visit.Participant.Id);
+            var participantIdentity = await _participantsService.GetParticipantAsync(neuropsychologicalBatteryScores.Visit.Participant.Id);
             neuropsychologicalBatteryScores.Visit.Participant.Profile = participantIdentity;
 
             return View(neuropsychologicalBatteryScores);
@@ -138,9 +138,15 @@ namespace UDS.Net.Web.Controllers
                 .AsNoTracking()
                 .FirstOrDefaultAsync(v => v.Id == neuropsychologicalBatteryScores.Id);
 
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(neuropsychologicalBatteryScores);
+            }
+
             neuropsychologicalBatteryScores.Visit = visit;
 
-            var participantIdentity = await _participantService.GetParticipantAsync(neuropsychologicalBatteryScores.Visit.Participant.Id);
+            var participantIdentity = await _participantsService.GetParticipantAsync(neuropsychologicalBatteryScores.Visit.Participant.Id);
             neuropsychologicalBatteryScores.Visit.Participant.Profile = participantIdentity;
 
             if (visit == null)
@@ -171,6 +177,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(neuropsychologicalBatteryScores);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(NeuropsychologicalBatteryScores));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

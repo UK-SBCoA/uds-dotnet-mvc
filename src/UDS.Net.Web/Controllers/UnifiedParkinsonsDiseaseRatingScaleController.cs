@@ -12,10 +12,8 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class UnifiedParkinsonsDiseaseRatingScaleController : Controller
+    public class UnifiedParkinsonsDiseaseRatingScaleController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
         private ProtocolVariable[] _protocolVariables;
         private ProtocolVariable _speech;
         private ProtocolVariable _facialExpression;
@@ -34,12 +32,9 @@ namespace UDS.Net.Web.Controllers
         private ProtocolVariable _otherDyskinesias;
         private ProtocolVariable _receivedDrug;
         private ProtocolVariable _antiparkinsonianDrugs;
-        private readonly IParticipantsService _participantService;
 
-        public UnifiedParkinsonsDiseaseRatingScaleController(UdsContext context, IParticipantsService participantsService)
+        public UnifiedParkinsonsDiseaseRatingScaleController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
             string jsonString = System.IO.File.ReadAllText("App_Data/UPDRSVariableCodes.json");
             _protocolVariables = JsonSerializer.Deserialize<ProtocolVariable[]>(jsonString);
             _speech = _protocolVariables.Where(pr => pr.Name == "Speech").Single();
@@ -59,8 +54,6 @@ namespace UDS.Net.Web.Controllers
             _otherDyskinesias = _protocolVariables.Where(p => p.Name == "OtherDyskinesias").Single();
             _receivedDrug = _protocolVariables.Where(p => p.Name == "ReceivedDrug").Single();
             _antiparkinsonianDrugs = _protocolVariables.Where(p => p.Name == "ReceivedDrug").Single();
-            _participantService = participantsService;
-
 
         }
 
@@ -112,7 +105,7 @@ namespace UDS.Net.Web.Controllers
         // GET: UnifiedParkinsonsDiseaseRatingScale/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-             if (id == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -136,9 +129,8 @@ namespace UDS.Net.Web.Controllers
             ViewBag.AntiparkinsonianDrugs = _antiparkinsonianDrugs;
 
             var unifiedParkinsonsDiseaseRatingScale = await _context.UnifiedParkinsonsDiseaseRatingScale
-                .Include("Visit")
                 .Include(c => c.Visit)
-                .ThenInclude(v => v.Participant)
+                    .ThenInclude(v => v.Participant)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -146,17 +138,19 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
-            else
+            else if (!FormCanBeEdited(unifiedParkinsonsDiseaseRatingScale.Visit.Status))
             {
-                var participantIdentity = await _participantService.GetParticipantAsync(unifiedParkinsonsDiseaseRatingScale.Visit.Participant.Id);
-                unifiedParkinsonsDiseaseRatingScale.Visit.Participant.Profile = participantIdentity;
-
-                if(unifiedParkinsonsDiseaseRatingScale.Visit.VisitType == VisitType.FVP || unifiedParkinsonsDiseaseRatingScale.Visit.VisitType == VisitType.TFP)
-                {
-                    return View("Edit", unifiedParkinsonsDiseaseRatingScale);
-                }
-                return View(unifiedParkinsonsDiseaseRatingScale);
+                return View("Details", unifiedParkinsonsDiseaseRatingScale);
             }
+
+            var participantIdentity = await _participantsService.GetParticipantAsync(unifiedParkinsonsDiseaseRatingScale.Visit.Participant.Id);
+            unifiedParkinsonsDiseaseRatingScale.Visit.Participant.Profile = participantIdentity;
+
+            if (unifiedParkinsonsDiseaseRatingScale.Visit.VisitType == VisitType.FVP || unifiedParkinsonsDiseaseRatingScale.Visit.VisitType == VisitType.TFP)
+            {
+                return View("Edit", unifiedParkinsonsDiseaseRatingScale);
+            }
+            return View(unifiedParkinsonsDiseaseRatingScale);
         }
 
         // POST: UnifiedParkinsonsDiseaseRatingScale/Edit/5
@@ -186,10 +180,18 @@ namespace UDS.Net.Web.Controllers
             ViewBag.OtherDyskinesias = _otherDyskinesias;
             ViewBag.ReceivedDrug = _receivedDrug;
             ViewBag.AntiparkinsonianDrugs = _antiparkinsonianDrugs;
+
             var visit = await _context.Visits
-            .AsNoTracking()
-            .Include("Participant")
-            .FirstOrDefaultAsync(v => v.Id == unifiedParkinsonsDiseaseRatingScale.Id);
+                .AsNoTracking()
+                .Include("Participant")
+                .FirstOrDefaultAsync(v => v.Id == unifiedParkinsonsDiseaseRatingScale.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(unifiedParkinsonsDiseaseRatingScale);
+            }
+
             unifiedParkinsonsDiseaseRatingScale.Visit = visit;
             var participantIdentity = await _participantsService.GetParticipantAsync(unifiedParkinsonsDiseaseRatingScale.Visit.Participant.Id);
             unifiedParkinsonsDiseaseRatingScale.Visit.Participant.Profile = participantIdentity;
@@ -213,6 +215,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(unifiedParkinsonsDiseaseRatingScale);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(UnifiedParkinsonsDiseaseRatingScale));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -10,15 +10,10 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class PhysicalEvaluationController : Controller
+    public class PhysicalEvaluationController : PacketFormController
     {
-        private readonly UdsContext _context;
-         private readonly IParticipantsService _participantsService;
-
-        public PhysicalEvaluationController(UdsContext context, IParticipantsService participantsService)
+        public PhysicalEvaluationController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
         }
 
         // GET: PhysicalEvaluation
@@ -70,7 +65,7 @@ namespace UDS.Net.Web.Controllers
             }
             var physicalEvaluation = await _context.PhysicalEvaluation
                 .Include(c => c.Visit)
-                .ThenInclude(v => v.Participant)
+                    .ThenInclude(v => v.Participant)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -78,6 +73,11 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(physicalEvaluation.Visit.Status))
+            {
+                return View("Details", physicalEvaluation);
+            }
+
             var participantIdentity = await _participantsService.GetParticipantAsync(physicalEvaluation.Visit.Participant.Id);
             physicalEvaluation.Visit.Participant.Profile = participantIdentity;
 
@@ -94,12 +94,21 @@ namespace UDS.Net.Web.Controllers
                 return NotFound();
             }
             var visit = await _context.Visits
-            .AsNoTracking()
-            .Include("Participant")
-            .FirstOrDefaultAsync(v => v.Id == physicalEvaluation.Id);
+                .AsNoTracking()
+                .Include("Participant")
+                .FirstOrDefaultAsync(v => v.Id == physicalEvaluation.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(physicalEvaluation);
+            }
+
             physicalEvaluation.Visit = visit;
+
             var participantIdentity = await _participantsService.GetParticipantAsync(physicalEvaluation.Visit.Participant.Id);
             physicalEvaluation.Visit.Participant.Profile = participantIdentity;
+
             if (!String.IsNullOrEmpty(save))
             {
                 physicalEvaluation.FormStatus = FormStatus.Incomplete;
@@ -118,6 +127,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(physicalEvaluation);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(PhysicalEvaluation));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

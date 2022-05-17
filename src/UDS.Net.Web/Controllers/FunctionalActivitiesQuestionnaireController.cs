@@ -13,17 +13,13 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class FunctionalActivitiesQuestionnaireController : Controller
+    public class FunctionalActivitiesQuestionnaireController : PacketFormController
     {
         private ProtocolVariable[] _protocolVariables;
         private ProtocolVariable _basicResponse;
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
 
-        public FunctionalActivitiesQuestionnaireController(UdsContext context, IParticipantsService participantsService)
+        public FunctionalActivitiesQuestionnaireController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
             string jsonString = System.IO.File.ReadAllText("App_Data/FunctionalActivitiesVariableCodes.json");
             _protocolVariables = JsonSerializer.Deserialize<ProtocolVariable[]>(jsonString);
             _basicResponse = _protocolVariables.Where(x => x.Name == "BasicResponse").Single();
@@ -92,6 +88,11 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(functionalActivitiesQuestionnaire.Visit.Status))
+            {
+                return View("Details", functionalActivitiesQuestionnaire);
+            }
+
 
             ViewBag.BasicResponse = _basicResponse;
 
@@ -118,6 +119,12 @@ namespace UDS.Net.Web.Controllers
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == functionalActivitiesQuestionnaire.Id);
 
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(functionalActivitiesQuestionnaire);
+            }
+
             functionalActivitiesQuestionnaire.Visit = visit;
 
             var participantIdentity = await _participantsService.GetParticipantAsync(functionalActivitiesQuestionnaire.Visit.Participant.Id);
@@ -143,6 +150,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(functionalActivitiesQuestionnaire);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(FunctionalActivitiesQuestionnaire));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

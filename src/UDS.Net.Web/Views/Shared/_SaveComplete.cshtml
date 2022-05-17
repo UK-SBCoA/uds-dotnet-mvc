@@ -1,5 +1,11 @@
 
 @model FormBase
+
+<div class="row">
+    <div class="col">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+</div>
 <input type="hidden" asp-for="Id" data-always-enabled />
 <input type="hidden" asp-for="FormStatus" data-always-enabled />
 <div class="btn-group">

@@ -9,8 +9,6 @@ using UDS.Net.Data.Entities;
 using UDS.Net.Data.Enums;
 using UDS.Net.Web.Services;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace UDS.Net.Web.Controllers
 {
     public class MilestoneController : Controller
@@ -19,7 +17,7 @@ namespace UDS.Net.Web.Controllers
         private readonly IParticipantsService _participantsService;
         private readonly UdsContext _context;
 
-        public MilestoneController(IMilestonesService milestonesService,IParticipantsService participantsService, UdsContext context)
+        public MilestoneController(IMilestonesService milestonesService, IParticipantsService participantsService, UdsContext context)
         {
             _milestonesService = milestonesService;
             _participantsService = participantsService;

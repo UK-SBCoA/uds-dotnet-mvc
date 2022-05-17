@@ -10,20 +10,16 @@ using UDS.Net.Data.Enums;
 using UDS.Net.Web.ViewModels;
 using UDS.Net.Web.Services;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace UDS.Net.Web.Controllers
 {
-    public class InclusionController : Controller
+    /// <summary>
+    /// Telephone Inclusion form
+    /// </summary>
+    public class InclusionController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
-
-        public InclusionController(UdsContext context, IParticipantsService participantsService)
+        public InclusionController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
-
         }
 
         // GET: Inclusion/Create
@@ -62,6 +58,10 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(inclusion.Visit.Status))
+            {
+                return View("Details", inclusion);
+            }
 
             var participantIdentity = await _participantsService.GetParticipantAsync(inclusion.Visit.Participant.Id);
             inclusion.Visit.Participant.Profile = participantIdentity;
@@ -83,6 +83,12 @@ namespace UDS.Net.Web.Controllers
                 .AsNoTracking()
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == inclusion.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(inclusion);
+            }
 
             inclusion.Visit = visit;
 
@@ -107,6 +113,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(inclusion);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(Inclusion));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

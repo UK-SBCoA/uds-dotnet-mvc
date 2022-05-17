@@ -12,15 +12,10 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class NeurologicalExaminationFindingsController : Controller
+    public class NeurologicalExaminationFindingsController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
-
-        public NeurologicalExaminationFindingsController(UdsContext context, IParticipantsService participantsService)
+        public NeurologicalExaminationFindingsController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
         }
 
         // GET: NeurologicalExaminationFindings
@@ -41,6 +36,7 @@ namespace UDS.Net.Web.Controllers
             var neurologicalExaminationFindings = await _context.NeurologicalExaminationFindings
                 .Include(n => n.Visit)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (neurologicalExaminationFindings == null)
             {
                 return NotFound();
@@ -91,16 +87,21 @@ namespace UDS.Net.Web.Controllers
                 return NotFound();
             }
 
-            var neurologicalExaminationFindings = 
-            await _context.NeurologicalExaminationFindings
-            .Include(c => c.Visit)
-            .ThenInclude(c => c.Participant)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(c => c.Id == id);
+            var neurologicalExaminationFindings = await _context.NeurologicalExaminationFindings
+                .Include(c => c.Visit)
+                .ThenInclude(c => c.Participant)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             if (neurologicalExaminationFindings == null)
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(neurologicalExaminationFindings.Visit.Status))
+            {
+                return View("Details", neurologicalExaminationFindings);
+            }
+
             var participantIdentity = await _participantsService.GetParticipantAsync(neurologicalExaminationFindings.Visit.Participant.Id);
             neurologicalExaminationFindings.Visit.Participant.Profile = participantIdentity;
             return View(neurologicalExaminationFindings);
@@ -121,9 +122,18 @@ namespace UDS.Net.Web.Controllers
                 .AsNoTracking()
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == neurologicalExaminationFindings.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(neurologicalExaminationFindings);
+            }
+
             neurologicalExaminationFindings.Visit = visit;
+
             var participantIdentity = await _participantsService.GetParticipantAsync(neurologicalExaminationFindings.Visit.Participant.Id);
             neurologicalExaminationFindings.Visit.Participant.Profile = participantIdentity;
+
             if (!String.IsNullOrEmpty(save))
             {
                 neurologicalExaminationFindings.FormStatus = FormStatus.Incomplete;
@@ -142,6 +152,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(neurologicalExaminationFindings);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(NeurologicalExaminationFindings));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

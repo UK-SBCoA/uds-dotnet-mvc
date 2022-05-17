@@ -11,15 +11,10 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class GeriatricDepressionScaleController : Controller
+    public class GeriatricDepressionScaleController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
-
-        public GeriatricDepressionScaleController(UdsContext context, IParticipantsService participantsService)
+        public GeriatricDepressionScaleController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
         }
 
         // GET: GeriatricDepressionScale
@@ -82,6 +77,10 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(geriatricDepressionScale.Visit.Status))
+            {
+                return View("Details", geriatricDepressionScale);
+            }
 
             var participantIdentity = await _participantsService.GetParticipantAsync(geriatricDepressionScale.Visit.Participant.Id);
             geriatricDepressionScale.Visit.Participant.Profile = participantIdentity;
@@ -105,6 +104,12 @@ namespace UDS.Net.Web.Controllers
                 .AsNoTracking()
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == geriatricDepressionScale.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(geriatricDepressionScale);
+            }
 
             geriatricDepressionScale.Visit = visit;
 
@@ -131,6 +136,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(geriatricDepressionScale);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(GeriatricDepressionScale));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

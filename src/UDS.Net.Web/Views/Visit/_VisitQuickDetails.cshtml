@@ -29,6 +29,9 @@
                     <input type="hidden" asp-for="VisitDate" />
                     <input type="hidden" asp-for="VisitType" />
                     <input type="hidden" name="redirectToAction" id="redirectToAction" value="Details" />
+                    <div>
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
             <div class="form-group">

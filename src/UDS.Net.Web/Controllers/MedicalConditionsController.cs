@@ -13,17 +13,12 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class MedicalConditionsController : Controller
+    public class MedicalConditionsController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
-        private ProtocolVariable _findings;
+        private readonly ProtocolVariable _findings;
 
-        public MedicalConditionsController(UdsContext context, IParticipantsService participantsService)
+        public MedicalConditionsController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
-
             _findings = new ProtocolVariable
             {
                 Codes = new Dictionary<string, string>()
@@ -166,6 +161,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(medicalConditions);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(MedicalConditions));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

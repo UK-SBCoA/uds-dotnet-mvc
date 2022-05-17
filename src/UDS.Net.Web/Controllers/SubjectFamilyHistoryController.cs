@@ -13,26 +13,24 @@ using UDS.Net.Web.ViewModels;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class SubjectFamilyHistoryController : Controller
+    public class SubjectFamilyHistoryController : PacketFormController
     {
         private ProtocolVariable[] _protocolVariables;
         private ProtocolVariable _primaryDiagnosis;
         private ProtocolVariable _neurologicalProblems;
         private ProtocolVariable _methodOfEvaluation;
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
         private int _siblingNumber = 20;
         private int _childNumber = 15;
-        public SubjectFamilyHistoryController(UdsContext context, IParticipantsService participantsService)
+
+        public SubjectFamilyHistoryController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
             string jsonString = System.IO.File.ReadAllText("App_Data/SubjectFamilyHistoryVariableCodes.json");
             _protocolVariables = JsonSerializer.Deserialize<ProtocolVariable[]>(jsonString);
             _primaryDiagnosis = _protocolVariables.Where(p => p.Name == "PrimaryDiagnosis").FirstOrDefault();
             _neurologicalProblems = _protocolVariables.Where(p => p.Name == "NeurologicalPsychiatric").FirstOrDefault();
             _methodOfEvaluation = _protocolVariables.Where(p => p.Name == "EvaluationMethod").FirstOrDefault();
         }
+
         public async Task<IActionResult> Create(int id)
         {
             /*
@@ -124,6 +122,7 @@ namespace UDS.Net.Web.Controllers
             }
             return RedirectToAction("Edit", new { id = subjectFamilyHistory.Id });
         }
+
         public async Task<IActionResult> Edit(int? id) {
 
             if (id == null)
@@ -133,22 +132,31 @@ namespace UDS.Net.Web.Controllers
             ViewBag.PrimaryDiagnosis = _primaryDiagnosis;
             ViewBag.NeurologicalProblems = _neurologicalProblems;
             ViewBag.MethodOfEvaluation = _methodOfEvaluation;
+
             var familyHistory = await _context.SubjectFamilyHistories
                 .Include(x => x.Visit)
                     .ThenInclude(x => x.Participant)
                 .Include(x => x.Relatives)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
-            if (familyHistory == null) {
+
+            if (familyHistory == null)
+            {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(familyHistory.Visit.Status))
+            {
+                return View("Details", familyHistory);
+            }
+
             var participantIdentity = await _participantsService.GetParticipantAsync(familyHistory.Visit.Participant.Id);
             familyHistory.Visit.Participant.Profile = participantIdentity;
             return View(familyHistory);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, SubjectFamilyHistory subjectFamilyHistory, string save, string complete) {
+        public async Task<IActionResult> Edit(int id, SubjectFamilyHistory subjectFamilyHistory, string save, string complete)
+        {
             if (id != subjectFamilyHistory.Id) {
                 return NotFound();
             }
@@ -156,12 +164,22 @@ namespace UDS.Net.Web.Controllers
                 .AsNoTracking()
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == subjectFamilyHistory.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(subjectFamilyHistory);
+            }
+
             subjectFamilyHistory.Visit = visit;
+
             var participantIdentity = await _participantsService.GetParticipantAsync(subjectFamilyHistory.Visit.Participant.Id);
             subjectFamilyHistory.Visit.Participant.Profile = participantIdentity;
+
             ViewBag.PrimaryDiagnosis = _primaryDiagnosis;
             ViewBag.NeurologicalProblems = _neurologicalProblems;
             ViewBag.MethodOfEvaluation = _methodOfEvaluation;
+
             if (!String.IsNullOrEmpty(save))
             {
                 subjectFamilyHistory.FormStatus = FormStatus.Incomplete;
@@ -243,6 +261,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(subjectFamilyHistory);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(SubjectFamilyHistory));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -221,6 +221,23 @@ namespace UDS.Net.Web.Controllers
 
             ViewBag.Examiners = examiners;
 
+            if (visit.Status == VisitStatus.Complete && existingVisit.Checklist.FormStatus != FormStatus.Complete) // if this happens another user has changed a form within the visit
+            {
+                var visitVM = await _visitService.GetVisitWithParticipantAndFormBases(visit.Id);
+
+                var participantIdentity = await _participantsService.GetParticipantAsync(visit.Participant.Id);
+                visitVM.Participant.Profile = participantIdentity;
+
+                ModelState.AddModelError("Status", "Packet cannot be completed because Z1 is not completed.");
+
+                if (visit.VisitType == VisitType.IVP)
+                    return View("IVP", visitVM);
+                else if (visit.VisitType == VisitType.TFP)
+                    return View("TFP", visitVM);
+                else
+                    return View("FVP", visitVM);
+            }
+
             if (ModelState.IsValid)
             {
                 try

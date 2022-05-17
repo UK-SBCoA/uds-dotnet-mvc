@@ -55,6 +55,7 @@ namespace UDS.Net.Web
             services.AddScoped<IVisitService, VisitService>();
             services.AddScoped<IUserPreferencesService, UserPreferencesService>();
             services.AddScoped<IMilestonesService, MilestonesService>();
+            services.AddScoped<IChecklistService, ChecklistService>();
             services.AddRazorPages();
         }
 

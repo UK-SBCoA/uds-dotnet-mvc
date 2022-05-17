@@ -12,15 +12,10 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class MedicationsReviewController : Controller
+    public class MedicationsReviewController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
-
-        public MedicationsReviewController(UdsContext context, IParticipantsService participantsService)
+        public MedicationsReviewController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
         }
 
         // GET: MedicationsReview
@@ -50,7 +45,6 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
-
 
             var participantIdentity = await _participantsService.GetParticipantAsync(medicationsReview.Visit.Participant.Id);
             medicationsReview.Visit.Participant.Profile = participantIdentity;
@@ -160,13 +154,18 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
-            // Set viewbag
+            else if (!FormCanBeEdited(medicationsReview.Visit.Status))
+            {
+                return View("Details", medicationsReview);
+            }
+            
             await SetMedicationViewbag(medicationsReview.Id, medicationsReview);
 
             var participantIdentity = await _participantsService.GetParticipantAsync(medicationsReview.Visit.Participant.Id);
             medicationsReview.Visit.Participant.Profile = participantIdentity;
             return View(medicationsReview);
         }
+
         private async Task SetMedicationViewbag(int formId, MedicationsReview medicationsReview)
         {
             var medicationsReferenceWithSelected = await GetMedicationReferenceWithSelected(formId, medicationsReview); 
@@ -178,6 +177,7 @@ namespace UDS.Net.Web.Controllers
             // Default = false && OverTheCounter = false
             ViewData["NonDefaultRef"] = GetNonDefaultMedications(medicationsReferenceWithSelected).ToList();
         }
+
         private IEnumerable<MedicationSelected> GetDefaultMedicationsWithSelected(List<MedicationSelected> medications)
         {
             var defaultMeds = medications.Where(x => x.MedicationReference.FromNACCDefaultReference && !x.MedicationReference.IsOverTheCounter);
@@ -185,14 +185,17 @@ namespace UDS.Net.Web.Controllers
             var allMedsWithSelected = defaultMeds.Concat(nonDefualt).OrderBy(x => x.MedicationReference.DisplayName);
             return allMedsWithSelected;
         }
+
         private IEnumerable<MedicationSelected> GetNonDefaultMedications(List<MedicationSelected> medications)
         {
             return medications.Where(x => !x.MedicationReference.FromNACCDefaultReference && !x.MedicationReference.IsOverTheCounter && !x.Selected);
         }
+
         private IEnumerable<MedicationSelected> GetNonDefaultMedicationsSelected(List<MedicationSelected> medications)
         {
             return medications.Where(x => !x.MedicationReference.FromNACCDefaultReference && !x.MedicationReference.IsOverTheCounter && x.Selected);
         }
+
         private IEnumerable<MedicationSelected> GetOverTheCounterMedications(List<MedicationSelected> medications)
         {
             return medications.Where(x => x.MedicationReference.IsOverTheCounter);
@@ -229,9 +232,6 @@ namespace UDS.Net.Web.Controllers
             return medicationsReferenceWithSelected;
         }
 
-        // POST: MedicationsReview/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, MedicationsReview medicationsReview, string[] MedicationsSelected, string save, string complete)
@@ -245,6 +245,12 @@ namespace UDS.Net.Web.Controllers
                 .AsNoTracking()
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == medicationsReview.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(medicationsReview);
+            }
 
             medicationsReview.Visit = visit;
 
@@ -272,6 +278,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(medicationsReview);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(MedicationsReview));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

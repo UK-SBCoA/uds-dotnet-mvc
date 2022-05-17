@@ -11,15 +11,10 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class CoParticipantDemographicsController : Controller
+    public class CoParticipantDemographicsController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantService;
-
-        public CoParticipantDemographicsController(UdsContext context, IParticipantsService participantsService)
+        public CoParticipantDemographicsController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantService = participantsService;
         }
 
         // GET: CoParticipantDemographics
@@ -113,17 +108,19 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
-            else
+            else if(!FormCanBeEdited(coParticipantDemographics.Visit.Status))
             {
-                var participantIdentity = await _participantService.GetParticipantAsync(coParticipantDemographics.Visit.Participant.Id);
-                coParticipantDemographics.Visit.Participant.Profile = participantIdentity;
-
-                if(coParticipantDemographics.Visit.VisitType == VisitType.FVP || coParticipantDemographics.Visit.VisitType == VisitType.TFP)
-                {
-                    return View("EditFVP", coParticipantDemographics);
-                }
-                return View(coParticipantDemographics);
+                return View("Details", coParticipantDemographics);
             }
+
+            var participantIdentity = await _participantsService.GetParticipantAsync(coParticipantDemographics.Visit.Participant.Id);
+            coParticipantDemographics.Visit.Participant.Profile = participantIdentity;
+
+            if(coParticipantDemographics.Visit.VisitType == VisitType.FVP || coParticipantDemographics.Visit.VisitType == VisitType.TFP)
+                return View("EditFVP", coParticipantDemographics);
+            else
+                return View(coParticipantDemographics);
+
         }
 
         // POST: CoParticipantDemographics/Edit/5
@@ -144,25 +141,33 @@ namespace UDS.Net.Web.Controllers
                 .AsNoTracking()
                 .FirstOrDefaultAsync(v => v.Id == coParticipantDemographics.Id);
 
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+
+                if (coParticipantDemographics.Visit.VisitType == VisitType.FVP || coParticipantDemographics.Visit.VisitType == VisitType.TFP)
+                    return View("EditFVP", coParticipantDemographics);
+                else
+                    return View(coParticipantDemographics);
+            }
+
             coParticipantDemographics.Visit = visit;
 
-            var participantIdentity = await _participantService.GetParticipantAsync(coParticipantDemographics.Visit.Participant.Id);
+            var participantIdentity = await _participantsService.GetParticipantAsync(coParticipantDemographics.Visit.Participant.Id);
             coParticipantDemographics.Visit.Participant.Profile = participantIdentity;
 
             if (visit == null)
             {
                 return NotFound();
             }
-
+            
             coParticipantDemographics.Visit = visit;
 
             var viewToReturn = "Edit";
-
-            if (coParticipantDemographics.Visit.VisitType == VisitType.FVP)
+            if (coParticipantDemographics.Visit.VisitType == VisitType.FVP || coParticipantDemographics.Visit.VisitType == VisitType.TFP)
             {
                 viewToReturn = "EditFVP";
             }
-
 
             if (!String.IsNullOrEmpty(save))
             {
@@ -183,6 +188,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(coParticipantDemographics);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(CoParticipantDemographics));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

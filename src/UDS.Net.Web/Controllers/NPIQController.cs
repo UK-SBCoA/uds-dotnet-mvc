@@ -12,20 +12,15 @@ using UDS.Net.Web.Services;
 
 namespace UDS.Net.Web.Controllers
 {
-    public class NPIQController : Controller
+    public class NPIQController : PacketFormController
     {
-        private readonly UdsContext _context;
-        private readonly IParticipantsService _participantsService;
         private ProtocolVariable _coParticipant;
         private ProtocolVariable _symptomPresent;
         private ProtocolVariable _symptomSeverity;
         private ProtocolVariable[] _protocolVariables;
 
-        public NPIQController(UdsContext context, IParticipantsService participantsService)
+        public NPIQController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
-            _context = context;
-            _participantsService = participantsService;
-
             string jsonString = System.IO.File.ReadAllText("App_Data/VariableCodesNames.json");
             _protocolVariables = JsonSerializer.Deserialize<ProtocolVariable[]>(jsonString);
 
@@ -124,6 +119,10 @@ namespace UDS.Net.Web.Controllers
             {
                 return NotFound();
             }
+            else if (!FormCanBeEdited(nPIQ.Visit.Status))
+            {
+                return View("Details", nPIQ);
+            }
 
             var participantIdentity = await _participantsService.GetParticipantAsync(nPIQ.Visit.Participant.Id);
             nPIQ.Visit.Participant.Profile = participantIdentity;
@@ -151,6 +150,12 @@ namespace UDS.Net.Web.Controllers
                 .AsNoTracking()
                 .Include("Participant")
                 .FirstOrDefaultAsync(v => v.Id == nPIQ.Id);
+
+            if (!FormCanBeEdited(visit.Status))
+            {
+                ModelState.AddModelError("FormStatus", "Form cannot be modified because packet is complete.");
+                return View(nPIQ);
+            }
 
             nPIQ.Visit = visit;
 
@@ -181,6 +186,7 @@ namespace UDS.Net.Web.Controllers
                 {
                     _context.Update(nPIQ);
                     await _context.SaveChangesAsync(HttpContext.User.Identity.Name);
+                    await _checklistService.ValidateAndUpdateChecklistStatus(visit, typeof(NPIQ));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
