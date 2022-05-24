@@ -231,7 +231,7 @@ namespace UDS.Net.Web.Controllers
                                 }
                             }
 
-                            bool hasNeurologicalProblemPsycyiatricCondition = relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 8;
+                            bool hasNeurologicalProblemPsycyiatricCondition = relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 8 && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 9;
 
                             if (!relative.PrimaryDx.HasValue && hasNeurologicalProblemPsycyiatricCondition)
                             {
