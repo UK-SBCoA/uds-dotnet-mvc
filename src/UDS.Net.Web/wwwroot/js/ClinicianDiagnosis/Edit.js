@@ -36,7 +36,22 @@ $(document).ready(function () {
             $('input[name="' + value + '"]').prop("disabled", disabled);
 
             if (!present || uncheck) {
-                console.log("unchecking " + value);
+                console.log("unchecking " + value); // TODO remove debug
+                $('input[name="' + value + '"]').prop('checked', false); // only unselect on not checked
+            }
+        });
+    }
+
+    function etiologyStateForNorm(present, normalChildElements) {
+        // this needs to run after the etiologyState when normal
+
+        var disabled = !present;
+
+        $.each(normalChildElements, function (index, value) {
+            $('input[name="' + value + '"]').prop("disabled", disabled);
+
+            if (!present) {
+                console.log("unchecking " + value); // TODO remove debu
                 $('input[name="' + value + '"]').prop('checked', false); // only unselect on not checked
             }
         });
@@ -181,6 +196,13 @@ $(document).ready(function () {
             
             etiologyState(present, childElements);
 
+            if (hasNormalCognition === "true") {
+                var normalChildElements = $(this).data("normal");
+                if (normalChildElements) {
+                    etiologyStateForNorm(present, normalChildElements);
+                }
+            }
+
         });
 
     }
@@ -277,9 +299,14 @@ $(document).ready(function () {
 
         // only toggle if cognition is not marked as normal
         var hasNormalCognition = $("input[name=HasNormalCognition]:checked");
-        if (typeof hasNormalCognition !== "undefined" && hasNormalCognition.val() != 'true')
-        {
+        if (typeof hasNormalCognition !== "undefined" && hasNormalCognition.val() != 'true') {
             etiologyState(present, childElements);
+        }
+        else {
+            var normalChildElements = $(this).data("normal");
+            // TODO remove debug
+            console.log(normalChildElements);
+            etiologyStateForNorm(present, normalChildElements);
         }
 
     });

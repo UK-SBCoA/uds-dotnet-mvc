@@ -637,10 +637,10 @@ namespace UDS.Net.Data.Entities
         public int? FTLDNOSDiagnosis { get; set; }
 
         [Display(Name = "If FTLD (Questions 14a – 14d) is Present, specify FTLD subtype")]
-        [RequiredIf(nameof(ProgressiveSupranuclearPaslyPresent), "1", ErrorMessage = "Please indicate FTLD subtype")]
-        [RequiredIf(nameof(CorticobasalDegenerationPresent), "1", ErrorMessage = "Please indicate FTLD subtype")]
-        [RequiredIf(nameof(FTLDWithMotorNeuronDiseasePresent), "1", ErrorMessage = "Please indicate FTLD subtype")]
-        [RequiredIf(nameof(FTLDNOSPresent), "1", ErrorMessage = "Please indicate FTLD subtype")]
+        [RequiredIf(nameof(ProgressiveSupranuclearPaslyPresent), true, ErrorMessage = "Please indicate FTLD subtype")]
+        [RequiredIf(nameof(CorticobasalDegenerationPresent), true, ErrorMessage = "Please indicate FTLD subtype")]
+        [RequiredIf(nameof(FTLDWithMotorNeuronDiseasePresent), true, ErrorMessage = "Please indicate FTLD subtype")]
+        [RequiredIf(nameof(FTLDNOSPresent), true, ErrorMessage = "Please indicate FTLD subtype")]
         [Column("FTLDSUBT")]
         public int? FTLDSubtype { get; set; }
 
@@ -658,7 +658,7 @@ namespace UDS.Net.Data.Entities
         [Column("CVDIF")]
         public int? VascularBrainInjuryDiagnosis { get; set; }
 
-        [RequiredIf(nameof(VascularBrainInjuryPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(VascularBrainInjuryPresent), true, ErrorMessage = "Please indicate")]
         [Display(Name = "Previous symptomatic stroke?")]
         [Column("PREVSTK")]
         public bool? PreviousSymptomaticStroke { get; set; }
@@ -673,12 +673,12 @@ namespace UDS.Net.Data.Entities
         [Column("STKIMAG")]
         public int? ConfirmationOfStrokeByNeuroImaging { get; set; }
 
-        [RequiredIf(nameof(VascularBrainInjuryPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(VascularBrainInjuryPresent), true, ErrorMessage = "Please indicate")]
         [Display(Name = "Is there imaging evidence of cystic infarction in cognitive network(s)?")]
         [Column("INFNETW")]
         public int? ImagingEvidenceOfCysticInfarctionInCognitiveNetwork { get; set; }
 
-        [RequiredIf(nameof(VascularBrainInjuryPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(VascularBrainInjuryPresent), true, ErrorMessage = "Please indicate")]
         [Display(Name = "Is there imaging evidence of cystic infarction, imaging evidence of extensive white matter hyperintensity (CHS grade 7–8+), and impairment in executive function?")]
         [Column("INFWMH")]
         public int? ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment { get; set; }
@@ -723,7 +723,7 @@ namespace UDS.Net.Data.Entities
         [Column("BRNINJIF")]
         public int? TraumaticBrainInjuryDiagnosis { get; set; }
 
-        [RequiredIf(nameof(TraumaticBrainInjuryPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(TraumaticBrainInjuryPresent), true, ErrorMessage = "Please indicate")]
         [Display(Name = "If Present, does the subject have symptoms consistent with chronic traumatic encephalopathy?")]
         [Column("BRNINCTE")]
         public int? ChronicTraumaticEncephalopathySymptom { get; set; }
@@ -752,7 +752,7 @@ namespace UDS.Net.Data.Entities
         [Column("NEOPIF")]
         public int? CNSNeoplasmDiagnosis { get; set; }
 
-        [RequiredIf(nameof(CNSNeoplasmPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(CNSNeoplasmPresent), true, ErrorMessage = "Please indicate")]
         [Column("NEOPSTAT")]
         public int? CNSNeoplasmType { get; set; }
 
@@ -776,7 +776,7 @@ namespace UDS.Net.Data.Entities
         /// Any text or numbers with the exception of single quotes (‘), double quotes (“), ampersands (&), and percentage signs(%).
         /// </summary>
         [Display(Name = "If Present, specify")]
-        [RequiredIf(nameof(OtherCognitiveImpairmentPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(OtherCognitiveImpairmentPresent), true, ErrorMessage = "Please indicate")]
         [Column("OTHCOGX")]
         [MaxLength(60)]
         public string OtherCognitiveImpairmentSpecified { get; set; }
@@ -797,7 +797,7 @@ namespace UDS.Net.Data.Entities
         /// 0 Untreated
         /// 1 Treated with medication and/or counseling
         /// </summary>
-        [RequiredIf(nameof(ActiveDepressionPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(ActiveDepressionPresent), true, ErrorMessage = "Please indicate")]
         [Display(Name = "If Present, select one")]
         [Column("DEPTREAT")]
         public bool? ActiveDepressionTreatment { get; set; }
@@ -850,7 +850,7 @@ namespace UDS.Net.Data.Entities
         [Column("OTHPSYIF")]
         public int? OtherPsychiatricDiseaseDiagnosis { get; set; }
 
-        [RequiredIf(nameof(OtherPsychiatricDiseasePresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(OtherPsychiatricDiseasePresent), true, ErrorMessage = "Please indicate")]
         [Display(Name = "If Present, specify")]
         [Column("OTHPSYX")]
         [MaxLength(60)]
@@ -864,7 +864,7 @@ namespace UDS.Net.Data.Entities
         [Column("ALCDEMIF")]
         public int? AlcoholAbuseDiagnosis { get; set; }
 
-        [RequiredIf(nameof(AlcoholAbuse), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(AlcoholAbuse), true, ErrorMessage = "Please indicate")]
         [Column("ALCABUSE")]
         public int? CurrentAlcoholAbuse { get; set; }
 
@@ -900,7 +900,7 @@ namespace UDS.Net.Data.Entities
         [Column("COGOTHIF")]
         public int? NOS1Diagnosis { get; set; }
 
-        [RequiredIf(nameof(NOS1), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(NOS1), true, ErrorMessage = "Please indicate")]
         [Display(Name = "If Present, specify")]
         [Column("COGOTHX")]
         [MaxLength(60)]
@@ -914,7 +914,7 @@ namespace UDS.Net.Data.Entities
         [Column("COGOTH2F")]
         public int? NOS2Diagnosis { get; set; }
 
-        [RequiredIf(nameof(NOS2), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(NOS2), true, ErrorMessage = "Please indicate")]
         [Display(Name = "If Present, specify")]
         [Column("COGOTH2X")]
         [MaxLength(60)]
@@ -928,7 +928,7 @@ namespace UDS.Net.Data.Entities
         [Column("COGOTH3F")]
         public int? NOS3Diagnosis { get; set; }
 
-        [RequiredIf(nameof(NOS3), "1", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(NOS3), true, ErrorMessage = "Please indicate")]
         [Display(Name = "If Present, specify")]
         [Column("COGOTH3X")]
         [MaxLength(60)]
