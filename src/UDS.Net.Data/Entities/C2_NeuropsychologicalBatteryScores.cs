@@ -431,31 +431,31 @@ namespace UDS.Net.Data.Entities
     [Display(Name = "Number of correct L-words repeated in 1 minute")]
     [Range(0, 15, ErrorMessage = "Value outside of required range")]
     [Column("UDSVERLR")]
-    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedFWords), 0, 40, ErrorMessage = "Value Required")]
+    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedLWords), 0, 40, ErrorMessage = "Value Required")]
     public int? VerbalFluencyPhonemicTestRepeatedLWords { get; set; }
 
-    [Display(Name = "Number of non-Lwords and rule violation errors in 1 minute")]
+    [Display(Name = "Number of non-L-words and rule violation errors in 1 minute")]
     [Range(0, 15, ErrorMessage = "Value outside of required range")]
     [Column("UDSVERLN")]
-    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedFWords), 0, 40, ErrorMessage = "Value Required")]
+    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedLWords), 0, 40, ErrorMessage = "Value Required")]
     public int? VerbalFluencyPhonemicTestLWordErrors { get; set; }
 
     [Display(Name = "Total number of correct F-words and L-words")]
     [Range(0, 80, ErrorMessage = "Value outside of required range")]
     [Column("UDSVERTN")]
-    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedFWords), 0, 40, ErrorMessage = "Value Required")]
+    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedLWords), 0, 40, ErrorMessage = "Value Required")]
     public int? VerbalFluencyPhonemicTestTotalCorrectFAndLWords { get; set; }
 
     [Display(Name = " Total number of F-word and L-words repetition errors")]
     [Range(0, 30, ErrorMessage = "Value outside of required range")]
     [Column("UDSVERTE")]
-    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedFWords), 0, 40, ErrorMessage = "Value Required")]
+    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedLWords), 0, 40, ErrorMessage = "Value Required")]
     public int? VerbalFluencyPhonemicTestTotalFAndLRepetitionErrors { get; set; }
 
     [Display(Name = "Number of non-F/L-words and rule violation errors")]
     [Range(0, 30, ErrorMessage = "Value outside of required range")]
     [Column("UDSVERTI")]
-    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedFWords), 0, 40, ErrorMessage = "Value Required")]
+    [RequiredIfRange(nameof(VerbalFluencyPhonemicTestGeneratedLWords), 0, 40, ErrorMessage = "Value Required")]
     public int? VerbalFluencyPhonemicTestTotalFAndLViolationErrors { get; set; }
 
     [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the subjects cognitive status is deemed")]
