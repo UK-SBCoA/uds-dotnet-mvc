@@ -10,7 +10,7 @@ $(document).ready(function () {
 
         $.each(childElements, function (index, value) {
             $('input[name="' + value + '"]').prop("disabled", disabled);
-            console.log(value + " disabled to " + disabled);
+
             if (!isChecked) {
                 $('input[name="' + value + '"]').prop('checked', false); // only unselect on not checked
             }
@@ -19,40 +19,30 @@ $(document).ready(function () {
 
     // Section 3: Etiologic diagnoses
 
-    function etiologyState(present, childElements) {
-        // indicate all present
+    function etiologyState(isNormal, etiologyPresent, childElements, diagnosisRadioButtons) {
+
+        console.log("normal cog = " + isNormal + ", etiology present " + etiologyPresent);
+        // if present, enable child elements
+        // if present and impaired, enable diagnosis radio buttons
+        // UDS spec:
         // for subjects with normal cognition, indicate presence, but leave diagnosis blank
         // for subjects with impaired cognition, only indicate one primary
+        
+        var diagnosisEnabled = etiologyPresent;
 
-        var disabled = !present; // toggle
-        var uncheck = false;
-
-        if ($("input[name=HasNormalCognition]:checked").val() === "true") {
-            disabled = true;
-            uncheck = true;
+        if (isNormal === 'true') {
+            diagnosisEnabled = false; // if is normal then diagnosis is always disabled
         }
 
         $.each(childElements, function (index, value) {
-            $('input[name="' + value + '"]').prop("disabled", disabled);
-
-            if (!present || uncheck) {
-                console.log("unchecking " + value); // TODO remove debug
-                $('input[name="' + value + '"]').prop('checked', false); // only unselect on not checked
-            }
+            $('input[name="' + value + '"]').prop("disabled", !etiologyPresent);
         });
-    }
 
-    function etiologyStateForNorm(present, normalChildElements) {
-        // this needs to run after the etiologyState when normal
-
-        var disabled = !present;
-
-        $.each(normalChildElements, function (index, value) {
-            $('input[name="' + value + '"]').prop("disabled", disabled);
-
-            if (!present) {
-                console.log("unchecking " + value); // TODO remove debu
-                $('input[name="' + value + '"]').prop('checked', false); // only unselect on not checked
+        $.each(diagnosisRadioButtons, function (index, value) {
+            console.log("changing disabled state " + value + " to " + !diagnosisEnabled);
+            $('input[name="' + value + '"]').prop("disabled", !diagnosisEnabled);
+            if (!etiologyPresent) {
+                $('input[name="' + value + '"]').prop('checked', false);
             }
         });
     }
@@ -163,7 +153,6 @@ $(document).ready(function () {
     // if false then impaired
 
     function hasNormalCognitionState(hasNormalCognition) {
-        
         var disabled = true;
         if (hasNormalCognition === "false") {
             disabled = false; // if false then enable #3
@@ -179,6 +168,7 @@ $(document).ready(function () {
             hasDementiaState(null);
         } else if (hasNormalCognition === "false") {
             // Question 3 Dementia State, children: #4 and #5
+
             var meetsCriteriaForDementia = $("input[name=MeetsCriteriaForDementia]:checked");
             if (typeof meetsCriteriaForDementia !== "undefined") {
                 hasDementiaState(meetsCriteriaForDementia.val());
@@ -189,21 +179,19 @@ $(document).ready(function () {
 
         // Section 3 diagnoses requirement is affected by hasNormalCognition
 
-        $(".etiology").each(function () {
-            var etiology = $(this).prop("name");
-            var present = $(this).is(":checked");
-            var childElements = $(this).data("children");
-            
-            etiologyState(present, childElements);
+        if (hasNormalCognition != null) {
+            console.log("------------------------------------------- has normal cognition = " + hasNormalCognition);
 
-            if (hasNormalCognition === "true") {
-                var normalChildElements = $(this).data("normal");
-                if (normalChildElements) {
-                    etiologyStateForNorm(present, normalChildElements);
-                }
-            }
+            $(".etiology").each(function () {
+                var etiology = $(this).prop("name");
+                var present = $(this).is(":checked");
+                var childElements = $(this).data("children");
+                var diagnosisRadioButtons = $(this).data("diagnosis");
 
-        });
+                etiologyState(hasNormalCognition, present, childElements, diagnosisRadioButtons);
+
+            });
+        }
 
     }
 
@@ -296,17 +284,12 @@ $(document).ready(function () {
         var etiology = $(this).prop("name");
         var present = $(this).is(":checked");
         var childElements = $(this).data("children");
+        var diagnosisRadioButtons = $(this).data("diagnosis");
 
-        // only toggle if cognition is not marked as normal
-        var hasNormalCognition = $("input[name=HasNormalCognition]:checked");
-        if (typeof hasNormalCognition !== "undefined" && hasNormalCognition.val() != 'true') {
-            etiologyState(present, childElements);
-        }
-        else {
-            var normalChildElements = $(this).data("normal");
-            // TODO remove debug
-            console.log(normalChildElements);
-            etiologyStateForNorm(present, normalChildElements);
+        var cognitionStateDefined = $('input[name="HasNormalCognition"]:checked');
+        if (cognitionStateDefined !== 'undefined') {
+
+            etiologyState(cognitionStateDefined.val(), present, childElements, diagnosisRadioButtons);
         }
 
     });
