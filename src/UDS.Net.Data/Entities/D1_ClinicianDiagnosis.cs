@@ -340,11 +340,12 @@ namespace UDS.Net.Data.Entities
         /// 0 = No
         /// 1 = Yes
         /// </summary>
+        [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Please indicate biomarker findings.")]
         [Display(Name = "Other (SPECIFY)")]
         [Column("OTHBIOM")]
         public bool? OtherEvidenceExists { get; set; }
 
-        [RequiredIf(nameof(OtherEvidenceExists), "1", ErrorMessage = "Please specify other biomarker findings.")]
+        [RequiredIf(nameof(OtherEvidenceExists), true, ErrorMessage = "Please specify other biomarker findings.")]
         [Display(Name = "Other (SPECIFY)")]
         [Column("OTHBIOMX")]
         [MaxLength(60)]
