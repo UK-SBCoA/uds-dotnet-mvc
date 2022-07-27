@@ -207,13 +207,6 @@ namespace UDS.Net.Web.Controllers
                             {
                                 ModelState.AddModelError(String.Format("Relatives[{0}].AgeAtDeath", relativeIndex), "Please provide an age at death or indicate otherwise");
                             }
-                            if(relative.BirthMonth.HasValue || relative.BirthYear.HasValue || relative.AgeAtDeath.HasValue)
-                            {
-                                if(!relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
-                                {
-                                    ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryNeurologicalProblemPsychiatricCondition", relativeIndex), "Please provide a value for Primary neurological problem/psychiatric condition");
-                                }
-                            }
                             if (relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
                             {
                                 var codeExists = _neurologicalProblems.Codes.Where(x => int.Parse(x.Key) == relative.PrimaryNeurologicalProblemPsychiatricCondition).Any();
