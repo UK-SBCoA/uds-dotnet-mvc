@@ -30,6 +30,9 @@ namespace UDS.Net.Data.Entities
         [Display(Name = "1e. If the subject quit smoking, specify the age at which he/she last smoked (i.e., quit)   (888=N/A, 999=unknown)", GroupName = "Cigarette Smoking")]
         [Column("QUITSMOK")]
         [RequiredIf(nameof(Tobac100), "1", ErrorMessage = "A value is required for this question")]
+        [Range(8,999, ErrorMessage = "Please indicate a valid age between 8 and 110 at which the participant quit smoking")]
+        [InvalidRange(nameof(QuitSmoking), 110, 887, ErrorMessage = "Please indicate a valid age between 8 and 110 at which the participant quit smoking")]
+        [InvalidRange(nameof(QuitSmoking), 889, 998, ErrorMessage = "Please indicate a valid age between 8 and 110 at which the participant quit smoking")]
         public int? QuitSmoking { get; set; }
         [Display(Name = "1f. In the past three months, has the subject consumed any alcohol? (If No or Unknown, SKIP TO QUESTION 2a)", GroupName = "Alcohol Use")]
         [Column("ALCOCCAS")]
@@ -37,7 +40,7 @@ namespace UDS.Net.Data.Entities
         public int? AlcoholConsumption { get; set; }
         [Display(Name = "1g. During the past three months, how often did the subject have at least one drink of any alcoholic beverage such as wine, beer, malt liquor, or spirits?", GroupName = "Alcohol Use")]
         [Column("ALCFREQ")]
-        [RequiredIf(nameof(AlcoholConsumption), "1", ErrorMessage = "Please indicate the frequency of alchohol consuption over the last 3 months")]
+        [RequiredIf(nameof(AlcoholConsumption), "1", ErrorMessage = "Please indicate the frequency of alcohol consumption over the last 3 months")]
         public int? AlcoholFrequency { get; set; }
         [Display(Name = "2a.  Heart attack / cardiac arrest (If absent or unknown, SKIP TO QUESTION 2b)", GroupName = "Cardiovascular disease")]
         [Column("CVHATT")]
@@ -251,11 +254,11 @@ namespace UDS.Net.Data.Entities
         [RequiredIf(nameof(OtherSleepDisorder), "2", ErrorMessage = "A value is required for this question")]
         [StringLength(60)]
         public string OtherSleepDisorderSpecify { get; set; }
-        [Display(Name = "6a. Alcohol abuse: Clinically significant impairment occuring over a 12-month period manifested in one of the following areas: work, driving, legal, or social", GroupName = "Medical conditions")]
+        [Display(Name = "6a. Alcohol abuse: Clinically significant impairment occurring over a 12-month period manifested in one of the following areas: work, driving, legal, or social", GroupName = "Medical conditions")]
         [Column("ALCOHOL")]
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, "A value is required for this field")]
         public int? AlcoholAbuse { get; set; }
-        [Display(Name = "6b. Other abused substances: clinically significant impairment occuring over a 12-month period manifested in one of the following areas: work, driving, legal, or social. (If absent or unknown, SKIP TO QUESTION 7a)", GroupName = "Medical conditions")]
+        [Display(Name = "6b. Other abused substances: clinically significant impairment occurring over a 12-month period manifested in one of the following areas: work, driving, legal, or social. (If absent or unknown, SKIP TO QUESTION 7a)", GroupName = "Medical conditions")]
         [Column("ABUSOTHR")]
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, "A value is required for this field")]
         public int? AbuseOther { get; set; }
