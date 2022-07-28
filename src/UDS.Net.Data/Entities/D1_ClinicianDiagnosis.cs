@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using COA.Components.Web.DataAnnotations;
+using UDS.Net.Data.DataAnnotations;
 using UDS.Net.Data.Enums;
 
 namespace UDS.Net.Data.Entities
@@ -277,7 +277,8 @@ namespace UDS.Net.Data.Entities
                 if (AmnesticMCISingleDomainPresent || AmnesticMCIMultipleDomains || NonAmnesticMCISingleDomain || NonAmnesticMCIMultipleDomains || CognitivelyImpairedNotMCIPresent)
                 {
                     return true;
-                } else return null;
+                }
+                else return null;
             }
         }
 
@@ -289,7 +290,7 @@ namespace UDS.Net.Data.Entities
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Please indicate biomarker findings.")]
         [Display(Name = "Abnormally elevated amyloid on PET")]
         [Column("AMYLPET")]
-        public int? AbnormallyElevatedAmyloidInPET{ get; set; }
+        public int? AbnormallyElevatedAmyloidInPET { get; set; }
 
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Please indicate biomarker findings.")]
         [Display(Name = "Abnormally low amyloid in CSF")]
@@ -358,7 +359,7 @@ namespace UDS.Net.Data.Entities
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Please indicate imaging findings.")]
         [Display(Name = "Large vessel infarct(s)")]
         [Column("IMAGLINF")]
-        public int? LargeVesselInfarcts{ get; set; }
+        public int? LargeVesselInfarcts { get; set; }
 
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Please indicate imaging findings.")]
         [Display(Name = "Lacunar infarct(s)")]
@@ -418,11 +419,12 @@ namespace UDS.Net.Data.Entities
         /// </summary>
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "In Section 3, ONE diagnosis should be indicated as primary.")]
         [NotMapped]
-        public bool? OnlyOnePrimaryDiagnosisAllowed {
+        public bool? OnlyOnePrimaryDiagnosisAllowed
+        {
             get
             {
                 int counter = 0;
-                
+
                 if (AlzheimersDiseaseDiagnosis.HasValue && AlzheimersDiseaseDiagnosis.Value == 1)
                 {
                     counter++;
@@ -551,7 +553,7 @@ namespace UDS.Net.Data.Entities
                 {
                     counter++;
                 }
-                
+
                 if (counter == 1)
                 {
                     return true;
@@ -579,7 +581,7 @@ namespace UDS.Net.Data.Entities
         /// 2 = Contributing
         /// 3 = Non-contributing
         /// </summary>
-        [RequiredIfImpaired(nameof(AlzheimersDiseasePresent), true, ErrorMessage = "Please indicate diagnosis. Only one should be selected as 1=Primary.")]
+        [RequiredIfImpaired(nameof(AlzheimersDiseasePresent), true, ErrorMessage = "Indicate diagnosis for Alzheimer's disease.")]
         [Column("ALZDISIF")]
         public int? AlzheimersDiseaseDiagnosis { get; set; }
 
@@ -589,7 +591,7 @@ namespace UDS.Net.Data.Entities
         [Column("LBDIS")]
         public bool LewyBodyDiseasePresent { get; set; }
 
-        [RequiredIfImpaired(nameof(LewyBodyDiseasePresent), true, ErrorMessage = "Please indicate diagnosis. Only one should be selected as 1=Primary.")]
+        [RequiredIfImpaired(nameof(LewyBodyDiseasePresent), true, ErrorMessage = "Indicate diagnosis for Lewy body disease.")]
         [Column("LBDIF")]
         public int? LewyBodyDiseaseDiagnosis { get; set; }
 
@@ -601,7 +603,7 @@ namespace UDS.Net.Data.Entities
         [Column("MSA")]
         public bool MultipleSystemAtrophyPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(MultipleSystemAtrophyPresent), true, ErrorMessage = "Please indicate diagnosis. Only one should be selected as 1=Primary.")]
+        [RequiredIfImpaired(nameof(MultipleSystemAtrophyPresent), true, ErrorMessage = "Indicate diagnosis for Multiple system atrophy.")]
         [Column("MSAIF")]
         public int? MultipleSystemAtrophyDiagnosis { get; set; }
 
@@ -609,7 +611,7 @@ namespace UDS.Net.Data.Entities
         [Column("PSP")]
         public bool ProgressiveSupranuclearPaslyPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(ProgressiveSupranuclearPaslyPresent), true, ErrorMessage = "Please indicate diagnosis. Only one should be selected as 1=Primary.")]
+        [RequiredIfImpaired(nameof(ProgressiveSupranuclearPaslyPresent), true, ErrorMessage = "Indicate diagnosis for Progressive supranuclear palsy (PSP).")]
         [Column("PSPIF")]
         public int? ProgressiveSupranuclearPaslyDiagnosis { get; set; }
 
@@ -617,7 +619,7 @@ namespace UDS.Net.Data.Entities
         [Column("CORT")]
         public bool CorticobasalDegenerationPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(CorticobasalDegenerationPresent), true, ErrorMessage = "Please indicate diagnosis. Only one should be selected as 1=Primary.")]
+        [RequiredIfImpaired(nameof(CorticobasalDegenerationPresent), true, ErrorMessage = "Indicate diagnosis for Corticobasal degeneration (CBD).")]
         [Column("CORTIF")]
         public int? CorticobasalDegenerationDiagnosis { get; set; }
 
@@ -625,7 +627,7 @@ namespace UDS.Net.Data.Entities
         [Column("FTLDMO")]
         public bool FTLDWithMotorNeuronDiseasePresent { get; set; }
 
-        [RequiredIfImpaired(nameof(FTLDWithMotorNeuronDiseasePresent), true, ErrorMessage = "Please indicate diagnosis. Only one should be selected as 1=Primary.")]
+        [RequiredIfImpaired(nameof(FTLDWithMotorNeuronDiseasePresent), true, ErrorMessage = "Indicate diagnosis for FTLD with motor neuron disease.")]
         [Column("FTLDMOIF")]
         public int? FTLDWithMotorNeuronDiseaseDiagnosis { get; set; }
 
@@ -633,7 +635,7 @@ namespace UDS.Net.Data.Entities
         [Column("FTLDNOS")]
         public bool FTLDNOSPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(FTLDNOSPresent), true, ErrorMessage = "Please indicate diagnosis. Only one should be selected as 1=Primary.")]
+        [RequiredIfImpaired(nameof(FTLDNOSPresent), true, ErrorMessage = "Indicate diagnosis for FTLD NOS.")]
         [Column("FTLDNOIF")]
         public int? FTLDNOSDiagnosis { get; set; }
 
@@ -655,7 +657,7 @@ namespace UDS.Net.Data.Entities
         [Column("CVD")]
         public bool VascularBrainInjuryPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(VascularBrainInjuryPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(VascularBrainInjuryPresent), true, ErrorMessage = "Indicate diagnosis for Vascular brain injury.")]
         [Column("CVDIF")]
         public int? VascularBrainInjuryDiagnosis { get; set; }
 
@@ -688,7 +690,7 @@ namespace UDS.Net.Data.Entities
         [Column("ESSTREM")]
         public bool EssentialTremorPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(EssentialTremorPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(EssentialTremorPresent), true, ErrorMessage = "Indicate diagnosis for Essential tremor.")]
         [Column("ESSTREIF")]
         public int? EssentialTremorDiagnosis { get; set; }
 
@@ -696,7 +698,7 @@ namespace UDS.Net.Data.Entities
         [Column("DOWNS")]
         public bool DownSyndromePresent { get; set; }
 
-        [RequiredIfImpaired(nameof(DownSyndromePresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(DownSyndromePresent), true, ErrorMessage = "Indicate diagnosis for Down syndrome.")]
         [Column("DOWNSIF")]
         public int? DownSyndromeDiagnosis { get; set; }
 
@@ -704,7 +706,7 @@ namespace UDS.Net.Data.Entities
         [Column("HUNT")]
         public bool HuntingtonsDiseasePresent { get; set; }
 
-        [RequiredIfImpaired(nameof(HuntingtonsDiseasePresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(HuntingtonsDiseasePresent), true, ErrorMessage = "Indicate diagnosis for Huntington's disease.")]
         [Column("HUNTIF")]
         public int? HuntingtonsDiseaseDiagnosis { get; set; }
 
@@ -712,7 +714,7 @@ namespace UDS.Net.Data.Entities
         [Column("PRION")]
         public bool PrionDiseasePresent { get; set; }
 
-        [RequiredIfImpaired(nameof(PrionDiseasePresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(PrionDiseasePresent), true, ErrorMessage = "Indicate diagnosis for Prion disease (CJD, other).")]
         [Column("PRIONIF")]
         public int? PrionDiseaseDiagnosis { get; set; }
 
@@ -720,7 +722,7 @@ namespace UDS.Net.Data.Entities
         [Column("BRNINJ")]
         public bool TraumaticBrainInjuryPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(TraumaticBrainInjuryPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(TraumaticBrainInjuryPresent), true, ErrorMessage = "Indicate diagnosis for Traumatic brain injury.")]
         [Column("BRNINJIF")]
         public int? TraumaticBrainInjuryDiagnosis { get; set; }
 
@@ -733,7 +735,7 @@ namespace UDS.Net.Data.Entities
         [Column("HYCEPH")]
         public bool NormalPressureHydrocephalusPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(NormalPressureHydrocephalusPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(NormalPressureHydrocephalusPresent), true, ErrorMessage = "Indicate diagnosis for Normal-pressure hydrocephalus.")]
         [Column("HYCEPHIF")]
         public int? NormalPressureHydropcephalusDiagnosis { get; set; }
 
@@ -741,7 +743,7 @@ namespace UDS.Net.Data.Entities
         [Column("EPILEP")]
         public bool EpilepsyPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(EpilepsyPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(EpilepsyPresent), true, ErrorMessage = "Indicate diagnosis for Epilepsy.")]
         [Column("EPILEPIF")]
         public int? EpilepsyDiagnosis { get; set; }
 
@@ -749,7 +751,7 @@ namespace UDS.Net.Data.Entities
         [Column("NEOP")]
         public bool CNSNeoplasmPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(CNSNeoplasmPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(CNSNeoplasmPresent), true, ErrorMessage = "Indicate diagnosis for CNS neoplasm.")]
         [Column("NEOPIF")]
         public int? CNSNeoplasmDiagnosis { get; set; }
 
@@ -761,7 +763,7 @@ namespace UDS.Net.Data.Entities
         [Column("HIV")]
         public bool HumanImmunodeficiencyVirusPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(HumanImmunodeficiencyVirusPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(HumanImmunodeficiencyVirusPresent), true, ErrorMessage = "Indicate diagnosis for Human immunodeficiency virus (HIV).")]
         [Column("HIVIF")]
         public int? HumanImmunodeficiencyVirusDiagnosis { get; set; }
 
@@ -769,7 +771,7 @@ namespace UDS.Net.Data.Entities
         [Column("OTHCOG")]
         public bool OtherCognitiveImpairmentPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(OtherCognitiveImpairmentPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(OtherCognitiveImpairmentPresent), true, ErrorMessage = "Indicate diagnosis for Other cognitive impairment.")]
         [Column("OTHCOGIF")]
         public int? OtherCognitiveImpairmentDiagnosis { get; set; }
 
@@ -790,7 +792,7 @@ namespace UDS.Net.Data.Entities
         [Column("DEP")]
         public bool ActiveDepressionPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(ActiveDepressionPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(ActiveDepressionPresent), true, ErrorMessage = "Indicate diagnosis for Active depression.")]
         [Column("DEPIF")]
         public int? ActiveDepressionDiagnosis { get; set; }
 
@@ -807,7 +809,7 @@ namespace UDS.Net.Data.Entities
         [Column("BIPOLDX")]
         public bool BipolarDisorderPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(BipolarDisorderPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(BipolarDisorderPresent), true, ErrorMessage = "Indicate diagnosis for Bipolar disorder.")]
         [Column("BIPOLDIF")]
         public int? BipolarDisorderDiagnosis { get; set; }
 
@@ -815,7 +817,7 @@ namespace UDS.Net.Data.Entities
         [Column("SCHIZOP")]
         public bool SchizophreniaPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(SchizophreniaPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(SchizophreniaPresent), true, ErrorMessage = "Indicate diagnosis for Schizophrenia or other psychosis.")]
         [Column("SCHIZOIF")]
         public int? SchizophreniaDiagnosis { get; set; }
 
@@ -823,7 +825,7 @@ namespace UDS.Net.Data.Entities
         [Column("ANXIET")]
         public bool AnxietyDisorderPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(AnxietyDisorderPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(AnxietyDisorderPresent), true, ErrorMessage = "Indicate diagnosis for Anxiety disorder.")]
         [Column("ANXIETIF")]
         public int? AnxietyDiagnosis { get; set; }
 
@@ -831,7 +833,7 @@ namespace UDS.Net.Data.Entities
         [Column("DELIR")]
         public bool DeliriumPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(DeliriumPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(DeliriumPresent), true, ErrorMessage = "Indicate diagnosis for Delirium.")]
         [Column("DELIRIF")]
         public int? DeliriumDiagnosis { get; set; }
 
@@ -839,7 +841,7 @@ namespace UDS.Net.Data.Entities
         [Column("PTSDDX")]
         public bool PostTraumaticStressDisorderPresent { get; set; }
 
-        [RequiredIfImpaired(nameof(PostTraumaticStressDisorderPresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(PostTraumaticStressDisorderPresent), true, ErrorMessage = "Indicate diagnosis for Post-traumatic stress disorder (PTSD).")]
         [Column("PTSDDXIF")]
         public int? PostTraumaticStressDisorderDiagnosis { get; set; }
 
@@ -847,7 +849,7 @@ namespace UDS.Net.Data.Entities
         [Column("OTHPSY")]
         public bool OtherPsychiatricDiseasePresent { get; set; }
 
-        [RequiredIfImpaired(nameof(OtherPsychiatricDiseasePresent), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(OtherPsychiatricDiseasePresent), true, ErrorMessage = "Indicate diagnosis for Other psychiatric disease.")]
         [Column("OTHPSYIF")]
         public int? OtherPsychiatricDiseaseDiagnosis { get; set; }
 
@@ -861,10 +863,11 @@ namespace UDS.Net.Data.Entities
         [Column("ALCDEM")]
         public bool AlcoholAbuse { get; set; }
 
-        [RequiredIfImpaired(nameof(AlcoholAbuse), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(AlcoholAbuse), true, ErrorMessage = "Indicate diagnosis for Cognitive impairment due to alcohol abuse.")]
         [Column("ALCDEMIF")]
         public int? AlcoholAbuseDiagnosis { get; set; }
 
+        [Display(Name = "Current alcohol abuse")]
         [RequiredIf(nameof(AlcoholAbuse), true, ErrorMessage = "Please indicate")]
         [Column("ALCABUSE")]
         public int? CurrentAlcoholAbuse { get; set; }
@@ -873,7 +876,7 @@ namespace UDS.Net.Data.Entities
         [Column("IMPSUB")]
         public bool SubstanceAbuse { get; set; }
 
-        [RequiredIfImpaired(nameof(SubstanceAbuse), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(SubstanceAbuse), true, ErrorMessage = "Indicate diagnosis for Cognitive impairment due to other substance abuse.")]
         [Column("IMPSUBIF")]
         public int? SubstanceAbuseDiagnosis { get; set; }
 
@@ -881,7 +884,7 @@ namespace UDS.Net.Data.Entities
         [Column("DYSILL")]
         public bool SystemicDisease { get; set; }
 
-        [RequiredIfImpaired(nameof(SystemicDisease), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(SystemicDisease), true, ErrorMessage = "Indicate diagnosis for Cognitive impairment due to systemic disease/medical illness (as indicated on Form D2).")]
         [Column("DYSILLIF")]
         public int? SystemicDiseaseDiagnosis { get; set; }
 
@@ -889,7 +892,7 @@ namespace UDS.Net.Data.Entities
         [Column("MEDS")]
         public bool Medications { get; set; }
 
-        [RequiredIfImpaired(nameof(Medications), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(Medications), true, ErrorMessage = "Indicate diagnosis for Cognitive impairment due to medications.")]
         [Column("MEDSIF")]
         public int? MedicationsDiagnosis { get; set; }
 
@@ -897,7 +900,7 @@ namespace UDS.Net.Data.Entities
         [Column("COGOTH")]
         public bool NOS1 { get; set; }
 
-        [RequiredIfImpaired(nameof(NOS1), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(NOS1), true, ErrorMessage = "Indicate diagnosis for Cognitive impairment NOS.")]
         [Column("COGOTHIF")]
         public int? NOS1Diagnosis { get; set; }
 
@@ -911,7 +914,7 @@ namespace UDS.Net.Data.Entities
         [Column("COGOTH2")]
         public bool NOS2 { get; set; }
 
-        [RequiredIfImpaired(nameof(NOS2), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(NOS2), true, ErrorMessage = "Indicate diagnosis for Cognitive impairment NOS.")]
         [Column("COGOTH2F")]
         public int? NOS2Diagnosis { get; set; }
 
@@ -925,7 +928,7 @@ namespace UDS.Net.Data.Entities
         [Column("COGOTH3")]
         public bool NOS3 { get; set; }
 
-        [RequiredIfImpaired(nameof(NOS3), "1", ErrorMessage = "Please indicate")]
+        [RequiredIfImpaired(nameof(NOS3), true, ErrorMessage = "Indicate diagnosis for Cognitive impairment NOS.")]
         [Column("COGOTH3F")]
         public int? NOS3Diagnosis { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using COA.Components.Web.DataAnnotations;
+using UDS.Net.Data.DataAnnotations;
 
 namespace UDS.Net.Data.Entities
 {

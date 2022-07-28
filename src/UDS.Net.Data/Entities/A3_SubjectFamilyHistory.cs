@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using COA.Components.Web.DataAnnotations;
+using UDS.Net.Data.DataAnnotations;
 using UDS.Net.Data.Enums;
 
 namespace UDS.Net.Data.Entities
