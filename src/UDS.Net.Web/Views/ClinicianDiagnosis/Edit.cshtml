@@ -1131,7 +1131,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="AlzheimersDiseasePresent" data-children="[&#34;AlzheimersDiseaseDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="AlzheimersDiseasePresent" data-diagnosis="[&#34;AlzheimersDiseaseDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="AlzheimersDiseasePresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1164,7 +1164,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="LewyBodyDiseasePresent" data-children="[&#34;ParkinsonsDiseasePresent&#34;,&#34;LewyBodyDiseaseDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="LewyBodyDiseasePresent" data-children="[&#34;ParkinsonsDiseasePresent&#34;]" data-diagnosis="[&#34;LewyBodyDiseaseDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="LewyBodyDiseasePresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1184,7 +1184,7 @@
                 <td colspan="2">@Html.DisplayNameFor(model => model.MultipleSystemAtrophyPresent)</td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="MultipleSystemAtrophyPresent" data-children="[&#34;MultipleSystemAtrophyDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="MultipleSystemAtrophyPresent" data-diagnosis="[&#34;MultipleSystemAtrophyDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="MultipleSystemAtrophyPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1209,7 +1209,7 @@
                 <td>@Html.DisplayNameFor(model => model.ProgressiveSupranuclearPaslyPresent)</td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology frontotemporalLobarDegeneration" asp-for="ProgressiveSupranuclearPaslyPresent" data-children="[&#34;ProgressiveSupranuclearPaslyDiagnosis&#34;]" />
+                        <input class="form-check-input etiology frontotemporalLobarDegeneration" asp-for="ProgressiveSupranuclearPaslyPresent" data-diagnosis="[&#34;ProgressiveSupranuclearPaslyDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="ProgressiveSupranuclearPaslyPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1230,7 +1230,7 @@
                 <td>@Html.DisplayNameFor(model => model.CorticobasalDegenerationPresent)</td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology frontotemporalLobarDegeneration" asp-for="CorticobasalDegenerationPresent" data-children="[&#34;CorticobasalDegenerationDiagnosis&#34;]" />
+                        <input class="form-check-input etiology frontotemporalLobarDegeneration" asp-for="CorticobasalDegenerationPresent" data-diagnosis="[&#34;CorticobasalDegenerationDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="CorticobasalDegenerationPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1251,7 +1251,7 @@
                 <td>@Html.DisplayNameFor(model => model.FTLDWithMotorNeuronDiseasePresent)</td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology frontotemporalLobarDegeneration" asp-for="FTLDWithMotorNeuronDiseasePresent" data-children="[&#34;FTLDWithMotorNeuronDiseaseDiagnosis&#34;]" />
+                        <input class="form-check-input etiology frontotemporalLobarDegeneration" asp-for="FTLDWithMotorNeuronDiseasePresent" data-diagnosis="[&#34;FTLDWithMotorNeuronDiseaseDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="FTLDWithMotorNeuronDiseasePresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1272,7 +1272,7 @@
                 <td> @Html.DisplayNameFor(model => model.FTLDNOSPresent)</td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology frontotemporalLobarDegeneration" asp-for="FTLDNOSPresent" data-children="[&#34;FTLDNOSDiagnosis&#34;]" />
+                        <input class="form-check-input etiology frontotemporalLobarDegeneration" asp-for="FTLDNOSPresent" data-diagnosis="[&#34;FTLDNOSDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="FTLDNOSPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1334,7 +1334,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="VascularBrainInjuryPresent" data-children="[&#34;VascularBrainInjuryDiagnosis&#34;,&#34;PreviousSymptomaticStroke&#34;,&#34;ImagingEvidenceOfCysticInfarctionInCognitiveNetwork&#34;,&#34;ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment&#34;]" />
+                        <input class="form-check-input etiology" asp-for="VascularBrainInjuryPresent" data-children="[&#34;PreviousSymptomaticStroke&#34;,&#34;ImagingEvidenceOfCysticInfarctionInCognitiveNetwork&#34;,&#34;ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment&#34;]" data-diagnosis="[&#34;VascularBrainInjuryDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="VascularBrainInjuryPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1477,7 +1477,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="EssentialTremorPresent" data-children="[&#34;EssentialTremorDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="EssentialTremorPresent" data-diagnosis="[&#34;EssentialTremorDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="EssentialTremorPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1499,7 +1499,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="DownSyndromePresent" data-children="[&#34;DownSyndromeDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="DownSyndromePresent" data-diagnosis="[&#34;DownSyndromeDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="DownSyndromePresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1521,7 +1521,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="HuntingtonsDiseasePresent" data-children="[&#34;HuntingtonsDiseaseDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="HuntingtonsDiseasePresent" data-diagnosis="[&#34;HuntingtonsDiseaseDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="HuntingtonsDiseasePresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1543,7 +1543,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="PrionDiseasePresent" data-children="[&#34;PrionDiseaseDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="PrionDiseasePresent" data-diagnosis="[&#34;PrionDiseaseDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="PrionDiseasePresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1590,7 +1590,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="TraumaticBrainInjuryPresent" data-children="[&#34;ChronicTraumaticEncephalopathySymptom&#34;,&#34;TraumaticBrainInjuryDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="TraumaticBrainInjuryPresent" data-children="[&#34;ChronicTraumaticEncephalopathySymptom&#34;]" data-diagnosis="[&#34;TraumaticBrainInjuryDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="TraumaticBrainInjuryPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1612,7 +1612,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="NormalPressureHydrocephalusPresent" data-children="[&#34;NormalPressureHydropcephalusDiagnosis&#34;]"  />
+                        <input class="form-check-input etiology" asp-for="NormalPressureHydrocephalusPresent" data-diagnosis="[&#34;NormalPressureHydropcephalusDiagnosis&#34;]"  />
                         <label class="form-check-label" asp-for="NormalPressureHydrocephalusPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1634,7 +1634,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="EpilepsyPresent" data-children="[&#34;EpilepsyDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="EpilepsyPresent" data-diagnosis="[&#34;EpilepsyDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="EpilepsyPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1677,7 +1677,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="CNSNeoplasmPresent" data-children="[&#34;CNSNeoplasmDiagnosis&#34;,&#34;CNSNeoplasmType&#34;]" />
+                        <input class="form-check-input etiology" asp-for="CNSNeoplasmPresent" data-children="[&#34;CNSNeoplasmType&#34;]" data-diagnosis="[&#34;CNSNeoplasmDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="CNSNeoplasmPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1699,7 +1699,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="HumanImmunodeficiencyVirusPresent" data-children="[&#34;HumanImmunodeficiencyVirusDiagnosis&#34;]"  />
+                        <input class="form-check-input etiology" asp-for="HumanImmunodeficiencyVirusPresent" data-diagnosis="[&#34;HumanImmunodeficiencyVirusDiagnosis&#34;]"  />
                         <label class="form-check-label" asp-for="HumanImmunodeficiencyVirusPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1735,7 +1735,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="OtherCognitiveImpairmentPresent" data-children="[&#34;OtherCognitiveImpairmentDiagnosis&#34;,&#34;OtherCognitiveImpairmentSpecified&#34;]"  />
+                        <input class="form-check-input etiology" asp-for="OtherCognitiveImpairmentPresent" data-children="[&#34;OtherCognitiveImpairmentSpecified&#34;]" data-diagnosis="[&#34;OtherCognitiveImpairmentDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="OtherCognitiveImpairmentPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1776,11 +1776,10 @@
                             </div>
                         </div>
                     </div>
-
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="ActiveDepressionPresent" data-children="[&#34;ActiveDepressionTreatment&#34;,&#34;ActiveDepressionDiagnosis&#34;]"  />
+                        <input class="form-check-input etiology" asp-for="ActiveDepressionPresent" data-children="[&#34;ActiveDepressionTreatment&#34;]" data-diagnosis="[&#34;ActiveDepressionDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="ActiveDepressionPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1802,7 +1801,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="BipolarDisorderPresent" data-children="[&#34;BipolarDisorderDiagnosis&#34;]"  />
+                        <input class="form-check-input etiology" asp-for="BipolarDisorderPresent" data-diagnosis="[&#34;BipolarDisorderDiagnosis&#34;]"  />
                         <label class="form-check-label" asp-for="BipolarDisorderPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1824,7 +1823,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="SchizophreniaPresent" data-children="[&#34;SchizophreniaDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="SchizophreniaPresent" data-diagnosis="[&#34;SchizophreniaDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="SchizophreniaPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1846,7 +1845,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="AnxietyDisorderPresent" data-children="[&#34;AnxietyDiagnosis&#34;]"  />
+                        <input class="form-check-input etiology" asp-for="AnxietyDisorderPresent" data-diagnosis="[&#34;AnxietyDiagnosis&#34;]"  />
                         <label class="form-check-label" asp-for="AnxietyDisorderPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1868,7 +1867,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="DeliriumPresent" data-children="[&#34;DeliriumDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="DeliriumPresent" data-diagnosis="[&#34;DeliriumDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="DeliriumPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1890,7 +1889,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="PostTraumaticStressDisorderPresent" data-children="[&#34;PostTraumaticStressDisorderDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="PostTraumaticStressDisorderPresent" data-diagnosis="[&#34;PostTraumaticStressDisorderDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="PostTraumaticStressDisorderPresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1926,7 +1925,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="OtherPsychiatricDiseasePresent" data-children="[&#34;OtherPsychiatricDiseaseDiagnosis&#34;,&#34;OtherPsychiatricDiseaseSpecified&#34;]" />
+                        <input class="form-check-input etiology" asp-for="OtherPsychiatricDiseasePresent" data-children="[&#34;OtherPsychiatricDiseaseSpecified&#34;]" data-diagnosis="[&#34;OtherPsychiatricDiseaseDiagnosis&#34;]"  />
                         <label class="form-check-label" asp-for="OtherPsychiatricDiseasePresent"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1974,7 +1973,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="AlcoholAbuse" data-children="[&#34;CurrentAlcoholAbuse&#34;,&#34;AlcoholAbuseDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="AlcoholAbuse" data-children="[&#34;CurrentAlcoholAbuse&#34;]" data-diagnosis="[&#34;AlcoholAbuseDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="AlcoholAbuse"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -1996,7 +1995,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="SubstanceAbuse" data-children="[&#34;SubstanceAbuseDiagnosis&#34;]" />
+                        <input class="form-check-input etiology" asp-for="SubstanceAbuse" data-diagnosis="[&#34;SubstanceAbuseDiagnosis&#34;]" />
                         <label class="form-check-label" asp-for="SubstanceAbuse"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -2018,7 +2017,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="SystemicDisease" data-children="[&#34;SystemicDiseaseDiagnosis&#34;]"  />
+                        <input class="form-check-input etiology" asp-for="SystemicDisease" data-diagnosis="[&#34;SystemicDiseaseDiagnosis&#34;]"  />
                         <label class="form-check-label" asp-for="SystemicDisease"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -2040,7 +2039,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="Medications" data-children="[&#34;MedicationsDiagnosis&#34;]"  />
+                        <input class="form-check-input etiology" asp-for="Medications" data-diagnosis="[&#34;MedicationsDiagnosis&#34;]"  />
                         <label class="form-check-label" asp-for="Medications"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -2075,7 +2074,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="NOS1" data-children="[&#34;NOS1Diagnosis&#34;,&#34;NOS1Specified&#34;]" />
+                        <input class="form-check-input etiology" asp-for="NOS1" data-children="[&#34;NOS1Specified&#34;]" data-diagnosis="[&#34;NOS1Diagnosis&#34;]" />
                         <label class="form-check-label" asp-for="NOS1"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -2110,7 +2109,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="NOS2" data-children="[&#34;NOS2Diagnosis&#34;,&#34;NOS2Specified&#34;]"  />
+                        <input class="form-check-input etiology" asp-for="NOS2" data-children="[&#34;NOS2Specified&#34;]" data-diagnosis="[&#34;NOS2Diagnosis&#34;]"  />
                         <label class="form-check-label" asp-for="NOS2"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>
@@ -2132,7 +2131,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-5">
-                                38b. <label asp-for="NOS3Specified" class="control-label"></label>
+                                39b. <label asp-for="NOS3Specified" class="control-label"></label>
                             </div>
                             <div class="col-7">
                                 <input asp-for="NOS3Specified" class="form-control" />
@@ -2145,7 +2144,7 @@
                 </td>
                 <td align="center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input etiology" asp-for="NOS3" data-children="[&#34;NOS3Diagnosis&#34;,&#34;NOS3Specified&#34;]" />
+                        <input class="form-check-input etiology" asp-for="NOS3" data-children="[&#34;NOS3Specified&#34;]" data-diagnosis="[&#34;NOS3Diagnosis&#34;]" />
                         <label class="form-check-label" asp-for="NOS3"> <span class="badge badge-pill badge-light">1</span></label>
                     </div>
                 </td>

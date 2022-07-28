@@ -1,815 +1,1622 @@
-@model ClinicianDiagnosis
+﻿@model ClinicianDiagnosis
 
 @{
-    ViewData["Title"] = "Details";
+    var title = "D1 Clinician Diagnosis";
+    var visitInfo = "";
+    if (visitInfo == null)
+    {
+        visitInfo = " - " + Model.Visit.Participant.Id + " - Visit " + Model.Visit.VisitNumber;
+    }
+    ViewData["Title"] = title + visitInfo;
 }
 
-<h1>Details</h1>
+@await Component.InvokeAsync("VisitHeader", new { visitId = Model.Visit.Id, participationId =
+Model.Visit.Participant.Id, participantProfile = Model.Visit.Participant.Profile })
+@await Component.InvokeAsync("FormHeader", new { currentVisit = Model.Visit, currentForm = Model, formTitle = title })
 
-<div>
-    <h4>ClinicianDiagnosis</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiagnosisMethod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiagnosisMethod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HasNormalCognition)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HasNormalCognition)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MeetsCriteriaForDementia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MeetsCriteriaForDementia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AmnesticMultiDomainPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AmnesticMultiDomainPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PosteriorCorticalAtrophyPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PosteriorCorticalAtrophyPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrimaryProgressiveAphasiaPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrimaryProgressiveAphasiaPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrimaryProgressiveAphasiaType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrimaryProgressiveAphasiaType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BehavioralVariantFTDPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BehavioralVariantFTDPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LewyBodyPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LewyBodyPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMultiDomainPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMultiDomainPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AmnesticMCISingleDomainPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AmnesticMCISingleDomainPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomains)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AmnesticMCIMultipleDomains)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsLanguage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AmnesticMCIMultipleDomainsLanguage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsAttention)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AmnesticMCIMultipleDomainsAttention)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsExecutive)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AmnesticMCIMultipleDomainsExecutive)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsVisuospatial)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AmnesticMCIMultipleDomainsVisuospatial)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomain)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCISingleDomain)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainLanguage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCISingleDomainLanguage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainAttention)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCISingleDomainAttention)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainExecutive)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCISingleDomainExecutive)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainVisuospatial)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCISingleDomainVisuospatial)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomains)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCIMultipleDomains)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsLanguage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCIMultipleDomainsLanguage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsAttention)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCIMultipleDomainsAttention)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsExecutive)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCIMultipleDomainsExecutive)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsVisuospatial)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonAmnesticMCIMultipleDomainsVisuospatial)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CognitivelyImpairedNotMCIPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CognitivelyImpairedNotMCIPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AbnormallyElevatedAmyloidInPET)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AbnormallyElevatedAmyloidInPET)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AbnormallyLowAmyloidInCSF)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AbnormallyLowAmyloidInCSF)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FDGPETPattern)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FDGPETPattern)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HippocampalAtrophy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HippocampalAtrophy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TauPETEvidenceForAD)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TauPETEvidenceForAD)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AbnormallyElevatedCSFTauOrPtau)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AbnormallyElevatedCSFTauOrPtau)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TauPETEvidence)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TauPETEvidence)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StructuralMREvidence)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StructuralMREvidence)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DopamineTransporterScanEvidence)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DopamineTransporterScanEvidence)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherEvidenceExists)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherEvidenceExists)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherEvidenceSpecified)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherEvidenceSpecified)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LargeVesselInfarcts)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LargeVesselInfarcts)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LacunarInfarcts)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LacunarInfarcts)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Macrohemorrhages)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Macrohemorrhages)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Microhemorrhages)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Microhemorrhages)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModerateWhiteMatterHyperintensity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModerateWhiteMatterHyperintensity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExtensiveWhiteMatterHyperintensity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExtensiveWhiteMatterHyperintensity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DominantlyInheritedADMutation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DominantlyInheritedADMutation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HereditaryFTLDMutation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HereditaryFTLDMutation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HereditaryMutationOther)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HereditaryMutationOther)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HereditaryMutationOtherSpecified)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HereditaryMutationOtherSpecified)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlzheimersDiseasePresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlzheimersDiseasePresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlzheimersDiseaseDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlzheimersDiseaseDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LewyBodyDiseasePresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LewyBodyDiseasePresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LewyBodyDiseaseDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LewyBodyDiseaseDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParkinsonsDiseasePresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParkinsonsDiseasePresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MultipleSystemAtrophyPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MultipleSystemAtrophyPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MultipleSystemAtrophyDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MultipleSystemAtrophyDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProgressiveSupranuclearPaslyPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProgressiveSupranuclearPaslyPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProgressiveSupranuclearPaslyDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProgressiveSupranuclearPaslyDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CorticobasalDegenerationPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CorticobasalDegenerationPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CorticobasalDegenerationDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CorticobasalDegenerationDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FTLDWithMotorNeuronDiseasePresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FTLDWithMotorNeuronDiseasePresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FTLDWithMotorNeuronDiseaseDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FTLDWithMotorNeuronDiseaseDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FTLDNOSPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FTLDNOSPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FTLDNOSDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FTLDNOSDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FTLDSubtype)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FTLDSubtype)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FTLDSubtypeOtherSpecified)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FTLDSubtypeOtherSpecified)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VascularBrainInjuryPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VascularBrainInjuryPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VascularBrainInjuryDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VascularBrainInjuryDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PreviousSymptomaticStroke)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PreviousSymptomaticStroke)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TemporalRelationshipBetweenStrokeAndCognitive)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TemporalRelationshipBetweenStrokeAndCognitive)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConfirmationOfStrokeByNeuroImaging)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConfirmationOfStrokeByNeuroImaging)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagingEvidenceOfCysticInfarctionInCognitiveNetwork)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagingEvidenceOfCysticInfarctionInCognitiveNetwork)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EssentialTremorPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EssentialTremorPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EssentialTremorDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EssentialTremorDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DownSyndromePresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DownSyndromePresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DownSyndromeDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DownSyndromeDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HuntingtonsDiseasePresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HuntingtonsDiseasePresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HuntingtonsDiseaseDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HuntingtonsDiseaseDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrionDiseasePresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrionDiseasePresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrionDiseaseDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrionDiseaseDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TraumaticBrainInjuryPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TraumaticBrainInjuryPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TraumaticBrainInjuryDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TraumaticBrainInjuryDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ChronicTraumaticEncephalopathySymptom)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ChronicTraumaticEncephalopathySymptom)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NormalPressureHydrocephalusPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NormalPressureHydrocephalusPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NormalPressureHydropcephalusDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NormalPressureHydropcephalusDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EpilepsyPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EpilepsyPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EpilepsyDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EpilepsyDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CNSNeoplasmPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CNSNeoplasmPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CNSNeoplasmDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CNSNeoplasmDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CNSNeoplasmType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CNSNeoplasmType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HumanImmunodeficiencyVirusPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HumanImmunodeficiencyVirusPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HumanImmunodeficiencyVirusDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HumanImmunodeficiencyVirusDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherCognitiveImpairmentPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherCognitiveImpairmentPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherCognitiveImpairmentDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherCognitiveImpairmentDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherCognitiveImpairmentSpecified)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherCognitiveImpairmentSpecified)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ActiveDepressionPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ActiveDepressionPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ActiveDepressionDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ActiveDepressionDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ActiveDepressionTreatment)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ActiveDepressionTreatment)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BipolarDisorderPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BipolarDisorderPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BipolarDisorderDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BipolarDisorderDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SchizophreniaPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SchizophreniaPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SchizophreniaDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SchizophreniaDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AnxietyDisorderPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AnxietyDisorderPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AnxietyDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AnxietyDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeliriumPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeliriumPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeliriumDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeliriumDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PostTraumaticStressDisorderPresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PostTraumaticStressDisorderPresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PostTraumaticStressDisorderDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PostTraumaticStressDisorderDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherPsychiatricDiseasePresent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherPsychiatricDiseasePresent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherPsychiatricDiseaseDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherPsychiatricDiseaseDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherPsychiatricDiseaseSpecified)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherPsychiatricDiseaseSpecified)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlcoholAbuse)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlcoholAbuse)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlcoholAbuseDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlcoholAbuseDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CurrentAlcoholAbuse)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CurrentAlcoholAbuse)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SubstanceAbuse)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SubstanceAbuse)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SubstanceAbuseDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SubstanceAbuseDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SystemicDisease)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SystemicDisease)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SystemicDiseaseDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SystemicDiseaseDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medications)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Medications)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MedicationsDiagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MedicationsDiagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NOS1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NOS1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NOS1Diagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NOS1Diagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NOS1Specified)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NOS1Specified)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NOS2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NOS2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NOS2Diagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NOS2Diagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NOS2Specified)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NOS2Specified)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NOS3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NOS3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NOS3Diagnosis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NOS3Diagnosis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NOS3Specified)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NOS3Specified)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Visit)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Visit.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExaminerInitials)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExaminerInitials)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FormStatus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FormStatus)
-        </dd>
-    </dl>
+<div class="row">
+  <div class="col-md-12">
+    <p class="lead">INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and
+      examples, see UDS Coding Guidebook for @Html.DisplayTextFor(v => v.Visit.VisitType) Visit Packet, Form D1. Check
+      <u>only</u> one box per question.</p>
+  </div>
 </div>
+<div class="row">
+  <div class="col-md-10 m-auto p-3 pb-5">
+    <div class="card">
+      <div class="card-body">
+        <p class="lead">This form is divided into three main sections</p>
+        <dl class="row p-3">
+          <dt class="col-sm-4">Section 1</dt>
+          <dd class="col-md-8"></dd>
+          <dt class="col-sm-4">
+            <a href="#section1">Cognitive and behavioral status</a>
+          </dt>
+          <dd class="col-md-8">
+            Normal cognition / MCI / dementia and dementia syndrome
+          </dd>
+          <dt class="col-sm-4">Section 2</dt>
+          <dd class="col-md-8"></dd>
+          <dt class="col-sm-4">
+            <a href="#section2">Biomarkers, imaging, and genetics</a>
+          </dt>
+          <dd class="col-md-8">
+            Neurodegenerative imaging and CSF biomarkers, imaging evidence for CVD, and known genetic mutations for AD
+            and FTLD
+          </dd>
+          <dt class="col-sm-4">Section 3</dt>
+          <dd class="col-md-8"></dd>
+          <dt class="col-sm-4">
+            <a href="#section3">Etiological diagnoses</a>
+          </dt>
+          <dd class="col-md-8">
+            Presumed etiological diagnoses for the cognitive disorder
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive counterreset">
+    <table class="table table-striped">
+        <tbody>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.DiagnosisMethod)
+                </td>
+                <td>
+                    @{ 
+                        var diagnosisMethodDisplay = "";
+                        if(Model.DiagnosisMethod.HasValue) {
+                            ViewBag.Dxmethod.Codes.TryGetValue(Model.DiagnosisMethod.ToString(), out diagnosisMethodDisplay);
+                        }
+                        <div><span class="badge badge-pill badge-light">@Model.DiagnosisMethod</span> @diagnosisMethodDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="table-primary">
+                <td colspan="3">
+                    <a name="section1"></a>
+                    <h2>Section 1: Cognitive and behavioral status</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="counter"></span> @Html.DisplayNameFor(model => model.HasNormalCognition)
+                </td>
+                <td>
+                    @Html.Raw(Model.HasNormalCognition == true ? "<span class='badge badge-pill badge-light'>1</span> Yes <span class='text-uppercase font-weight-light font-italic text-primary'>(SKIP TO QUESTION 6)</span>" : (Model.HasNormalCognition == false ? "<span class='badge badge-pill badge-light'>0</span> No <span class='text-uppercase font-weight-light font-italic text-primary'>(CONTINUE TO QUESTION 3)</span>" : ""))
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="counter"></span> @Html.DisplayNameFor(model => model.MeetsCriteriaForDementia)
+                    </div>
+                    <div>
+                        @Html.Raw(Model.MeetsCriteriaForDementia == true ? "<span class='badge badge-pill badge-light'>1</span> Yes <span class='text-uppercase font-weight-light font-italic text-primary'>(CONTINUE TO QUESTION 4)</span>" : (Model.MeetsCriteriaForDementia == false ? "<span class='badge badge-pill badge-light'>0</span> No <span class='text-uppercase font-weight-light font-italic text-primary'>(SKIP TO QUESTION 5)</span>" : ""))
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <strong>All-cause dementia</strong>
+                        <p class="bold">
+                            The subject has cognitive or behavioral (neuropsychiatric) symptoms that meet all of the following criteria:
+                        </p>
+                        <ul class="bullets">
+                            <li>Interfere with ability to function as before at work or at usual activities?</li>
+                            <li>Represent a decline from previous levels of functioning?</li>
+                            <li>Are not explained by delirium or major psychiatric disorder?</li>
+                            <li>
+                                Include cognitive impairment detected and diagnosed through a
+                                combination of 1) history-taking and 2) objective cognitive
+                                assessment (bedside or neuropsychological testing)?
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p><strong class="bold"><u>AND</u></strong></p>
+                        <strong>Impairment in one* or more of the following domains.</strong>
+                        <ul>
+                            <li>Impaired ability to acquire and remember new information</li>
+                            <li>Impaired reasoning and handling of complex tasks, poor judgment</li>
+                            <li>Impaired visuospatial abilities</li>
+                            <li>Impaired language functions</li>
+                            <li>Changes in personality, behavior, or comportment</li>
+                        </ul>
+                        <p class="font-italic">
+                            * In the event of single-domain impairment (e.g., language in PPA, behavior in bvFTD, posterior cortical atrophy), the subject must not fulfill criteria for MCI.
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="counter"></span> If the subject meets criteria for dementia, <span class="font-weight-light font-italic text-primary"><span class="text-uppercase">answer Questions</span> 4a–4f</span> below and then <span class="text-uppercase font-weight-light font-italic text-primary">SKIP TO QUESTION 6</span>.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p>
+                        Based entirely on the history and examination (including neuropsychological testing), what is the cognitive/behavioral syndrome? <strong>Select one or more as Present; all others will default to Absent in the NACC database.</strong>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="table subcounterreset">
+                        <thead>
+                            <tr class="table-dark text-dark">
+                                <th>Dementia syndrome</th>
+                                <th>Present</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.AmnesticMultiDomainPresent)
+                                </td>
+                                <td>
+                                    <div class="form-check-inline">
+                                        @Html.DisplayFor(model => model.AmnesticMultiDomainPresent)
+                                        <label><span class='badge badge-pill badge-light'>1</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.PosteriorCorticalAtrophyPresent)
+                                </td>
+                                <td>
+                                    <div class="form-check-inline">
+                                        @Html.DisplayFor(model => model.PosteriorCorticalAtrophyPresent)
+                                        <label><span class='badge badge-pill badge-light'>1</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.PrimaryProgressiveAphasiaPresent)
+                                </td>
+                                <td>
+                                    <div class="form-check-inline">
+                                        @Html.DisplayFor(model => model.PrimaryProgressiveAphasiaPresent)
+                                        <label><span class='badge badge-pill badge-light'>1</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="subsubcounterrest">
+                                <td>
+                                    <span class="subsubcounter text-muted"></span>@Html.DisplayNameFor(model => model.PrimaryProgressiveAphasiaType)
+                                </td>
+                                <td>
+                                    @{ 
+                                        var primaryProgressiveAphasiaTypeDisplay = "";
+                                        if(Model.PrimaryProgressiveAphasiaType.HasValue) {
+                                            ViewBag.Ppasynt.Codes.TryGetValue(Model.PrimaryProgressiveAphasiaType.ToString(), out primaryProgressiveAphasiaTypeDisplay);
+                                        }
+                                        <div><span class="badge badge-pill badge-light">@Model.PrimaryProgressiveAphasiaType</span> @primaryProgressiveAphasiaTypeDisplay</div>
+                                    } 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.BehavioralVariantFTDPresent)
+                                </td>
+                                <td>
+                                    <div class="form-check-inline">
+                                        @Html.DisplayFor(model => model.BehavioralVariantFTDPresent)
+                                        <label><span class='badge badge-pill badge-light'>1</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.LewyBodyPresent)
+                                </td>
+                                <td>
+                                    <div class="form-check-inline">
+                                        @Html.DisplayFor(model => model.LewyBodyPresent)
+                                        <label><span class='badge badge-pill badge-light'>1</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.NonAmnesticMultiDomainPresent)
+                                </td>
+                                <td>
+                                    <div class="form-check-inline">
+                                        @Html.DisplayFor(model => model.NonAmnesticMultiDomainPresent)
+                                        <label><span class='badge badge-pill badge-light'>1</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <span class="counter"></span> If the subject does not have normal cognition or behavior and is not clinically demented, indicate the type of cognitive impairment below
+                    </div>
+                    <div class="card m-3">
+                        <div class="card-body">
+                            <strong>MCI CORE CLINICAL CRITERIA</strong>
+                            <ul>
+                                <li>
+                                    Is the subject, the co-participant, or a clinician concerned about a change in cognition compared to the subject's previous level?
+                                </li>
+                                <li>
+                                    Is there impairment in one or more cognitive domains (memory, language, executive function, attention, and visuospatial skills)?
+                                </li>
+                                <li>
+                                    Is there largely preserved independence in functional abilities (no change from prior manner of functioning or uses minimal aids or assistance)?
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p>Select <strong>one</strong> syndrome from 5a-5e as being Present (all others will default to Absent in the NACC database), and then <span class="text-uppercase font-weight-light font-italic text-primary">CONTINUE TO QUESTION 6</span>. If you select MCI below, it should meet the <strong>MCI core clinical criteria</strong> outlined above.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="table subcounterreset">
+                        <tr>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                Present
+                            </th>
+                            <th>
+                                Affected domains
+                            </th>
+                            <th>
+                                No / Yes
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.AmnesticMCISingleDomainPresent)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.AmnesticMCISingleDomainPresent) <span class="badge badge-pill badge-light">1</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr class="subsubcounterreset">
+                            <td>
+                                <span class="subcounter text-muted"> </span>@Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomains)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.AmnesticMCIMultipleDomains) <span class="badge badge-pill badge-light">1</span>
+                            </td>
+                            <td colspan="2"><strong>CHECK YES for at least one additional domain (besides memory)</strong></td>
+                        </tr>
+                        <tr class="table subsubcounterreset">
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsLanguage)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.AmnesticMCIMultipleDomainsLanguage == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.AmnesticMCIMultipleDomainsLanguage == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsAttention)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.AmnesticMCIMultipleDomainsAttention == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.AmnesticMCIMultipleDomainsAttention == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsExecutive)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.AmnesticMCIMultipleDomainsExecutive == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.AmnesticMCIMultipleDomainsExecutive == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.AmnesticMCIMultipleDomainsVisuospatial)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.AmnesticMCIMultipleDomainsVisuospatial == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.AmnesticMCIMultipleDomainsVisuospatial == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr class="subsubcounterreset">
+                            <td>
+                                <span class="subcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomain)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.NonAmnesticMCISingleDomain) <span class="badge badge-pill badge-light">1</span>
+                            </td>
+                            <td colspan="2"><strong>CHECK YES to indicate the affected domain</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainLanguage)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.NonAmnesticMCISingleDomainLanguage == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.NonAmnesticMCISingleDomainLanguage == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainAttention)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.NonAmnesticMCISingleDomainAttention == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.NonAmnesticMCISingleDomainAttention == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainExecutive)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.NonAmnesticMCISingleDomainExecutive == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.NonAmnesticMCISingleDomainExecutive == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCISingleDomainVisuospatial)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.NonAmnesticMCISingleDomainVisuospatial == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.NonAmnesticMCISingleDomainVisuospatial == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr class="subsubcounterreset">
+                            <td>
+                                <span class="subcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomains)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.NonAmnesticMCIMultipleDomains) <span class="badge badge-pill badge-light">1</span>
+                            </td>
+                            <td colspan="2"><strong>CHECK YES for at least two domains</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsLanguage)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.NonAmnesticMCIMultipleDomainsLanguage == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.NonAmnesticMCIMultipleDomainsLanguage == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsAttention)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.NonAmnesticMCIMultipleDomainsAttention == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.NonAmnesticMCIMultipleDomainsAttention == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsExecutive)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.NonAmnesticMCIMultipleDomainsExecutive == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.NonAmnesticMCIMultipleDomainsExecutive == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="subsubcounter text-muted"> </span>@Html.DisplayNameFor(model => model.NonAmnesticMCIMultipleDomainsVisuospatial)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.NonAmnesticMCIMultipleDomainsVisuospatial == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (Model.NonAmnesticMCIMultipleDomainsVisuospatial == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter text-muted"> </span>@Html.DisplayNameFor(model => model.CognitivelyImpairedNotMCIPresent)
+                            </td>
+                            <td colspan="2">
+                                @Html.DisplayFor(model => model.CognitivelyImpairedNotMCIPresent) <span class="badge badge-pill badge-light">1</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped subcounterreset">
+        <tbody>
+            <tr class="table-primary">
+                <td colspan="2">
+                    <a name="section2"></a>
+                    <h2>
+                        Section 2: Biomarkers, imaging, and genetics
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center"><span class="font-weight-light font-italic text-primary">Section 2 must be completed for all subjects.</span></td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="counter"></span> Indicate neurodegenerative biomarker status, using local standards for positivity.</td>
+            </tr>
+            <tr class="table-dark text-dark">
+                <td>
+                    Biomarker findings
+                </td>
+                <td>
+                    No / Yes / Unknown / not assessed
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.AbnormallyElevatedAmyloidInPET)
+                </td>
+                <td>
+                    @{
+                        var abnormallyElevatedAmyloidInPETDisplay = "";
+                        if(Model.AbnormallyElevatedAmyloidInPET.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.AbnormallyElevatedAmyloidInPET.Value.ToString(), out abnormallyElevatedAmyloidInPETDisplay);   
+                        }
+                    }
+                    <p><span class='badge badge-pill badge-light'>@Model.AbnormallyElevatedAmyloidInPET</span> @abnormallyElevatedAmyloidInPETDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.AbnormallyLowAmyloidInCSF)
+                </td>
+                <td>
+                    @{
+                        var abnormallyLowAmyloidInCSFDisplay = "";
+                        if(Model.AbnormallyLowAmyloidInCSF.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.AbnormallyLowAmyloidInCSF.Value.ToString(), out abnormallyLowAmyloidInCSFDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.AbnormallyLowAmyloidInCSF</span> @abnormallyLowAmyloidInCSFDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.FDGPETPattern)
+                </td>
+                <td>
+                    @{
+                        var fDGPETPatternDisplay = "";
+                        if(Model.FDGPETPattern.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.FDGPETPattern.Value.ToString(), out fDGPETPatternDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.FDGPETPattern</span> @fDGPETPatternDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.HippocampalAtrophy)
+                </td>
+                <td>
+                    @{
+                        var hippocampalAtrophyDisplay = "";
+                        if(Model.HippocampalAtrophy.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.HippocampalAtrophy.Value.ToString(), out hippocampalAtrophyDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.HippocampalAtrophy</span> @hippocampalAtrophyDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.TauPETEvidenceForAD)
+                </td>
+                <td>
+                    @{
+                        var tauPETEvidenceForADDisplay = "";
+                        if(Model.TauPETEvidenceForAD.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.TauPETEvidenceForAD.Value.ToString(), out tauPETEvidenceForADDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.TauPETEvidenceForAD</span> @tauPETEvidenceForADDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.AbnormallyElevatedCSFTauOrPtau)
+                </td>
+                <td>
+                    @{
+                        var abnormallyElevatedCSFTauOrPtauDisplay = "";
+                        if(Model.AbnormallyElevatedCSFTauOrPtau.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.AbnormallyElevatedCSFTauOrPtau.Value.ToString(), out abnormallyElevatedCSFTauOrPtauDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.AbnormallyElevatedCSFTauOrPtau</span> @abnormallyElevatedCSFTauOrPtauDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism)
+                </td>
+                <td>
+                    @{
+                        var fDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolismDisplay = "";
+                        if(Model.FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism.Value.ToString(), out fDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolismDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.FDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolism</span> @fDGPETEvidenceForFrontalOrAnteriorTemporalHypometabolismDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.TauPETEvidence)
+                </td>
+                <td>
+                    @{
+                        var tauPETEvidenceDisplay = "";
+                        if(Model.TauPETEvidence.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.TauPETEvidence.Value.ToString(), out tauPETEvidenceDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.TauPETEvidence</span> @tauPETEvidenceDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.StructuralMREvidence)
+                </td>
+                <td>
+                    @{ var structuralMREvidenceDisplay = "";
+                        if(Model.StructuralMREvidence.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.StructuralMREvidence.Value.ToString(), out structuralMREvidenceDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.StructuralMREvidence</span> @structuralMREvidenceDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.DopamineTransporterScanEvidence)
+                </td>
+                <td>
+                    @{ var dopamineTransporterScanEvidenceDisplay = "";
+                        if(Model.DopamineTransporterScanEvidence.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.DopamineTransporterScanEvidence.Value.ToString(), out dopamineTransporterScanEvidenceDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.DopamineTransporterScanEvidence</span> @dopamineTransporterScanEvidenceDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.OtherEvidenceExists)
+                    </div>
+                    <div>
+                        <div>
+                            @Html.TextBoxFor(model => model.OtherEvidenceSpecified, new { @disabled = "true" })
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    @{
+                        var otherEvidenceExistsDisplay = "";
+                        if(Model.OtherEvidenceExists.HasValue) {
+                            int otherEvidenceExists = Convert.ToInt32(Model.OtherEvidenceExists.Value);
+                            ViewBag.Findings.Codes.TryGetValue(otherEvidenceExists.ToString(), out otherEvidenceExistsDisplay);
+
+                            <p><span class='badge badge-pill badge-light'>@otherEvidenceExists</span> @otherEvidenceExistsDisplay</p>
+                        }
+                      }
+                </td>
+            </tr>
+        </tbody>
+        <tbody class="subcounterreset">
+            <tr>
+                <td colspan="2"><span class="counter"></span> Is there evidence for cerebrovascular disease (CVD) on imaging?</td>
+            </tr>
+            <tr class="table-dark text-dark">
+                <td>Imaging findings</td>
+                <td>No / Yes / Unknown / not assessed</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.LargeVesselInfarcts)
+                </td>
+                <td>
+                    @{
+                        var largeVesselInfarctsDisplay = "";
+                        if(Model.LargeVesselInfarcts.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.LargeVesselInfarcts.Value.ToString(), out largeVesselInfarctsDisplay);
+                        }   
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.LargeVesselInfarcts</span> @largeVesselInfarctsDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.LacunarInfarcts)
+                </td>
+                <td>
+                    @{
+                        var lacunarInfarctsDisplay = "";
+                        if(Model.LacunarInfarcts.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.LacunarInfarcts.Value.ToString(), out lacunarInfarctsDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.LacunarInfarcts</span> @lacunarInfarctsDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.Macrohemorrhages)
+                </td>
+                <td>
+                    @{
+                        var macrohemorrhagesDisplay = "";
+                        if(Model.Macrohemorrhages.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.Macrohemorrhages.Value.ToString(), out macrohemorrhagesDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.Macrohemorrhages</span> @macrohemorrhagesDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.Microhemorrhages)
+                </td>
+                <td>
+                    @{
+                        var microhemorrhagesDisplay = "";
+                        if(Model.Microhemorrhages.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.Microhemorrhages.Value.ToString(), out microhemorrhagesDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.Microhemorrhages</span> @microhemorrhagesDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.ModerateWhiteMatterHyperintensity)
+                </td>
+                <td>
+                    @{
+                        var moderateWhiteMatterHyperintensityDisplay = "";
+                        if(Model.ModerateWhiteMatterHyperintensity.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.ModerateWhiteMatterHyperintensity.Value.ToString(), out moderateWhiteMatterHyperintensityDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.ModerateWhiteMatterHyperintensity</span> @moderateWhiteMatterHyperintensityDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.ExtensiveWhiteMatterHyperintensity)
+                </td>
+                <td>
+                    @{
+                        var extensiveWhiteMatterHyperintensityDisplay = "";
+                        if(Model.ExtensiveWhiteMatterHyperintensity.HasValue) {
+                            ViewBag.Findings.Codes.TryGetValue(Model.ExtensiveWhiteMatterHyperintensity.Value.ToString(), out extensiveWhiteMatterHyperintensityDisplay);
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.ExtensiveWhiteMatterHyperintensity</span> @extensiveWhiteMatterHyperintensityDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="counter"></span> @Html.DisplayNameFor(model => model.DominantlyInheritedADMutation)
+                </td>
+                <td>
+                    @{
+                        var dominantlyInheritedADMutationDisplay = "";
+                        if(Model.DominantlyInheritedADMutation.HasValue) {
+                            ViewBag.FindingsSubs.Codes.TryGetValue(Model.DominantlyInheritedADMutation.Value.ToString(), out dominantlyInheritedADMutationDisplay);
+                        }
+                    }
+                    <p><span class='badge badge-pill badge-light'>@Model.DominantlyInheritedADMutation</span> @dominantlyInheritedADMutationDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="counter"></span> @Html.DisplayNameFor(model => model.HereditaryFTLDMutation)
+                </td>
+                <td>
+                    @{
+                        var hereditaryFTLDMutationDisplay = "";
+                        if(Model.HereditaryFTLDMutation.HasValue) {
+                            ViewBag.FindingsSubs.Codes.TryGetValue(Model.HereditaryFTLDMutation.Value.ToString(), out hereditaryFTLDMutationDisplay);   
+                        }
+                     }
+                    <p><span class='badge badge-pill badge-light'>@Model.HereditaryFTLDMutation</span> @hereditaryFTLDMutationDisplay</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="counter"></span> @Html.DisplayNameFor(model => model.HereditaryMutationOther)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.HereditaryMutationOtherSpecified, new { @disabled = "true" })
+                    </div>
+                </td>
+                <td>
+                    @{
+                        var hereditaryMutationOtherDisplay = "";
+                        if(Model.HereditaryMutationOther.HasValue) {
+                            int hereditaryMutationOther = Convert.ToInt32(Model.HereditaryMutationOther.Value);
+                            ViewBag.FindingsSubs.Codes.TryGetValue(hereditaryMutationOther.ToString(), out hereditaryMutationOtherDisplay);
+
+                            <p><span class='badge badge-pill badge-light'>@hereditaryMutationOther</span> @hereditaryMutationOtherDisplay</p>
+                        }
+                     } 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <tbody class="subcounterreset">
+            <tr class="table-primary">
+                <td colspan="3">
+                    <a name="section3"></a>
+                    <h2>Section 3: Etiologic diagnoses</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="font-weight-light font-italic text-primary">Section 3 must be completed for all subjects.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p>Indicate presumptive etiologic diagnoses of the cognitive disorder and whether a given diagnosis is a primary, contributing, or non-contributing cause of the observed impairment, based on the clinician's best judgment. <strong>Select one or more diagnoses as Present; all others will default to Absent in the NACC database.</strong> Only one diagnosis should be selected as 1=Primary.</p>
+                    <p><strong>For subjects with normal cognition:</strong> Indicate the presence of any diagnoses by marking Present, and leave the questions on whether the diagnosis was primary, contributing, or non-contributing blank. Subjects with positive biomarkers but no clinical symptoms of Alzheimer's disease, Lewy body disease, or frontotemporal lobar degeneration <strong>should not</strong> have these diagnoses marked as Present. Instead, the biomarker data from Section 2 can be used to identify the presence of preclinical disease.</p>
+                    <p class="text-center p-4 font-bold">
+                        <span asp-validation-for="OnlyOnePrimaryDiagnosisAllowed" class="text-danger"></span>
+                    </p>
+                </td>
+            </tr>
+            <tr class="table-dark text-dark">
+                <th>Etiologic diagnoses</th>
+                <th>Present</th>
+                <th>Primary / Contributing / Non-contributing</th>
+            </tr>
+            <tr>
+                <td>
+                    <span class="counter"></span> @Html.DisplayNameFor(model => model.AlzheimersDiseasePresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.AlzheimersDiseasePresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ var alzheimersDiseaseDiagnosisDisplay = "";
+                        if (Model.AlzheimersDiseaseDiagnosis.HasValue)
+                        {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.AlzheimersDiseaseDiagnosis.Value.ToString(), out alzheimersDiseaseDiagnosisDisplay);
+                        }
+                    }
+                    <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.AlzheimersDiseaseDiagnosis</span> @alzheimersDiseaseDiagnosisDisplay</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="counter"></span> @Html.DisplayNameFor(model => model.LewyBodyDiseasePresent)
+                </td>
+                <td>@Html.DisplayFor(model => model.LewyBodyDiseasePresent) <span class="badge badge-pill badge-light">1</span></td>
+                <td class="subcounterreset">
+                    @{ var lewyBodyDiseaseDiagnosisDisplay = "";
+                        if (Model.LewyBodyDiseaseDiagnosis.HasValue)
+                        {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.LewyBodyDiseaseDiagnosis.Value.ToString(), out lewyBodyDiseaseDiagnosisDisplay);
+                        }
+                    }
+                    <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.LewyBodyDiseaseDiagnosis</span> @lewyBodyDiseaseDiagnosisDisplay</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="ml-4"><span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.ParkinsonsDiseasePresent)</div>
+                </td>
+                <td colspan="2">
+                    @Html.DisplayFor(model => model.ParkinsonsDiseasePresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="counter"></span> @Html.DisplayNameFor(model => model.MultipleSystemAtrophyPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.MultipleSystemAtrophyPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td class="subcounterreset">
+                    @{ var multipleSystemAtrophyDiagnosisDisplay = "";
+                        if (Model.MultipleSystemAtrophyDiagnosis.HasValue)
+                        {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.MultipleSystemAtrophyDiagnosis.Value.ToString(), out multipleSystemAtrophyDiagnosisDisplay);
+                        }
+                    }
+                    <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.MultipleSystemAtrophyDiagnosis</span> @multipleSystemAtrophyDiagnosisDisplay</div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody class="subcounterreset">
+            <tr>
+                <td colspan="3"><span class="counter"></span> Frontotemporal lobar degeneration</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="ml-4"><span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.ProgressiveSupranuclearPaslyPresent)</div>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ProgressiveSupranuclearPaslyPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{
+                        var progressiveSupranuclearPaslyDiagnosisDisplay = "";
+                        if (Model.ProgressiveSupranuclearPaslyDiagnosis.HasValue)
+                        {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.ProgressiveSupranuclearPaslyDiagnosis.Value.ToString(), out progressiveSupranuclearPaslyDiagnosisDisplay);
+                        }
+                     }
+                    <div><span class="subsubcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.ProgressiveSupranuclearPaslyDiagnosis</span> @progressiveSupranuclearPaslyDiagnosisDisplay</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="ml-4"><span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.CorticobasalDegenerationPresent)</div>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.CorticobasalDegenerationPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{
+                        var corticobasalDegenerationDiagnosisDisplay = "";
+                        if (Model.CorticobasalDegenerationDiagnosis.HasValue)
+                        {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.CorticobasalDegenerationDiagnosis.Value.ToString(), out corticobasalDegenerationDiagnosisDisplay);
+                        }
+                     }
+                    <div><span class="subsubcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.CorticobasalDegenerationDiagnosis</span> @corticobasalDegenerationDiagnosisDisplay</div> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="ml-4"><span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.FTLDWithMotorNeuronDiseasePresent)</div>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.FTLDWithMotorNeuronDiseasePresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{
+                        var fTLDWithMotorNeuronDiseaseDiagnosisDisplay = "";
+                        if (Model.FTLDWithMotorNeuronDiseaseDiagnosis.HasValue)
+                        {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.FTLDWithMotorNeuronDiseaseDiagnosis.Value.ToString(), out fTLDWithMotorNeuronDiseaseDiagnosisDisplay);
+                        }
+                     }
+                    <div><span class="subsubcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.FTLDWithMotorNeuronDiseaseDiagnosis</span> @fTLDWithMotorNeuronDiseaseDiagnosisDisplay</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="ml-4"><span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.FTLDNOSPresent)</div>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.FTLDNOSPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{
+                        var fTLDNOSDiagnosisDisplay = "";
+                        if (Model.FTLDNOSDiagnosis.HasValue)
+                        {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.FTLDNOSDiagnosis.Value.ToString(), out fTLDNOSDiagnosisDisplay);
+                        }
+                    }
+                    <div><span class="subsubcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.FTLDNOSDiagnosis</span> @fTLDNOSDiagnosisDisplay</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="ml-4 subcounter text-muted"></span>@Html.DisplayNameFor(model => model.FTLDSubtype)
+                </td>
+                <td>
+                    @{ 
+                        var fTLDSubtypeDisplay = "";
+                        if(Model.FTLDSubtype.HasValue) {
+                            ViewBag.FTLDSubtype.Codes.TryGetValue(Model.FTLDSubtype.ToString(), out fTLDSubtypeDisplay);
+                        }
+                        <div><span class="badge badge-pill badge-light">@Model.FTLDSubtype</span>@fTLDSubtypeDisplay</div>
+                        @if(Model.FTLDSubtype == 3) {
+                            @Html.TextBoxFor(model => model.FTLDSubtypeOtherSpecified, new { @disabled = "true" })
+                        }
+                    } 
+                </td>
+            </tr>
+        </tbody>
+        <tbody class="subcounterreset">
+            <tr>
+                <td>
+                    <span class="counter"></span> @Html.DisplayNameFor(model => model.VascularBrainInjuryPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.VascularBrainInjuryPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td colspan="2">
+                    @{
+                        var vascularBrainInjuryDiagnosisDisplay = "";
+                        if (Model.VascularBrainInjuryDiagnosis.HasValue)
+                        {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.VascularBrainInjuryDiagnosis.Value.ToString(), out vascularBrainInjuryDiagnosisDisplay);
+                        }
+                     }
+                    <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.VascularBrainInjuryDiagnosis</span> @vascularBrainInjuryDiagnosisDisplay</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tr class="subsubcounterreset">
+                            <td>
+                                <span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.PreviousSymptomaticStroke)
+                            </td>
+                            <td>
+                                @{ var PreviousSymptomaticStrokeDisplay = Model.PreviousSymptomaticStroke; }
+                                @Html.Raw(PreviousSymptomaticStrokeDisplay == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (PreviousSymptomaticStrokeDisplay == false ? "<span class='badge badge-pill badge-light'>0</span> No <span class='font-weight-light font-italic text-primary'>(<span class='text-uppercase'>SKIP TO QUESTION</span> 15c)</span>" : ""))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <span class="subsubcounter text-muted"></span> @Html.DisplayNameFor(model => model.TemporalRelationshipBetweenStrokeAndCognitive)
+                                        </td>
+                                        <td>
+                                            @{ var temporalRelationshipBetweenStrokeAndCognitiveDisplay = Model.TemporalRelationshipBetweenStrokeAndCognitive;  }
+                                            @Html.Raw(temporalRelationshipBetweenStrokeAndCognitiveDisplay == true ? "<span class='badge badge-pill badge-light'>1</span> Yes" : (temporalRelationshipBetweenStrokeAndCognitiveDisplay == false ? "<span class='badge badge-pill badge-light'>0</span> No" : ""))
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="subsubcounter text-muted"></span> @Html.DisplayNameFor(model => model.ConfirmationOfStrokeByNeuroImaging)
+                                        </td>
+                                        <td>
+                                            @{
+                                                var confirmationOfStrokeByNeuroImagingDisplay = "";
+                                                if (Model.ConfirmationOfStrokeByNeuroImaging.HasValue)
+                                                {
+                                                    ViewBag.Etiologicsubs.Codes.TryGetValue(Model.ConfirmationOfStrokeByNeuroImaging.Value.ToString(), out confirmationOfStrokeByNeuroImagingDisplay);
+                                                }
+                                                <div><span class="badge badge-pill badge-light"> @Model.ConfirmationOfStrokeByNeuroImaging</span> @confirmationOfStrokeByNeuroImagingDisplay</div>
+                                            }
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.ImagingEvidenceOfCysticInfarctionInCognitiveNetwork)
+                            </td>
+                            <td>
+                                @{
+                                    var imagingEvidenceOfCysticInfarctionInCognitiveNetworkDisplay = "";
+                                    if(Model.ImagingEvidenceOfCysticInfarctionInCognitiveNetwork.HasValue) {
+                                        ViewBag.Etiologicsubs.Codes.TryGetValue(Model.ImagingEvidenceOfCysticInfarctionInCognitiveNetwork.Value.ToString(), out imagingEvidenceOfCysticInfarctionInCognitiveNetworkDisplay);
+                                    }
+                                    <div><span class="badge badge-pill badge-light"> @Model.ImagingEvidenceOfCysticInfarctionInCognitiveNetwork</span> @imagingEvidenceOfCysticInfarctionInCognitiveNetworkDisplay</div>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment)
+                            </td>
+                            <td>
+                                @{
+                                    var imagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairmentDisplay = "";
+                                    if(Model.ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment.HasValue) {
+                                        ViewBag.Etiologicsubs.Codes.TryGetValue(Model.ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment.ToString(), out imagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairmentDisplay);
+                                    }
+                                    <div><span class="badge badge-pill badge-light"> @Model.ImagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairment</span> @imagingEvidenceOfCysticInfarctionExtensiveWhiteMatterHyperintensistyAndExecutiveImpairmentDisplay</div>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.EssentialTremorPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.EssentialTremorPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var essentialTremorDiagnosisDisplay = "";
+                        if(Model.EssentialTremorDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.EssentialTremorDiagnosis.ToString(), out essentialTremorDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.EssentialTremorDiagnosis</span> @essentialTremorDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.DownSyndromePresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.DownSyndromePresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var downSyndromeDiagnosisDisplay = "";
+                        if(Model.DownSyndromeDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.DownSyndromeDiagnosis.ToString(), out downSyndromeDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.DownSyndromeDiagnosis</span> @downSyndromeDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>            
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.HuntingtonsDiseasePresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.HuntingtonsDiseasePresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var huntingtonsDiseaseDiagnosisDisplay = "";
+                        if(Model.HuntingtonsDiseaseDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.HuntingtonsDiseaseDiagnosis.ToString(), out huntingtonsDiseaseDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.HuntingtonsDiseaseDiagnosis</span> @huntingtonsDiseaseDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.PrionDiseasePresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.PrionDiseasePresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var prionDiseaseDiagnosisDisplay = "";
+                        if(Model.PrionDiseaseDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.PrionDiseaseDiagnosis.ToString(), out prionDiseaseDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.PrionDiseaseDiagnosis</span> @prionDiseaseDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.TraumaticBrainInjuryPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.TraumaticBrainInjuryPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var traumaticBrainInjuryDiagnosisDisplay = "";
+                        if(Model.TraumaticBrainInjuryDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.TraumaticBrainInjuryDiagnosis.ToString(), out traumaticBrainInjuryDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.TraumaticBrainInjuryDiagnosis</span> @traumaticBrainInjuryDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.ChronicTraumaticEncephalopathySymptom)
+                                </td>
+                                <td>
+                                    @{ 
+                                        var chronicTraumaticEncephalopathySymptomDisplay = "";
+                                        if(Model.ChronicTraumaticEncephalopathySymptom.HasValue) {
+                                            ViewBag.GeneralThreeGroup.Codes.TryGetValue(Model.ChronicTraumaticEncephalopathySymptom.ToString(), out chronicTraumaticEncephalopathySymptomDisplay);
+                                        }
+                                        <div><span class="badge badge-pill badge-light">@Model.ChronicTraumaticEncephalopathySymptom</span> @chronicTraumaticEncephalopathySymptomDisplay</div>
+                                    } 
+                                </td>       
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.NormalPressureHydrocephalusPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.NormalPressureHydrocephalusPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var normalPressureHydropcephalusDiagnosisDisplay = "";
+                        if(Model.NormalPressureHydropcephalusDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.NormalPressureHydropcephalusDiagnosis.ToString(), out normalPressureHydropcephalusDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.NormalPressureHydropcephalusDiagnosis</span> @normalPressureHydropcephalusDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.EpilepsyPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.EpilepsyPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var epilepsyDiagnosisDisplay = "";
+                        if(Model.EpilepsyDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.EpilepsyDiagnosis.ToString(), out epilepsyDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.EpilepsyDiagnosis</span> @epilepsyDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.CNSNeoplasmPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.CNSNeoplasmPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var cNSNeoplasmDiagnosisDisplay = "";
+                        if(Model.CNSNeoplasmDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.CNSNeoplasmDiagnosis.ToString(), out cNSNeoplasmDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.CNSNeoplasmDiagnosis</span> @cNSNeoplasmDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span>
+                                </td>
+                                <td>
+                                    @{
+                                        var cNSNeoplasmTypeDisplay = "";
+                                        if(Model.CNSNeoplasmType.HasValue) {
+                                            ViewBag.Cnsneoplasmtype.Codes.TryGetValue(Model.CNSNeoplasmType.ToString(), out cNSNeoplasmTypeDisplay);
+                                            <div><span class="badge badge-pill badge-light">@Model.CNSNeoplasmType</span> @cNSNeoplasmTypeDisplay</div>
+                                        }
+                                    } 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.HumanImmunodeficiencyVirusPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.HumanImmunodeficiencyVirusPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var humanImmunodeficiencyVirusDiagnosisDisplay = "";
+                        if(Model.HumanImmunodeficiencyVirusDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.HumanImmunodeficiencyVirusDiagnosis.ToString(), out humanImmunodeficiencyVirusDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.HumanImmunodeficiencyVirusDiagnosis</span> @humanImmunodeficiencyVirusDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.OtherCognitiveImpairmentPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.OtherCognitiveImpairmentPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var otherCognitiveImpairmentDiagnosisDisplay = "";
+                        if(Model.OtherCognitiveImpairmentDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.OtherCognitiveImpairmentDiagnosis.ToString(), out otherCognitiveImpairmentDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.OtherCognitiveImpairmentDiagnosis</span> @otherCognitiveImpairmentDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span> @Html.DisplayNameFor(model => model.OtherCognitiveImpairmentSpecified)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.OtherCognitiveImpairmentSpecified, new { @disabled = "true" })
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.ActiveDepressionPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ActiveDepressionPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var activeDepressionDiagnosisDisplay = "";
+                        if(Model.ActiveDepressionDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.ActiveDepressionDiagnosis.ToString(), out activeDepressionDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.ActiveDepressionDiagnosis</span> @activeDepressionDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.ActiveDepressionTreatment)            
+                            </td>
+                            <td>
+                                @{
+                                    var activeDepressionTreatmentDisplay = "";
+                                    if(Model.ActiveDepressionTreatment.HasValue) {
+                                        if(Model.ActiveDepressionTreatment == true) {
+                                            activeDepressionTreatmentDisplay = "<span class='badge badge-pill badge-light'>1</span> Treated with medication and/or counseling";
+                                        } else {
+                                            activeDepressionTreatmentDisplay = "<span class='badge badge-pill badge-light'>0</span> Untreated";
+                                        }
+                                    }
+                                }
+                                @Html.Raw(activeDepressionTreatmentDisplay)
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.BipolarDisorderPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.BipolarDisorderPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var bipolarDisorderDiagnosisDisplay = "";
+                        if(Model.BipolarDisorderDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.BipolarDisorderDiagnosis.ToString(), out bipolarDisorderDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.BipolarDisorderDiagnosis</span> @bipolarDisorderDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.SchizophreniaPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.SchizophreniaPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var schizophreniaDiagnosisDisplay = "";
+                        if(Model.SchizophreniaDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.SchizophreniaDiagnosis.ToString(), out schizophreniaDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.SchizophreniaDiagnosis</span> @schizophreniaDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.AnxietyDisorderPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.AnxietyDisorderPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var anxietyDiagnosisDisplay = "";
+                        if(Model.AnxietyDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.AnxietyDiagnosis.ToString(), out anxietyDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.AnxietyDiagnosis</span> @anxietyDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.DeliriumPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.DeliriumPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var deliriumDiagnosisDisplay = "";
+                        if(Model.DeliriumDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.DeliriumDiagnosis.ToString(), out deliriumDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.DeliriumDiagnosis</span> @deliriumDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.PostTraumaticStressDisorderPresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.PostTraumaticStressDisorderPresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var postTraumaticStressDisorderDiagnosisDisplay = "";
+                        if(Model.PostTraumaticStressDisorderDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.PostTraumaticStressDisorderDiagnosis.ToString(), out postTraumaticStressDisorderDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.PostTraumaticStressDisorderDiagnosis</span> @postTraumaticStressDisorderDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.OtherPsychiatricDiseasePresent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.OtherPsychiatricDiseasePresent) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var otherPsychiatricDiseaseDiagnosisDisplay = "";
+                        if(Model.OtherPsychiatricDiseaseDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.OtherPsychiatricDiseaseDiagnosis.ToString(), out otherPsychiatricDiseaseDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.OtherPsychiatricDiseaseDiagnosis</span> @otherPsychiatricDiseaseDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.OtherPsychiatricDiseaseSpecified)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.OtherPsychiatricDiseaseSpecified)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.AlcoholAbuse)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.AlcoholAbuse) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var alcoholAbuseDiagnosisDisplay = "";
+                        if(Model.AlcoholAbuseDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.AlcoholAbuseDiagnosis.ToString(), out alcoholAbuseDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.AlcoholAbuseDiagnosis</span> @alcoholAbuseDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.CurrentAlcoholAbuse)
+                                </td>
+                                <td>
+                                    @{ 
+                                        var currentAlcoholAbuseDisplay = "";
+                                        if(Model.CurrentAlcoholAbuse.HasValue) {
+                                            ViewBag.GeneralThreeGroup.Codes.TryGetValue(Model.CurrentAlcoholAbuse.ToString(), out currentAlcoholAbuseDisplay);
+                                        }
+                                        <div><span class="badge badge-pill badge-light">@Model.CurrentAlcoholAbuse</span> @currentAlcoholAbuseDisplay</div>
+                                    } 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.SubstanceAbuse)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.SubstanceAbuse) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var substanceAbuseDiagnosisDislpay = "";
+                        if(Model.SubstanceAbuseDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.SubstanceAbuseDiagnosis.ToString(), out substanceAbuseDiagnosisDislpay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.SubstanceAbuseDiagnosis</span> @substanceAbuseDiagnosisDislpay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.SystemicDisease)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.SystemicDisease) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var systemicDiseaseDiagnosisDisplay = "";
+                        if(Model.SystemicDiseaseDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.SystemicDiseaseDiagnosis.ToString(), out systemicDiseaseDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.SystemicDiseaseDiagnosis</span> @systemicDiseaseDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.Medications)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Medications) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var medicationsDiagnosisDisplay = "";
+                        if(Model.MedicationsDiagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.MedicationsDiagnosis.ToString(), out medicationsDiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.MedicationsDiagnosis</span> @medicationsDiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.NOS1)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.NOS1) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var nOS1DiagnosisDisplay = "";
+                        if(Model.NOS1Diagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.NOS1Diagnosis.ToString(), out nOS1DiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.NOS1Diagnosis</span> @nOS1DiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.NOS1Specified)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.NOS1Specified)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.NOS2)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.NOS2) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var nOS2DiagnosisDisplay = "";
+                        if(Model.NOS2Diagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.NOS2Diagnosis.ToString(), out nOS2DiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.NOS2Diagnosis</span> @nOS2DiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.NOS2Specified)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.NOS2Specified)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="subcounterreset">
+                <td>
+                    <span class="counter"></span>@Html.DisplayNameFor(model => model.NOS3)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.NOS3) <span class="badge badge-pill badge-light">1</span>
+                </td>
+                <td>
+                    @{ 
+                        var nOS3DiagnosisDisplay = "";
+                        if(Model.NOS3Diagnosis.HasValue) {
+                            ViewBag.Etiologic.Codes.TryGetValue(Model.NOS3Diagnosis.ToString(), out nOS3DiagnosisDisplay);
+                        }
+                        <div><span class="subcounter text-muted"></span><span class="badge badge-pill badge-light">@Model.NOS3Diagnosis</span> @nOS3DiagnosisDisplay</div>
+                    } 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="subcounter text-muted"></span>@Html.DisplayNameFor(model => model.NOS3Specified)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.NOS3Specified)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

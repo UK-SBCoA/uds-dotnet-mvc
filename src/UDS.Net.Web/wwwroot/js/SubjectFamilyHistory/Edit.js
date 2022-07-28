@@ -35,7 +35,7 @@
         }
         for(let i = 1; i <= totalRowCount; i++) {
             const neruoHasValue = this.GetRow(i).find('input[name$=PrimaryNeurologicalProblemPsychiatricCondition]').first().val();
-            if(neruoHasValue && neruoHasValue != 8) {
+            if(neruoHasValue && neruoHasValue != 8 && neruoHasValue != 9) {
                 this.EnableNeuroControls(i);
             }
             else {
@@ -115,7 +115,7 @@
         const jRow = this.GetRow(relationshipIndex);
         const neuroWatch = jRow.find('input[name$="PrimaryNeurologicalProblemPsychiatricCondition"]').first();
         neuroWatch.on('keydown keyup', (events) => {
-            if ($(events.target).val() == '' || $(events.target).val() == 8)
+            if ($(events.target).val() == '' || $(events.target).val() == 8 || $(events.target).val() == 9)
             {
                 this.DisableNeuroControls(relationshipIndex);
             } else {

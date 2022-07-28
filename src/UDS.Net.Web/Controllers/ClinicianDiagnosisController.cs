@@ -17,6 +17,12 @@ namespace UDS.Net.Web.Controllers
         private ProtocolVariable _findings;
         private ProtocolVariable _findingsSubs;
         private ProtocolVariable _etiologic;
+        private ProtocolVariable _etiologicsubs;
+        private ProtocolVariable _generalThreeGroup;
+        private ProtocolVariable _cnsneoplasmtype;
+        private ProtocolVariable _dxmethod;
+        private ProtocolVariable _ppasynt;
+        private ProtocolVariable _ftldSubtype;
         private ProtocolVariable[] _protocolVariables;
 
         public ClinicianDiagnosisController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
@@ -28,6 +34,10 @@ namespace UDS.Net.Web.Controllers
         {
             string jsonString = await System.IO.File.ReadAllTextAsync("App_Data/ClinicianDiagnosisVariableCodes.json");
             _protocolVariables = JsonSerializer.Deserialize<ProtocolVariable[]>(jsonString);
+            
+            _ftldSubtype = _protocolVariables
+                .Where(item => item.Name == "FTLDSUBTYPE")
+                .FirstOrDefault();
 
             _findings = _protocolVariables
                 .Where(item => item.Name == "FINDINGS")
@@ -39,6 +49,26 @@ namespace UDS.Net.Web.Controllers
 
             _etiologic = _protocolVariables
                 .Where(item => item.Name == "ETIOLOGIC")
+                .FirstOrDefault();
+
+            _etiologicsubs = _protocolVariables
+                .Where(item => item.Name == "ETIOLOGICSUBS")
+                .FirstOrDefault();
+
+            _cnsneoplasmtype = _protocolVariables
+                .Where(item => item.Name == "CNSNEOPLASMTYPE")
+                .FirstOrDefault();
+
+            _dxmethod = _protocolVariables
+                .Where(item => item.Name == "DXMETHOD")
+                .FirstOrDefault();
+
+            _ppasynt = _protocolVariables
+                .Where(item => item.Name == "PPASYNT")
+                .FirstOrDefault();
+
+            _generalThreeGroup = _protocolVariables
+                .Where(item => item.Name == "GENERALTHREEGROUP")
                 .FirstOrDefault();
         }
 
@@ -59,11 +89,27 @@ namespace UDS.Net.Web.Controllers
 
             var clinicianDiagnosis = await _context.ClinicianDiagnoses
                 .Include(c => c.Visit)
+                    .ThenInclude(c => c.Participant)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (clinicianDiagnosis == null)
             {
                 return NotFound();
             }
+
+            var participantIdentity = await _participantsService.GetParticipantAsync(clinicianDiagnosis.Visit.Participant.Id);
+            clinicianDiagnosis.Visit.Participant.Profile = participantIdentity;
+
+            ViewBag.Dxmethod = _dxmethod;
+            ViewBag.FTLDSubtype = _ftldSubtype;
+            ViewBag.Findings = _findings;
+            ViewBag.FindingsSubs = _findingsSubs;
+            ViewBag.Etiologic = _etiologic;
+            ViewBag.Etiologicsubs = _etiologicsubs;
+            ViewBag.Cnsneoplasmtype = _cnsneoplasmtype;
+            ViewBag.Ppasynt = _ppasynt;
+            ViewBag.GeneralThreeGroup = _generalThreeGroup;
 
             return View(clinicianDiagnosis);
         }
@@ -127,9 +173,15 @@ namespace UDS.Net.Web.Controllers
             var participantIdentity = await _participantsService.GetParticipantAsync(clinicianDiagnosis.Visit.Participant.Id);
             clinicianDiagnosis.Visit.Participant.Profile = participantIdentity;
 
+            ViewBag.Dxmethod = _dxmethod;
+            ViewBag.FTLDSubtype = _ftldSubtype;
             ViewBag.Findings = _findings;
             ViewBag.FindingsSubs = _findingsSubs;
             ViewBag.Etiologic = _etiologic;
+            ViewBag.Etiologicsubs = _etiologicsubs;
+            ViewBag.Cnsneoplasmtype = _cnsneoplasmtype;
+            ViewBag.Ppasynt = _ppasynt;
+            ViewBag.GeneralThreeGroup = _generalThreeGroup;
 
             return View(clinicianDiagnosis);
         }
@@ -162,9 +214,15 @@ namespace UDS.Net.Web.Controllers
             var participantIdentity = await _participantsService.GetParticipantAsync(clinicianDiagnosis.Visit.Participant.Id);
             clinicianDiagnosis.Visit.Participant.Profile = participantIdentity;
 
+            ViewBag.Dxmethod = _dxmethod;
+            ViewBag.FTLDSubtype = _ftldSubtype;
             ViewBag.Findings = _findings;
             ViewBag.FindingsSubs = _findingsSubs;
             ViewBag.Etiologic = _etiologic;
+            ViewBag.Etiologicsubs = _etiologicsubs;
+            ViewBag.Cnsneoplasmtype = _cnsneoplasmtype;
+            ViewBag.Ppasynt = _ppasynt;
+            ViewBag.GeneralThreeGroup = _generalThreeGroup;
 
             if (!String.IsNullOrEmpty(save))
             {

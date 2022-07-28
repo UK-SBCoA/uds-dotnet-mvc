@@ -207,6 +207,13 @@ namespace UDS.Net.Web.Controllers
                             {
                                 ModelState.AddModelError(String.Format("Relatives[{0}].AgeAtDeath", relativeIndex), "Please provide an age at death or indicate otherwise");
                             }
+                            if(relative.BirthMonth.HasValue || relative.BirthYear.HasValue || relative.AgeAtDeath.HasValue)
+                            {
+                                if(!relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
+                                {
+                                    ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryNeurologicalProblemPsychiatricCondition", relativeIndex), "Please provide a value for Primary neurological problem/psychiatric condition");
+                                }
+                            }
                             if (relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
                             {
                                 var codeExists = _neurologicalProblems.Codes.Where(x => int.Parse(x.Key) == relative.PrimaryNeurologicalProblemPsychiatricCondition).Any();
@@ -229,9 +236,17 @@ namespace UDS.Net.Web.Controllers
                                 {
                                     ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "Please enter a valid code");
                                 }
+
+                                if(relative.PrimaryDx.HasValue && relative.PrimaryDx.Value == 999) {
+                                    int[] invalidMethodsOfEvaluation = {1,2,3};
+
+                                    if(Array.Exists(invalidMethodsOfEvaluation, method => method == relative.MethodOfEvaluation.Value)) {
+                                        ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "If Primary Dx is 999, the method of evaluation cannot be 1, 2, or 3");
+                                    }
+                                }
                             }
 
-                            bool hasNeurologicalProblemPsycyiatricCondition = relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 8;
+                            bool hasNeurologicalProblemPsycyiatricCondition = relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 8 && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 9;
 
                             if (!relative.PrimaryDx.HasValue && hasNeurologicalProblemPsycyiatricCondition)
                             {

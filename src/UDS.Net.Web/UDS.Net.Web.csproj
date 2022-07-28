@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <Version>3.0.0-beta.3</Version>
+    <Version>3.0.0-beta.4</Version>
     <Authors>Sanders-Brown Center on Aging</Authors>
     <Description>UDS for .NET MVC</Description>
     <Owners>UK-SBCoA</Owners>
