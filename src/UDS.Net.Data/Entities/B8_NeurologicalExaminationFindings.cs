@@ -153,5 +153,66 @@ namespace UDS.Net.Data.Entities
         [MaxLength(60)]
         public string OtherFindingsSpeicify {get;set;}
 
+        [NotMapped]
+        [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Questions 2 - 8 should have at least 1 recorded sign if abnormal neurological exam findings were recorded to be consitent with questions 2 - 8 in question #1")]
+        public bool? GroupHasValue
+        {
+            get
+            {
+                if(AbnormalNeurologicalExamFindings == 1)
+                {
+                    var valueCount = 0;
+
+                    if (ParkinsonianSigns.HasValue && ParkinsonianSigns.Value == true)
+                    {
+                        valueCount++;
+                    }
+
+                    if(CerebrovascularDiseaseSigns.HasValue && CerebrovascularDiseaseSigns.Value == true)
+                    {
+                        valueCount++;
+                    }
+
+                    if (CerebrovascularDiseaseSigns.HasValue && CerebrovascularDiseaseSigns.Value == true)
+                    {
+                        valueCount++;
+                    }
+
+                    if (HigherCorticalVisual.HasValue && HigherCorticalVisual.Value == true)
+                    {
+                        valueCount++;
+                    }
+
+                    if (GaitApraxia.HasValue && GaitApraxia.Value == true)
+                    {
+                        valueCount++;
+                    }
+
+                    if (PSP.HasValue && PSP.Value == true)
+                    {
+                        valueCount++;
+                    }
+
+                    if (ALS_Findings.HasValue && ALS_Findings.Value == true)
+                    {
+                        valueCount++;
+                    }
+
+                    if (OtherFindings.HasValue && OtherFindings.Value == true)
+                    {
+                        valueCount++;
+                    }
+
+                    if (valueCount > 0)
+                    {
+                        return true;
+                    }
+
+                    return null;
+                }
+
+                return true;
+            }
+        }
     }
 }
