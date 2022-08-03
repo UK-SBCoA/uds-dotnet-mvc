@@ -47,13 +47,14 @@ namespace UDS.Net.Data.Entities
         [Display(Name = "Standard Global CDR", GroupName ="Standard CDR")]
         [Range(0, 3, ErrorMessage = "Please provide a valid score")]
         [Column("CDRGLOB")]
+        [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Please provide a score")]
         public double? StandardGlobalCDR {get;set;}
-        [Display(Name = "9. Behavior comportment and personality", GroupName ="Supplimental CDR")]
+        [Display(Name = "9. Behavior comportment and personality", GroupName ="Supplemental CDR")]
         [Range(0, 3, ErrorMessage = "Please provide a valid score")]
         [Column("COMPORT")]
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage="Please provide a score")]
         public double? BehaviorComportmentAndPersonality {get;set;}
-        [Display(Name = "10. Language", GroupName ="Supplimental CDR")]
+        [Display(Name = "10. Language", GroupName ="Supplemental CDR")]
         [Range(0, 3, ErrorMessage = "Please provide a valid score")]
         [Column("CDRLANG")]
         [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage="Please provide a score")]
