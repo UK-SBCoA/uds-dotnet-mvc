@@ -261,40 +261,59 @@
                                 <tr>
                                     <td class="w-50">
                                         5. <label asp-for="PredominantSymptom"></label>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantSymptom").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantSymptom").FirstOrDefault());
+                                        }
+                                        <div class="pt-2">
+                                        </div>
                                         <div><span class="text-danger" asp-validation-for="PredominantSymptom"></span></div>
                                         <div><span class="text-danger" asp-validation-for="PredominantSymptomOther"></span></div>
                                     </td>
                                     <td colspan="4">
+                                        @if (!isIVP)
+                                        {
+                                            <div>
+                                                <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[0]" value="0" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
+                                                <label for="PredominantSymptom[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                            </div>
+                                        }
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[1]" value="1" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[1]" value="1" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[1]"><span class="badge badge-pill badge-light">1</span> Memory</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[2]" value="2" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[2]" value="2" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[2]"><span class="badge badge-pill badge-light">2</span> Orientation</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[3]" value="3" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[3]" value="3" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[3]"><span class="badge badge-pill badge-light">3</span> Executive function — judgment, planning, problem-solving</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[4]" value="4" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[4]" value="4" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[4]"><span class="badge badge-pill badge-light">4</span> Language</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[5]" value="5" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[5]" value="5" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[5]"><span class="badge badge-pill badge-light">5</span> Visuospatial function</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[6]" value="6" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[6]" value="6" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[6]"><span class="badge badge-pill badge-light">6</span> Attention / concentration</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[7]" value="7" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[7]" value="7" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[7]"><span class="badge badge-pill badge-light">7</span> Fluctuating cognition</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[8]" value="8" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[8]" value="8" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[8]"><span class="badge badge-pill badge-light">8</span> Other (Specify)</label>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-control" asp-for="PredominantSymptomOther" />
@@ -710,10 +729,13 @@
                                         <div><span class="text-danger" asp-validation-for="BehaviorDeclineOther"></span></div>
                                     </td>
                                     <td colspan="3">
-                                        <div>
-                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[0]" value="0" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,2,3,4,5,6,7,8,9,99]" />
-                                            <label for="BehaviorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
-                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div>
+                                                <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[0]" value="0" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,2,3,4,5,6,7,8,9,99]" />
+                                                <label for="BehaviorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                            </div>
+                                        }
                                         <div>
                                             <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[1]" value="1" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
                                             <label for="BehaviorDecline[1]"><span class="badge badge-pill badge-light">1</span> Apathy/withdrawal</label>
@@ -942,10 +964,13 @@
                                         <div><span class="text-danger" asp-validation-for="PredominantMotorDecline"></span></div>
                                     </td>
                                     <td colspan="4">
-                                        <div>
-                                            <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[0]" value="0" />
-                                            <label for="PredominantMotorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
-                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div>
+                                                <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[0]" value="0" />
+                                                <label for="PredominantMotorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                            </div>
+                                        }
                                         <div>
                                             <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[1]" value="1" />
                                             <label for="PredominantMotorDecline[1]"><span class="badge badge-pill badge-light">1</span> Gait disorder</label>
@@ -1182,10 +1207,13 @@
                                         <div><span class="text-danger" asp-validation-for="PredominantDomain"></span></div>
                                     </td>
                                     <td colspan="4">
-                                        <div>
-                                            <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[0]" value="0" />
-                                            <label for="PredominantDomain[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
-                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div>
+                                                <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[0]" value="0" />
+                                                <label for="PredominantDomain[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                            </div>
+                                        }
                                         <div>
                                             <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[1]" value="1" />
                                             <label for="PredominantDomain[1]"><span class="badge badge-pill badge-light">1</span> Cognition</label>

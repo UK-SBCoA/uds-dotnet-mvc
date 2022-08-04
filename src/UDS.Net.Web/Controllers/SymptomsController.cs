@@ -118,6 +118,7 @@ namespace UDS.Net.Web.Controllers
             CheckValue(previousForm, symptoms, "SuggestiveOfSclerosisAge", 777);
             CheckValue(previousForm, symptoms, "AssessmentOfSclerosisAge", 777);
             CheckValue(previousForm, symptoms, "PredominantDomain", 0);
+            CheckValue(previousForm, symptoms, "PredominantSymptom", 0);
 
             ViewBag.NonmatchingValues = _nonMatchingValues;
             ViewBag.VisitType = symptoms.Visit.VisitType;
