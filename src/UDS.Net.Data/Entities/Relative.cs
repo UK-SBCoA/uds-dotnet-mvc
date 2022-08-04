@@ -17,7 +17,8 @@ namespace UDS.Net.Data.Entities
         public FamilyRelationship Relation { get; set; }
         [Range(1, 99, ErrorMessage = "Value must be within the valid range of 1 - 12 or 99")]
         [InvalidRange(nameof(BirthMonth), 13, 98, ErrorMessage = "Value must be within the valid range of 1 - 12 or 99")]
-        public int? BirthMonth { get; set; }        [CurrentYearRange(nameof(BirthYear), 1875, 9999, ErrorMessage = "Value must be within the valid range of 1875 - current year or 9999")]
+        public int? BirthMonth { get; set; }
+        [CurrentYearRange(nameof(BirthYear), 1875, 9999, ErrorMessage = "Value must be within the valid range of 1875 - current year or 9999")]
         public int? BirthYear { get; set; }
         [Range(0, 999, ErrorMessage = "Value must be within the valid range of 0 - 110, 888, or 999")]
         [InvalidRange(nameof(AgeAtDeath), 111, 887, ErrorMessage = "Value must be within the valid range of 0 - 110, 888, or 999")]

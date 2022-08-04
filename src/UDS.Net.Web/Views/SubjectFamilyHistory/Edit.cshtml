@@ -544,8 +544,8 @@ Model.Visit.Participant.Id,
         <div class="card-body">
             <div class="form-group">
                 <label class="control-label">
-                    <span class="counter"></span> How many full siblings does the subject have? <input class="form-control"
-                                                                            asp-for="SiblingNumber" /><br>
+                    <span class="counter"></span> How many full siblings does the subject have? <em>(77 = Adopted, unknown)</em><input class="form-control"
+                                                                                                                             asp-for="SiblingNumber" /><br>
                     <span class="text-danger" asp-validation-for="SiblingNumber"></span>
                 </label>
                 @if (Model.Visit.VisitType == VisitType.IVP)

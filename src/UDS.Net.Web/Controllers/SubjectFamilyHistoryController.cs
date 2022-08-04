@@ -195,72 +195,83 @@ namespace UDS.Net.Web.Controllers
                         if ((relative.Relation == FamilyRelationship.Father && subjectFamilyHistory.ParentChange == 1) || (relative.Relation == FamilyRelationship.Mother && subjectFamilyHistory.ParentChange == 1) || (relative.Relation == FamilyRelationship.Father && subjectFamilyHistory.ParentChange == 1) || (relative.Relation == FamilyRelationship.Child && subjectFamilyHistory.ChildrenChange == 1) || (relative.Relation == FamilyRelationship.Sibling && subjectFamilyHistory.SiblingChange == 1) || subjectFamilyHistory.Visit.VisitType == VisitType.IVP)
                         {
                             int relativeIndex = relatives.IndexOf(relative);
-                            if (!relative.BirthMonth.HasValue)
-                            {
-                                ModelState.AddModelError(String.Format("Relatives[{0}].BirthMonth", relativeIndex), "Please provide a Birth Month or indicate otherwise");
-                            }
-                            if (!relative.BirthYear.HasValue)
-                            {
-                                ModelState.AddModelError(String.Format("Relatives[{0}].BirthYear", relativeIndex), "Please provide a Birth Year indicate otherwise");
-                            }
-                            if (!relative.AgeAtDeath.HasValue)
-                            {
-                                ModelState.AddModelError(String.Format("Relatives[{0}].AgeAtDeath", relativeIndex), "Please provide an age at death or indicate otherwise");
-                            }
-                            if(relative.BirthMonth.HasValue || relative.BirthYear.HasValue || relative.AgeAtDeath.HasValue)
-                            {
-                                if(!relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
-                                {
-                                    ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryNeurologicalProblemPsychiatricCondition", relativeIndex), "Please provide a value for Primary neurological problem/psychiatric condition");
-                                }
-                            }
-                            if (relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
-                            {
-                                var codeExists = _neurologicalProblems.Codes.Where(x => int.Parse(x.Key) == relative.PrimaryNeurologicalProblemPsychiatricCondition).Any();
-                                if(!codeExists) {
-                                    ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryNeurologicalProblemPsychiatricCondition", relativeIndex), "Please enter a valid code");
-                                }                          
-                            }
-                            if (relative.PrimaryDx.HasValue)
-                            {
-                                var codeExists = _primaryDiagnosis.Codes.Where(x => int.Parse(x.Key) == relative.PrimaryDx).Any();
-                                if (!codeExists)
-                                {
-                                    ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryDx", relativeIndex), "Please enter a valid code, refer to APPENDIX 1");
-                                }
-                            }
-                            if (relative.MethodOfEvaluation.HasValue)
-                            {
-                                var codeExists = _methodOfEvaluation.Codes.Where(x => int.Parse(x.Key) == relative.MethodOfEvaluation).Any();
-                                if (!codeExists)
-                                {
-                                    ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "Please enter a valid code");
-                                }
 
-                                if(relative.PrimaryDx.HasValue && relative.PrimaryDx.Value == 999) {
-                                    int[] invalidMethodsOfEvaluation = {1,2,3};
+                            var isAdoptedOrUnknown = subjectFamilyHistory.SiblingNumber == 77 && relative.Relation == FamilyRelationship.Sibling;
 
-                                    if(Array.Exists(invalidMethodsOfEvaluation, method => method == relative.MethodOfEvaluation.Value)) {
-                                        ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "If Primary Dx is 999, the method of evaluation cannot be 1, 2, or 3");
+                            if (isAdoptedOrUnknown)
+                            {
+                                relativeIndex++;
+                            } else {
+                                if (!relative.BirthMonth.HasValue)
+                                {
+                                    ModelState.AddModelError(String.Format("Relatives[{0}].BirthMonth", relativeIndex), "Please provide a Birth Month or indicate otherwise");
+                                }
+                                if (!relative.BirthYear.HasValue)
+                                {
+                                    ModelState.AddModelError(String.Format("Relatives[{0}].BirthYear", relativeIndex), "Please provide a Birth Year indicate otherwise");
+                                }
+                                if (!relative.AgeAtDeath.HasValue)
+                                {
+                                    ModelState.AddModelError(String.Format("Relatives[{0}].AgeAtDeath", relativeIndex), "Please provide an age at death or indicate otherwise");
+                                }
+                                if (relative.BirthMonth.HasValue || relative.BirthYear.HasValue || relative.AgeAtDeath.HasValue)
+                                {
+                                    if (!relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
+                                    {
+                                        ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryNeurologicalProblemPsychiatricCondition", relativeIndex), "Please provide a value for Primary neurological problem/psychiatric condition");
                                     }
                                 }
-                            }
+                                if (relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue)
+                                {
+                                    var codeExists = _neurologicalProblems.Codes.Where(x => int.Parse(x.Key) == relative.PrimaryNeurologicalProblemPsychiatricCondition).Any();
+                                    if (!codeExists)
+                                    {
+                                        ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryNeurologicalProblemPsychiatricCondition", relativeIndex), "Please enter a valid code");
+                                    }
+                                }
+                                if (relative.PrimaryDx.HasValue)
+                                {
+                                    var codeExists = _primaryDiagnosis.Codes.Where(x => int.Parse(x.Key) == relative.PrimaryDx).Any();
+                                    if (!codeExists)
+                                    {
+                                        ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryDx", relativeIndex), "Please enter a valid code, refer to APPENDIX 1");
+                                    }
+                                }
+                                if (relative.MethodOfEvaluation.HasValue)
+                                {
+                                    var codeExists = _methodOfEvaluation.Codes.Where(x => int.Parse(x.Key) == relative.MethodOfEvaluation).Any();
+                                    if (!codeExists)
+                                    {
+                                        ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "Please enter a valid code");
+                                    }
 
-                            bool hasNeurologicalProblemPsycyiatricCondition = relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 8 && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 9;
+                                    if (relative.PrimaryDx.HasValue && relative.PrimaryDx.Value == 999)
+                                    {
+                                        int[] invalidMethodsOfEvaluation = { 1, 2, 3 };
 
-                            if (!relative.PrimaryDx.HasValue && hasNeurologicalProblemPsycyiatricCondition)
-                            {
-                                ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryDx", relativeIndex), "Please provide a Primary Dx, refer to the codes in APPENDIX 1");
+                                        if (Array.Exists(invalidMethodsOfEvaluation, method => method == relative.MethodOfEvaluation.Value))
+                                        {
+                                            ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "If Primary Dx is 999, the method of evaluation cannot be 1, 2, or 3");
+                                        }
+                                    }
+                                }
+
+                                bool hasNeurologicalProblemPsycyiatricCondition = relative.PrimaryNeurologicalProblemPsychiatricCondition.HasValue && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 8 && relative.PrimaryNeurologicalProblemPsychiatricCondition.Value != 9;
+
+                                if (!relative.PrimaryDx.HasValue && hasNeurologicalProblemPsycyiatricCondition)
+                                {
+                                    ModelState.AddModelError(String.Format("Relatives[{0}].PrimaryDx", relativeIndex), "Please provide a Primary Dx, refer to the codes in APPENDIX 1");
+                                }
+                                if (!relative.MethodOfEvaluation.HasValue && hasNeurologicalProblemPsycyiatricCondition)
+                                {
+                                    ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "Please provide a method of evaluation, refer to the codes below");
+                                }
+                                if (!relative.AgeOfOnSet.HasValue && hasNeurologicalProblemPsycyiatricCondition)
+                                {
+                                    ModelState.AddModelError(String.Format("Relatives[{0}].AgeOfOnSet", relativeIndex), "Please provide the age of onset");
+                                }
+                                relativeIndex++;
                             }
-                            if (!relative.MethodOfEvaluation.HasValue && hasNeurologicalProblemPsycyiatricCondition)
-                            {
-                                ModelState.AddModelError(String.Format("Relatives[{0}].MethodOfEvaluation", relativeIndex), "Please provide a method of evaluation, refer to the codes below");
-                            }
-                            if (!relative.AgeOfOnSet.HasValue && hasNeurologicalProblemPsycyiatricCondition)
-                            {
-                                ModelState.AddModelError(String.Format("Relatives[{0}].AgeOfOnSet", relativeIndex), "Please provide the age of onset");
-                            }
-                            relativeIndex++;
                         }
                     }
                 }
