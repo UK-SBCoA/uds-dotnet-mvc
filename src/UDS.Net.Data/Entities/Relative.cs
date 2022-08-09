@@ -28,6 +28,7 @@ namespace UDS.Net.Data.Entities
         public int? PrimaryDx { get; set; }
         public int? MethodOfEvaluation { get; set; }
         [InvalidRange(nameof(AgeOfOnSet), 111, 998, ErrorMessage = "Value must be within the valid range of 0 - 110 or 999")]
+        [Range(0, 999, ErrorMessage = "Value must be within the valid range of 0 - 110 or 999")]
         public int? AgeOfOnSet { get; set; }
         public SubjectFamilyHistory SubjectFamilyHistory { get; set; }
     }

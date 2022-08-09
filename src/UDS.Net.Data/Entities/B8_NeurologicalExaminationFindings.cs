@@ -154,56 +154,56 @@ namespace UDS.Net.Data.Entities
         public string OtherFindingsSpeicify {get;set;}
 
         [NotMapped]
-        [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Questions 2 - 8 should have at least 1 recorded sign if abnormal neurological exam findings were recorded to be consitent with questions 2 - 8 in question #1")]
-        public bool? GroupHasValue
+        [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Indicate at least one finding/syndrome that were consistent with the abnormal neurological exam (Yes to at least one in Questions 2-8)")]
+        public bool? AtLeastOneFindingSyndromeIndicated
         {
             get
             {
                 if(AbnormalNeurologicalExamFindings == 1)
                 {
-                    var valueCount = 0;
+                    int count = 0;
 
                     if (ParkinsonianSigns.HasValue && ParkinsonianSigns.Value == true)
                     {
-                        valueCount++;
+                        count++;
                     }
 
                     if(CerebrovascularDiseaseSigns.HasValue && CerebrovascularDiseaseSigns.Value == true)
                     {
-                        valueCount++;
+                        count++;
                     }
 
                     if (CerebrovascularDiseaseSigns.HasValue && CerebrovascularDiseaseSigns.Value == true)
                     {
-                        valueCount++;
+                        count++;
                     }
 
                     if (HigherCorticalVisual.HasValue && HigherCorticalVisual.Value == true)
                     {
-                        valueCount++;
+                        count++;
                     }
 
                     if (GaitApraxia.HasValue && GaitApraxia.Value == true)
                     {
-                        valueCount++;
+                        count++;
                     }
 
                     if (PSP.HasValue && PSP.Value == true)
                     {
-                        valueCount++;
+                        count++;
                     }
 
                     if (ALS_Findings.HasValue && ALS_Findings.Value == true)
                     {
-                        valueCount++;
+                        count++;
                     }
 
                     if (OtherFindings.HasValue && OtherFindings.Value == true)
                     {
-                        valueCount++;
+                        count++;
                     }
 
-                    if (valueCount > 0)
+                    if (count > 0)
                     {
                         return true;
                     }
