@@ -31,7 +31,7 @@ namespace UDS.Net.Data.Entities
         [Column("QUITSMOK")]
         [RequiredIf(nameof(Tobac100), "1", ErrorMessage = "A value is required for this question")]
         [Range(8,999, ErrorMessage = "Please indicate a valid age between 8 and 110 at which the participant quit smoking")]
-        [InvalidRange(nameof(QuitSmoking), 110, 887, ErrorMessage = "Please indicate a valid age between 8 and 110 at which the participant quit smoking")]
+        [InvalidRange(nameof(QuitSmoking), 111, 887, ErrorMessage = "Please indicate a valid age between 8 and 110 at which the participant quit smoking")]
         [InvalidRange(nameof(QuitSmoking), 889, 998, ErrorMessage = "Please indicate a valid age between 8 and 110 at which the participant quit smoking")]
         public int? QuitSmoking { get; set; }
         [Display(Name = "1f. In the past three months, has the subject consumed any alcohol? (If No or Unknown, SKIP TO QUESTION 2a)", GroupName = "Alcohol Use")]
