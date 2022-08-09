@@ -93,7 +93,7 @@ namespace UDS.Net.Data.Entities
         [Column("COGFPRED")]
         [RequiredIf(nameof(CognitionImpairment), 1, ErrorMessage = "Please provide a value")]
         [Display(Name = "Indicate the predominant symptom that was first recognized as a decline in the subject’s cognition")]
-        [Range(1, 99, ErrorMessage = "Value outside of required range")]
+        [Range(0, 99, ErrorMessage = "Value outside of required range")]
         [InvalidRange(nameof(PredominantSymptom), 9, 98, ErrorMessage = "Value outside of required range")]
         public int? PredominantSymptom { get; set; }
 
