@@ -331,7 +331,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/js/RadioFieldToggle.js"></script>
-    <script src="~/js/SubsequentRadioControlDisable.js"></script>
-    <script src="~/js/ParticipantDemographics/Edit.js"></script>
+    <script asp-append-version="true" type="text/javascript" src="~/js/SubsequentRadioControlDisable.js"></script>
+    <script asp-append-version="true" type="text/javascript" src="~/js/RacialQuestions.js"></script>
 }
