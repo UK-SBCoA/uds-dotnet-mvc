@@ -168,11 +168,6 @@ namespace UDS.Net.Data.Entities
                         count++;
                     }
 
-                    if(CerebrovascularDiseaseSigns.HasValue && CerebrovascularDiseaseSigns.Value == true)
-                    {
-                        count++;
-                    }
-
                     if (CerebrovascularDiseaseSigns.HasValue && CerebrovascularDiseaseSigns.Value == true)
                     {
                         count++;
