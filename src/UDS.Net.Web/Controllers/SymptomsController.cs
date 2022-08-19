@@ -15,7 +15,7 @@ namespace UDS.Net.Web.Controllers
 {
     public class SymptomsController : PacketFormController
     {
-        private List<NonMatchingValueDto> _nonMatchingValues = new List<NonMatchingValueDto>();
+        private List<PreviousValueDto> _previousValues = new List<PreviousValueDto>();
 
         public SymptomsController(UdsContext context, IParticipantsService participantsService, IChecklistService checklistService) : base(context, participantsService, checklistService)
         {
@@ -120,7 +120,7 @@ namespace UDS.Net.Web.Controllers
             CheckValue(previousForm, symptoms, "PredominantDomain", 0);
             CheckValue(previousForm, symptoms, "PredominantSymptom", 0);
 
-            ViewBag.NonmatchingValues = _nonMatchingValues;
+            ViewBag.previousValues = _previousValues;
             ViewBag.VisitType = symptoms.Visit.VisitType;
 
             return View(symptoms);
@@ -138,7 +138,7 @@ namespace UDS.Net.Web.Controllers
                 return NotFound();
             }
 
-            ViewBag.NonmatchingValues = _nonMatchingValues;
+            ViewBag.previousValues = _previousValues;
 
             var visit = await _context.Visits
                 .AsNoTracking()
@@ -230,7 +230,7 @@ namespace UDS.Net.Web.Controllers
 
         private Symptoms GetPreviousForm(int visitNumber, int currentParticipantId)
         {
-            var previousForms = GetAllPreviousForms(currentParticipantId);
+            var previousForms = GetCurrentAndPrevForms(currentParticipantId, visitNumber);
 
             var currentFormIndex = previousForms.FindIndex(c => c.Visit.VisitNumber == visitNumber);
             var previousFormIndex = currentFormIndex - 1;
@@ -244,12 +244,13 @@ namespace UDS.Net.Web.Controllers
             return null;
         }
 
-        private List<Symptoms> GetAllPreviousForms(int currentParticipantId)
+        //current form is included here for use in comparing with previous values
+        private List<Symptoms> GetCurrentAndPrevForms(int currentParticipantId, int currentVisitNumber)
         {
             var previousForms = _context.Symptoms
                 .Include(c => c.Visit)
                 .ThenInclude(c => c.Participant)
-                .Where(c => c.Visit.Participant.Id == currentParticipantId)
+                .Where(c => c.Visit.Participant.Id == currentParticipantId && c.Visit.VisitNumber <= currentVisitNumber)
                 .OrderBy(c => c.Visit.VisitNumber)
                 .AsNoTracking()
                 .ToList();
@@ -257,24 +258,21 @@ namespace UDS.Net.Web.Controllers
             return previousForms;
         }
 
-        private string GetPreviousValueText(string target, int currentVisitId, int currentParticipantId)
+        private string GetPreviousValueText(string target, int currentVisitNumber, int currentParticipantId)
         {
             string previousValuesText = null;
 
-            var previousForms = GetAllPreviousForms(currentParticipantId);
+            var previousForms = GetCurrentAndPrevForms(currentParticipantId, currentVisitNumber);
 
             foreach (Symptoms form in previousForms)
             {
                 if(form != null)
                 {
-                    var previousValue = form.GetType().GetProperty(target).GetValue(form, null);
-                    var previousVisitNumber = form.Visit.VisitNumber;
+                    if(form.Visit.VisitNumber != currentVisitNumber) {
+                        var previousValue = form.GetType().GetProperty(target).GetValue(form, null);
+                        var previousVisitNumber = form.Visit.VisitNumber;
 
-                    previousValuesText += $"\nvist #{previousVisitNumber}: {previousValue}";
-
-                    if(currentVisitId == form.Visit.VisitNumber)
-                    {
-                        previousValuesText += " (current)";
+                        previousValuesText += $"\nvisit #{previousVisitNumber}: {(previousValue == null ? "N/A" : previousValue)}";
                     }
                 }
             }
@@ -286,19 +284,25 @@ namespace UDS.Net.Web.Controllers
         {
             if (previousForm != null)
             {
-                var currentValue = GetCurrentValue(currentForm, target);
-                var previousValue = GetPreviousValue(previousForm, target);
+                if(previousForm.Visit.VisitNumber != currentForm.Visit.VisitNumber) {
+                    var currentValue = GetCurrentValue(currentForm, target);
+                    var previousValue = GetPreviousValue(previousForm, target);
+                    var showSuggestionText = false;
 
-                if (currentValue == null && previousValue != null)
-                {
-                    SetCurrentValue(currentForm, target, autoFillValue);
-                }
-                if (currentValue != previousValue && previousValue != null && currentValue != null)
-                {
-                    if (!Equals(currentValue, autoFillValue))
+                    if (currentValue == null && previousValue != null)
                     {
-                        CreateNonMatchMsg(target, autoFillValue, currentForm.Visit.VisitNumber, currentForm.Visit.Participant.Id);
+                        SetCurrentValue(currentForm, target, autoFillValue);
                     }
+
+                    if (currentValue != null)
+                    {
+                        if (!Equals(currentValue, autoFillValue) && previousValue != null)
+                        {
+                            showSuggestionText = true;
+                        }
+                    }
+
+                    CreatePreviousValueMsg(target, autoFillValue, currentForm.Visit.VisitNumber, currentForm.Visit.Participant.Id, showSuggestionText);
                 }
             }
         }
@@ -318,17 +322,21 @@ namespace UDS.Net.Web.Controllers
             currentForm.GetType().GetProperty(target).SetValue(currentForm, autoFillvalue);
         }
 
-        private void CreateNonMatchMsg(string target, int autoFillValue, int currentVisitId, int currentParticipantId)
+        private void CreatePreviousValueMsg(string target, int autoFillValue, int currentVisitNumber, int currentParticipantId, bool showSuggestionText)
         {
-            var previousValuesText = "The previously recorded values are:\n" + GetPreviousValueText(target, currentVisitId, currentParticipantId) + "\n\nplease input " + autoFillValue;
+            var previousValuesText = "The previously recorded values are:\n" + GetPreviousValueText(target, currentVisitNumber, currentParticipantId);
 
-            var message = new NonMatchingValueDto
+            if(showSuggestionText) {
+                previousValuesText += "\n\nplease input " + autoFillValue;
+            }
+
+            var message = new PreviousValueDto
             {
                 Name = target,
                 Text = previousValuesText
             };
 
-            _nonMatchingValues.Add(message);
+            _previousValues.Add(message);
         }
     }
 }

@@ -267,9 +267,9 @@
                                                 <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantSymptom").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantSymptom").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantSymptom").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantSymptom").FirstOrDefault());
                                         }
                                         <div class="pt-2">
                                         </div>
@@ -376,9 +376,9 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AgeOfDecline").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "AgeOfDecline").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AgeOfDecline").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "AgeOfDecline").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -527,9 +527,9 @@
                                                 (777 = Age of onset provided at a previous UDS visit)
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "HallucinationsAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "HallucinationsAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "HallucinationsAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "HallucinationsAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -719,9 +719,9 @@
                                                 <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorDecline").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "BehaviorDecline").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorDecline").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "BehaviorDecline").FirstOrDefault());
                                         }
                                         <div class="pt-2">
                                         </div>
@@ -837,9 +837,9 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -957,9 +957,9 @@
                                                 <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantMotorDecline").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantMotorDecline").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantMotorDecline").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantMotorDecline").FirstOrDefault());
                                         }
                                         <div><span class="text-danger" asp-validation-for="PredominantMotorDecline"></span></div>
                                     </td>
@@ -1064,9 +1064,9 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -1109,9 +1109,9 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -1136,9 +1136,9 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -1200,9 +1200,9 @@
                                                 <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantDomain").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantDomain").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantDomain").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantDomain").FirstOrDefault());
                                         }
                                         <div><span class="text-danger" asp-validation-for="PredominantDomain"></span></div>
                                     </td>
