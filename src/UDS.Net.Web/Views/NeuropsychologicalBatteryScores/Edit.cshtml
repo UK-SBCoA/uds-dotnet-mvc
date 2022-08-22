@@ -858,6 +858,7 @@
                                 <span class="badge badge-pillbadge-light">(If not finished by 150 seconds, enter 150)</span>
                                 <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 995–998, and SKIP TO QUESTION 8b.)</span></div>
                                 <div><span asp-validation-for="TrailMakingTestASecondsToComplete" class="text-danger"></span></div>
+                                <div><span class="errorHidden TrailMakingTestASecondsToComplete text-danger">8a should be between (1-150), (995-998)</span></div>
                             </td>
                             <td>
                                 <div class="form-check form-check-inline form-group">
@@ -912,6 +913,7 @@
                                 <span class="badge badge-pillbadge-light">(If not finished by 300 seconds, enter 300)</span>
                                 <div><span class="text-uppercase font-weight-light font-italic text-primary">(If test not completed, enter reason code, 995–998, and SKIP TO QUESTION 9a.)</span></div>
                                 <div><span asp-validation-for="TrailMakingTestBSecondsToComplete" class="text-danger"></span></div>
+                                <div><span class="errorHidden TrailMakingTestBSecondsToComplete text-danger">8a should be between (0-300, 995-998)</span></div>
                             </td>
                             <td>
                                 <div class="form-check form-check-inline form-group">
@@ -1456,162 +1458,5 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script type="text/javascript" src="~/js/RadioFieldToggle.js"></script>
     <script type="text/javascript" src="~/js/NumberRangeToggle.js"></script>
-    <script>
-        var eightA = $('input[name="TrailMakingTestASecondsToComplete"]');
-        var eightATwo = $('input[name="TrailMakingTestANumberOfCorrect"]');
-        var eightB = $('input[name="TrailMakingTestBSecondsToComplete"]');
-        var eightBTwo = $('input[name="TrailMakingTestBNumberOfCorrect"]');
-        var trailMakingErrorA = $('input.trailMakingErrorA');
-        var trailMakingErrorB = $('input.trailMakingErrorB');
-        
-
-        var TrailMakingTestCheck =(elem, maxValue, elemToToggle)=> {
-            var elemValue = parseInt($(elem).val())
-            //check 8a values
-            if(elemValue) {
-                if(elemValue <= maxValue) {
-                    elemToToggle.prop('disabled', false);
-                } else {
-                    elemToToggle.prop('disabled', true);
-                }
-            }
-        }
-
-         //show/hide error text for value conflict
-        var TrailMakingErrorCheck =(errorElement, expectedValue, parentElement, parentElementMax)=> {
-            var errorField =  $(`.${errorElement}`)
-            var inputField = $(`input[name="${errorElement}"`)
-            var inputFieldValue = inputField.val()
-            var parentElementValue = $(`input[name="${parentElement}"`).val()
-
-            if(inputFieldValue != expectedValue && parentElementValue <= parentElementMax) {
-                if(errorField.hasClass("errorHidden")) {
-                    errorField.removeClass("errorHidden")
-                }
-                if(!inputField.hasClass("errorField")) {
-                    inputField.addClass("errorField")
-                }
-                inputField.val(null)
-            } else {
-                if(!errorField.hasClass("errorHidden")) {
-                    errorField.addClass("errorHidden")
-                }
-                if(inputField.hasClass("errorField")) {
-                    inputField.removeClass("errorField")
-                }
-            }
-        }
-
-        //onload readOnly correct lines
-        TrailMakingTestCheck(eightA, 149, eightATwo)
-        TrailMakingTestCheck(eightB, 299, eightBTwo)
-
-        //on change, if 8a is null or < 150, 8a2 NEEDS to be 24. If 8a is null, 8a2 is disabled. Same with 8b and 8b2
-        eightA.change((elem) => {
-            TrailMakingTestCheck(elem.target, 149, eightATwo)
-            TrailMakingErrorCheck('TrailMakingTestANumberOfCorrect', 24, 'TrailMakingTestASecondsToComplete', 149)
-        });
-
-        eightB.change((elem) => {
-            TrailMakingTestCheck(elem.target, 299, eightBTwo)
-            TrailMakingErrorCheck('TrailMakingTestBNumberOfCorrect', 24, 'TrailMakingTestBSecondsToComplete', 299)
-        });
-
-        eightATwo.change((elem) => {
-           TrailMakingErrorCheck('TrailMakingTestANumberOfCorrect', 24, 'TrailMakingTestASecondsToComplete', 149)
-        })
-       
-        eightBTwo.change((elem) => {
-           TrailMakingErrorCheck('TrailMakingTestBNumberOfCorrect', 24, 'TrailMakingTestBSecondsToComplete', 299)
-        })
-    </script>
-    <script>
-        //add all of the values for 1g - 1bb and compare to total raw score
-        var TotalRawScoreSum =()=> {
-            var totalRawScore = parseInt($('input[name="TotalRawScore"').val());
-            var scoreSum = 0;
-            var scoreList = 
-            [
-                "MoCATrials",
-                "MoCACube",
-                "MoCAClockContour",
-                "MoCAClockNumbers",
-                "MoCAHands",
-                "MoCANaming",
-                "MoCADigits",
-                "MoCALetter",
-                "MoCASerial",
-                "MoCARepetition",
-                "MoCAFluency",
-                "MoCAAbstraction",
-                "MoCANoCue",
-                "MoCADate",
-                "MoCAMonth",
-                "MoCAYear",
-                "MoCADay",
-                "MoCAPlace",
-                "MoCACity"
-            ]
-
-            scoreList.forEach((elem) => {
-                var elemValue = parseInt($(`input[name="${elem}"]`).val())
-                if(isNaN(elemValue)) {
-                    elemValue = 0;
-                }
-
-                //if elem value is 88 or an error code, don't caclulate to total
-                if(elemValue >= 88) {
-                    elemValue = 0;
-                } else {
-                    scoreSum += elemValue; 
-                }               
-            }) 
-
-            if(totalRawScore != 88) {
-                if(isNaN(totalRawScore)) {
-                    totalRawScore = 0;
-                }
-                if(scoreSum != totalRawScore) {
-                    $('.TotalRawScoreError').text(`The MoCA Item Scores you have entered equal ${scoreSum} and do not add up to the Total Raw Score of ${totalRawScore}.  Please check both the Item Scores and/or the Total Raw Score and make corrections.`)
-                    if($('.TotalRawScoreError').hasClass("errorHidden")) {
-                        $('.TotalRawScoreError').removeClass("errorHidden")
-                    }
-                    if(!$('input[name="TotalRawScore"]').hasClass("errorField")) {
-                        $('input[name="TotalRawScore"]').addClass("errorField")
-                    }
-
-                    $('input[name="TotalRawScore"]').val(null)
-                    totalRawScore = 0;
-                } else {
-                    if(!$('.TotalRawScoreError').hasClass("errorHidden")) {
-                        $('.TotalRawScoreError').addClass("errorHidden")
-                        $('input[name="TotalRawScore"]').removeClass("errorField")
-                    }
-                    if($('input[name="TotalRawScore"]').hasClass("errorField")) {
-                        $('input[name="TotalRawScore"]').removeClass("errorField")
-                    }
-                }
-            } else {
-                //if 88 then ignore and treat as valid, remove all previous invalid classes
-                if(!$('.TotalRawScoreError').hasClass("errorHidden")) {
-                    $('.TotalRawScoreError').addClass("errorHidden")
-                    $('input[name="TotalRawScore"]').removeClass("errorField")
-                }
-                if($('input[name="TotalRawScore"]').hasClass("errorField")) {
-                    $('input[name="TotalRawScore"]').removeClass("errorField")
-                }
-            }
-        }
-
-      
-
-        $('.totalScoreSum').change(() => {
-            TotalRawScoreSum();
-        });
-
-        $('input[name="TotalRawScore"]').change(() => {
-            TotalRawScoreSum();
-        });
-
-    </script>
+    <script type="text/javascript" src="~/js/NeuropsychologicalBatteryScores/Edit.js"></script>
 }

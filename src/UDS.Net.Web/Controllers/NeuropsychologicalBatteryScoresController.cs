@@ -225,6 +225,49 @@ namespace UDS.Net.Web.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult TrailMakingTestASecondsToCompleteValidateRange(int seconds)
+        {
+            var result = true;
+            if((seconds > 150) && (seconds < 995))
+            {
+                result = false;
+            }
+            return Json(result);
+        }
+        public IActionResult TrailMakingTestBSecondsToCompleteValidateRange(int seconds)
+        {
+            var result = true;
+            if ((seconds > 300 && seconds < 995))
+            {
+                result = false;
+            }
+            return Json(result);
+        }
+        public IActionResult TrailMakingTestANumberOfCorrectValidateRange(int seconds, int correctLines)
+        {
+            var result = true;
+            if(seconds == 150)
+            {
+                if (correctLines == 24)
+                {
+                    result = false;
+                }
+            }
+
+            return Json(result);
+        }
+        public IActionResult TrailMakingTestBNumberOfCorrectValidateRange(int seconds, int correctLines)
+        {
+            var result = true;
+            if(seconds == 300)
+            {
+                if (correctLines == 24)
+                {
+                    result = false;
+                }
+            }
+            return Json(result);
+        }
 
         private bool neuropsychologicalBatteryScoresExists(int id)
         {

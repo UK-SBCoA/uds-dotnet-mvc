@@ -256,7 +256,7 @@ namespace UDS.Net.Data.Entities
 
     [Display(Name = "Longest span forward")]
     [Range(0, 9, ErrorMessage = "Value outside of required range")]
-    [InvalidRange(nameof(NumberSpanTestForwardLongestSpanForward), 1, 4, ErrorMessage = "Value outside of required range")]
+    [InvalidRange(nameof(NumberSpanTestForwardLongestSpanForward), 1, 2, ErrorMessage = "Value outside of required range")]
     [Column("DIGFORSL")]
     public int? NumberSpanTestForwardLongestSpanForward { get; set; }
 
