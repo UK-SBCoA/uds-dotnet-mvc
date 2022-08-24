@@ -167,6 +167,26 @@ namespace UDS.Net.Data.Entities
     [RequiredIf(nameof(MoCAPartAdministered), true, ErrorMessage = "Value Required")]
     public int? MoCARecognition { get; set; }
 
+    // Rules for MoCANoCue, MoCACategoryCue, MoCARecognition
+    // if no reason codes or N/As then MoCANoCue + MoCACategoryCue + MoCARecognition <= 5.
+    [NotMapped]
+    [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "The sum of the Delayed recall questions, excluding reason variable codes, must be equal to or less than 5")]
+    public bool? DelayedRecallIsValid { 
+      get {
+        int delayedRecallTotal = 0;
+
+        if(MoCANoCue.HasValue && MoCACategoryCue.HasValue && MoCARecognition.HasValue) {
+          int moCANoCueValue = MoCANoCue.Value >= 95 && MoCANoCue.Value <= 98 ? 0 : MoCANoCue.Value;
+          int moCACategoryCueValue = MoCACategoryCue.Value != 88 ? MoCACategoryCue.Value : 0;
+          int moCARecognitionValue = MoCARecognition.Value != 88 ? MoCARecognition.Value : 0;
+
+          delayedRecallTotal += moCANoCueValue + moCACategoryCueValue + moCARecognitionValue;
+        }
+
+        return delayedRecallTotal <= 5 ? true : null;
+      }
+    }
+
     [Display(Name = "Orientation — Date")]
     [Range(0, 98, ErrorMessage = "Value outside of required range")]
     [InvalidRange(nameof(MoCADate), 2, 94, ErrorMessage = "Value outside of required range")]
