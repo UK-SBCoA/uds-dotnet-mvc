@@ -499,7 +499,7 @@
                         <span asp-validation-for="GDS" class="text-danger"></span>
                     </div>
                     <div class="col-md-2">
-                        <input asp-for="GDS" class="form-control" />
+                        <input readonly asp-for="GDS" class="form-control" />
                     </div>
                 </div>
 
@@ -522,28 +522,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>var total = 0
-        $('input[name=NoGDS]').on('change gds-load', (event) => {
-            var isChecked = $(event.target).is(':checked');
-            if (isChecked) {
-                $('input[type=radio]').each((index, elem) => {
-                    if (elem.getAttribute('name') != event.target.getAttribute('name')) {
-                        $(elem).prop('disabled', true);
-                        $('input[name=GDS]').val(88);
-                    }
-                });
-            } else {
-                $('input').each((index, elem) => {
-                    $(elem).prop('disabled', false);
-                    $('input[name=GDS]').val(null);
-                    depressionScore();
-                });
-            }
-        }).triggerHandler('gds-load');
-        $('input[type=radio]').on('change', (event) => {
-            depressionScore();
-        });
-        function depressionScore() {
-            $('input[name=GDS]').val($('input[type=radio][value=1]:checked').length);
-        }</script>
+    <script asp-append-version="true" type="text/javascript" src="~/js/GeriatricDepressionScale/Edit.js"></script>
 }
