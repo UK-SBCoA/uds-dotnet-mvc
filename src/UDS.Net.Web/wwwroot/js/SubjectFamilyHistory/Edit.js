@@ -11,14 +11,20 @@
     Initialize() {
         const totalRowCount = this.GetRowCount();
         if(this._tablePrefix != 'Parent') {
-            const disableStart = parseInt(this._enabledRows) + 1;
+            var disableStart = parseInt(this._enabledRows) + 1;
+
+            disableStart = this.CheckForUnknownOrAdopted(this._enabledRows, this._tablePrefix);
+
             for(let i = disableStart; i <= totalRowCount; i++) {
                 this.ReadOnlyRow(i);
             }
             // Setup Relationship Watch
             let disableTask;
             $(`input[name=${this._tablePrefix}Number`).on('keyup', (event) => {
-                const newStart = $(event.target).val() ? (parseInt($(event.target).val()) + 1) : 0;
+                var newStart = $(event.target).val() ? (parseInt($(event.target).val()) + 1) : 0;
+
+                newStart = this.CheckForUnknownOrAdopted($(event.target).val(), this._tablePrefix);                
+
                 clearTimeout(disableTask);
                 disableTask = setTimeout(() => {
                     if(newStart >= 0) {
@@ -35,7 +41,7 @@
         }
         for(let i = 1; i <= totalRowCount; i++) {
             const neruoHasValue = this.GetRow(i).find('input[name$=PrimaryNeurologicalProblemPsychiatricCondition]').first().val();
-            if(neruoHasValue && neruoHasValue != 8) {
+            if(neruoHasValue && neruoHasValue != 8 && neruoHasValue != 9) {
                 this.EnableNeuroControls(i);
             }
             else {
@@ -115,7 +121,7 @@
         const jRow = this.GetRow(relationshipIndex);
         const neuroWatch = jRow.find('input[name$="PrimaryNeurologicalProblemPsychiatricCondition"]').first();
         neuroWatch.on('keydown keyup', (events) => {
-            if ($(events.target).val() == '' || $(events.target).val() == 8)
+            if ($(events.target).val() == '' || $(events.target).val() == 8 || $(events.target).val() == 9)
             {
                 this.DisableNeuroControls(relationshipIndex);
             } else {
@@ -123,6 +129,18 @@
             }
         });
     }
+
+    CheckForUnknownOrAdopted(inputValue, tablePrefix) {
+        if (tablePrefix == "Sibling") {
+            if (inputValue == 77) {
+                return 0;
+            }
+        }
+
+        //Needs to return + 1 to value to match value to row
+        return parseInt(inputValue) + 1;
+    }
+
 }
 class SubjectFamilyHistory {
     Initialize() {

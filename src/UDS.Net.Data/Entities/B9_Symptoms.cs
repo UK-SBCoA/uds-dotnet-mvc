@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using COA.Components.Web.DataAnnotations;
+using UDS.Net.Data.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using UDS.Net.Data.Enums;
 
@@ -93,7 +93,7 @@ namespace UDS.Net.Data.Entities
         [Column("COGFPRED")]
         [RequiredIf(nameof(CognitionImpairment), 1, ErrorMessage = "Please provide a value")]
         [Display(Name = "Indicate the predominant symptom that was first recognized as a decline in the subject’s cognition")]
-        [Range(1, 99, ErrorMessage = "Value outside of required range")]
+        [Range(0, 99, ErrorMessage = "Value outside of required range")]
         [InvalidRange(nameof(PredominantSymptom), 9, 98, ErrorMessage = "Value outside of required range")]
         public int? PredominantSymptom { get; set; }
 
@@ -128,6 +128,69 @@ namespace UDS.Net.Data.Entities
         [Display(Name = "Based on the clinician’s judgment, is the subject currently experiencing any kind of behavioral symptoms?")]
         [Range(0, 1, ErrorMessage = "Value outside of required range")]
         public int? BehavioralSymptoms { get; set; }
+
+        [NotMapped]
+        [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Please indicate at least one behavioral symptom (9a-j)")]
+        public bool? AtLeastOneIndicatedIfHasBehavioralSymptom
+        {
+            get
+            {
+                if (BehavioralSymptoms.HasValue)
+                {
+                    if (BehavioralSymptoms.Value == 0)
+                        return true;
+                    else
+                    {
+                        int count = 0;
+
+                        if (ApathyWithdrawal.HasValue && ApathyWithdrawal.Value == 1)
+                            count++;
+
+                        if (DepressedMood.HasValue && DepressedMood.Value == 1)
+                            count++;
+
+                        if (VisualHallucinations.HasValue && VisualHallucinations.Value == 1)
+                            count++;
+
+                        if (AuditoryHallucinations.HasValue && AuditoryHallucinations.Value == 1)
+                            count++;
+
+                        if (AbnormalBeliefs.HasValue && AbnormalBeliefs.Value == 1)
+                            count++;
+
+                        if (Disinhibition.HasValue && Disinhibition.Value == 1)
+                            count++;
+
+                        if (Irritability.HasValue && Irritability.Value == 1)
+                            count++;
+
+                        if (Agitation.HasValue && Agitation.Value == 1)
+                            count++;
+
+                        if (PersonalityChange.HasValue && PersonalityChange.Value == 1)
+                            count++;
+
+                        if (RemDisorder.HasValue && RemDisorder.Value == 1)
+                            count++;
+
+                        if (Anxiety.HasValue && Anxiety.Value == 1)
+                            count++;
+
+                        if (ChangeInBehavior.HasValue && ChangeInBehavior.Value == 1)
+                            count++;
+
+                        if (count > 0)
+                            return true;
+
+                        return null;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
 
         [Column("BEAPATHY")]
         [RequiredIf(nameof(BehavioralSymptoms), 1, ErrorMessage = "Please provide a value")]

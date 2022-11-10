@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using COA.Components.Web.DataAnnotations;
+using UDS.Net.Data.DataAnnotations;
 using UDS.Net.Data.Enums;
 
 namespace UDS.Net.Data.Entities
@@ -67,12 +68,15 @@ namespace UDS.Net.Data.Entities
         [RequiredIf(nameof(FvpComplete), true, "Please indicate if there has been a change in mother or father information")]
         public int? ParentChange { get; set; }
         [Column("SIBS")]
-        [RequiredIf(nameof(IvpComplete), true, "Please indicate number of siblings 0 - 20")]
+        [Range(0, 77, ErrorMessage = "Value must be within the valid range of 0 - 20 or 77")]
+        [RequiredIf(nameof(IvpComplete), true, "Please indicate number of siblings 0 - 20 or 77")]
+        [InvalidRange(nameof(SiblingNumber), 21, 76, ErrorMessage = "Please indicate a valid number of siblings within range of 0 - 20 or 77")]
         public int? SiblingNumber { get; set; }
         [Column("NWINFSIB")]
         [RequiredIf(nameof(FvpComplete), true, "Please indicate if there has been a change in sibling information")]
         public int? SiblingChange { get; set; }
         [Column("KIDS")]
+        [Range(0, 15, ErrorMessage = "Value must be within the valid range of 0 - 15")]
         [RequiredIf(nameof(IvpComplete), true, "Please indicate number of children 0 - 15")]
         public int? ChildrenNumber { get; set; }
         [Column("NWINFKID")]

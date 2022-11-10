@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using COA.Components.Web.DataAnnotations;
+using UDS.Net.Data.DataAnnotations;
 using UDS.Net.Data.Enums;
 
 namespace UDS.Net.Data.Entities
@@ -153,5 +153,61 @@ namespace UDS.Net.Data.Entities
         [MaxLength(60)]
         public string OtherFindingsSpeicify {get;set;}
 
+        [NotMapped]
+        [RequiredIf(nameof(FormStatus), FormStatus.Complete, ErrorMessage = "Indicate at least one finding/syndrome that were consistent with the abnormal neurological exam (Yes to at least one in Questions 2-8)")]
+        public bool? AtLeastOneFindingSyndromeIndicated
+        {
+            get
+            {
+                if(AbnormalNeurologicalExamFindings == 1)
+                {
+                    int count = 0;
+
+                    if (ParkinsonianSigns.HasValue && ParkinsonianSigns.Value == true)
+                    {
+                        count++;
+                    }
+
+                    if (CerebrovascularDiseaseSigns.HasValue && CerebrovascularDiseaseSigns.Value == true)
+                    {
+                        count++;
+                    }
+
+                    if (HigherCorticalVisual.HasValue && HigherCorticalVisual.Value == true)
+                    {
+                        count++;
+                    }
+
+                    if (GaitApraxia.HasValue && GaitApraxia.Value == true)
+                    {
+                        count++;
+                    }
+
+                    if (PSP.HasValue && PSP.Value == true)
+                    {
+                        count++;
+                    }
+
+                    if (ALS_Findings.HasValue && ALS_Findings.Value == true)
+                    {
+                        count++;
+                    }
+
+                    if (OtherFindings.HasValue && OtherFindings.Value == true)
+                    {
+                        count++;
+                    }
+
+                    if (count > 0)
+                    {
+                        return true;
+                    }
+
+                    return null;
+                }
+
+                return true;
+            }
+        }
     }
 }

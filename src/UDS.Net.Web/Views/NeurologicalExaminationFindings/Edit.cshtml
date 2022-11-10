@@ -23,7 +23,7 @@
     <table class="table table-stiped table-bordered">
         <thead>
             <tr class=" table-secondary">
-                <th colspan="5">
+                <th colspan="7">
                     <label asp-for="AbnormalNeurologicalExamFindings" class="control-label"></label><br>
                     <span asp-validation-for="AbnormalNeurologicalExamFindings" class="text-danger"></span>
                 </th>
@@ -31,7 +31,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" asp-for="AbnormalNeurologicalExamFindings" id="AbnormalNeurologicalExamFindings[0]" value="0" data-always-enabled />
                         <label class="form-check-label" for="AbnormalNeurologicalExamFindings[0]"> <span class="badge badge-pill badge-light">0</span> No abnormal findings <span class="text-uppercase font-weight-light font-italic text-primary">(END FORM HERE)</span></label>
@@ -51,24 +51,27 @@
         </tbody>
         <thead>
             <tr class="table-primary">
-                <th colspan="5">INSTRUCTIONS FOR QUESTIONS 2 – 8</th>
+                <th colspan="7">INSTRUCTIONS FOR QUESTIONS 2 – 8</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     Please complete the appropriate sections below, using your best clinical judgment in selecting findings that indicate the likely syndrome(s) that is/are present.
+                    <div>
+                        <span asp-validation-for="AtLeastOneFindingSyndromeIndicated" class="text-danger"></span>
+                    </div>
                 </td>
             </tr>
         </tbody>
         <thead>
             <tr class="table-primary">
-                <th colspan="5">
+                <th colspan="7">
                     CHECK ALL OF THE GROUPS OF FINDINGS / SYNDROMES THAT WERE PRESENT:
                 </th>
             </tr>
             <tr class="table-secondary">
-                <th colspan="5">
+                <th colspan="7">
                     <label asp-for="ParkinsonianSigns" class="control-label"></label><br>
                     <span asp-validation-for="ParkinsonianSigns" class="text-danger"></span>
                 </th>
@@ -76,7 +79,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     <div class="form-check">
                         <input class="form-check-input"  
                             type="radio" asp-for="ParkinsonianSigns" 
@@ -92,12 +95,12 @@
             </tr>
             <tr>
                 <td colspan="1">
-                    <i>Findings not marked Yes or Not assessed will default to No in the NACC database</i>
+                    <i>Findings should be marked as Yes, No, or Not assessed.</i>
                 </td>
-                <td colspan="2" class="table-primary text-center">
+                <td colspan="3" class="table-primary text-center">
                     LEFT
                 </td>
-                <td colspan="2" class="table-primary  text-center">
+                <td colspan="3" class="table-primary  text-center">
                     RIGHT
                 </td>
             </tr>
@@ -109,10 +112,16 @@
                     Yes
                 </td>
                 <td class=" table-secondary text-center">
+                    No
+                </td>
+                <td class=" table-secondary text-center">
                     Not assessed
                 </td>
                 <td class=" table-secondary text-center">
                     Yes
+                </td>
+                <td class=" table-secondary text-center">
+                    No
                 </td>
                 <td class=" table-secondary text-center">
                     Not assessed
@@ -133,6 +142,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="ParkinsonianLeftRestingTremorArm" id="ParkinsonianLeftRestingTremorArm[0]" value="0" />
+                        <label class="form-check-label" for="ParkinsonianLeftRestingTremorArm[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ParkinsonianLeftRestingTremorArm" id="ParkinsonianLeftRestingTremorArm[8]" value="8" />
                         <label class="form-check-label" for="ParkinsonianLeftRestingTremorArm[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -141,6 +156,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ParkinsonianRightRestingTremorArm" id="ParkinsonianRightRestingTremorArm[1]" value="1" />
                         <label class="form-check-label" for="ParkinsonianRightRestingTremorArm[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="ParkinsonianRightRestingTremorArm" id="ParkinsonianRightRestingTremorArm[0]" value="0" />
+                        <label class="form-check-label" for="ParkinsonianRightRestingTremorArm[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -165,6 +186,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="ParkinsonianLeftSlowingOfFineMotorMovements" id="ParkinsonianLeftSlowingOfFineMotorMovements[0]" value="0" />
+                        <label class="form-check-label" for="ParkinsonianLeftSlowingOfFineMotorMovements[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ParkinsonianLeftSlowingOfFineMotorMovements" id="ParkinsonianLeftSlowingOfFineMotorMovements[8]" value="8" />
                         <label class="form-check-label" for="ParkinsonianLeftSlowingOfFineMotorMovements[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -173,6 +200,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ParkinsonianRightSlowingOfFineMotorMovements" id="ParkinsonianRightSlowingOfFineMotorMovements[1]" value="1" />
                         <label class="form-check-label" for="ParkinsonianRightSlowingOfFineMotorMovements[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="ParkinsonianRightSlowingOfFineMotorMovements" id="ParkinsonianRightSlowingOfFineMotorMovements[0]" value="0" />
+                        <label class="form-check-label" for="ParkinsonianRightSlowingOfFineMotorMovements[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -197,6 +230,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="ParkinsonianLeftRigidityArm" id="ParkinsonianLeftRigidityArm[0]" value="0" />
+                        <label class="form-check-label" for="ParkinsonianLeftRigidityArm[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ParkinsonianLeftRigidityArm" id="ParkinsonianLeftRigidityArm[8]" value="8" />
                         <label class="form-check-label" for="ParkinsonianLeftRigidityArm[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -205,6 +244,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ParkinsonianRightRigidityArm" id="ParkinsonianRightRigidityArm[1]" value="1" />
                         <label class="form-check-label" for="ParkinsonianRightRigidityArm[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="ParkinsonianRightRigidityArm" id="ParkinsonianRightRigidityArm[0]" value="0" />
+                        <label class="form-check-label" for="ParkinsonianRightRigidityArm[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -220,6 +265,9 @@
                     Yes
                 </td>
                 <td colspan="2" class=" table-secondary text-center">
+                    No
+                </td>
+                <td colspan="2" class=" table-secondary text-center">
                     Not assessed
                 </td>
             </tr>
@@ -232,6 +280,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ParkinsonianBradykinesia" id="ParkinsonianBradykinesia[1]" value="1" />
                         <label class="form-check-label" for="ParkinsonianBradykinesia[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="ParkinsonianBradykinesia" id="ParkinsonianBradykinesia[0]" value="0" />
+                        <label class="form-check-label" for="ParkinsonianBradykinesia[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td colspan="2">
@@ -254,6 +308,12 @@
                 </td>
                 <td colspan="2">
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="ParkinsonianGaitDisorder" id="ParkinsonianGaitDisorder[0]" value="0" />
+                        <label class="form-check-label" for="ParkinsonianGaitDisorder[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ParkinsonianGaitDisorder" id="ParkinsonianGaitDisorder[8]" value="8" />
                         <label class="form-check-label" for="ParkinsonianGaitDisorder[8]"><span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -272,6 +332,12 @@
                 </td>
                 <td colspan="2">
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="ParkinsonianPosturalInstability" id="ParkinsonianPosturalInstability[0]" value="0" />
+                        <label class="form-check-label" for="ParkinsonianPosturalInstability[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ParkinsonianPosturalInstability" id="ParkinsonianPosturalInstability[8]" value="8" />
                         <label class="form-check-label" for="ParkinsonianPosturalInstability[8]"><span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -280,7 +346,7 @@
         </tbody>
         <thead>
             <tr class=" table-secondary">
-                <th colspan="5">
+                <th colspan="7">
                     <label asp-for="CerebrovascularDiseaseSigns" class="control-label"></label><br>
                     <span asp-validation-for="CerebrovascularDiseaseSigns" class="text-danger"></span>
                 </th>
@@ -288,7 +354,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" asp-for="CerebrovascularDiseaseSigns" id="CerebrovascularDiseaseSigns[0]" value="false" />
                         <label class="form-check-label" for="CerebrovascularDiseaseSigns[0]"> <span class="badge badge-pill badge-light">0</span> No <span class="text-uppercase font-weight-light font-italic text-primary">(SKIP TO QUESTION 4)</span></label>
@@ -301,9 +367,9 @@
             </tr>
             <tr>
                 <td>
-                    <i>Findings not marked Yes or Not assessed will default to No in the NACC database.</i>
+                    <i>Findings should be marked as Yes, No, or Not assessed.</i>
                 </td>
-                <td class="table-primary text-center" colspan="4">
+                <td class="table-primary text-center" colspan="7">
                     PRESENT
                 </td>
             </tr>
@@ -311,6 +377,9 @@
                 <td colspan="1" class="table-primary">Findings consistent with stroke/cerebrovascular disease</td>
                 <td colspan="2" class=" table-secondary text-center">
                     Yes
+                </td>
+                <td colspan="2" class=" table-secondary text-center">
+                    No
                 </td>
                 <td colspan="2" class=" table-secondary text-center">
                     Not assessed
@@ -325,6 +394,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CorticalCognitiveDeficit" id="CorticalCognitiveDeficit[1]" value="1" />
                         <label class="form-check-label" for="CorticalCognitiveDeficit[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CorticalCognitiveDeficit" id="CorticalCognitiveDeficit[0]" value="0" />
+                        <label class="form-check-label" for="CorticalCognitiveDeficit[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td colspan="2">
@@ -347,6 +422,12 @@
                 </td>
                 <td colspan="2">
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CorticalSIVD" id="CorticalSIVD[0]" value="0" />
+                        <label class="form-check-label" for="CorticalSIVD[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CorticalSIVD" id="CorticalSIVD[8]" value="8" />
                         <label class="form-check-label" for="CorticalSIVD[8]"><span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -354,10 +435,10 @@
             </tr>
             <tr>
                 <td rowspan="2"></td>
-                <td colspan="2" class="table-primary text-center">
+                <td colspan="3" class="table-primary text-center">
                     LEFT
                 </td>
-                <td colspan="2" class="table-primary  text-center">
+                <td colspan="3" class="table-primary  text-center">
                     RIGHT
                 </td>
             </tr>
@@ -366,10 +447,16 @@
                     Yes
                 </td>
                 <td class=" table-secondary text-center">
+                    No
+                </td>
+                <td class=" table-secondary text-center">
                     Not assessed
                 </td>
                 <td class=" table-secondary text-center">
                     Yes
+                </td>
+                <td class=" table-secondary text-center">
+                    No
                 </td>
                 <td class=" table-secondary text-center">
                     Not assessed
@@ -389,6 +476,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CorticalMotorLeft" id="CorticalMotorLeft[0]" value="0" />
+                        <label class="form-check-label" for="CorticalMotorLeft[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CorticalMotorLeft" id="CorticalMotorLeft[8]" value="8" />
                         <label class="form-check-label" for="CorticalMotorLeft[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -397,6 +490,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CorticalMotorRight" id="CorticalMotorRight[1]" value="1" />
                         <label class="form-check-label" for="CorticalMotorRight[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CorticalMotorRight" id="CorticalMotorRight[0]" value="0" />
+                        <label class="form-check-label" for="CorticalMotorRight[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -421,6 +520,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CorticalVisualFieldLossLeft" id="CorticalVisualFieldLossLeft[0]" value="0" />
+                        <label class="form-check-label" for="CorticalVisualFieldLossLeft[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CorticalVisualFieldLossLeft" id="CorticalVisualFieldLossLeft[8]" value="8" />
                         <label class="form-check-label" for="CorticalVisualFieldLossLeft[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -429,6 +534,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CorticalVisualFieldLossRight" id="CorticalVisualFieldLossRight[1]" value="1" />
                         <label class="form-check-label" for="CorticalVisualFieldLossRight[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CorticalVisualFieldLossRight" id="CorticalVisualFieldLossRight[0]" value="0" />
+                        <label class="form-check-label" for="CorticalVisualFieldLossRight[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -452,14 +563,26 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CorticalSomatosensoryLossLeft" id="CorticalSomatosensoryLossLeft[0]" value="0" />
+                        <label class="form-check-label" for="CorticalSomatosensoryLossLeft[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CorticalSomatosensoryLossLeft" id="CorticalSomatosensoryLossLeft[8]" value="8" />
                         <label class="form-check-label" for="CorticalSomatosensoryLossLeft[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
-                        <input type="radio" asp-for="CorticalVisualFieldLossRight" id="CorticalVisualFieldLossRight[1]" value="1" />
-                        <label class="form-check-label" for="CorticalVisualFieldLossRight[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                        <input type="radio" asp-for="CorticalSomatosensoryLossRight" id="CorticalSomatosensoryLossRight[1]" value="1" />
+                        <label class="form-check-label" for="CorticalSomatosensoryLossRight[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CorticalSomatosensoryLossRight" id="CorticalSomatosensoryLossRight[0]" value="0" />
+                        <label class="form-check-label" for="CorticalSomatosensoryLossRight[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -472,7 +595,7 @@
         </tbody>
         <thead>
             <tr class=" table-secondary">
-                <th colspan="5">
+                <th colspan="7">
                     <label asp-for="HigherCorticalVisual" class="control-label"></label><br>
                     <span asp-validation-for="HigherCorticalVisual" class="text-danger"></span>
                 </th>
@@ -480,7 +603,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="HigherCorticalVisual" id="HigherCorticalVisual[0]" value="false" />
                         <label class="form-check-label" for="HigherCorticalVisual[0]"> <span class="badge badge-pill badge-light">0</span> No</label>
@@ -494,7 +617,7 @@
         </tbody>
         <thead>
             <tr class=" table-secondary">
-                <th colspan="5">
+                <th colspan="7">
                     <label asp-for="PSP" class="control-label"></label><br>
                     <span asp-validation-for="PSP" class="text-danger"></span>
                 </th>
@@ -502,7 +625,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="PSP" id="PSP[0]" value="false" />
                         <label class="form-check-label" for="PSP[0]"> <span class="badge badge-pill badge-light">0</span> No <span class="text-uppercase font-weight-light font-italic text-primary">(SKIP TO QUESTION 6)</span></label>
@@ -515,9 +638,9 @@
             </tr>
             <tr>
                 <td>
-                    <i>Findings not marked Yes or Not assessed will default to No in the NACC database.</i>
+                    <i>Findings should be marked as Yes, No, or Not assessed.</i>
                 </td>
-                <td colspan="4" class="text-center table-primary">
+                <td colspan="7" class="text-center table-primary">
                     PRESENT
                 </td>
             </tr>
@@ -527,6 +650,9 @@
                 </td>
                 <td colspan="2" class="table-secondary ">
                     Yes
+                </td>
+                <td colspan="2" class="table-secondary ">
+                    No
                 </td>
                 <td colspan="2" class="table-secondary ">
                     Not assessed
@@ -541,6 +667,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="PSP_EyeMovement" id="PSP_EyeMovement[1]" value="1" />
                         <label class="form-check-label" for="PSP_EyeMovement[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="PSP_EyeMovement" id="PSP_EyeMovement[0]" value="0" />
+                        <label class="form-check-label" for="PSP_EyeMovement[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td colspan="2">
@@ -563,6 +695,12 @@
                 </td>
                 <td colspan="2">
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="PSP_Dysarthria" id="PSP_Dysarthria[0]" value="0" />
+                        <label class="form-check-label" for="PSP_Dysarthria[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="PSP_Dysarthria" id="PSP_Dysarthria[8]" value="8" />
                         <label class="form-check-label" for="PSP_Dysarthria[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -577,6 +715,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="PSP_Axial" id="PSP_Axial[1]" value="1" />
                         <label class="form-check-label" for="PSP_Axial[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="PSP_Axial" id="PSP_Axial[0]" value="0" />
+                        <label class="form-check-label" for="PSP_Axial[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td colspan="2">
@@ -599,6 +743,12 @@
                 </td>
                 <td colspan="2">
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="PSP_Gait" id="PSP_Gait[0]" value="0" />
+                        <label class="form-check-label" for="PSP_Gait[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="PSP_Gait" id="PSP_Gait[8]" value="8" />
                         <label class="form-check-label" for="PSP_Gait[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -617,6 +767,12 @@
                 </td>
                 <td colspan="2">
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="PSP_Apraxia" id="PSP_Apraxia[0]" value="0" />
+                        <label class="form-check-label" for="PSP_Apraxia[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="PSP_Apraxia" id="PSP_Apraxia[8]" value="8" />
                         <label class="form-check-label" for="PSP_Apraxia[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -624,10 +780,10 @@
             </tr>
             <tr>
                 <td rowspan="2"></td>
-                <td colspan="2" class="table-primary text-center">
+                <td colspan="3" class="table-primary text-center">
                     LEFT
                 </td>
-                <td colspan="2" class="table-primary  text-center">
+                <td colspan="3" class="table-primary  text-center">
                     RIGHT
                 </td>
             </tr>
@@ -636,10 +792,16 @@
                     Yes
                 </td>
                 <td class=" table-secondary text-center">
+                    No
+                </td>
+                <td class=" table-secondary text-center">
                     Not assessed
                 </td>
                 <td class=" table-secondary text-center">
                     Yes
+                </td>
+                <td class=" table-secondary text-center">
+                    No
                 </td>
                 <td class=" table-secondary text-center">
                     Not assessed
@@ -659,6 +821,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_ApraxiaLeft" id="CBS_ApraxiaLeft[0]" value="0" />
+                        <label class="form-check-label" for="CBS_ApraxiaLeft[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_ApraxiaLeft" id="CBS_ApraxiaLeft[8]" value="8" />
                         <label class="form-check-label" for="CBS_ApraxiaLeft[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -667,6 +835,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_ApraxiaRight" id="CBS_ApraxiaRight[1]" value="1" />
                         <label class="form-check-label" for="CBS_ApraxiaRight[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_ApraxiaRight" id="CBS_ApraxiaRight[0]" value="0" />
+                        <label class="form-check-label" for="CBS_ApraxiaRight[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -690,6 +864,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_CorticalSensoryDeficitsLeft" id="CBS_CorticalSensoryDeficitsLeft[0]" value="0" />
+                        <label class="form-check-label" for="CBS_CorticalSensoryDeficitsLeft[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_CorticalSensoryDeficitsLeft" id="CBS_CorticalSensoryDeficitsLeft[8]" value="8" />
                         <label class="form-check-label" for="CBS_CorticalSensoryDeficitsLeft[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -698,6 +878,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_CorticalSensoryDeficitsRight" id="CBS_CorticalSensoryDeficitsRight[1]" value="1" />
                         <label class="form-check-label" for="CBS_CorticalSensoryDeficitsRight[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_CorticalSensoryDeficitsRight" id="CBS_CorticalSensoryDeficitsRight[0]" value="0" />
+                        <label class="form-check-label" for="CBS_CorticalSensoryDeficitsRight[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -722,6 +908,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_AtaxiaLeft" id="CBS_AtaxiaLeft[0]" value="0" />
+                        <label class="form-check-label" for="CBS_AtaxiaLeft[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_AtaxiaLeft" id="CBS_AtaxiaLeft[8]" value="8" />
                         <label class="form-check-label" for="CBS_AtaxiaLeft[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -730,6 +922,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_AtaxiaRight" id="CBS_AtaxiaRight[1]" value="1" />
                         <label class="form-check-label" for="CBS_AtaxiaRight[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_AtaxiaRight" id="CBS_AtaxiaRight[0]" value="0" />
+                        <label class="form-check-label" for="CBS_AtaxiaRight[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -754,6 +952,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_AlienLimbLeft" id="CBS_AlienLimbLeft[0]" value="0" />
+                        <label class="form-check-label" for="CBS_AlienLimbLeft[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_AlienLimbLeft" id="CBS_AlienLimbLeft[8]" value="8" />
                         <label class="form-check-label" for="CBS_AlienLimbLeft[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -762,6 +966,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_AlienLimbRight" id="CBS_AlienLimbRight[1]" value="1" />
                         <label class="form-check-label" for="CBS_AlienLimbRight[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_AlienLimbRight" id="CBS_AlienLimbRight[0]" value="0" />
+                        <label class="form-check-label" for="CBS_AlienLimbRight[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -786,6 +996,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_DystoniaLeft" id="CBS_DystoniaLeft[0]" value="0" />
+                        <label class="form-check-label" for="CBS_DystoniaLeft[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_DystoniaLeft" id="CBS_DystoniaLeft[8]" value="8" />
                         <label class="form-check-label" for="CBS_DystoniaLeft[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -794,6 +1010,12 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_DystoniaRight" id="CBS_DystoniaRight[1]" value="1" />
                         <label class="form-check-label" for="CBS_DystoniaRight[1]"> <span class="badge badge-pill badge-light">1</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_DystoniaRight" id="CBS_DystoniaRight[0]" value="0" />
+                        <label class="form-check-label" for="CBS_DystoniaRight[0]"> <span class="badge badge-pill badge-light">0</span></label>
                     </div>
                 </td>
                 <td>
@@ -817,6 +1039,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_MyoclonusLeft" id="CBS_MyoclonusLeft[0]" value="0" />
+                        <label class="form-check-label" for="CBS_MyoclonusLeft[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_MyoclonusLeft" id="CBS_MyoclonusLeft[8]" value="8" />
                         <label class="form-check-label" for="CBS_MyoclonusLeft[8]"> <span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -829,6 +1057,12 @@
                 </td>
                 <td>
                     <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="CBS_MyoclonusRight" id="CBS_MyoclonusRight[0]" value="0" />
+                        <label class="form-check-label" for="CBS_MyoclonusRight[0]"> <span class="badge badge-pill badge-light">0</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check form-check-inline">
                         <input type="radio" asp-for="CBS_MyoclonusRight" id="CBS_MyoclonusRight[8]" value="8" />
                         <label class="form-check-label" for="CBS_MyoclonusRight[8]"><span class="badge badge-pill badge-light">8</span></label>
                     </div>
@@ -837,7 +1071,7 @@
         </tbody>
         <thead>
             <tr class=" table-secondary">
-                <th colspan="5">
+                <th colspan="7">
                     <label asp-for="ALS_Findings" class="control-label"></label><br>
                     <span asp-validation-for="ALS_Findings" class="text-danger"></span>
                 </th>
@@ -845,7 +1079,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="ALS_Findings" id="ALS_Findings[0]" value="false" />
                         <label class="form-check-label" for="ALS_Findings[0]"> <span class="badge badge-pill badge-light">0</span>No</label>
@@ -859,7 +1093,7 @@
         </tbody>
         <thead>
             <tr class=" table-secondary">
-                <th colspan="5">
+                <th colspan="7">
                     <label asp-for="GaitApraxia" class="control-label"></label><br>
                     <span asp-validation-for="GaitApraxia" class="text-danger"></span>
                 </th>
@@ -867,7 +1101,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="GaitApraxia" id="GaitApraxia[0]" value="false" />
                         <label class="form-check-label" for="GaitApraxia[0]"> <span class="badge badge-pill badge-light">0</span>No</label>
@@ -881,7 +1115,7 @@
         </tbody>
         <thead>
             <tr class=" table-secondary">
-                <th colspan="5">
+                <th colspan="7">
                     <label asp-for="OtherFindings" class="control-label"></label><br>
                     <span asp-validation-for="OtherFindings" class="text-danger"></span>
                 </th>
@@ -889,7 +1123,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     <div class="row">
                         <div class="col">
                             <div class="form-check form-check-inline">
@@ -913,6 +1147,7 @@
             </tr>
         </tbody>
     </table>
+
     <partial name="_SaveComplete" model='Model' view-data="ViewData" />
 </form>
 <partial name="_CopyrightStatement" />

@@ -17,14 +17,7 @@
     <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <table class="table table-bordered table-striped mt-5">
-                <thead>
-                    <tr>
-                        <td colspan="6">
-                        </td>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr>
                         <td>
@@ -38,13 +31,13 @@
                                 <div><span asp-validation-for="BirthYear" class="text-danger" type="number"></span></div>
                             </div>
                         </td>
-                        <td class="colspan=" 1">
+                        <td>
                             <input asp-for="BirthMonth" class="form-control" type="number" />
                         </td>
-                        <td class="colspan=" 1">
+                        <td>
                             <input asp-for="BirthDay" class="form-control" type="number" />
                         </td>
-                        <td class="colspan=" 1">
+                        <td>
                             <input asp-for="BirthYear" class="form-control" type="number" />
                         </td>
                     </tr>
@@ -53,14 +46,18 @@
                             <label>2. @Html.DisplayNameFor(model => model.Sex)</label>
                             <div><span asp-validation-for="Sex" class="text-danger"></span></div>
                         </td>
-                        <td colspan="3">
-                            <div>
-                                <input asp-for="Sex" type="radio" name="Sex" value="1" id="Sex[0]" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="Sex[0]">Male</label>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Sex" type="radio" name="Sex" value="1" id="Sex[0]" />
+                                <label class="form-check-label" for="Sex[0]">
+                                    <span class="badge badge-pill badge-light">1</span>Male
+                                </label>
                             </div>
-                            <div>
-                                <input asp-for="Sex" type="radio" name="Sex" value="2" id="Sex[1]" /><span class="badge badge-pill badge-light">2</span>
-                                <label for="Sex[1]">Female</label>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Sex" type="radio" name="Sex" value="2" id="Sex[1]" />
+                                <label class="form-check-label" for="Sex[1]">
+                                    <span class="badge badge-pill badge-light">2</span>Female
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -70,13 +67,17 @@
                             <div><span asp-validation-for="IsNewCoParticipant" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <input asp-for="IsNewCoParticipant" type="radio" name="IsNewCoParticipant" value="false" id="IsNewCoParticipant[1]" data-toggle-bool="[false]" data-toggle-targets="HispanicLatinoEthnicity,EthnicOrigins,Race,SecondaryRace,AdditionalRace,YearsOfEducation" /><span class="badge badge-pill badge-light">0</span>
-                                <label for="IsNewCoParticipant[1]">No (If No, SKIP TO QUESTION 9)</label>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="IsNewCoParticipant" type="radio" name="IsNewCoParticipant" value="false" id="IsNewCoParticipant[1]" data-toggle-bool="[false]" data-toggle-targets="HispanicLatinoEthnicity,EthnicOrigins,YearsOfEducation" />
+                                <label class="form-check-label " for="IsNewCoParticipant[1]">
+                                    <span class="badge badge-pill badge-light">0</span>No (If No, SKIP TO QUESTION 9)
+                                </label>
                             </div>
-                            <div>
-                                <input asp-for="IsNewCoParticipant" type="radio" name="IsNewCoParticipant" value="true" id="IsNewCoParticipant[0]" data-toggle-bool="[false]" data-toggle-targets="HispanicLatinoEthnicity,EthnicOrigins,Race,SecondaryRace,AdditionalRace,YearsOfEducation" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="IsNewCoParticipant[0]">Yes</label>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="IsNewCoParticipant" type="radio" name="IsNewCoParticipant" value="true" id="IsNewCoParticipant[0]" data-toggle-bool="[false]" data-toggle-targets="HispanicLatinoEthnicity,EthnicOrigins,YearsOfEducation" />
+                                <label class="form-check-label " for="IsNewCoParticipant[0]">
+                                    <span class="badge badge-pill badge-light">1</span>Yes
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -86,17 +87,23 @@
                             <div><span asp-validation-for="HispanicLatinoEthnicity" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <input class="isNewParticipantToggle" type="radio" asp-for="HispanicLatinoEthnicity" value="0" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[1]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins" /><span class="badge badge-pill badge-light">0</span>
-                                <label for="HispanicLatinoEthnicity[1]">No (if No, SKIP TO QUESTION 5)</label>
+                            <div class="form-check">
+                                <input class="form-check-input" class="isNewParticipantToggle" type="radio" asp-for="HispanicLatinoEthnicity" value="0" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[1]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins" />
+                                <label class="form-check-label" for="HispanicLatinoEthnicity[1]">
+                                    <span class="badge badge-pill badge-light">0</span>No (if No, SKIP TO QUESTION 5)
+                                </label>
                             </div>
-                            <div>
-                                <input class="isNewParticipantToggle" type="radio" asp-for="HispanicLatinoEthnicity" value="1" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[2]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="HispanicLatinoEthnicity[2]">Yes</label>
+                            <div class="form-check">
+                                <input class="form-check-input" class="isNewParticipantToggle" type="radio" asp-for="HispanicLatinoEthnicity" value="1" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[2]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins" />
+                                <label class="form-check-label" for="HispanicLatinoEthnicity[2]">
+                                    <span class="badge badge-pill badge-light">1</span>Yes
+                                </label>
                             </div>
-                            <div>
-                                <input class="isNewParticipantToggle" type="radio" asp-for="HispanicLatinoEthnicity" value="9" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[3]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins" /><span class="badge badge-pill badge-light">9</span>
-                                <label for="HispanicLatinoEthnicity[3]">Uknown (if Unknown, SKIP TO QUESTION 5)</label>
+                            <div class="form-check">
+                                <input class="form-check-input" class="isNewParticipantToggle" type="radio" asp-for="HispanicLatinoEthnicity" value="9" name="HispanicLatinoEthnicity" id="HispanicLatinoEthnicity[3]" data-toggle-values="[0,9]" data-toggle-targets="EthnicOrigins" />
+                                <label class="form-check-label" for="HispanicLatinoEthnicity[3]">
+                                    <span class="badge badge-pill badge-light">9</span>Unknown (if Unknown, SKIP TO QUESTION 5)
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -107,38 +114,54 @@
                             <div><span asp-validation-for="EthnicOriginsOther" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="1" name="EthnicOrigins" id="EthnicOrigins[1]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="EthnicOrigins[1]">Mexican, Chicano, or Mexican-American</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="EthnicOrigins" value="1" name="EthnicOrigins" id="EthnicOrigins[1]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" />
+                                <label class="form-check-label" for="EthnicOrigins[1]">
+                                    <span class="badge badge-pill badge-light">1</span>Mexican, Chicano, or Mexican-American
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="2" name="EthnicOrigins" id="EthnicOrigins[2]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">2</span>
-                                <label for="EthnicOrigins[2]">Puerto Rican</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="EthnicOrigins" value="2" name="EthnicOrigins" id="EthnicOrigins[2]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" />
+                                <label class="form-check-label" for="EthnicOrigins[2]">
+                                    <span class="badge badge-pill badge-light">2</span>Puerto Rican
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="3" name="EthnicOrigins" id="EthnicOrigins[3]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">3</span>
-                                <label for="EthnicOrigins[3]">Cuban</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="EthnicOrigins" value="3" name="EthnicOrigins" id="EthnicOrigins[3]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" />
+                                <label class="form-check-label" for="EthnicOrigins[3]">
+                                    <span class="badge badge-pill badge-light">3</span>Cuban
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="4" name="EthnicOrigins" id="EthnicOrigins[4]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">4</span>
-                                <label for="EthnicOrigins[4]">Dominican</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="EthnicOrigins" value="4" name="EthnicOrigins" id="EthnicOrigins[4]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" />
+                                <label class="form-check-label" for="EthnicOrigins[4]">
+                                    <span class="badge badge-pill badge-light">4</span>Dominican
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="5" name="EthnicOrigins" id="EthnicOrigins[5]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">5</span>
-                                <label for="EthnicOrigins[5]">Central American</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="EthnicOrigins" value="5" name="EthnicOrigins" id="EthnicOrigins[5]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" />
+                                <label class="form-check-label" for="EthnicOrigins[5]">
+                                    <span class="badge badge-pill badge-light">5</span>Central American
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="6" name="EthnicOrigins" id="EthnicOrigins[6]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">6</span>
-                                <label for="EthnicOrigins[6]">South American</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="EthnicOrigins" value="6" name="EthnicOrigins" id="EthnicOrigins[6]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" />
+                                <label class="form-check-label" for="EthnicOrigins[6]">
+                                    <span class="badge badge-pill badge-light">6</span>South American
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="50" name="EthnicOrigins" id="EthnicOrigins[7]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">50</span>
-                                <label for="EthnicOrigins[7]">Other (SPECIFY)</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="EthnicOrigins" value="50" name="EthnicOrigins" id="EthnicOrigins[7]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" />
+                                <label class="form-check-label" for="EthnicOrigins[7]">
+                                    <span class="badge badge-pill badge-light">50</span>Other (SPECIFY)
+                                </label>
                                 <input class="form-control" type="text" name="EthnicOriginsOther" asp-for="EthnicOriginsOther" />
                             </div>
-                            <div>
-                                <input type="radio" asp-for="EthnicOrigins" value="99" name="EthnicOrigins" id="EthnicOrigins[8]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" /><span class="badge badge-pill badge-light">99</span>
-                                <label for="EthnicOrigins[8]">Unknown</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="EthnicOrigins" value="99" name="EthnicOrigins" id="EthnicOrigins[8]" data-toggle-values="[1,2,3,4,5,6,99]" data-toggle-targets="EthnicOriginsOther" />
+                                <label class="form-check-label" for="EthnicOrigins[8]">
+                                    <span class="badge badge-pill badge-light">99</span>Unknown
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -149,34 +172,48 @@
                             <div><span asp-validation-for="RaceOther" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <input type="radio" asp-for="Race" value="1" name="Race" id="Race[1]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="Race[1]">White</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Race" value="1" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" name="Race" id="Race[1]" />
+                                <label class="form-check-label" for="Race[1]">
+                                    <span class="badge badge-pill badge-light">1</span>White
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="Race" value="2" name="Race" id="Race[2]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">2</span>
-                                <label for="Race[2]">Black or African American</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Race" value="2" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" name="Race" id="Race[2]" />
+                                <label class="form-check-label" for="Race[2]">
+                                    <span class="badge badge-pill badge-light">2</span>Black or African American
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="Race" value="3" name="Race" id="Race[3]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">3</span>
-                                <label for="Race[3]">American Indian or Alaska Native</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Race" value="3" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" name="Race" id="Race[3]" />
+                                <label class="form-check-label" for="Race[3]">
+                                    <span class="badge badge-pill badge-light">3</span>American Indian or Alaska Native
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="Race" value="4" name="Race" id="Race[4]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">4</span>
-                                <label for="Race[4]">Native Hawaiian or other Pacific Islander</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Race" value="4" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" name="Race" id="Race[4]" />
+                                <label class="form-check-label" for="Race[4]">
+                                    <span class="badge badge-pill badge-light">4</span>Native Hawaiian or other Pacific Islander
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="Race" value="5" name="Race" id="Race[5]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">5</span>
-                                <label for="Race[5]">Asian</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Race" value="5" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" name="Race" id="Race[5]" />
+                                <label class="form-check-label" for="Race[5]">
+                                    <span class="badge badge-pill badge-light">5</span>Asian
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="Race" value="50" name="Race" id="Race[6]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">50</span>
-                                <label for="Race[6]">Other (SPECIFY)</label>
-                                <input class="form-control" type="text" asp-for="RaceOther" name="RaceOther" />
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Race" value="50" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" name="Race" id="Race[6]" />
+                                <label class="form-check-label" for="Race[6]">
+                                    <span class="badge badge-pill badge-light">50</span>Other (SPECIFY)
+                                </label>
+                                <input class="form-control" type="text" asp-for="RaceOther" name="RaceOther" disabled />
                             </div>
-                            <div>
-                                <input type="radio" asp-for="Race" value="99" name="Race" id="Race[7]" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" /><span class="badge badge-pill badge-light">99</span>
-                                <label for="Race[7]">Uknown</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Race" value="99" data-toggle-values="[1,2,3,4,5,99]" data-toggle-targets="RaceOther" name="Race" id="Race[7]" />
+                                <label class="form-check-label" for="Race[7]">
+                                    <span class="badge badge-pill badge-light">99</span>Unknown
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -187,38 +224,54 @@
                             <div><span asp-validation-for="SecondaryRaceOther" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <input type="radio" asp-for="SecondaryRace" value="1" name="SecondaryRace" id="SecondaryRace[1]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="SecondaryRace[1]">White</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="SecondaryRace" value="1" name="SecondaryRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="SecondaryRaceOther" id="SecondaryRace[1]" />
+                                <label class="form-check-label" for="SecondaryRace[1]">
+                                    <span class="badge badge-pill badge-light">1</span>White
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="SecondaryRace" value="2" name="SecondaryRace" id="SecondaryRace[2]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">2</span>
-                                <label for="SecondaryRace[2]">Black or African American</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="SecondaryRace" value="2" name="SecondaryRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="SecondaryRaceOther" id="SecondaryRace[2]" />
+                                <label class="form-check-label" for="SecondaryRace[2]">
+                                    <span class="badge badge-pill badge-light">2</span>Black or African American
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="SecondaryRace" value="3" name="SecondaryRace" id="SecondaryRace[3]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">3</span>
-                                <label for="SecondaryRace[3]">American Indian or Alaska Native</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="SecondaryRace" value="3" name="SecondaryRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="SecondaryRaceOther" id="SecondaryRace[3]" />
+                                <label class="form-check-label" for="SecondaryRace[3]">
+                                    <span class="badge badge-pill badge-light">3</span>American Indian or Alaska Native
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="SecondaryRace" value="4" name="SecondaryRace" id="SecondaryRace[4]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">4</span>
-                                <label for="SecondaryRace[4]">Native Hawaiian or other Pacific Islander</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="SecondaryRace" value="4" name="SecondaryRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="SecondaryRaceOther" id="SecondaryRace[4]" />
+                                <label class="form-check-label" for="SecondaryRace[4]">
+                                    <span class="badge badge-pill badge-light">4</span>Native Hawaiian or other Pacific Islander
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="SecondaryRace" value="5" name="SecondaryRace" id="SecondaryRace[5]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">5</span>
-                                <label for="SecondaryRace[5]">Asian</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="SecondaryRace" value="5" name="SecondaryRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="SecondaryRaceOther" id="SecondaryRace[5]" />
+                                <label class="form-check-label" for="SecondaryRace[5]">
+                                    <span class="badge badge-pill badge-light">5</span>Asian
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="SecondaryRace" value="50" name="SecondaryRace" id="SecondaryRace[6]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">50</span>
-                                <label for="SecondaryRace[6]">Other (SPECIFY)</label>
-                                <input class="form-control" type="text" asp-for="SecondaryRaceOther" />
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="SecondaryRace" value="50" name="SecondaryRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="SecondaryRaceOther" id="SecondaryRace[6]" />
+                                <label class="form-check-label" for="SecondaryRace[6]">
+                                    <span class="badge badge-pill badge-light">50</span>Other (SPECIFY)
+                                </label>
+                                <input class="form-control" type="text" asp-for="SecondaryRaceOther" disabled />
                             </div>
-                            <div>
-                                <input type="radio" asp-for="SecondaryRace" value="88" name="SecondaryRace" id="SecondaryRace[7]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">88</span>
-                                <label for="SecondaryRace[7]">None Reported</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="SecondaryRace" value="88" name="SecondaryRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="SecondaryRaceOther" id="SecondaryRace[7]" />
+                                <label class="form-check-label" for="SecondaryRace[7]">
+                                    <span class="badge badge-pill badge-light">88</span>None Reported
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="SecondaryRace" value="99" name="SecondaryRace" id="SecondaryRace[8]" data-toggle-values="[1,2,3,4,5,,88,99]" data-toggle-targets="SecondaryRaceOther" /><span class="badge badge-pill badge-light">99</span>
-                                <label for="SecondaryRace[8]">Unknown</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="SecondaryRace" value="99" name="SecondaryRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="SecondaryRaceOther" id="SecondaryRace[8]" />
+                                <label class="form-check-label" for="SecondaryRace[8]">
+                                    <span class="badge badge-pill badge-light">99</span>Unknown
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -229,38 +282,54 @@
                             <div><span asp-validation-for="AdditionalRaceOther" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <input type="radio" asp-for="AdditionalRace" value="1" name="AdditionalRace" id="AdditionalRace[1]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="AdditionalRace[1]">White</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AdditionalRace" value="1" name="AdditionalRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" id="AdditionalRace[1]" />
+                                <label class="form-check-label" for="AdditionalRace[1]">
+                                    <span class="badge badge-pill badge-light">1</span>White
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="AdditionalRace" value="2" name="AdditionalRace" id="AdditionalRace[2]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">2</span>
-                                <label for="AdditionalRace[2]">Black or African American</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AdditionalRace" value="2" name="AdditionalRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" id="AdditionalRace[2]" />
+                                <label class="form-check-label" for="AdditionalRace[2]">
+                                    <span class="badge badge-pill badge-light">2</span>Black or African American
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="AdditionalRace" value="3" name="AdditionalRace" id="AdditionalRace[3]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">3</span>
-                                <label for="AdditionalRace[3]">American Indian or Alaska Native</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AdditionalRace" value="3" name="AdditionalRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" id="AdditionalRace[3]" />
+                                <label class="form-check-label" for="AdditionalRace[3]">
+                                    <span class="badge badge-pill badge-light">3</span>American Indian or Alaska Native
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="AdditionalRace" value="4" name="AdditionalRace" id="AdditionalRace[4]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">4</span>
-                                <label for="AdditionalRace[4]">Native Hawaiian or other Pacific Islander</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AdditionalRace" value="4" name="AdditionalRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" id="AdditionalRace[4]" />
+                                <label class="form-check-label" for="AdditionalRace[4]">
+                                    <span class="badge badge-pill badge-light">4</span>Native Hawaiian or other Pacific Islander
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="AdditionalRace" value="5" name="AdditionalRace" id="AdditionalRace[5]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">5</span>
-                                <label for="AdditionalRace[5]">Asian</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AdditionalRace" value="5" name="AdditionalRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" id="AdditionalRace[5]" />
+                                <label class="form-check-label" for="AdditionalRace[5]">
+                                    <span class="badge badge-pill badge-light">5</span>Asian
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="AdditionalRace" value="50" name="AdditionalRace" id="AdditionalRace[6]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">50</span>
-                                <label for="AdditionalRace[6]">Other (SPECIFY)</label>
-                                <input class="form-control" type="text" asp-for="AdditionalRaceOther" />
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AdditionalRace" value="50" name="AdditionalRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" id="AdditionalRace[6]" />
+                                <label class="form-check-label" for="AdditionalRace[6]">
+                                    <span class="badge badge-pill badge-light">50</span>Other (SPECIFY)
+                                </label>
+                                <input class="form-control" type="text" asp-for="AdditionalRaceOther" disabled />
                             </div>
-                            <div>
-                                <input type="radio" asp-for="AdditionalRace" value="88" name="AdditionalRace" id="AdditionalRace[7]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">88</span>
-                                <label for="AdditionalRace[7]">None Reported</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AdditionalRace" value="88" name="AdditionalRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" id="AdditionalRace[7]" />
+                                <label class="form-check-label" for="AdditionalRace[7]">
+                                    <span class="badge badge-pill badge-light">88</span>None Reported
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="AdditionalRace" value="99" name="AdditionalRace" id="AdditionalRace[8]" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" /><span class="badge badge-pill badge-light">99</span>
-                                <label for="AdditionalRace[8]">Unknown</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="AdditionalRace" value="99" name="AdditionalRace" data-toggle-values="[1,2,3,4,5,88,99]" data-toggle-targets="AdditionalRaceOther" id="AdditionalRace[8]" />
+                                <label class="form-check-label" for="AdditionalRace[8]">
+                                    <span class="badge badge-pill badge-light">99</span>Unknown
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -286,53 +355,41 @@
                             <div><span asp-validation-for="Relationship" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <input type="radio" asp-for="Relationship" value="1" name="Relationship" id="Relationship[1]" /><span class="badge badge-pill badge-light">1</span>
-                                </div>
-                                <div class="col-sm-10">
-                                    <label for="Relationship[1]">Spouse, partner, or companion (include ex-spouse, ex-partner, fiancé, boyfriend, girlfriend)</label>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Relationship" value="1" name="Relationship" id="Relationship[1]" />
+                                <label class="form-check-label" for="Relationship[1]">
+                                    <span class="badge badge-pill badge-light">1</span>Spouse, partner, or companion (include ex-spouse, ex-partner, fiancé, boyfriend, girlfriend)
+                                </label>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <input type="radio" asp-for="Relationship" value="2" name="Relationship" id="Relationship[2]" /><span class="badge badge-pill badge-light">2</span>
-                                </div>
-                                <div class="col-sm-10">
-                                    <label for="Relationship[2]">Child (by blood or through marriage or adoption)</label>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Relationship" value="2" name="Relationship" id="Relationship[2]" />
+                                <label class="form-check-label" for="Relationship[2]">
+                                    <span class="badge badge-pill badge-light">2</span>Child (by blood or through marriage or adoption)
+                                </label>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <input type="radio" asp-for="Relationship" value="3" name="Relationship" id="Relationship[3]" /><span class="badge badge-pill badge-light">3</span>
-                                </div>
-                                <div class="col-sm-10">
-                                    <label for="Relationship[3]">Sibling (by blood or through marriage or adoption)</label>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Relationship" value="3" name="Relationship" id="Relationship[3]" />
+                                <label class="form-check-label" for="Relationship[3]">
+                                    <span class="badge badge-pill badge-light">3</span>Sibling (by blood or through marriage or adoption)
+                                </label>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <input type="radio" asp-for="Relationship" value="4" name="Relationship" id="Relationship[4]" /><span class="badge badge-pill badge-light">4</span>
-                                </div>
-                                <div class="col-sm-10">
-                                    <label for="Relationship[4]">Other relative (by blood or through marriage or adoption)</label>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Relationship" value="4" name="Relationship" id="Relationship[4]" />
+                                <label class="form-check-label" for="Relationship[4]">
+                                    <span class="badge badge-pill badge-light">4</span>Other relative (by blood or through marriage or adoption)
+                                </label>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <input type="radio" asp-for="Relationship" value="5" name="Relationship" id="Relationship[5]" /><span class="badge badge-pill badge-light">5</span>
-                                </div>
-                                <div class="col-sm-10">
-                                    <label for="Relationship[5]">Friend, neighbor, or someone known through family, friends, work, or community (e.g., church)</label>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Relationship" value="5" name="Relationship" id="Relationship[5]" />
+                                <label class="form-check-label" for="Relationship[5]">
+                                    <span class="badge badge-pill badge-light">5</span>Friend, neighbor, or someone known through family, friends, work, or community (e.g., church)
+                                </label>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <input type="radio" asp-for="Relationship" value="6" name="Relationship" id="Relationship[6]" /><span class="badge badge-pill badge-light">6</span>
-                                </div>
-                                <div class="col-sm-10">
-                                    <label for="Relationship[6]">Paid caregiver, health care provider, or clinician</label>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Relationship" value="6" name="Relationship" id="Relationship[6]" />
+                                <label class="form-check-label" for="Relationship[6]">
+                                    <span class="badge badge-pill badge-light">6</span>Paid caregiver, health care provider, or clinician
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -358,13 +415,17 @@
                             <div><span asp-validation-for="LivesWith" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <input asp-for="LivesWith" type="radio" name="LivesWith" value="false" id="LivesWith[1]" data-toggle-bool="[true]" data-toggle-targets="FrequencyOfVisit,FrequencyOfTele" /><span class="badge badge-pill badge-light">0</span>
-                                <label for="LivesWith[1]">No</label>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="LivesWith" type="radio" name="LivesWith" value="false" id="LivesWith[1]" data-toggle-bool="[true]" data-toggle-targets="FrequencyOfVisit,FrequencyOfTele" />
+                                <label class="form-check-label" for="LivesWith[1]">
+                                    <span class="badge badge-pill badge-light">0</span>No
+                                </label>
                             </div>
-                            <div>
-                                <input asp-for="LivesWith" type="radio" name="LivesWith" value="true" id="LivesWith[0]" data-toggle-bool="[true]" data-toggle-targets="FrequencyOfVisit,FrequencyOfTele" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="LivesWith[0]">Yes (If Yes, SKIP TO QUESTION 11)</label>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="LivesWith" type="radio" name="LivesWith" value="true" id="LivesWith[0]" data-toggle-bool="[true]" data-toggle-targets="FrequencyOfVisit,FrequencyOfTele" />
+                                <label class="form-check-label" for="LivesWith[0]">
+                                    <span class="badge badge-pill badge-light">1</span>Yes (If Yes, SKIP TO QUESTION 11)
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -374,29 +435,41 @@
                             <div><span asp-validation-for="FrequencyOfVisit" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfVisit" value="1" name="FrequencyOfVisit" id="FrequencyOfVisit[1]" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="FrequencyOfVisit[1]" class="form-check-label">Daily</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfVisit" value="1" name="FrequencyOfVisit" id="FrequencyOfVisit[1]" />
+                                <label class="form-check-label" for="FrequencyOfVisit[1]">
+                                    <span class="badge badge-pill badge-light">1</span>Daily
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfVisit" value="2" name="FrequencyOfVisit" id="FrequencyOfVisit[2]" /><span class="badge badge-pill badge-light">2</span>
-                                <label for="FrequencyOfVisit[2]" class="form-check-label">At least 3 times per week</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfVisit" value="2" name="FrequencyOfVisit" id="FrequencyOfVisit[2]" />
+                                <label class="form-check-label" for="FrequencyOfVisit[2]">
+                                    <span class="badge badge-pill badge-light">2</span>At least 3 times per week
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfVisit" value="3" name="FrequencyOfVisit" id="FrequencyOfVisit[3]" /><span class="badge badge-pill badge-light">3</span>
-                                <label for="FrequencyOfVisit[3]" class="form-check-label">Weekly</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfVisit" value="3" name="FrequencyOfVisit" id="FrequencyOfVisit[3]" />
+                                <label class="form-check-label" for="FrequencyOfVisit[3]">
+                                    <span class="badge badge-pill badge-light">3</span>Weekly
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfVisit" value="4" name="FrequencyOfVisit" id="FrequencyOfVisit[4]" /><span class="badge badge-pill badge-light">4</span>
-                                <label for="FrequencyOfVisit[4]" class="form-check-label">At least three times per month</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfVisit" value="4" name="FrequencyOfVisit" id="FrequencyOfVisit[4]" />
+                                <label class="form-check-label" for="FrequencyOfVisit[4]">
+                                    <span class="badge badge-pill badge-light">4</span>At least three times per month
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfVisit" value="5" name="FrequencyOfVisit" id="FrequencyOfVisit[5]" /><span class="badge badge-pill badge-light">5</span>
-                                <label for="FrequencyOfVisit[5]" class="form-check-label">Monthly</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfVisit" value="5" name="FrequencyOfVisit" id="FrequencyOfVisit[5]" />
+                                <label class="form-check-label" for="FrequencyOfVisit[5]">
+                                    <span class="badge badge-pill badge-light">5</span>Monthly
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfVisit" value="6" name="FrequencyOfVisit" id="FrequencyOfVisit[6]" /><span class="badge badge-pill badge-light">6</span>
-                                <label for="FrequencyOfVisit[6]" class="form-check-label">Less than once a month</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfVisit" value="6" name="FrequencyOfVisit" id="FrequencyOfVisit[6]" />
+                                <label class="form-check-label" for="FrequencyOfVisit[6]">
+                                    <span class="badge badge-pill badge-light">6</span>Less than once a month
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -406,29 +479,41 @@
                             <div><span asp-validation-for="FrequencyOfTele" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfTele" value="1" name="FrequencyOfTele" id="FrequencyOfTele[1]" /><span class="badge badge-pill badge-light">1</span>
-                                <label for="FrequencyOfTele[1]" class="form-check-label">Daily</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfTele" value="1" name="FrequencyOfTele" id="FrequencyOfTele[1]" />
+                                <label class="form-check-label" for="FrequencyOfTele[1]">
+                                    <span class="badge badge-pill badge-light">1</span>Daily
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfTele" value="2" name="FrequencyOfTele" id="FrequencyOfTele[2]" /><span class="badge badge-pill badge-light">2</span>
-                                <label for="FrequencyOfTele[2]" class="form-check-label">At least 3 times per week</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfTele" value="2" name="FrequencyOfTele" id="FrequencyOfTele[2]" />
+                                <label class="form-check-label" for="FrequencyOfTele[2]">
+                                    <span class="badge badge-pill badge-light">2</span>At least 3 times per week
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfTele" value="3" name="FrequencyOfTele" id="FrequencyOfTele[3]" /><span class="badge badge-pill badge-light">3</span>
-                                <label for="FrequencyOfTele[3]" class="form-check-label">Weekly</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfTele" value="3" name="FrequencyOfTele" id="FrequencyOfTele[3]" />
+                                <label class="form-check-label" for="FrequencyOfTele[3]">
+                                    <span class="badge badge-pill badge-light">3</span>Weekly
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfTele" value="4" name="FrequencyOfTele" id="FrequencyOfTele[4]" /><span class="badge badge-pill badge-light">4</span>
-                                <label for="FrequencyOfTele[4]" class="form-check-label">At least three times per month</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfTele" value="4" name="FrequencyOfTele" id="FrequencyOfTele[4]" />
+                                <label class="form-check-label" for="FrequencyOfTele[4]">
+                                    <span class="badge badge-pill badge-light">4</span>At least three times per month
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfTele" value="5" name="FrequencyOfTele" id="FrequencyOfTele[5]" /><span class="badge badge-pill badge-light">5</span>
-                                <label for="FrequencyOfTele[5]" class="form-check-label">Monthly</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfTele" value="5" name="FrequencyOfTele" id="FrequencyOfTele[5]" />
+                                <label class="form-check-label" for="FrequencyOfTele[5]">
+                                    <span class="badge badge-pill badge-light">5</span>Monthly
+                                </label>
                             </div>
-                            <div>
-                                <input type="radio" asp-for="FrequencyOfTele" value="6" name="FrequencyOfTele" id="FrequencyOfTele[6]" /><span class="badge badge-pill badge-light">6</span>
-                                <label for="FrequencyOfTele[6]" class="form-check-label">Less than once a month</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FrequencyOfTele" value="6" name="FrequencyOfTele" id="FrequencyOfTele[6]" />
+                                <label class="form-check-label" for="FrequencyOfTele[6]">
+                                    <span class="badge badge-pill badge-light">6</span>Less than once a month
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -438,15 +523,17 @@
                             <div><span asp-validation-for="Reliability" class="text-danger"></span></div>
                         </td>
                         <td colspan="3">
-                            <div>
-                                <div>
-                                    <input asp-for="Reliability" type="radio" name="Reliability" value="false" id="Reliability[1]" /><span class="badge badge-pill badge-light">0</span>
-                                    <label for="Reliability[1]" class="form-check-label">No</label>
-                                </div>
-                                <div>
-                                    <input asp-for="Reliability" type="radio" name="Reliability" value="true" id="Reliability[0]" /><span class="badge badge-pill badge-light">1</span>
-                                    <label for="Reliability[0]" class="form-check-label">Yes</label>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Reliability" type="radio" name="Reliability" value="false" id="Reliability[1]" />
+                                <label class="form-check-label" for="Reliability[1]">
+                                    <span class="badge badge-pill badge-light">0</span>No
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Reliability" type="radio" name="Reliability" value="true" id="Reliability[0]" />
+                                <label class="form-check-label" for="Reliability[0]">
+                                    <span class="badge badge-pill badge-light">1</span>Yes
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -479,6 +566,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script type="text/javascript" src="~/js/RadioFieldToggle.js"></script>
-    <script type="text/javascript" src="~/js/CoParticipantDemographics/Edit.js"></script>
+    <script asp-append-version="true" type="text/javascript" src="~/js/SubsequentRadioControlDisable.js"></script>
+    <script asp-append-version="true" type="text/javascript" src="~/js/RacialQuestions.js"></script>
 }

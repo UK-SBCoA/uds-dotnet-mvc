@@ -19,6 +19,16 @@
         }
     },
     {
+        "Name": "FTLDSUBTYPE",
+        "Description": "Sub types for 14e",
+        "Codes": {
+            "1": "Tauopathy",
+            "2": "TDP-43 proteinopathy",
+            "3": "Other (SPECIFY)",
+            "9": "Unknown"
+        }
+    },
+    {
         "Name": "FINDINGS",
         "Description": "Codes for findings",
         "Codes": {
@@ -53,5 +63,22 @@
             "1": "Yes",
             "9": "Unknown; no relevant imaging data available"
         }
-    }
+    },
+    {
+        "Name": "CNSNEOPLASMTYPE",
+        "Description": "Codes for cns neoplasm types",
+        "Codes": {
+            "1": "Benign",
+            "2": "Malignant"
+        }
+    },
+    {
+        "Name": "GENERALTHREEGROUP",
+        "Description" : "Codes for general 'No', 'Yes', 'Unknown' questions",
+        "Codes" : {
+            "0": "No",
+            "1": "Yes",
+            "9": "Unknown"
+        }
+    }   
 ]

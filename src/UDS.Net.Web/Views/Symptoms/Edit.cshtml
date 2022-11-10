@@ -30,7 +30,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th colspan="2">
-                                        Declines in memory reported by subject and co-participant
+                                        Declines in memory reported by participant and co-participant
                                     </th>
                                 </tr>
                             </thead>
@@ -104,8 +104,7 @@
                                 <tr>
                                     <th colspan="1">
                                         <span class="font-weight-normal">
-                                            4. Indicate whether the subject currently is meaningfully impaired, relative to previously attained abilities,
-                                            in the following cognitive domains, or has fluctuating cognition
+                                            4. Indicate whether the participant currently is meaningfully impaired, relative to previously attained abilities, in the following cognitive domains, or has fluctuating cognition
                                         </span>
                                     </th>
                                     <th class="pr-5" colspan="1">
@@ -262,40 +261,59 @@
                                 <tr>
                                     <td class="w-50">
                                         5. <label asp-for="PredominantSymptom"></label>
+                                        @if (!isIVP)
+                                        {
+                                            <div class="pt-2">
+                                                <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
+                                            </div>
+                                        }
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantSymptom").Any()))
+                                        {
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantSymptom").FirstOrDefault());
+                                        }
+                                        <div class="pt-2">
+                                        </div>
                                         <div><span class="text-danger" asp-validation-for="PredominantSymptom"></span></div>
                                         <div><span class="text-danger" asp-validation-for="PredominantSymptomOther"></span></div>
                                     </td>
                                     <td colspan="4">
+                                        @if (!isIVP)
+                                        {
+                                            <div>
+                                                <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[0]" value="0" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
+                                                <label for="PredominantSymptom[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                            </div>
+                                        }
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[1]" value="1" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[1]" value="1" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[1]"><span class="badge badge-pill badge-light">1</span> Memory</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[2]" value="2" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[2]" value="2" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[2]"><span class="badge badge-pill badge-light">2</span> Orientation</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[3]" value="3" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[3]" value="3" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[3]"><span class="badge badge-pill badge-light">3</span> Executive function — judgment, planning, problem-solving</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[4]" value="4" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[4]" value="4" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[4]"><span class="badge badge-pill badge-light">4</span> Language</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[5]" value="5" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[5]" value="5" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[5]"><span class="badge badge-pill badge-light">5</span> Visuospatial function</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[6]" value="6" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[6]" value="6" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[6]"><span class="badge badge-pill badge-light">6</span> Attention / concentration</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[7]" value="7" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[7]" value="7" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[7]"><span class="badge badge-pill badge-light">7</span> Fluctuating cognition</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[8]" value="8" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[1,2,3,4,5,6,7,99]" />
+                                            <input type="radio" asp-for="PredominantSymptom" id="PredominantSymptom[8]" value="8" data-toggle-targets="PredominantSymptomOther" data-toggle-values="[0,1,2,3,4,5,6,7,99]" />
                                             <label for="PredominantSymptom[8]"><span class="badge badge-pill badge-light">8</span> Other (Specify)</label>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-control" asp-for="PredominantSymptomOther" />
@@ -358,25 +376,26 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AgeOfDecline").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "AgeOfDecline").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AgeOfDecline").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "AgeOfDecline").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead class="thead-light">
                                 <tr>
-                                    <th colspan="4">Behavioral symptoms</th>
+                                    <th colspan="6">Behavioral symptoms</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="1" class="w-50">
+                                    <td colspan="3">
                                         8. <label asp-for="BehavioralSymptoms"></label>
                                         <div>(If No, <b>SKIP TO QUESTION 13</b>)</div>
                                         <div><span class="text-danger" asp-validation-for="BehavioralSymptoms"></span></div>
@@ -391,27 +410,28 @@
                                     </td>
                                 </tr>
                             </tbody>
-                            <thead class="thead-light">
-                                <tr>
-                                    <th colspan="1" class="font-weight-normal">
-                                        9. Indicate whether the subject currently manifests meaningful change in behavior in any
-                                        of the following ways
-                                    </th>
-                                    <th class="pr-5" colspan="1">
-                                        No
-                                    </th>
-                                    <th class="pr-5" colspan="1">
-                                        Yes
-                                    </th>
-                                    <th colspan="1">
-                                        Unknown
-                                    </th>
+                            <tbody>
+                                <tr class="table-secondary">
+                                    <td colspan="3">
+                                        9. <strong>Indicate whether the participant currently manifests meaningful change in behavior in any of the following ways</strong>
+                                        <div><span class="text-danger" asp-validation-for="AtLeastOneIndicatedIfHasBehavioralSymptom"></span></div>
+                                    </td>
+                                    <td class="pr-5">
+                                        <strong>No</strong>
+                                    </td>
+                                    <td class="pr-5">
+                                        <strong>Yes</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Unknown</strong>
+                                    </td>
                                 </tr>
-                            </thead>
+                            </tbody>
                             <tbody>
                                 <tr>
+                                    <td colspan="2">9a. </td>
                                     <td>
-                                        9a. <b>Apathy, withdrawal</b> <label asp-for="ApathyWithdrawal"></label>
+                                        <b>Apathy, withdrawal</b> <label asp-for="ApathyWithdrawal"></label>
                                         <div><span class="text-danger" asp-validation-for="ApathyWithdrawal"></span></div>
                                     </td>
                                     <td>
@@ -425,8 +445,9 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">9b. </td>
                                     <td>
-                                        9b. <b>Depressed mood</b> <label asp-for="DepressedMood"></label>
+                                        <b>Depressed mood</b> <label asp-for="DepressedMood"></label>
                                         <div><span class="text-danger" asp-validation-for="DepressedMood"></span></div>
                                     </td>
                                     <td>
@@ -440,15 +461,18 @@
                                     </td>
                                 </tr>
                             </tbody>
-                            <thead class="thead-light">
-                                <tr>
-                                    <th colspan="4" class="font-weight-normal">9c. Psychosis</th>
-                                </tr>
-                            </thead>
                             <tbody>
+                                <tr class="table-secondary">
+                                    <td colspan="2">9c. </td>
+                                    <td colspan="4"><strong>Psychosis</strong></td>
+                                </tr>
                                 <tr>
+                                    <td></td>
                                     <td>
-                                        9c1. <label asp-for="VisualHallucinations"></label>
+                                        9c1.
+                                    </td>
+                                    <td>
+                                        <label asp-for="VisualHallucinations"></label>
                                         <div><span class="text-danger" asp-validation-for="VisualHallucinations"></span></div>
                                     </td>
                                     <td>
@@ -462,6 +486,8 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td></td>
+                                    <td></td>
                                     <td>
                                         9c1a. <label asp-for="DetailedHallucinations"></label>
                                         <div><span class="text-danger" asp-validation-for="DetailedHallucinations"></span></div>
@@ -477,6 +503,8 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td></td>
+                                    <td></td>
                                     <td>
                                         <div>
                                             9c1b. <label asp-for="HallucinationsAge"></label>
@@ -499,15 +527,17 @@
                                                 (777 = Age of onset provided at a previous UDS visit)
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "HallucinationsAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "HallucinationsAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "HallucinationsAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "HallucinationsAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td></td>
+                                    <td>9c2. </td>
                                     <td>
-                                        9c2. <label asp-for="AuditoryHallucinations"></label>
+                                        <label asp-for="AuditoryHallucinations"></label>
                                         <div><span class="text-danger" asp-validation-for="AuditoryHallucinations"></span></div>
                                     </td>
                                     <td>
@@ -521,8 +551,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td></td>
+                                    <td>9c3. </td>
                                     <td>
-                                        9c3. <label asp-for="AbnormalBeliefs"></label>
+                                        <label asp-for="AbnormalBeliefs"></label>
                                         <div><span class="text-danger" asp-validation-for="AbnormalBeliefs"></span></div>
                                     </td>
                                     <td>
@@ -535,9 +567,13 @@
                                         <input type="radio" asp-for="AbnormalBeliefs" id="AbnormalBeliefs[9]" value="9" /><label for="AbnormalBeliefs[9]"><span class="badge badge-pill badge-light">9</span> Unknown</label>
                                     </td>
                                 </tr>
+                            </tbody>
+                            <tbody>
                                 <tr>
+                                    <td colspan="2">9d. </td>
                                     <td>
-                                        9d. <b>Disinhibition</b> <label asp-for="Disinhibition"></label>
+                                        <b>Disinhibition</b>
+                                        <label asp-for="Disinhibition"></label>
                                         <div><span class="text-danger" asp-validation-for="Disinhibition"></span></div>
                                     </td>
                                     <td>
@@ -551,8 +587,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">9e. </td>
                                     <td>
-                                        9e. <b>Irritability</b> <label asp-for="Irritability"></label>
+                                        <b>Irritability</b><br />
+                                        <label asp-for="Irritability"></label>
                                         <div><span class="text-danger" asp-validation-for="Irritability"></span></div>
                                     </td>
                                     <td>
@@ -566,8 +604,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">9f. </td>
                                     <td>
-                                        9f. <b>Agitation</b> <label asp-for="Agitation"></label>
+                                        <b>Agitation</b>
+                                        <br /><label asp-for="Agitation"></label>
                                         <div><span class="text-danger" asp-validation-for="Agitation"></span></div>
                                     </td>
                                     <td>
@@ -581,8 +621,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">9g. </td>
                                     <td>
-                                        9g. <b>Personality change</b> <label asp-for="PersonalityChange"></label>
+                                        <b>Personality change</b>
+                                        <br /><label asp-for="PersonalityChange"></label>
                                         <div><span class="text-danger" asp-validation-for="PersonalityChange"></span></div>
                                     </td>
                                     <td>
@@ -596,8 +638,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">9h. </td>
                                     <td>
-                                        9h. <b>REM sleep behavior disorder</b> <label asp-for="RemDisorder"></label>
+                                        <b>REM sleep behavior disorder</b>
+                                        <br /><label asp-for="RemDisorder"></label>
                                         <div><span class="text-danger" asp-validation-for="RemDisorder"></span></div>
                                     </td>
                                     <td>
@@ -611,9 +655,11 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td></td>
+                                    <td>9h1. </td>
                                     <td>
                                         <div>
-                                            9h1. <label asp-for="RemDisorderAge"></label>
+                                            <label asp-for="RemDisorderAge"></label>
                                             <div><span class="text-danger" asp-validation-for="RemDisorderAge"></span></div>
                                         </div>
                                         <div>
@@ -627,8 +673,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">9i. </td>
                                     <td>
-                                        9i. <b>Anxiety</b> <label asp-for="Anxiety"></label>
+                                        <b>Anxiety</b>
+                                        <br /><label asp-for="Anxiety"></label>
                                         <div><span class="text-danger" asp-validation-for="Anxiety"></span></div>
                                     </td>
                                     <td>
@@ -642,9 +690,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="1">
+                                    <td colspan="2">9j. </td>
+                                    <td>
                                         <div>
-                                            9j. Other (Specify)
+                                            <strong>Other (Specify)</strong>
                                             <div><span class="text-danger" asp-validation-for="ChangeInBehavior"></span></div>
                                             <div><span class="text-danger" asp-validation-for="ChangeInBehaviorOther"></span></div>
                                         </div>
@@ -659,8 +708,10 @@
                                         <input type="text" asp-for="ChangeInBehaviorOther" class="form-control" />
                                     </td>
                                 </tr>
+                            </tbody>
+                            <tbody>
                                 <tr>
-                                    <td class="w-50">
+                                    <td colspan="3" class="w-50">
                                         10. <label asp-for="BehaviorDecline"></label>
                                         @if (!isIVP)
                                         {
@@ -668,20 +719,23 @@
                                                 <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorDecline").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "BehaviorDecline").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorDecline").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "BehaviorDecline").FirstOrDefault());
                                         }
                                         <div class="pt-2">
                                         </div>
                                         <div><span class="text-danger" asp-validation-for="BehaviorDecline"></span></div>
                                         <div><span class="text-danger" asp-validation-for="BehaviorDeclineOther"></span></div>
                                     </td>
-                                    <td colspan="4">
-                                        <div>
-                                            <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[0]" value="0" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,2,3,4,5,6,7,8,9,99]" />
-                                            <label for="BehaviorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
-                                        </div>
+                                    <td colspan="3">
+                                        @if (!isIVP)
+                                        {
+                                            <div>
+                                                <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[0]" value="0" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,2,3,4,5,6,7,8,9,99]" />
+                                                <label for="BehaviorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                            </div>
+                                        }
                                         <div>
                                             <input type="radio" asp-for="BehaviorDecline" id="BehaviorDecline[1]" value="1" data-toggle-targets="BehaviorDeclineOther" data-toggle-values="[0,1,2,3,4,5,6,7,8,9,99]" />
                                             <label for="BehaviorDecline[1]"><span class="badge badge-pill badge-light">1</span> Apathy/withdrawal</label>
@@ -731,39 +785,39 @@
                                         </div>
                                     </td>
                                 <tr>
-                                    <td class="w-50">
+                                    <td colspan="3" class="w-50">
                                         11. <label asp-for="OnsetBehavioral"></label>
                                         <div><span class="text-danger" asp-validation-for="OnsetBehavioral"></span></div>
                                         <div><span class="text-danger" asp-validation-for="OnsetBehavioralOther"></span></div>
                                     </td>
-                                    <td colspan="4">
+                                    <td colspan="3">
                                         <div>
-                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[1]" value="1" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[1]" value="1" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,99]" />
                                             <label for="OnsetBehavioral[1]"><span class="badge badge-pill badge-light">1</span> Gradual</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[2]" value="2" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[2]" value="2" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,99]" />
                                             <label for="OnsetBehavioral[2]"><span class="badge badge-pill badge-light">2</span> Subacute</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[3]" value="3" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[3]" value="3" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,99]" />
                                             <label for="OnsetBehavioral[3]"><span class="badge badge-pill badge-light">3</span> Abrupt</label>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[4]" value="4" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,5]" />
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[4]" value="4" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,99]" />
                                             <label for="OnsetBehavioral[4]"><span class="badge badge-pill badge-light">4</span> Other (Specify)</label>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-control" asp-for="OnsetBehavioralOther" />
                                             </div>
                                         </div>
                                         <div>
-                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[5]" value="5" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,4,5,6,7,8,9,99]" />
-                                            <label for="OnsetBehavioral[5]"><span class="badge badge-pill badge-light">5</span> Unknown</label>
+                                            <input type="radio" asp-for="OnsetBehavioral" id="OnsetBehavioral[99]" value="99" data-toggle-targets="OnsetBehavioralOther" data-toggle-values="[1,2,3,99]" />
+                                            <label for="OnsetBehavioral[99]"><span class="badge badge-pill badge-light">99</span> Unknown</label>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td colspan="3">
                                         <div>
                                             12. <label asp-for="BehaviorSymptomsAge"></label>
                                             <div><span class="text-danger" asp-validation-for="BehaviorSymptomsAge"></span></div>
@@ -783,9 +837,9 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "BehaviorSymptomsAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -820,8 +874,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th colspan="1" class="font-weight-normal">
-                                        14. Indicate whether the subject currently has meaningful change in motor
-                                        function in any of the following areas
+                                        14. Indicate whether the participant currently has meaningful change in motor function in any of the following areas
                                     </th>
                                     <th class="pr-5" colspan="1">
                                         No
@@ -904,17 +957,20 @@
                                                 <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantMotorDecline").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantMotorDecline").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantMotorDecline").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantMotorDecline").FirstOrDefault());
                                         }
                                         <div><span class="text-danger" asp-validation-for="PredominantMotorDecline"></span></div>
                                     </td>
                                     <td colspan="4">
-                                        <div>
-                                            <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[0]" value="0" />
-                                            <label for="PredominantMotorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
-                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div>
+                                                <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[0]" value="0" />
+                                                <label for="PredominantMotorDecline[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                            </div>
+                                        }
                                         <div>
                                             <input type="radio" asp-for="PredominantMotorDecline" id="PredominantMotorDecline[1]" value="1" />
                                             <label for="PredominantMotorDecline[1]"><span class="badge badge-pill badge-light">1</span> Gait disorder</label>
@@ -1008,9 +1064,9 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "SuggestiveOfParkinsonismAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -1053,9 +1109,9 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "SuggestiveOfSclerosisAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -1080,9 +1136,9 @@
                                                 <p>(777 = Age of onset entered at a previous UDS visit)</p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "AssessmentOfSclerosisAge").FirstOrDefault());
                                         }
                                     </td>
                                 </tr>
@@ -1144,17 +1200,20 @@
                                                 <p><em>NOTE: Enter 0 if this information was provided on a previously submitted Form B9</em></p>
                                             </div>
                                         }
-                                        @if (((ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantDomain").Any()))
+                                        @if (((ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantDomain").Any()))
                                         {
-                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.NonmatchingValues as List<NonMatchingValueDto>).Where(x => x.Name == "PredominantDomain").FirstOrDefault());
+                                            @await Html.PartialAsync("_PreviousValueNotification", (ViewBag.previousValues as List<PreviousValueDto>).Where(x => x.Name == "PredominantDomain").FirstOrDefault());
                                         }
                                         <div><span class="text-danger" asp-validation-for="PredominantDomain"></span></div>
                                     </td>
                                     <td colspan="4">
-                                        <div>
-                                            <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[0]" value="0" />
-                                            <label for="PredominantDomain[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
-                                        </div>
+                                        @if (!isIVP)
+                                        {
+                                            <div>
+                                                <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[0]" value="0" />
+                                                <label for="PredominantDomain[0]"><span class="badge badge-pill badge-light">0</span> Assessed at a previous UDS visit</label>
+                                            </div>
+                                        }
                                         <div>
                                             <input type="radio" asp-for="PredominantDomain" id="PredominantDomain[1]" value="1" />
                                             <label for="PredominantDomain[1]"><span class="badge badge-pill badge-light">1</span> Cognition</label>

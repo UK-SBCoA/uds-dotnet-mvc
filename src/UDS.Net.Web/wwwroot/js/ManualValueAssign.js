@@ -1,5 +1,5 @@
 ﻿/*
-Docuementation
+Documentation
 
 Step 1: Apply "data-assign-parent" to the input element you wish to use
 as the group parent (as of now, checkbox type inputs are only supported)
